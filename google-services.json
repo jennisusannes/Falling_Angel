@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "218271237328",
+    "project_id": "falling-angel-74f3f",
+    "storage_bucket": "falling-angel-74f3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218271237328:android:307a196bd904133eb9cad5",
+        "android_client_info": {
+          "package_name": "com.fallingangel.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218271237328-nfatlgh2hpoa3gjgbigcqikqhjong13s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fallingangel.com",
+            "certificate_hash": "dc70df678ddcbb1bd68dd182d994dc01e44e117a"
+          }
+        },
+        {
+          "client_id": "218271237328-dlo965m3qqe4rofcgnleg7ns34n5f504.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZoliNmK7HxwIeWisn_PBmr47r3vDkHQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218271237328-dlo965m3qqe4rofcgnleg7ns34n5f504.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
