@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:218271237328:android:307a196bd904133eb9cad5",
+        "mobilesdk_app_id": "1:218271237328:android:ca1b27ab74a6b4c4b9cad5",
         "android_client_info": {
-          "package_name": "com.fallingangel.com"
+          "package_name": "com.fallingangel.game"
         }
       },
       "oauth_client": [
         {
-          "client_id": "218271237328-nfatlgh2hpoa3gjgbigcqikqhjong13s.apps.googleusercontent.com",
+          "client_id": "218271237328-50vn072jkbm5vrih6ikpkpp728coduhm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.fallingangel.com",
+            "package_name": "com.fallingangel.game",
             "certificate_hash": "dc70df678ddcbb1bd68dd182d994dc01e44e117a"
           }
         },
