@@ -1,4 +1,4 @@
-package com.fallingangel;
+package com.fallingangel.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
