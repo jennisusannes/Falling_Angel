@@ -8,4 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class GameSystem {
 
+    //TODO: Avventer denne, usikker på hva den gjør
+
 }
