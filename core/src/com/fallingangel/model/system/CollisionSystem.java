@@ -87,7 +87,6 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             if (angelState.get() == AngelComponent.STATE_HIT) {
                 continue;
 
-
             }
 
             MovementComponent angelMov = mm.get(angel);
@@ -159,13 +158,6 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
 
 
-            //så kanskje noe sånt når man treffer et hinder:
-              /*  if AngelComponent.LIFE > 0 {
-                    AngelComponent.LIFE +- 1;
-                } else {
-                    world.state = WORLD_STATE_GAME_OVER; ?
-                }
-                 */
 
 
         }
