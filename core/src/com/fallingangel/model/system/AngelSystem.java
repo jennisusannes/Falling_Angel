@@ -1,5 +1,3 @@
-package com.fallingangel.model.system;
-
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
