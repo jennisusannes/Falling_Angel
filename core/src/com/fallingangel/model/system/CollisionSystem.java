@@ -27,15 +27,16 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ComponentMapper<StateComponent> sm;
     private ComponentMapper<TransformComponent> tm;
 
-    public void CollisionListener {
-        public void hitObs (); //if angel hits an obstacle (and dies/looses a life)
-        public void hitCoin (); //if angel hits a coin (and gets points)
-        public void hitPU (); //if angel hits a power up (and gets an advantage)
+    //CollisionListener brukes hvis vi skal lage lyde når den treffer noe
+   /* public static interface CollisionListener {
+        public void hitObs (); //hits an obstacle
+        public void hitCoin (); //hits a coin
+        public void hitPU (); //hits a power up
 
-    }
+    } */
 
     private Engine engine;
-    private World world;  //creates a new world
+    private World world;
     private CollisionListener listener;
     private Random rand = new Random();
     private ImmutableArray<Entity> angels;
@@ -46,7 +47,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
     public CollisionSystem(World world, CollisionListener listener) {
         this.world = world;
-        this.listener = listener;
+     //   this.listener = listener;
 
         //creates our componentMappers
         bm = ComponentMapper.getFor(BoundsComponent.class);
@@ -92,7 +93,11 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             MovementComponent angelMov = mm.get(angel);
             BoundsComponent angelBounds = bm.get(angel);
 
-            if (angelMov.move.y < 0.0f) { //?? engelen skal jo ikke bevege seg i y-retning, så litt usikker på denne
+            //engelen sin y retning er negativ her (altså den faller nedover på skjermen),
+            //det er jo bare når den går nedover at den treffer noe (eller ikke?)
+            // i vårt spill skal den stå stille i y retning, så må endre til at
+
+            if (angelMov.move.x > 0.0f) { //?? funker dette?
                 TransformComponent angelPos = tm.get(angel);
 
                 for (int j = 0; j < obstacles.size(); ++j) {
@@ -100,20 +105,21 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                     TransformComponent obsPos = tm.get(obstacle);
 
-                    if (angelPos.pos.y >= obsPos.pos.y) { //checks if angelBounds and obsBounds are overlapping if angel position is higher than or the same as obstacle position
+                    //checks if angelBounds and obsBounds are overlapping if angel position is higher than or the same as obstacle position
+                    if (angelPos.pos.y >= obsPos.pos.y) {
                         BoundsComponent obsBounds = bm.get(obstacle);
 
                         if (angelBounds.bounds.overlaps(obsBounds.bounds)) {
                             angelSystem.hitObstacle(angel);
-                            listener.hitObs();
-                            break;
+                            //listener.hitObs();
+                            //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
                         }
 
                     }
                 }
             }
 
-            //if angel hits a moving obstacle (plane)
+            //if angel hits a moving obstacle (plane), the player dies
             for (int j = 0; j < planes.size(); ++j) {
                 Entity plane = planes.get(j);
 
@@ -121,7 +127,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                 if (planeBounds.bounds.overlaps(angelBounds.bounds)) {
                     angelSystem.hitPlane(angel);
-                    listener.hitObs();
+                   // listener.hitObs();
                 }
             }
 
@@ -133,12 +139,12 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                 if (coinBounds.bounds.overlaps(angelBounds.bounds)) {
                     engine.removeEntity(coin);
-                    listener.hitCoin();
+                    //listener.hitCoin();
                     world.score += CoinComponent.SCORE;
                 }
             }
 
-            //when player hits a powerup, and it disappears
+            //when player hits a powerup, the powerup disappears and the player gets an advantage
             for (int j = 0; j < powerup.size(); ++j) {
                 Entity powerup = powerup.get(j);
 
@@ -146,20 +152,20 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                 if (powerupBounds.bounds.overlaps(angelBounds.bounds)) {
                     engine.removeEntity(powerup);
-                    listener.hitPU();
+                    angelSystem.hitPowerup(angel);
+                    //listener.hitPU();
                 }
             }
 
 
-            //hvor skal metodene for hva som skal skje når spilleren har truffet noe være?
-            //for å miste liv, må vi kanskje ha noen liv i AngelComponent eller noe??
+
             //så kanskje noe sånt når man treffer et hinder:
               /*  if AngelComponent.LIFE > 0 {
                     AngelComponent.LIFE +- 1;
                 } else {
                     world.state = WORLD_STATE_GAME_OVER; ?
                 }
-                men skjønner ikke hvor i koden dette skal være .. */
+                 */
 
 
         }

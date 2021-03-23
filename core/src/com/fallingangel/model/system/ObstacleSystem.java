@@ -14,11 +14,10 @@ import com.fallingangel.model.component.StateComponent;
 
 public class ObstacleSystem extends IteratingSystem {
 
-    //should process all entities in Obstacle-, State-, Transform- and MovementComponent
+    //should process all entities in Obstacle-, Transform- and MovementComponent
     private static final Family family = Family.all(ObstacleComponent.class,
-            StateComponent.class,
             TransformComponent.class,
-            MovementComponent.class).get(); //usikker på om vi trenger state fordi hinderene har vel bare en state, og usikker på transform
+            MovementComponent.class).get();
 
     private Enigne enigne;
 
@@ -27,7 +26,6 @@ public class ObstacleSystem extends IteratingSystem {
         private ComponentMapper<TransformComponent> tm;
         private ComponentMapper<MovementComponent> mm;
         private ComponentMapper<ObstacleComponent> om;
-        private ComponentMapper<StateComponent> sm; //trenger kanskje ikke denne
 
     }
 
@@ -37,8 +35,7 @@ public class ObstacleSystem extends IteratingSystem {
         this.engine = engine;
     }
 
-    //usikker på om vi trenger denne og hva den evt gjør.
-    //I superjumper finnes det ulike platformer (bevegelige og noen som går i oppløsning) og det er det denne sjekker der
+    //litt usikker på om vi trenger denne og hva den evt gjør.
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         ObstacleComponent obstacle = om.get(entity);
