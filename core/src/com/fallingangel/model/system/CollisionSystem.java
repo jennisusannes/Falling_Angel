@@ -92,9 +92,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             MovementComponent angelMov = mm.get(angel);
             BoundsComponent angelBounds = bm.get(angel);
 
-            //engelen sin y retning er negativ her (altså den faller nedover på skjermen),
-            //det er jo bare når den går nedover at den treffer noe (eller ikke?)
-            // i vårt spill skal den stå stille i y retning, så må endre til at
+
 
             if (angelMov.move.x > 0.0f) { //?? funker dette?
                 TransformComponent angelPos = tm.get(angel);
@@ -155,6 +153,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                     //listener.hitPU();
                 }
             }
+
 
 
 
