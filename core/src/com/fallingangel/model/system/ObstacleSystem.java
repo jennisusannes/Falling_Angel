@@ -1,6 +1,7 @@
 package com.fallingangel.model.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
@@ -19,7 +20,7 @@ public class ObstacleSystem extends IteratingSystem {
             TransformComponent.class,
             MovementComponent.class).get();
 
-    private Enigne enigne;
+    private Engine engine;
 
     public ObstacleSystem () {
         super(family);
@@ -36,11 +37,15 @@ public class ObstacleSystem extends IteratingSystem {
     }
 
     //litt usikker på om vi trenger denne og hva den evt gjør.
+    //svar: den bare sørger for at obstaclen er oppdatert til enhver tid, denne metoden kjøres hver gang systemet oppdateres
+    //metoden er felles for mange av system-klassene, kommer fra IteratingSystem
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         ObstacleComponent obstacle = om.get(entity);
+    }
 
-
+    public void decreaseSpeed() { //trenger denne i angelsystem sin hitpowerUp-metode, men må fikses
+        mm.move.set(0, om.VELOCITY / 2);
     }
 
 

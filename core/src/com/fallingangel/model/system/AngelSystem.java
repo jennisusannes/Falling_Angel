@@ -8,8 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.physics.box2d.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;
+import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TransformComponent;
+
+//GJLR OM TIL SAMME SPEED SOM OBSTACLES PÅ HITOBSTACLE
+
 
 public class AngelSystem extends IteratingSystem {
     //IteratingSystem is s simple EntitySystem that iterates over each entity and calls processEntity() for each entity every time the EntitySystem is updated.
@@ -19,7 +23,6 @@ public class AngelSystem extends IteratingSystem {
     //used to describe what entity objects an entitysystem should process
     //the angel, movement, state and trans comp are now in the system
 
-    private float accelY = 0.0f;
     private World world;
 
     private ComponentMapper<AngelComponent> angel_mapper; //makes it easy to get the component from the objects
@@ -37,13 +40,8 @@ public class AngelSystem extends IteratingSystem {
         transform_mapper = ComponentMapper.getFor(TransformComponent.class);
     }
 
-    public void setAccelY(float accelY){
-        this.accelY = accelY;
-    }
-
     public void update(float deltaTime){
         super.update(deltaTime);
-        accelY = 0.0f;
     }
 
     @Override
@@ -56,21 +54,16 @@ public class AngelSystem extends IteratingSystem {
         StateComponent state = state_mapper.get(entity);
         TransformComponent transform = transform_mapper.get(entity);
 
-        //see what methods should be called/ what changes should happen to the angel
+        //if-setninger for å bytte state
 
-        if (state.get() != AngelComponent.STATE_HIT && transform.pos.y <= 0.5f){ //if the angel is falling and ???
-            hitObstacle(entity);
-        }
-
-        if (state.get() != AngelComponent.STATE_HIT){ //if the angel is falling
-            movement.move.y = -accelY / 10.0f * AngelComponent.MOVE_VELOCITY; //DENNE MÅ NOK FIKSES PÅ
-        }
-
-        if (movement.move.y < 0){
-            state.set(AngelComponent.STATE_FALL);
+        if (transform.pos.y == World.WORLD_HEIGHT){ //evt bounds?
+            state.set(AngelComponent.STATE_DEAD);
+            //DA MÅ DEN VARSLE OM DET PÅ EN MÅTE
         }
 
     }
+
+    //DISSE STATESENE MÅ ENDRES TILBAKE PÅ ET TIDSPUNKT
 
     public void hitObstacle(Entity entity){
         if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
@@ -78,11 +71,27 @@ public class AngelSystem extends IteratingSystem {
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
         MovementComponent movement = movement_mapper.get(entity);
 
-        movement.move.set(0, 0); //the velocity is set to zero
+        movement.move.set(0, ObstacleComponent.VELOCITY); //it will move with the obstacle
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
     }
 
     public void hitPlane(Entity entity){
+        if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
 
+        StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
+        MovementComponent movement = movement_mapper.get(entity);
+
+        movement.move.set(0, 0); //it can't keep falling down in the y-direction
+        state.set(AngelComponent.STATE_HIT); //the state is changed to hit
+    }
+
+    public void hitPowerUp(Entity entity){
+        if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
+
+        StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
+        MovementComponent movement = movement_mapper.get(entity);
+
+        //FOR ALLE OBSTACLES: (sjekk World)
+            //ObstacleSystem.decreaseSpeed();
     }
 }
