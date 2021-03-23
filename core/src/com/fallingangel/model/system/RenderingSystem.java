@@ -15,8 +15,11 @@ import java.util.Comparator;
 
 public class RenderingSystem extends IteratingSystem{
 
+    //Lurer på om denne enten skal være på Controller eller på View... --> se nærmere på hva denne gjør
+
 
     //Skjønner ikke helt hva "FRUSTUM" betyr ...
+    //skjønner ikke helt bruken (?)
     static final float FRUSTUM_WIDTH = 10;
     static final float FRUSTUM_HEIGHT = 15;
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
