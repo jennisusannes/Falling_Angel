@@ -8,9 +8,10 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.fallingangel.World; //TODO: have to make this class
+import com.fallingangel.model.World; //TODO: have to make this class
 
 import com.fallingangel.model.component.AngelComponent;
+import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.TransformComponent;
@@ -78,7 +79,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         ObstacleSystem obstacleSystem = engine.getSystem(ObstacleSystem.class);
 
         for (int i = 0; i < angels.size(); ++i) {
-            Entitiy angel = angels.get(i);
+            Entity angel = angels.get(i);
 
             StateComponent angelState = sm.get(angel);
 
