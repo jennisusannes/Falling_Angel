@@ -9,4 +9,6 @@ public class PowerUpComponent implements Component {
 
     //TODO: Implement change of internal state: slower the velocity for 5 seconds
 
+    public static final int STATE_NORMAL = 0;
+
 }

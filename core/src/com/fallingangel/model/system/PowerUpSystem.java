@@ -8,4 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class PowerUpSystem {
 
+    //TODO: Her må det tenkes litt; Usikker på logikken her.
+
 }
