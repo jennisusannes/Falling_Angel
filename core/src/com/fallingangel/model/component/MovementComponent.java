@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class MovementComponent implements Component {
 
-    public final Vector2 angelMove = new Vector2();
-    public final Vector2 obstacleMove = new Vector2();
+    public final Vector2 move = new Vector2();
+    public final Vector2 accel = new Vector2();
 
 }
