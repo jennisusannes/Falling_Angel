@@ -43,7 +43,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ImmutableArray<Entity> coins;
     private ImmutableArray<Entity> planes;
     private ImmutableArray<Entity> obstacles;
-    private ImmutableArray<Entity> powerup;
+    private ImmutableArray<Entity> powerups;
 
     public CollisionSystem(World world, CollisionListener listener) {
         this.world = world;
@@ -69,7 +69,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         //gets all entities with a ObstacleComponent, BoundsComponent and TransformCompon
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
         //gets all entities with a PowerUpComponent and BoundsComponent
-        powerup = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());
+        powerups = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());
 
         //trenger angel og obstacle TransformComponent??
     }
@@ -93,11 +93,8 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             MovementComponent angelMov = mm.get(angel);
             BoundsComponent angelBounds = bm.get(angel);
 
-            //engelen sin y retning er negativ her (altså den faller nedover på skjermen),
-            //det er jo bare når den går nedover at den treffer noe (eller ikke?)
-            // i vårt spill skal den stå stille i y retning, så må endre til at
 
-            if (angelMov.move.x > 0.0f) { //?? funker dette?
+            if (angelMov.move.x != 0.0f) { //?? funker dette?
                 TransformComponent angelPos = tm.get(angel);
 
                 for (int j = 0; j < obstacles.size(); ++j) {
@@ -140,19 +137,19 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 if (coinBounds.bounds.overlaps(angelBounds.bounds)) {
                     engine.removeEntity(coin);
                     //listener.hitCoin();
-                    world.score += CoinComponent.SCORE;
+                    world.score += CoinComponent.SCORE; //score må legges til i world
                 }
             }
 
             //when player hits a powerup, the powerup disappears and the player gets an advantage
-            for (int j = 0; j < powerup.size(); ++j) {
-                Entity powerup = powerup.get(j);
+            for (int j = 0; j < powerups.size(); ++j) {
+                Entity powerup = powerups.get(j);
 
                 BoundsComponent powerupBounds = bm.get(powerup);
 
                 if (powerupBounds.bounds.overlaps(angelBounds.bounds)) {
                     engine.removeEntity(powerup);
-                    angelSystem.hitPowerup(angel);
+                    angelSystem.hitPowerup(angel); //hitPowerup må lages i AngelSystem
                     //listener.hitPU();
                 }
             }
