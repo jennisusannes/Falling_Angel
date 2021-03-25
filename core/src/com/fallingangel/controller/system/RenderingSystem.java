@@ -1,4 +1,4 @@
-package com.fallingangel.model.system;
+package com.fallingangel.controller.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;

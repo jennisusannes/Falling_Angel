@@ -1,17 +1,14 @@
-package com.fallingangel.model.system;
+package com.fallingangel.controller.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import com.fallingangel.model.World;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.TransformComponent;
-import com.fallingangel.model.component.StateComponent;
 
 public class ObstacleSystem extends IteratingSystem {
 
