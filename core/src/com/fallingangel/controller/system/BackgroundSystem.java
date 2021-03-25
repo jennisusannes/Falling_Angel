@@ -1,4 +1,4 @@
-package com.fallingangel.model.system;
+package com.fallingangel.controller.system;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -6,7 +6,6 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.fallingangel.model.component.BackgroundComponent;
-import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
 public class BackgroundSystem extends IteratingSystem {

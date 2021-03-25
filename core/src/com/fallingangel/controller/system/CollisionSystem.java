@@ -1,4 +1,4 @@
-package com.fallingangel.model.system;
+package com.fallingangel.controller.system;
 
 import java.util.Random
 
