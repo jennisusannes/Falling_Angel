@@ -7,8 +7,8 @@ import com.badlogic.ashley.systems.IteratingSystem;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
-import com.badlogic.gdx.component.CameraComponent;
-import com.badlogic.gdx.component.TransformComponent;
+import com.fallingangel.model.component.CameraComponent;
+import com.fallingangel.model.component.TransformComponent;
 
 public class CameraSystem extends IteratingSystem { //IteratingSystem iterates over each entity and calls processEntity() for each entity every time the EntitySystem is updated.
 
