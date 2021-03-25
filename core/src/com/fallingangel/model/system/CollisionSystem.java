@@ -8,7 +8,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.fallingangel.model.World; //TODO: have to make this class
+import com.fallingangel.model.World;
 
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -149,7 +149,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                 if (powerupBounds.bounds.overlaps(angelBounds.bounds)) {
                     engine.removeEntity(powerup);
-                    angelSystem.hitPowerup(angel); //hitPowerup må lages i AngelSystem
+                    angelSystem.hitPowerUp(angel); //hitPowerup må lages i AngelSystem
                     //listener.hitPU();
                 }
             }

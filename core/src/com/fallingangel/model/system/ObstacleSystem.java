@@ -21,12 +21,16 @@ public class ObstacleSystem extends IteratingSystem {
             MovementComponent.class).get();
 
     private Engine engine;
+    private ComponentMapper<TransformComponent> tm;
+    private ComponentMapper<MovementComponent> mm;
+    private ComponentMapper<ObstacleComponent> om;
 
     public ObstacleSystem () {
         super(family);
-        private ComponentMapper<TransformComponent> tm;
-        private ComponentMapper<MovementComponent> mm;
-        private ComponentMapper<ObstacleComponent> om;
+
+        tm = ComponentMapper.getFor(TransformComponent.class);
+        mm = ComponentMapper.getFor(MovementComponent.class);
+        om = ComponentMapper.getFor(ObstacleComponent.class);
 
     }
 
