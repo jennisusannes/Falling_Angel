@@ -9,11 +9,22 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class FallingAngel extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+
+	FireBaseInterface FBI;
+
+	public FallingAngel(FireBaseInterface fireBaseInterface){
+		FBI = fireBaseInterface;
+	}
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+		FBI.SomeFunction();
+		System.out.println("hallla");
+		FBI.FirstFireBaseTest();
+		//FBI.SetOnValueChangedListener();
+		//FBI.SetValueInDb("message", "this is new text");
 	}
 
 	@Override
