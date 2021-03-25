@@ -48,16 +48,42 @@ public class ObstacleSystem extends IteratingSystem {
         ObstacleComponent obstacle = om.get(entity);
     }
 
+    /*
     public void decreaseSpeed() { //trenger denne i angelsystem sin hitpowerUp-metode, men må fikses
         mm.move.set(0, om.VELOCITY / 2);
     }
 
+     */
 
 
 
 
 
 
+    /* TODO: implementere logikk ala flappy
+    public void update(float dt) {
+            handleInput();
+            updateGround();
+            bird.update(dt);
+            cam.position.set(bird.getX() + 80, cam.viewportHeight / 2, 0);
+            for(Tube tube : tubes){
+                if(cam.position.x - cam.viewportWidth / 2 > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
+                    tube.reposition(tube.getPosTopTube().x +((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+                }
+
+                if(tube.collides(bird.getBounds())){
+                    bird.colliding = true;
+                    gameover = true;
+                }
+            }
+            if(bird.getY() <= ground.getHeight() + GROUND_Y_OFFSET){
+                gameover = true;
+                bird.colliding = true;
+            }
+            cam.update();
+        }
+
+ */
 
 
 
