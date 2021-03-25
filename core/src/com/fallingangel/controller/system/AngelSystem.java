@@ -4,7 +4,9 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector3;
+import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
@@ -29,7 +31,7 @@ public class AngelSystem extends IteratingSystem {
     private ComponentMapper<StateComponent> state_mapper;
     private ComponentMapper<TransformComponent> transform_mapper;
 
-    public AngelSystem(World world){
+    public AngelSystem(com.fallingangel.model.World world){
         super(family); //calls the constructor of the IteratingSystem
         this.world = world;
 
@@ -55,7 +57,7 @@ public class AngelSystem extends IteratingSystem {
 
         //if-setninger for å bytte state
 
-        if (transform.pos.y == World.WORLD_HEIGHT){ //evt bounds?
+        if (transform.pos.y == world.WORLD_HEIGHT){ //evt bounds?
             state.set(AngelComponent.STATE_DEAD);
             //DA MÅ DEN VARSLE OM DET PÅ EN MÅTE
         }
@@ -92,5 +94,21 @@ public class AngelSystem extends IteratingSystem {
 
         //FOR ALLE OBSTACLES: (sjekk World)
             //ObstacleSystem.decreaseSpeed();
+    }
+
+    public void press(Entity angelEntity, int screenX, int screenY){
+        //hva skjer når man trykker på skjermen eller holder inne en av musetastene
+        Vector3 vector = new Vector3(screenX, Gdx.graphics.getHeight() - screenY, 0); //kan hende denne må flippes, litt usikker
+        transform_mapper.get(angelEntity).pos.set(vector); //gets the comp of this entity and sets the position
+    }
+
+    public void drag(Entity angelEntity, int screenX, int screenY){
+        //hva skjer når man drar med fingeren eller musen
+        Vector3 vector = new Vector3(screenX, Gdx.graphics.getHeight() - screenY, 0); //kan hende denne må flippes, litt usikker
+        transform_mapper.get(angelEntity).pos.set(vector); //gets the comp of this entity and sets the position
+    }
+
+    public void unpress(Entity angelEntity){ //kan kanskje kuttes
+        //hva skjer når man slipper musen/piltastene
     }
 }
