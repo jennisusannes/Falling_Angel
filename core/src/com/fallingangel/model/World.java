@@ -39,10 +39,10 @@ public class World {
     }
 
     /*
-    Kan være at funksjonen under skal være:
+    todo: Kan være at funksjonen under skal være:
     private List<Entity> createObstacles(){
     List<Entity> entities = new ArrayList<Entity>();
-     LOGIKK HER
+     [LOGIKK]
      .
      .
      .
