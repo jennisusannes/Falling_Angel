@@ -3,6 +3,7 @@ package com.fallingangel.model;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.Vector2;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.ObstacleComponent;
@@ -19,14 +20,16 @@ public class World {
 
     //lurer på om det skal være flere static variables her (?)
     public int score;
+    public Entity angel;
+    public int state;
 
-    /*
+
     //TODO: vurdere om disse skal være med i spillet
     public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
 	public static final Vector2 gravity = new Vector2(0, -12);
-     */
+
 
     private Engine engine;
 
@@ -35,6 +38,10 @@ public class World {
         this.engine = engine;
     }
 
+    public void create(){
+        this.angel = createAngel();
+        this.state = WORLD_STATE_RUNNING;
+    }
 
     public Entity createAngel(){
         Entity angelEntity = new Entity();
