@@ -37,7 +37,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
     private Engine engine;
     private World world;
-    private CollisionListener listener;
+    //private CollisionListener listener;
     private Random rand = new Random();
     private ImmutableArray<Entity> angels;
     private ImmutableArray<Entity> coins;
@@ -45,7 +45,8 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ImmutableArray<Entity> obstacles;
     private ImmutableArray<Entity> powerups;
 
-    public CollisionSystem(World world, CollisionListener listener) {
+    // om vi skal ha listener (lyd): public CollisionSystem(World world, CollisionListener listener)
+    public CollisionSystem(World world) {
         this.world = world;
      //   this.listener = listener;
 

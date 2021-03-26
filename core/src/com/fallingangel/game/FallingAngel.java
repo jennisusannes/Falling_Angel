@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class FallingAngel extends ApplicationAdapter {
-	SpriteBatch batch;
+	public SpriteBatch batch;
 	Texture img;
 	
 	@Override
