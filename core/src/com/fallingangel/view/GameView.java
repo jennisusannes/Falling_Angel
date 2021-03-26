@@ -39,7 +39,6 @@ public class GameView extends ScreenAdapter {
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
 
-
     private OrthographicCamera gameCam;
     private Viewport viewPort; //Viewport manages a Camera's viewportWidth and viewportHeight
     public FallingAngel game;
@@ -91,8 +90,6 @@ public class GameView extends ScreenAdapter {
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
         gameCam.update();
         */
-
-
 
 
         angelSystem = engine.getSystem(AngelSystem.class);
