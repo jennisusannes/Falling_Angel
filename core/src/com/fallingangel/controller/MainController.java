@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.view.AbstractView;
+import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
 import com.fallingangel.view.MenuView;
 
@@ -30,14 +31,13 @@ public class MainController extends ClickListener {
     //private Stack<AbstractView> views; //kunne prøvd screens
     public FallingAngel game;
     public GameView gameView = new GameView();
+    public GameOverView gameOverView = new GameOverView();
     public MenuView menuView;
 
     public MainController() {
         //this.views = new Stack<AbstractView>();
         this.game = FallingAngel.getInstance();
-
         //gameView = new GameView(this.game);
-
     }
 
     public void setStartScreen(){
@@ -49,9 +49,9 @@ public class MainController extends ClickListener {
         game.setScreen(nextScreen);
     }
 
-  // public MenuView getMenuView(){
-    //   return menuView;
-    //}
+  public MenuView getMenuView(){
+      return menuView;
+    }
 
     public GameView getGameView(){
         return gameView;
@@ -60,19 +60,6 @@ public class MainController extends ClickListener {
 
 
     /*
-
-    public void actionPerformed(ActionEvent event) {
-        String command = event.getActionCommand();
-        if (command.equals("Play")) {
-            game.setScreen(gameView);
-        //} else if (command.equals("Pause/Continue")) {
-        //    model.setPause(! model.getPause());
-        //} else if (command.equals("Flip Vertically")) {
-         //   view.setFlipVertical(! view.getFlipVertical());
-        }
-    }
-
-
 
 
     public void push(AbstractView view) {
@@ -98,19 +85,15 @@ public class MainController extends ClickListener {
 
       */
 
-   // public void playButtonEvent(Event event){
-    //    game.setScreen(gameView);
-   // }
-
-
-
-
-
 
     @Override
     public boolean handle(Event event) {
         if (event.getListenerActor().equals(menuView.getPlayButtonActor())) {
             game.setScreen(gameView);
+            return true;
+        }
+        else if (event.getListenerActor().equals(gameOverView.getGameOverButton())){
+            game.setScreen(menuView);
             return true;
         }
         else{

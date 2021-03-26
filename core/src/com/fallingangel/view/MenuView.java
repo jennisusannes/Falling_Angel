@@ -28,8 +28,6 @@ public class MenuView extends ScreenAdapter {
     private Stage stage;
     private MainController controller;
     private Button playButton;
-    //private GameView gameView;
-    //private Actor actor;
 
     public MenuView(){
         super();
@@ -37,7 +35,6 @@ public class MenuView extends ScreenAdapter {
         this.controller = game.mc;
         background = new Texture("backgrounds/BackgroundSky.jpg");
         playTexture = new Texture("buttons/play.png");
-        //gameView = new GameView();
     }
 
 
@@ -94,10 +91,7 @@ public class MenuView extends ScreenAdapter {
         b.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                //game.setScreen(gameView);
-                //controller.handle(inputEvent);
                 controller = game.mc;
-                //controller.changeView(controller.getGameView());
                 controller.handle(inputEvent);
 
             }
