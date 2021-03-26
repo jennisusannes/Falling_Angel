@@ -35,10 +35,10 @@ public class MainController extends ClickListener {
     public MainController() {
         //this.views = new Stack<AbstractView>();
         this.game = FallingAngel.getInstance();
-<<<<<<< HEAD
+
         //gameView = new GameView(this.game);
         game.setScreen(new MenuView());
-=======
+
         menuView = game.getMenuView();
         //menuView =  new MenuView();
         //gameView = new GameView();
@@ -55,7 +55,7 @@ public class MainController extends ClickListener {
 
     public GameView getGameView(){
         return gameView;
->>>>>>> 74bb92b186fad318c6dd4d5bb85c07ec28070e3b
+
     }
 
     /*
