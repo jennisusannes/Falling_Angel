@@ -1,33 +1,46 @@
 package com.fallingangel.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.fallingangel.view.GameView;
+import com.fallingangel.view.MenuView;
 
-public class FallingAngel extends ApplicationAdapter {
+public final class FallingAngel extends Game implements ApplicationListener {
+
+
 	public SpriteBatch batch;
-	Texture img;
-	
+	public BitmapFont font;
+	//public MainController mc;
+	private MenuView menuView;
+	private static final FallingAngel INSTANCE = new FallingAngel();
+
+	private FallingAngel(){
+
+	}
+
+	public static FallingAngel getInstance() {
+		return INSTANCE;
+	}
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		font = new BitmapFont();
+
+		setScreen(new GameView());
+		/*this.mc = new MainController(); // burde egt sette controller som setter en screen
+		mc.setStartScreen();*/
+
 	}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
-	
+
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		font.dispose();
 	}
+
 }
