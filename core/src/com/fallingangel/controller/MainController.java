@@ -29,8 +29,8 @@ public class MainController extends ClickListener {
 
     //private Stack<AbstractView> views; //kunne prøvd screens
     private FallingAngel game;
-    private MenuView menuView;
-    private GameView gameView;
+    public GameView gameView;
+    public MenuView menuView;
 
     public MainController() {
         //this.views = new Stack<AbstractView>();
@@ -39,9 +39,6 @@ public class MainController extends ClickListener {
         //gameView = new GameView(this.game);
         game.setScreen(new MenuView());
 
-        menuView = game.getMenuView();
-        //menuView =  new MenuView();
-        //gameView = new GameView();
     }
 
 
