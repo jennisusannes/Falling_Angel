@@ -16,8 +16,12 @@ public class World {
     public static final float WORLD_HEIGHT = 15*20;
     public static final float WORLD_WIDTH = 10;
 
+
+    //lurer på om det skal være flere static variables her (?)
+    public int score;
+
     /*
-    //Usikker på om vi skal ha med disse variablene, men lar de stå her:
+    //TODO: vurdere om disse skal være med i spillet
     public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
@@ -73,7 +77,7 @@ public class World {
         return powerup;
     }
 
-    //TODO: er det flere som skal implementeres?
+    //TODO: skal dette gjøres med flere systems(?)
 
 
 
