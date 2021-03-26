@@ -1,6 +1,7 @@
 package com.fallingangel.controller;
 
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
@@ -19,7 +20,7 @@ import java.util.Stack;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
-public class MainController extends ClickListener{
+public class MainController extends ClickListener {
      /*TODO
      Bytte mellom skjermene
      Kanksje noe mer
@@ -33,8 +34,8 @@ public class MainController extends ClickListener{
     public MainController() {
         //this.views = new Stack<AbstractView>();
         this.game = FallingAngel.getInstance();
-        menuView = new MenuView();
-        gameView = new GameView(this.game);
+        //gameView = new GameView(this.game);
+        game.setScreen(new MenuView());
     }
 
     /*

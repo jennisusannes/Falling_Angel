@@ -29,7 +29,7 @@ public class GameView extends AbstractView implements Screen { //AbstractView
             @Override
             public boolean keyDown(int keyCode) {
                 if (keyCode == Input.Keys.SPACE) {
-                    game.setScreen(new GameOverView(game));
+                    game.setScreen(new GameOverView());
                 }
                 return true;
             }
