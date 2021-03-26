@@ -1,4 +1,7 @@
 package com.fallingangel.view;
+
+import com.fallingangel.controller.MainController;
+
 public class AchievementsView extends AbstractView{
 
     @Override
@@ -25,4 +28,8 @@ public class AchievementsView extends AbstractView{
     public void dispose() {
 
     }
+    protected void addActionListener(MainController controller) {
+        //this.addActionListener(controller);
+    }
+
 }
