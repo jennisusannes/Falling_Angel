@@ -28,7 +28,7 @@ public class MenuView extends ScreenAdapter {
     private Stage stage;
     private MainController controller;
     private Button playButton;
-    private GameView gameView;
+    //private GameView gameView;
     //private Actor actor;
 
     public MenuView(){
@@ -56,7 +56,6 @@ public class MenuView extends ScreenAdapter {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        //Button pButton = makeButton(playTexture,Gdx.graphics.getWidth()*0.45f);
         setPlayButton();
         stage.addActor(getPlayButtonActor());
 
@@ -97,7 +96,10 @@ public class MenuView extends ScreenAdapter {
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
                 //game.setScreen(gameView);
                 //controller.handle(inputEvent);
-                controller.changeView(controller.getGameView());
+                controller = game.mc;
+                //controller.changeView(controller.getGameView());
+                controller.handle(inputEvent);
+
             }
         });
         return b;

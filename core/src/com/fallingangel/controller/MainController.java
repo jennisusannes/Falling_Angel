@@ -28,7 +28,7 @@ public class MainController extends ClickListener {
     */
 
     //private Stack<AbstractView> views; //kunne prøvd screens
-    private FallingAngel game;
+    public FallingAngel game;
     public GameView gameView = new GameView();
     public MenuView menuView;
 
@@ -37,10 +37,13 @@ public class MainController extends ClickListener {
         this.game = FallingAngel.getInstance();
 
         //gameView = new GameView(this.game);
-        game.setScreen(new MenuView());
 
     }
 
+    public void setStartScreen(){
+        this.menuView = new MenuView();
+        game.setScreen(menuView);
+    }
 
     public void changeView(Screen nextScreen){
         game.setScreen(nextScreen);
@@ -106,15 +109,16 @@ public class MainController extends ClickListener {
 
     @Override
     public boolean handle(Event event) {
-        //game.setScreen(gameView);
-        //if (event.getListenerActor() == menuView.getPlayButtonActor()) {
-        //    game.setScreen(gameView);
+        if (event.getListenerActor().equals(menuView.getPlayButtonActor())) {
+            game.setScreen(gameView);
             return true;
-       // }
-       // else{
-        //    return false;
-       // }
+        }
+        else{
+            return false;
+        }
     }
+
+
 
 
 

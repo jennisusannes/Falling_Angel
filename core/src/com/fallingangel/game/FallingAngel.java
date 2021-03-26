@@ -32,6 +32,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 
 		//setScreen(new MenuView());
 		this.mc = new MainController(); // burde egt sette controller som setter en screen
+		mc.setStartScreen();
 
 	}
 
