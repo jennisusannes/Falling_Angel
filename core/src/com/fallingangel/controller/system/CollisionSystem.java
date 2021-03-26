@@ -1,6 +1,6 @@
 package com.fallingangel.controller.system;
 
-import java.util.Random
+import java.util.Random;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;

@@ -32,16 +32,16 @@ public class AngelSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transform_mapper;
 
     public AngelSystem(com.fallingangel.model.World world){
-        super(family); //calls the constructor of the IteratingSystem
+        super(family); //calls the constructor of the IteratingSystem. Creates an entity system that iterates over each entity and calls processEntity()
         this.world = world;
 
-        angel_mapper = ComponentMapper.getFor(AngelComponent.class); //sets angel, movement, state and transform comp
+        angel_mapper = ComponentMapper.getFor(AngelComponent.class); //sets angel, movement, state and transform comp mappers
         movement_mapper = ComponentMapper.getFor(MovementComponent.class);
         state_mapper = ComponentMapper.getFor(StateComponent.class);
         transform_mapper = ComponentMapper.getFor(TransformComponent.class);
     }
 
-    public void update(float deltaTime){
+    public void update(float deltaTime){ //makes sure the IteratingSystem is updated as well
         super.update(deltaTime);
     }
 
@@ -55,8 +55,7 @@ public class AngelSystem extends IteratingSystem {
         StateComponent state = state_mapper.get(entity);
         TransformComponent transform = transform_mapper.get(entity);
 
-        //if-setninger for å bytte state
-
+        //if-sentences to switch state of the object
         if (transform.pos.y == world.WORLD_HEIGHT){ //evt bounds?
             state.set(AngelComponent.STATE_DEAD);
             //DA MÅ DEN VARSLE OM DET PÅ EN MÅTE
@@ -97,13 +96,13 @@ public class AngelSystem extends IteratingSystem {
     }
 
     public void press(Entity angelEntity, int screenX, int screenY){
-        //hva skjer når man trykker på skjermen eller holder inne en av musetastene
+        //Called when the screen was touched or a mouse button was pressed.
         Vector3 vector = new Vector3(screenX, Gdx.graphics.getHeight() - screenY, 0); //kan hende denne må flippes, litt usikker
         transform_mapper.get(angelEntity).pos.set(vector); //gets the comp of this entity and sets the position
     }
 
     public void drag(Entity angelEntity, int screenX, int screenY){
-        //hva skjer når man drar med fingeren eller musen
+        //Called when a finger or the mouse was dragged.
         Vector3 vector = new Vector3(screenX, Gdx.graphics.getHeight() - screenY, 0); //kan hende denne må flippes, litt usikker
         transform_mapper.get(angelEntity).pos.set(vector); //gets the comp of this entity and sets the position
     }

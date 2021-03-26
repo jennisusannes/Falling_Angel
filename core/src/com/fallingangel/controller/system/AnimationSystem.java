@@ -13,7 +13,6 @@ import com.fallingangel.model.component.TextureComponent;
 public class AnimationSystem extends IteratingSystem {
 
 
-
     //introduce mappers to that it gets easier to get the component from the object
     private ComponentMapper<TextureComponent> texture_mapper;
     private ComponentMapper<AnimationComponent> animation_mapper;
@@ -41,7 +40,7 @@ public class AnimationSystem extends IteratingSystem {
         AnimationComponent animation = animation_mapper.get(entity);
         StateComponent state = state_mapper.get(entity);
 
-        Animation anim = animation.animations.get(state.get()); //gets the animation that fits the current state
+        Animation anim = animation.animations.get(state.get()); //gets the animation that fits the current state (HIT or FALL)
 
         if (anim != null) {
             texture.region = (TextureRegion) anim.getKeyFrame(state.time); //sets the texture to a part of that animation

@@ -22,7 +22,7 @@ public class BoundsSystem extends IteratingSystem {
 
     @Override
     public void processEntity(Entity entity, float deltaTime) { //makes sure that the bounds are updated
-        TransformComponent transform = transform_mapper.get(entity);
+        TransformComponent transform = transform_mapper.get(entity); //gets the trans and bounds comp of this entity
         BoundsComponent bounds = bounds_mapper.get(entity);
 
         bounds.bounds.x = transform.pos.x - bounds.bounds.width * 0.5f;

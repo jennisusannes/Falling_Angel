@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.InputProcessor;
 import com.fallingangel.controller.system.AngelSystem;
 
-public class PlayerActionsController implements InputProcessor { //denne klassen tar seg av input
+public class PlayerActionsController implements InputProcessor { //this class deals with the input
 
     //The controller responds to the user input and performs interactions on the data model objects
     //An InputProcessor is used to receive input events from the keyboard and the touch screen (mouse on the desktop).
@@ -20,9 +20,8 @@ public class PlayerActionsController implements InputProcessor { //denne klassen
         this.angelEntity = angelSystem.getEntities().get(0);
     }
 
-
-    //metoder for å ta i mot input og kalle videre på metoder i systems. Disse kommer fra Inputprocessor
-    //sier ifra om inputen har blitt processed, false hvis den ikke blir sendt videre
+    //methods that receive input and calls other methods in systems. These methods are from InputProcessor
+    //tells whether the input has been processed, false if not
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button){ //Called when the screen was touched or a mouse button was pressed.
