@@ -25,21 +25,17 @@ public class MenuView extends AbstractView implements Screen {
 
     private Texture playTexture;
     private Texture background;
-    private GameView gameView;
-    private final FallingAngel game;
+    private FallingAngel game;
     private Stage stage;
     private MainController controller;
-    //private Button pButton;
     private Button playButton;
-    private Actor actor;
+    //private Actor actor;
 
-    public MenuView(final FallingAngel game){
-        this.game = game;
-        gameView = new GameView(this.game);
+    public MenuView(){
+        this.game = FallingAngel.getInstance();
+        controller = new MainController();
         background = new Texture("backgrounds/BackgroundSky.jpg");
         playTexture = new Texture("buttons/play.png");
-        //button.addActionListener();
-        //Drawable drawable = new TextureRegionDrawable(new TextureRegion(playButton));
     }
 
 
@@ -48,12 +44,11 @@ public class MenuView extends AbstractView implements Screen {
     }
 
     public void setPlayButton() {
-        playButton = makeButton(playTexture,Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight() * 0.4f);
-        this.playButton = playButton;
+        this.playButton = makeButton(playTexture,Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight() * 0.4f);
     }
 
-    public Actor getPlayButtonActor(){
-        return (Actor) playButton;
+    public Button getPlayButtonActor(){
+        return playButton;
     }
 
     public void show() {
@@ -82,12 +77,12 @@ public class MenuView extends AbstractView implements Screen {
         Button b = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         b.setSize(200, 200);
         b.setPosition(xPos, yPos);
-       Array<Actor> buttons = stage.getActors();
-       for (Actor actor : buttons) {
-           if (actor instanceof Button) {
-               actor.addListener(controller);
-           }
-        }
+      // Array<Actor> buttons = stage.getActors();
+      // for (Actor actor : buttons) {
+      //     if (actor instanceof Button) {
+      //         actor.addListener(controller);
+      //     }
+      //  }
 
         b.addListener(new ClickListener() {
             @Override
@@ -118,7 +113,6 @@ public class MenuView extends AbstractView implements Screen {
 
     public void render(float delta) {
             game.batch.begin(); // Draw elements to Sprite Batch
-            //game.batch.setTransformMatrix(new Matrix4().setToRotation(0,0,1,270));
             game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
             game.batch.end();
             stage.draw();

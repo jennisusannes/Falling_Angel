@@ -25,17 +25,19 @@ public class MainController extends ClickListener{
      Kanksje noe mer
     */
 
-    private Stack<AbstractView> views; //kunne prøvd screens
+    //private Stack<AbstractView> views; //kunne prøvd screens
     private FallingAngel game;
     private MenuView menuView;
     private GameView gameView;
 
-    public MainController(FallingAngel game) {
-        this.views = new Stack<AbstractView>();
-        this.game = game;
-        menuView = new MenuView(this.game);
+    public MainController() {
+        //this.views = new Stack<AbstractView>();
+        this.game = FallingAngel.getInstance();
+        menuView = new MenuView();
         gameView = new GameView(this.game);
     }
+
+    /*
 
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
@@ -47,7 +49,7 @@ public class MainController extends ClickListener{
          //   view.setFlipVertical(! view.getFlipVertical());
         }
     }
-     /*
+
 
 
 

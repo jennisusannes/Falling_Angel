@@ -13,15 +13,19 @@ public class FallingAngel extends Game implements ApplicationListener {
 
 	public SpriteBatch batch;
 	public BitmapFont font;
-	//private Texture img;
 	private MainController mc;
 	private MenuView menuView;
-	
+	private static FallingAngel INSTANCE;
+
+	public static FallingAngel getInstance() {
+		return INSTANCE;
+	}
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		setScreen(new MenuView(this)); // burde egt sette controller som setter en screen
+		setScreen(new MenuView()); // burde egt sette controller som setter en screen
 
 		//mc = new MainController(this);
 		//menuView = new MenuView(this);
