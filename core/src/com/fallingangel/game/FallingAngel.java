@@ -13,8 +13,8 @@ public class FallingAngel extends Game implements ApplicationListener {
 
 	public SpriteBatch batch;
 	public BitmapFont font;
-	private MainController mc;
-	private MenuView menuView;
+	public MainController controller;
+	public MenuView menuView;
 	private static FallingAngel INSTANCE;
 
 	public static FallingAngel getInstance() {
@@ -25,12 +25,21 @@ public class FallingAngel extends Game implements ApplicationListener {
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		setScreen(new MenuView()); // burde egt sette controller som setter en screen
-
-		//mc = new MainController(this);
+		controller = new MainController();
+		menuView = new MenuView();
+		setScreen(menuView);
+		//controller.changeView(menuView); // burde egt sette controller som setter en screen
 		//menuView = new MenuView(this);
 		//mc.set(menuView);
 	}
+
+	public MainController getController(){
+		return controller;
+	}
+	public MenuView getMenuView(){
+		return menuView;
+	}
+
 
 	@Override
 	public void dispose () {

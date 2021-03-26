@@ -16,11 +16,11 @@ public class GameOverView extends ScreenAdapter {
     private Stage stage;
     private MenuView menuView;
 
-    public GameOverView(FallingAngel game){
-        this.game = game;
+    public GameOverView(){
+        this.game = FallingAngel.getInstance();
         background = new Texture("backgrounds/BackgroundSky.jpg");
         gameOverButton = new Texture("buttons/game-over.png");
-        menuView = new MenuView(this.game);
+        menuView = new MenuView();
     }
 
     @Override

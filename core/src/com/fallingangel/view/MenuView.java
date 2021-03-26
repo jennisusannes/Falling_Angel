@@ -33,7 +33,7 @@ public class MenuView extends AbstractView implements Screen {
 
     public MenuView(){
         this.game = FallingAngel.getInstance();
-        controller = new MainController();
+        controller = game.getController();
         background = new Texture("backgrounds/BackgroundSky.jpg");
         playTexture = new Texture("buttons/play.png");
     }
