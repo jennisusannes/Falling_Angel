@@ -28,6 +28,7 @@ public class MenuView extends ScreenAdapter {
     private Stage stage;
     private MainController controller;
     private Button playButton;
+    private GameView gameView;
     //private Actor actor;
 
     public MenuView(){
@@ -36,6 +37,7 @@ public class MenuView extends ScreenAdapter {
         this.controller = game.mc;
         background = new Texture("backgrounds/BackgroundSky.jpg");
         playTexture = new Texture("buttons/play.png");
+        //gameView = new GameView();
     }
 
 
@@ -51,16 +53,17 @@ public class MenuView extends ScreenAdapter {
         GL20 gl = Gdx.gl;
         gl.glClearColor(1, 0, 0, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-/*
+
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
         //Button pButton = makeButton(playTexture,Gdx.graphics.getWidth()*0.45f);
         setPlayButton();
         stage.addActor(getPlayButtonActor());
-*/
+
         game.batch.begin(); // Draw elements to Sprite Batch
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         game.batch.end();
+        stage.draw();
 
 
 
@@ -92,8 +95,9 @@ public class MenuView extends ScreenAdapter {
         b.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                //game.setScreen(nextScreen);
-                controller.handle(inputEvent);
+                //game.setScreen(gameView);
+                //controller.handle(inputEvent);
+                controller.changeView(controller.getGameView());
             }
         });
         return b;
