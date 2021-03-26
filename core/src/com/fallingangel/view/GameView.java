@@ -13,8 +13,8 @@ public class GameView extends AbstractView implements Screen { //AbstractView
     private FallingAngel game;
     private Texture background;
 
-    public GameView(FallingAngel game){
-        this.game = game;
+    public GameView(){
+        this.game = FallingAngel.getInstance();
         background = new Texture("backgrounds/BackgroundSky.jpg");
     }
 
@@ -29,7 +29,11 @@ public class GameView extends AbstractView implements Screen { //AbstractView
             @Override
             public boolean keyDown(int keyCode) {
                 if (keyCode == Input.Keys.SPACE) {
+<<<<<<< HEAD
                     game.setScreen(new GameOverView());
+=======
+                    //game.setScreen(new GameOverView(game));
+>>>>>>> 74bb92b186fad318c6dd4d5bb85c07ec28070e3b
                 }
                 return true;
             }

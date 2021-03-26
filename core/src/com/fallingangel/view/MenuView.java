@@ -33,7 +33,11 @@ public class MenuView extends ScreenAdapter {
     public MenuView(){
         super();
         this.game = FallingAngel.getInstance();
+<<<<<<< HEAD
         //this.controller = game.mc;
+=======
+        controller = game.getController();
+>>>>>>> 74bb92b186fad318c6dd4d5bb85c07ec28070e3b
         background = new Texture("backgrounds/BackgroundSky.jpg");
         playTexture = new Texture("buttons/play.png");
     }

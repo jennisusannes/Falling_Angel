@@ -4,6 +4,7 @@ package com.fallingangel.controller;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -34,8 +35,27 @@ public class MainController extends ClickListener {
     public MainController() {
         //this.views = new Stack<AbstractView>();
         this.game = FallingAngel.getInstance();
+<<<<<<< HEAD
         //gameView = new GameView(this.game);
         game.setScreen(new MenuView());
+=======
+        menuView = game.getMenuView();
+        //menuView =  new MenuView();
+        //gameView = new GameView();
+    }
+
+
+    public void changeView(Screen nextScreen){
+        game.setScreen(nextScreen);
+    }
+
+  // public MenuView getMenuView(){
+    //   return menuView;
+    //}
+
+    public GameView getGameView(){
+        return gameView;
+>>>>>>> 74bb92b186fad318c6dd4d5bb85c07ec28070e3b
     }
 
     /*
