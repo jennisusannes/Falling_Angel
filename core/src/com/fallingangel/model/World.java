@@ -43,6 +43,8 @@ public class World {
         this.state = WORLD_STATE_RUNNING;
     }
 
+
+    //TODO: Følg ahsley-superjumper logikken her
     public Entity createAngel(){
         Entity angelEntity = new Entity();
         AngelComponent ac = new AngelComponent();
