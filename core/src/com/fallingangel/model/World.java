@@ -13,7 +13,7 @@ import com.fallingangel.model.component.PowerUpComponent;
 public class World {
 
 
-    //Må finne riktige statiske variabler her, sånn at appen går helt ut i kanten på alle devices
+    //Må finne riktige statiske variabler her, sånn at appen passer fint til alle
     public static final float WORLD_HEIGHT = 15*20;
     public static final float WORLD_WIDTH = 10;
 
@@ -24,7 +24,7 @@ public class World {
     public int state;
 
 
-    //TODO: vurdere om disse skal være med i spillet
+    //Usikker på om disse skal være med i spillet (?)
     public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
@@ -33,18 +33,21 @@ public class World {
 
     private Engine engine;
 
-    //Er en mulighet for at det er lurere å bruke pooled engine.
+
     public World(Engine engine){
         this.engine = engine;
     }
+    //Mulig å bruke pooled engine også
+
+
 
     public void create(){
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
+
     }
 
 
-    //TODO: Følg ahsley-superjumper logikken her
     public Entity createAngel(){
         Entity angelEntity = new Entity();
         AngelComponent ac = new AngelComponent();
@@ -69,7 +72,6 @@ public class World {
         return obstacleEntity;
     }
 
-
     public Entity createPlane(){
         Entity planeEntity = new Entity();
         PlaneComponent pc = new PlaneComponent();
@@ -86,7 +88,6 @@ public class World {
         return powerup;
     }
 
-    //TODO: skal dette gjøres med flere systems(?)
 
 
 
