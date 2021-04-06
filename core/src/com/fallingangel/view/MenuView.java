@@ -18,33 +18,94 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 
+import javax.xml.soap.Text;
+
 
 public class MenuView extends ScreenAdapter {
 
 
     private Texture playTexture;
     private Texture background;
+    // textures for buttons
+    private Texture singlePlayerTexture;
+    private Texture multiPlayerTexture;
+    private Texture achievementsTexture;
+    private Texture highscoreListTexture;
+    private Texture settingsTexture;
     private FallingAngel game;
     private Stage stage;
     private MainController controller;
     private Button playButton;
+    // buttons
+    private Button singlePlayerButton;
+    private Button multiPlayerButton;
+    private Button achievementsButton;
+    private Button highscoreListButton;
+    private Button settingsButton;
 
     public MenuView(){
         super();
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
-        background = new Texture("backgrounds/BackgroundSky.jpg");
+        background = new Texture("backgrounds/mainmenu_background.PNG");
         playTexture = new Texture("buttons/play.png");
+        // button textures
+        singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
+        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
+        achievementsTexture = new Texture("buttons/achievements_button.PNG");
+        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
+        settingsTexture = new Texture("buttons/settings_button.PNG");
     }
 
+    // getters and setters for buttons
 
     public void setPlayButton() {
-        this.playButton = makeButton(playTexture,Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight() * 0.4f);
+        this.playButton = makeButton(playTexture,200, 200, Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight() * 0.4f);
     }
-
     public Button getPlayButtonActor(){
         return playButton;
     }
+
+    public void setSinglePlayerButton() {
+        this.singlePlayerButton = makeButton(singlePlayerTexture,600, 400, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.4f);
+    }
+
+    public Button getSinglePlayerButton(){
+        return singlePlayerButton;
+    }
+
+    public void setMultiPlayerButton() {
+        this.multiPlayerButton = makeButton(multiPlayerTexture,600, 400, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.4f);
+    }
+
+    public Button getMultiPlayerButton(){
+        return multiPlayerButton;
+    }
+
+    public void setAchievementsButton() {
+        this.achievementsButton = makeButton(achievementsTexture, 200,200, Gdx.graphics.getWidth()*0.2f, Gdx.graphics.getHeight() * 0.15f);
+    }
+
+    public Button getAchievementsButton(){
+        return achievementsButton;
+    }
+
+    public void setHighscoreListButton() {
+        this.highscoreListButton = makeButton(highscoreListTexture,200, 200,Gdx.graphics.getWidth()*0.65f, Gdx.graphics.getHeight() * 0.15f);
+    }
+
+    public Button getHighscoreListButton(){
+        return highscoreListButton;
+    }
+
+    public void setSettingsButton() {
+        this.settingsButton = makeButton(settingsTexture,200,200,Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight() * 0.89f);
+    }
+
+    public Button getSettingsButton(){
+        return settingsButton;
+    }
+
 
     public void draw() {
         GL20 gl = Gdx.gl;
@@ -53,70 +114,46 @@ public class MenuView extends ScreenAdapter {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
-        setPlayButton();
-        stage.addActor(getPlayButtonActor());
+        setSinglePlayerButton();
+        stage.addActor(getSinglePlayerButton());
+        setMultiPlayerButton();
+        stage.addActor(getMultiPlayerButton());
+        setAchievementsButton();
+        stage.addActor(getAchievementsButton());
+        setHighscoreListButton();
+        stage.addActor(getHighscoreListButton());
+        setSettingsButton();
+        stage.addActor(getSettingsButton());
 
         game.batch.begin(); // Draw elements to Sprite Batch
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         game.batch.end();
         stage.draw();
-
-
-
-        /*Gdx.input.setInputProcessor(new InputAdapter() {
-            @Override
-            public boolean touchDown(int x, int y, int pointer, int button) {
-                int renderY = Gdx.graphics.getHeight() - y;
-                if (Vector2.dst((float) (Gdx.graphics.getWidth()*0.45), (float)(Gdx.graphics.getHeight()*0.4), x, renderY) < 200) {
-                    game.setScreen(new GameView(game));
-                }
-                return true;
-            }
-        }); */
     }
 
 
 
-    public Button makeButton(Texture texture, float xPos, float yPos) { //
-        Button b = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
-        b.setSize(200, 200);
-        b.setPosition(xPos, yPos);
-      // Array<Actor> buttons = stage.getActors();
-      // for (Actor actor : buttons) {
-      //     if (actor instanceof Button) {
-      //         actor.addListener(controller);
-      //     }
-      //  }
-
-        b.addListener(new ClickListener() {
+    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        button.setSize(width, height);
+        button.setPosition(xPos, yPos);
+        button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
                 controller = game.mc;
                 controller.handle(inputEvent);
-
             }
         });
-        return b;
+        return button;
     }
-
-
 
     public void update(float dt) {
 
     }
 
-
-
     @Override
     public void render(float dt) {
         update(dt);
         draw();
-        /*
-        game.batch.begin(); // Draw elements to Sprite Batch
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
-        game.batch.end();
-        stage.draw();*/
     }
-
-
 }

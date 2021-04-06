@@ -1,4 +1,5 @@
 package com.fallingangel.view;
-public class SinglePlayerView{
+
+public class SinglePlayerView {
 
 }

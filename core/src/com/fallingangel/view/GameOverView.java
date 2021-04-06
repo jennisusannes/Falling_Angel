@@ -23,7 +23,7 @@ public class GameOverView extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
-        background = new Texture("backgrounds/BackgroundSky.jpg");
+        background = new Texture("backgrounds/winner_player1_background.PNG");
         gameOverTexture = new Texture("buttons/game-over.png");
         //controller = game.mc;
         //menuView = controller.getMenuView();
@@ -31,7 +31,7 @@ public class GameOverView extends ScreenAdapter {
 
     public void setGameOverButton() {
         controller = game.mc;
-        this.gameOverButton = controller.getMenuView().makeButton(gameOverTexture,Gdx.graphics.getWidth()*0.4f, Gdx.graphics.getHeight() * 0.4f);
+        this.gameOverButton = controller.getMenuView().makeButton(gameOverTexture,200,200,Gdx.graphics.getWidth()*0.4f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getGameOverButton(){

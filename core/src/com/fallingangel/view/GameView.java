@@ -15,7 +15,7 @@ public class GameView extends AbstractView implements Screen { //AbstractView
 
     public GameView(){
         this.game = FallingAngel.getInstance();
-        background = new Texture("backgrounds/BackgroundSky.jpg");
+        background = new Texture("backgrounds/level_sunset_background.png");
     }
 
 
