@@ -95,15 +95,15 @@ public class World {
 
     public Entity createBackground(){
         Entity backgroundEntity = new Entity();
-        BackgroundComponent backgroundComponent = new BackgroundComponent();
+        //BackgroundComponent backgroundComponent = new BackgroundComponent();
         TextureComponent textureComponent = new TextureComponent();
-        TransformComponent transformComponent = new TransformComponent();
+        //TransformComponent transformComponent = new TransformComponent();
 
-        textureComponent.texture = Asset.getTexture(Asset.gameBackground);
+        textureComponent.texture = Asset.backgroundTexture;
 
-        backgroundEntity.add(backgroundComponent);
+        //backgroundEntity.add(backgroundComponent);
         backgroundEntity.add(textureComponent);
-        backgroundEntity.add(transformComponent);
+        //backgroundEntity.add(transformComponent);
 
         engine.addEntity(backgroundEntity);
 

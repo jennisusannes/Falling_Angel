@@ -73,17 +73,19 @@ public class GameView extends ScreenAdapter {
     private int state;
 
 
-    public void GameView() {
+    public GameView() {
+        super();
         //this.game  = FallingAngel.getInstance();
         Asset.load();
         state = GAME_READY;
 
         //Camera (and viewport of the screen)
+        /*
         this.gameCam = new OrthographicCamera(320,480);
         this.viewPort = new StretchViewport(320, 480, gameCam);
         viewPort.apply();
         gameCam.position.set(320 / 2, 480 / 2, 0);
-        gameCam.update();
+        gameCam.update();*/
 
         this.touchPoint = new Vector3();
 
@@ -129,7 +131,7 @@ public class GameView extends ScreenAdapter {
         //tror denne tar inn kamera som følger bakgrunnen
         engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
-        world.create(); //TODO: Må lage metode i World.java
+        //world.create(); //TODO: Må lage metode i World.java
 
         //Tubbywars har maps, trenger vi det?
 
@@ -236,16 +238,18 @@ public class GameView extends ScreenAdapter {
     }
 
     public void drawUI () {
-        Texture texture = new Texture("BackgroundSky.png");
+        /*Texture texture = new Texture("BackgroundSky.png");
         TextureRegion textureRegion = new TextureRegion(texture, 0, 0, 500, 200);
         Image image = new Image(textureRegion);
 
         stage.addActor(image);
 
         stage.draw();
-        /*gameCam.update();
+        gameCam.update();
         game.batch.setProjectionMatrix(gameCam.combined); //setProjectMatrix should be called every time the camera is moved or the screen is resized
+        */
         game.batch.begin();
+
 
         switch (state) {
             case GAME_READY:
@@ -261,14 +265,20 @@ public class GameView extends ScreenAdapter {
                 presentGameOver();
                 break;
         }
-        game.batch.end();*/
+        game.batch.end();
 
     }
 
     //Hvis vi legger inn bilder med Ready, GameOver osv. men skal kanskje sendes til et annet view uansett
     public void presentReady() {
-        game.batch.draw(Asset.getTexture(Asset.gameBackground), 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());   //må legge inn Asset for et spill som er klart
+        /*
+        Texture tex = new Texture("BackgroundSky.png");
+        game.batch.draw(tex, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());   //må legge inn Asset for et spill som er klart
+        */
+        game.batch.draw(Asset.backgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
+
 
     public void presentRunning() {
         //Asset for et kjørende spill, må ha en pause knapp og score

@@ -1,13 +1,16 @@
 package com.fallingangel.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Asset {
 
-    //Spillets bakgrunn, bruker samme gjennom hele spillet:
-    public static String gameBackground = "BackgroundSky.png";
+    public static Texture backgroundTexture;
 
+    //Spillets bakgrunn, bruker samme gjennom hele spillet:
+    //public static String gameBackground = "BackgroundSky.png";
+/*
     //Alle PNGs for pig-animation
     public static String pigAnimation1 = "characters/pig/pig_animation_1.PNG";
     public static String pigAnimation2 = "characters/pig/pig_animation_2.PNG";
@@ -50,22 +53,28 @@ public class Asset {
 
 
 
-    /*public Asset(){
-        this.assetManager = new AssetManager();
-    }*/
+    public Asset(){
+        //this.assetManager = new AssetManager();
+    }
 
 
     public static void dispose(){
         assetManager.dispose();
     }
-
+    */
     public static void load(){
-        assetManager.load(gameBackground, Texture.class);
+        //assetManager.load(gameBackground, Texture.class);
+        backgroundTexture = new Texture("BackgroundSky.png");
     }
 
-
+/*
     public static Texture getTexture(String textureName){
-        return assetManager.get(textureName, Texture.class);
+        //return assetManager.get(textureName, Texture.class);
+        return
+    }*/
+
+    public void update(){
+
     }
 
 

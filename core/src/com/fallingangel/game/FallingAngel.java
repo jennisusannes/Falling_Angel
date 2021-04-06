@@ -5,6 +5,7 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.fallingangel.model.Asset;
 import com.fallingangel.view.GameView;
 import com.fallingangel.view.MenuView;
 
@@ -33,7 +34,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public void create () {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-
+		Asset.load();
 		this.gameView = new GameView();
 		setScreen(gameView);
 		/*this.mc = new MainController(); // burde egt sette controller som setter en screen
@@ -46,6 +47,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public void dispose () {
 		batch.dispose();
 		font.dispose();
+		//Asset.dispose();
 	}
 
 }
