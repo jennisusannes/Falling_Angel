@@ -14,7 +14,7 @@ public class AndroidInterfaceClass implements FireBaseInterface{
     DatabaseReference myRef;
 
     public AndroidInterfaceClass(){
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
         myRef = database.getReference("message");
     }
     @Override

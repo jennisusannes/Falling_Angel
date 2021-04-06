@@ -3,8 +3,8 @@ android {
 
 //From Firebase
 
-    apply plugin: 'com.android.application'
-
+  //  apply plugin: 'com.android.application'
+/*
 
     dependencies {
         // Import the Firebase BoM
@@ -36,7 +36,7 @@ android {
     }
     // Add this line
     apply plugin: 'com.google.gms.google-services'
-
+*/
     //Fra før
     buildToolsVersion "30.0.3"
     compileSdkVersion 30
