@@ -15,12 +15,14 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public BitmapFont font;
 	//public MainController mc;
 	private MenuView menuView;
+	//Instanciating the game with a singleton-pattern
 	private static final FallingAngel INSTANCE = new FallingAngel();
 
 	private FallingAngel(){
 
 	}
 
+	//Singleton-pattern for the entire game
 	public static FallingAngel getInstance() {
 		return INSTANCE;
 	}

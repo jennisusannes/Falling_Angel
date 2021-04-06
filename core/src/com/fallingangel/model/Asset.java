@@ -4,17 +4,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Asset {
-    //TODO: implementere figurer her - høyre-trykk på bildet --> copy --> path from source root
-
 
     //Spillets bakgrunn, bruker samme gjennom hele spillet:
     public static String gameBackground = "/BackgroundSky.png";
-
-
-    //Spillets meny-side
-    //Eksempel:
-    //public static String logo = "[path]";
-
 
     //Alle PNGs for pig-animation
     public static String pigAnimation1 = "characters/pig/pig_animation_1.PNG";
@@ -28,14 +20,12 @@ public class Asset {
 
     //PNGs for select character siden:
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
-    //Her kommer det trolig fler
 
     //Devil obstacles:
     public static String devil1 = "obstacles/devil/devil_1.png";
     public static String devil2 = "obstacles/devil/devil_2.png";
     //spritesheet for devilAnimation
     public static String devilAnimation = "obstacles/devil/devil_animation.png";
-
 
     //Cloud-obstacle:
     public static String cloud = "obstacles/cloud.png";
@@ -49,7 +39,6 @@ public class Asset {
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
 
-
     //power-ups and benefits:
     public static String coin = "coin.png";
     //public static String powerUp = "[path]";
@@ -57,6 +46,8 @@ public class Asset {
 
     //importerer assetManager for å håndtere innlasting av filer.
     private static AssetManager assetManager;
+
+
 
 
     public Asset(){
@@ -68,8 +59,8 @@ public class Asset {
         assetManager.dispose();
     }
 
-    public static void load(){
-        //assetManager.load(string filename, class type);
+    public static void load(String filename){
+        //assetManager.load(filename, Texture.class);
     }
 
 
