@@ -18,6 +18,8 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	//Instanciating the game with a singleton-pattern
 	private static final FallingAngel INSTANCE = new FallingAngel();
 
+	public GameView gameView;
+
 	private FallingAngel(){
 
 	}
@@ -32,7 +34,8 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 
-		setScreen(new GameView());
+		this.gameView = new GameView();
+		setScreen(gameView);
 		/*this.mc = new MainController(); // burde egt sette controller som setter en screen
 		mc.setStartScreen();*/
 

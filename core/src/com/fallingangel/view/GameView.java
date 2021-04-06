@@ -5,14 +5,17 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Input.Keys;
@@ -43,9 +46,9 @@ public class GameView extends ScreenAdapter {
     static final int GAME_OVER = 3;
 
 
-    private OrthographicCamera gameCam;
+    public OrthographicCamera gameCam;
     private Viewport viewPort; //Viewport manages a Camera's viewportWidth and viewportHeight
-    public FallingAngel game;
+    public FallingAngel game = FallingAngel.getInstance();
     private World world;
     private Vector3 touchPoint;
     private Rectangle pauseBounds;
@@ -71,18 +74,18 @@ public class GameView extends ScreenAdapter {
 
 
     public void GameView() {
-        this.game  = FallingAngel.getInstance();
+        //this.game  = FallingAngel.getInstance();
         Asset.load();
         state = GAME_READY;
 
         //Camera (and viewport of the screen)
         this.gameCam = new OrthographicCamera(320,480);
-        viewPort = new StretchViewport(320, 480, gameCam);
+        this.viewPort = new StretchViewport(320, 480, gameCam);
         viewPort.apply();
         gameCam.position.set(320 / 2, 480 / 2, 0);
         gameCam.update();
 
-        touchPoint = new Vector3();
+        this.touchPoint = new Vector3();
 
 
 
@@ -104,12 +107,12 @@ public class GameView extends ScreenAdapter {
 
         //Initializes new world
         this.engine = new Engine();
-        world = new World(engine);
-        stage = new Stage();
-        settingsStage = new Stage();
+        this.world = new World(engine);
+        this.stage = new Stage();
+        this.settingsStage = new Stage();
 
-        angelSystem = engine.getSystem(AngelSystem.class);
-        angels = engine.getEntities();
+        this.angelSystem = engine.getSystem(AngelSystem.class);
+        this.angels = engine.getEntities();
 
         engine.addSystem(new AngelSystem(world));
         engine.addSystem(new ObstacleSystem());
@@ -233,7 +236,14 @@ public class GameView extends ScreenAdapter {
     }
 
     public void drawUI () {
-        gameCam.update();
+        Texture texture = new Texture("BackgroundSky.png");
+        TextureRegion textureRegion = new TextureRegion(texture, 0, 0, 500, 200);
+        Image image = new Image(textureRegion);
+
+        stage.addActor(image);
+
+        stage.draw();
+        /*gameCam.update();
         game.batch.setProjectionMatrix(gameCam.combined); //setProjectMatrix should be called every time the camera is moved or the screen is resized
         game.batch.begin();
 
@@ -251,7 +261,7 @@ public class GameView extends ScreenAdapter {
                 presentGameOver();
                 break;
         }
-        game.batch.end();
+        game.batch.end();*/
 
     }
 
