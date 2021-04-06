@@ -77,23 +77,27 @@ public class RenderingSystem extends IteratingSystem{
         for (Entity entity : renderQueue) {
             TextureComponent tex = textureM.get(entity);
 
-            if (tex.region == null) {
+            if (tex.texture == null) {
                 continue;
             }
 
             TransformComponent t = transformM.get(entity);
 
+            /*
             float width = tex.region.getRegionWidth();
             float height = tex.region.getRegionHeight();
+             */
+            float width = tex.texture.getWidth();
+            float height = tex.texture.getHeight();
             float originX = width * 0.5f;
             float originY = height * 0.5f;
-
-            sb.draw(tex.region,
+/*
+            sb.draw(tex.texture,
                     t.pos.x - originX, t.pos.y - originY,
                     originX, originY,
                     width, height,
                     t.scale.x * PIXELS_TO_METRES, t.scale.y * PIXELS_TO_METRES,
-                    MathUtils.radiansToDegrees * t.rotation);
+                    MathUtils.radiansToDegrees * t.rotation);*/
         }
 
         sb.end();

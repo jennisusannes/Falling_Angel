@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Asset {
 
     //Spillets bakgrunn, bruker samme gjennom hele spillet:
-    public static String gameBackground = "/BackgroundSky.png";
+    public static String gameBackground = "BackgroundSky.png";
 
     //Alle PNGs for pig-animation
     public static String pigAnimation1 = "characters/pig/pig_animation_1.PNG";
@@ -45,26 +45,26 @@ public class Asset {
 
 
     //importerer assetManager for å håndtere innlasting av filer.
-    private static AssetManager assetManager;
+    private static AssetManager assetManager = new AssetManager();
 
 
 
 
-    public Asset(){
+    /*public Asset(){
         this.assetManager = new AssetManager();
-    }
+    }*/
 
 
     public static void dispose(){
         assetManager.dispose();
     }
 
-    public static void load(String filename){
-        //assetManager.load(filename, Texture.class);
+    public static void load(){
+        assetManager.load(gameBackground, Texture.class);
     }
 
 
-    public Texture getTexture(String textureName){
+    public static Texture getTexture(String textureName){
         return assetManager.get(textureName, Texture.class);
     }
 

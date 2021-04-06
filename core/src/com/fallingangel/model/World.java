@@ -5,10 +5,13 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.fallingangel.model.component.AngelComponent;
+import com.fallingangel.model.component.BackgroundComponent;
 import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.PlaneComponent;
 import com.fallingangel.model.component.PowerUpComponent;
+import com.fallingangel.model.component.TextureComponent;
+import com.fallingangel.model.component.TransformComponent;
 
 public class World {
 
@@ -22,6 +25,7 @@ public class World {
     public int score;
     public Entity angel;
     public int state;
+    public Entity background;
 
 
     //Usikker på om disse skal være med i spillet (?)
@@ -44,6 +48,7 @@ public class World {
     public void create(){
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
+        this.background = createBackground();
 
     }
 
@@ -86,6 +91,23 @@ public class World {
         powerup.add(puc);
         engine.addEntity(powerup);
         return powerup;
+    }
+
+    public Entity createBackground(){
+        Entity backgroundEntity = new Entity();
+        BackgroundComponent backgroundComponent = new BackgroundComponent();
+        TextureComponent textureComponent = new TextureComponent();
+        TransformComponent transformComponent = new TransformComponent();
+
+        textureComponent.texture = Asset.getTexture(Asset.gameBackground);
+
+        backgroundEntity.add(backgroundComponent);
+        backgroundEntity.add(textureComponent);
+        backgroundEntity.add(transformComponent);
+
+        engine.addEntity(backgroundEntity);
+
+        return backgroundEntity;
     }
 
 

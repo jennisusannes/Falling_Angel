@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -29,6 +30,8 @@ import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
+import com.fallingangel.model.component.BackgroundComponent;
+import com.fallingangel.model.component.TextureComponent;
 
 public class GameView extends ScreenAdapter {
 
@@ -69,17 +72,19 @@ public class GameView extends ScreenAdapter {
 
     public void GameView() {
         this.game  = FallingAngel.getInstance();
-
+        Asset.load();
         state = GAME_READY;
 
         //Camera (and viewport of the screen)
-        gameCam = new OrthographicCamera(320,480);
+        this.gameCam = new OrthographicCamera(320,480);
         viewPort = new StretchViewport(320, 480, gameCam);
         viewPort.apply();
         gameCam.position.set(320 / 2, 480 / 2, 0);
         gameCam.update();
 
         touchPoint = new Vector3();
+
+
 
         //kan bytte ut med det under, men må legge inn bredde og høyde i FallingAngel filen:
 
@@ -252,7 +257,7 @@ public class GameView extends ScreenAdapter {
 
     //Hvis vi legger inn bilder med Ready, GameOver osv. men skal kanskje sendes til et annet view uansett
     public void presentReady() {
-        //game.batch.draw(Asset.);   //må legge inn Asset for et spill som er klart
+        game.batch.draw(Asset.getTexture(Asset.gameBackground), 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());   //må legge inn Asset for et spill som er klart
     }
 
     public void presentRunning() {
@@ -292,7 +297,7 @@ public class GameView extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        update(delta);
+        //update(delta);
         drawUI();
     }
 

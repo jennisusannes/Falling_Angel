@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fallingangel.model.component.AnimationComponent;
@@ -43,7 +44,7 @@ public class AnimationSystem extends IteratingSystem {
         Animation anim = animation.animations.get(state.get()); //gets the animation that fits the current state (HIT or FALL)
 
         if (anim != null) {
-            texture.region = (TextureRegion) anim.getKeyFrame(state.time); //sets the texture to a part of that animation
+            texture.texture = (Texture) anim.getKeyFrame(state.time); //sets the texture to a part of that animation
         }
 
         state.time += deltaTime; //updates the time
