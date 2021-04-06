@@ -45,7 +45,6 @@ public class AngelSystem extends IteratingSystem {
     public void update(float deltaTime){ //makes sure the IteratingSystem is updated as well
         super.update(deltaTime);
 
-
     }
 
     @Override
