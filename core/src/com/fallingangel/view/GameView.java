@@ -41,6 +41,9 @@ import com.fallingangel.model.component.TextureComponent;
 
 public class GameView extends ScreenAdapter {
 
+    //prøver denne for animasjonen, kun midlertidig løsning
+    float stateTime;
+
     //Tar i bruk assets for å hente bilder
 
     static final int GAME_READY = 0;
@@ -81,6 +84,8 @@ public class GameView extends ScreenAdapter {
         //this.game  = FallingAngel.getInstance();
         Asset.load();
         state = GAME_READY;
+
+        stateTime = 0.0f; //kun midlertidig
 
         //Camera (and viewport of the screen)
         /*
@@ -146,6 +151,8 @@ public class GameView extends ScreenAdapter {
         if (dt > 0.1f) dt = 0.1f;
 
         engine.update(dt);
+
+        stateTime += dt;
 
         switch (state) {
             case GAME_READY:
@@ -297,9 +304,15 @@ public class GameView extends ScreenAdapter {
         game.batch.draw(world.obstacle.getComponent(TextureComponent.class).texture, 150, 500, 300, 1000);
 
 
-        //her prøver vi å få til animasjon
+        //her prøver vi å få til animasjon gjennom ashley systemet
+        /*
         TextureRegion tex = world.coin.getComponent(TextureComponent.class).textureRegion; //hvilken dette er oppdateres gjennom AnimationSystem (GameView.render() -> GameView.update() -> engine.update(dt) -> oppdaterer AnimationSystem -> kjører processEntity)
         game.batch.draw(tex, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
+        */
+
+        //midlertidig animasjon, lettvindt løsning. husk å fjerne statetime felt øverst, i konstruktør og i update-metoden når vi tar den bort:)
+        TextureRegion currentFrame = Asset.coinAnimation.getKeyFrame(stateTime, true);
+        game.batch.draw(currentFrame, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
     }
 
     public void presentPaused() {
