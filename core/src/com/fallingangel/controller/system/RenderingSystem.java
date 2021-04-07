@@ -71,7 +71,7 @@ public class RenderingSystem extends IteratingSystem{
         renderQueue.sort(comparator);
 
         cam.update();
-        sb.setProjectionMatrix(cam.combined);
+        //sb.setProjectionMatrix(cam.combined); //denne zoomer inn kameraet, vet ikke om den skal brukes enda
         sb.begin();
 
         for (Entity entity : renderQueue) {

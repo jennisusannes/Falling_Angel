@@ -11,6 +11,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -33,7 +34,9 @@ import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
+import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BackgroundComponent;
+import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 
 public class GameView extends ScreenAdapter {
@@ -131,7 +134,7 @@ public class GameView extends ScreenAdapter {
         //tror denne tar inn kamera som følger bakgrunnen
         engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
-        world.create(); //TODO: Må lage metode i World.java
+        world.create();
 
         //Tubbywars har maps, trenger vi det?
 
@@ -142,7 +145,7 @@ public class GameView extends ScreenAdapter {
     public void update(float dt) {
         //if (dt > 0.1f) dt = 0.1f;
 
-        engine.update(dt);
+        //engine.update(dt);
 
         switch (state) {
             case GAME_READY:
@@ -172,6 +175,8 @@ public class GameView extends ScreenAdapter {
     //Updates on what state the game is in
     //må legge inn metoder for hva som skjer mens spillet kjører
     private void updateRunning (float dt) {
+
+        /*
         if (Gdx.input.justTouched()) {
             //camera unproject is used to transform the screen coordinates from a click or touch to the gameworld
             gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -181,7 +186,7 @@ public class GameView extends ScreenAdapter {
                 pauseSystem();
                 return;
             }
-        }
+        }*/
         //her må det legges inn metoder for å flytte på Angel
             /*
             float accelX = 0.0f;
@@ -210,6 +215,7 @@ public class GameView extends ScreenAdapter {
             //legg til en if-setning om denne scoren er høyere enn highscore -> si ny highscore, ellers bare vise scoren
             //oppdatere ny highscore
             pauseSystem();
+
         }
     }
 
@@ -282,6 +288,15 @@ public class GameView extends ScreenAdapter {
 
     public void presentRunning() {
         //Asset for et kjørende spill, må ha en pause knapp og score
+        game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        BitmapFont font = new BitmapFont();
+        font.draw(game.batch, "Gratulerer, det funker", 50, 50);
+
+        //game.batch.draw(Asset.coinTexture, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/6);
+        float statetime = world.coin.getComponent(StateComponent.class).time;
+        //game.batch.draw(world.coin.getComponent(AnimationComponent.class).animations.get(0).getKeyFrame(statetime, true), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/6);
+        //game.batch.draw(world.coin.getComponent(AnimationComponent.class).animations.get(0).getKeyFrame(statetime, true), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/6);
     }
 
     public void presentPaused() {
@@ -317,7 +332,7 @@ public class GameView extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        //update(delta);
+        update(delta);
         drawUI();
     }
 

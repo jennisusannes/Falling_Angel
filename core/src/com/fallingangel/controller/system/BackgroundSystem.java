@@ -26,7 +26,8 @@ public class BackgroundSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) { //makes sure that the entity follows the camera
         //the method is called every time the BackgroundSystem is updated
+        /*
         TransformComponent transform = transform_mapper.get(entity); //gets the updates trans comp for this entity
-        transform.pos.set(camera.position.x, camera.position.y, 10.0f);
+        transform.pos.set(camera.position.x, camera.position.y, 10.0f);*/
     }
 }

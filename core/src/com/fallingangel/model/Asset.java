@@ -1,5 +1,6 @@
 package com.fallingangel.model;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -83,6 +84,7 @@ public class Asset {
 
         Array<TextureRegion> coinFrames = makeFrames(new Texture("coin.png"), 5);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4));
+        coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
 

@@ -31,6 +31,7 @@ public class World {
     public Entity angel;
     public int state;
     public Entity background;
+    public Entity coin;
 
 
     //Usikker på om disse skal være med i spillet (?)
@@ -54,6 +55,7 @@ public class World {
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
         this.background = createBackground();
+        this.coin = createCoin();
 
     }
 
@@ -98,7 +100,7 @@ public class World {
         return angelEntity;
     }
 
-    private void createCoin(float x, float y) {
+    private Entity createCoin() { //kan ha float x, float y som input her hvis vi skal bruke pos som kommentert ut lenger ned
         Entity coinEntity = engine.createEntity();
 
         AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
@@ -113,7 +115,7 @@ public class World {
         boundsComponent.bounds.width = CoinComponent.WIDTH;
         boundsComponent.bounds.height = CoinComponent.HEIGHT;
 
-        transformComponent.pos.set(x, y, 3.0f);
+        //transformComponent.pos.set(x, y, 3.0f);
 
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
@@ -125,6 +127,8 @@ public class World {
         coinEntity.add(stateComponent);
 
         engine.addEntity(coinEntity);
+
+        return coinEntity;
     }
 
     public Entity createObstacle(){
