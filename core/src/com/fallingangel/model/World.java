@@ -3,13 +3,18 @@ package com.fallingangel.model;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.fallingangel.model.component.AngelComponent;
+import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BackgroundComponent;
+import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
+import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.PlaneComponent;
 import com.fallingangel.model.component.PowerUpComponent;
+import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
@@ -55,9 +60,41 @@ public class World {
 
     public Entity createAngel(){
         Entity angelEntity = new Entity();
-        AngelComponent ac = new AngelComponent();
-        angelEntity.add(ac);
+
+        //make new comp.
+        AngelComponent angelComponent = new AngelComponent();
+        AnimationComponent animationComponent = new AnimationComponent();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        MovementComponent movementComponent = new MovementComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        StateComponent stateComponent = new StateComponent();
+        TextureComponent textureComponent = new TextureComponent();
+
+        //connect the animation from Assets to the an.comp. IntMap
+        animationComponent.animations.put(AngelComponent.STATE_FALL, Asset.pigAnimation);
+        //animations for when a collision occurs and when the pig is dead
+
+        //put the bounds as the angels width and height
+        boundsComponent.bounds.width = AngelComponent.WIDTH;
+        boundsComponent.bounds.height = AngelComponent.HEIGHT;
+
+        //connect the comp. to the entity
+        angelEntity.add(angelComponent);
+        angelEntity.add(animationComponent);
+        angelEntity.add(boundsComponent);
+        angelEntity.add(movementComponent);
+        angelEntity.add(transformComponent);
+        angelEntity.add(stateComponent);
+        angelEntity.add(textureComponent);
+
+        //set the state as falling
+        stateComponent.set(AngelComponent.STATE_FALL);
+        //set the position of the angel
+        transformComponent.pos.set(5.0f, 1.0f, 0.0f); //
+
+        //add the entity to the engine
         engine.addEntity(angelEntity);
+
         return angelEntity;
     }
 

@@ -1,12 +1,21 @@
 package com.fallingangel.model;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 
 public class Asset {
 
     public static Texture backgroundTexture;
+
+    //Sprite-sheet for pig
+    public static Animation<Texture> pigAnimation;
+
+    public static String pigFrame1 = "characters/pig/pig_animation_1.PNG";
+    public static String pigFrame2 = "characters/pig/pig_animation_2.PNG";
+    public static String pigFrame3 = "characters/pig/pig_animation_3.PNG";
+    public static String pigFrame4 = "characters/pig/pig_animation_4.PNG";
+    public static String pigFrame5 = "characters/pig/pig_animation_5.PNG";
+    public static String pigFrame6 = "characters/pig/pig_animation_6.PNG";
 
     //Spillets bakgrunn, bruker samme gjennom hele spillet:
     //public static String gameBackground = "BackgroundSky.png";
@@ -65,6 +74,13 @@ public class Asset {
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
         backgroundTexture = new Texture("BackgroundSky.png");
+
+        //pigSpritesheet = new Animation(0.2f, new TextureRegion("characters/pig/pig_animation.png", ))
+        pigAnimation = new Animation<Texture>(0.2f, new Texture(pigFrame1), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
+
+
+
+        //"characters/pig/pig_animation.png"
     }
 
 /*
