@@ -2,6 +2,8 @@ package com.fallingangel.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
@@ -9,10 +11,6 @@ public class Asset {
 
     //Animation for pig:
     public static Animation<Texture> pigAnimation;
-
-    //Animation for coin:
-    public static Animation<Texture> coinAnimation;
-
 
     //Pig-frames:
     public static String pigFrame1 = "characters/pig/pig_animation_1.PNG";
@@ -22,18 +20,19 @@ public class Asset {
     public static String pigFrame5 = "characters/pig/pig_animation_5.PNG";
     public static String pigFrame6 = "characters/pig/pig_animation_6.PNG";
 
+
+    //Animation for coin:
+    public static Animation<TextureRegion> coinAnimation;
+    public static Texture coinTexture = new Texture("coin.png");
+
+
+
+
+
     //Spillets bakgrunn, bruker samme gjennom hele spillet:
     //public static String gameBackground = "BackgroundSky.png";
 /*
-    //Alle PNGs for pig-animation
-    public static String pigAnimation1 = "characters/pig/pig_animation_1.PNG";
-    public static String pigAnimation2 = "characters/pig/pig_animation_2.PNG";
-    public static String pigAnimation3 = "characters/pig/pig_animation_3.PNG";
-    public static String pigAnimation4 = "characters/pig/pig_animation_4.PNG";
-    public static String pigAnimation5 = "characters/pig/pig_animation_5.PNG";
-    public static String pigAnimation6 = "characters/pig/pig_animation_6.PNG";
-    //Sprite-sheet for pig
-    public static String pigSpritesheet = "/characters/pig/pig_animation.png";
+
 
     //PNGs for select character siden:
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -80,12 +79,28 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
         backgroundTexture = new Texture("BackgroundSky.png");
 
-        //pigSpritesheet = new Animation(0.2f, new TextureRegion("characters/pig/pig_animation.png", ))
         pigAnimation = new Animation<Texture>(0.2f, new Texture(pigFrame1), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
-        //coinAnimation = new Animation<Texture>(0.2f, );
+
+        Array<TextureRegion> coinFrames = makeFrames(new Texture("coin.png"), 5);
+        coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4));
+
 
 
         //"characters/pig/pig_animation.png"
+    }
+
+
+    //Helpmethod in order to create a list of frames. Used in order to create animations.
+    public static Array<TextureRegion> makeFrames(Texture texture, int frameCount){
+        Array<TextureRegion> frames = new Array<TextureRegion>();
+        TextureRegion temp;
+        int frameWidth = texture.getWidth() / frameCount;
+        for(int i = 0; i < frameCount; i++){
+            temp = new TextureRegion(texture, i * frameWidth, 0, frameWidth, texture.getHeight());
+            frames.add(temp);
+        }
+        return frames;
+
     }
 
 /*

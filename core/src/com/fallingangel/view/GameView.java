@@ -131,7 +131,7 @@ public class GameView extends ScreenAdapter {
         //tror denne tar inn kamera som følger bakgrunnen
         engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
-        //world.create(); //TODO: Må lage metode i World.java
+        world.create(); //TODO: Må lage metode i World.java
 
         //Tubbywars har maps, trenger vi det?
 
@@ -275,8 +275,8 @@ public class GameView extends ScreenAdapter {
         Texture tex = new Texture("BackgroundSky.png");
         game.batch.draw(tex, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());   //må legge inn Asset for et spill som er klart
         */
-        game.batch.draw(Asset.backgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        //game.batch.draw(Asset.backgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
 

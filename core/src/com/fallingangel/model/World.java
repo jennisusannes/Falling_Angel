@@ -99,7 +99,7 @@ public class World {
     }
 
     private void createCoin(float x, float y) {
-        Entity entity = engine.createEntity();
+        Entity coinEntity = engine.createEntity();
 
         AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
         CoinComponent coinComponent = engine.createComponent(CoinComponent.class);
@@ -117,14 +117,14 @@ public class World {
 
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
-        entity.add(coinComponent);
-        entity.add(boundsComponent);
-        entity.add(transformComponent);
-        entity.add(textureComponent);
-        entity.add(animationComponent);
-        entity.add(stateComponent);
+        coinEntity.add(coinComponent);
+        coinEntity.add(boundsComponent);
+        coinEntity.add(transformComponent);
+        coinEntity.add(textureComponent);
+        coinEntity.add(animationComponent);
+        coinEntity.add(stateComponent);
 
-        engine.addEntity(entity);
+        engine.addEntity(coinEntity);
     }
 
     public Entity createObstacle(){
