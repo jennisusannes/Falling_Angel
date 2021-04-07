@@ -143,9 +143,9 @@ public class GameView extends ScreenAdapter {
 
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
-        //if (dt > 0.1f) dt = 0.1f;
+        if (dt > 0.1f) dt = 0.1f;
 
-        //engine.update(dt);
+        engine.update(dt);
 
         switch (state) {
             case GAME_READY:
@@ -293,10 +293,13 @@ public class GameView extends ScreenAdapter {
         BitmapFont font = new BitmapFont();
         font.draw(game.batch, "Gratulerer, det funker", 50, 50);
 
-        //game.batch.draw(Asset.coinTexture, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/6);
-        float statetime = world.coin.getComponent(StateComponent.class).time;
-        //game.batch.draw(world.coin.getComponent(AnimationComponent.class).animations.get(0).getKeyFrame(statetime, true), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/6);
-        //game.batch.draw(world.coin.getComponent(AnimationComponent.class).animations.get(0).getKeyFrame(statetime, true), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/6);
+        game.batch.draw(world.plane.getComponent(TextureComponent.class).texture, 200, 200, 1000, 500);
+        game.batch.draw(world.obstacle.getComponent(TextureComponent.class).texture, 150, 500, 300, 1000);
+
+
+        //her prøver vi å få til animasjon
+        TextureRegion tex = world.coin.getComponent(TextureComponent.class).textureRegion; //hvilken dette er oppdateres gjennom AnimationSystem (GameView.render() -> GameView.update() -> engine.update(dt) -> oppdaterer AnimationSystem -> kjører processEntity)
+        game.batch.draw(tex, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
     }
 
     public void presentPaused() {

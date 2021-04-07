@@ -8,11 +8,14 @@ import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
+
+    //BACKGROUND
     public static Texture backgroundTexture;
 
-    //Animation for pig:
-    public static Animation<Texture> pigAnimation;
 
+    //PIG
+    //Animation for pig:
+    public static Animation<TextureRegion> pigAnimation;
     //Pig-frames:
     public static String pigFrame1 = "characters/pig/pig_animation_1.PNG";
     public static String pigFrame2 = "characters/pig/pig_animation_2.PNG";
@@ -22,16 +25,23 @@ public class Asset {
     public static String pigFrame6 = "characters/pig/pig_animation_6.PNG";
 
 
+    //COIN
     //Animation for coin:
     public static Animation<TextureRegion> coinAnimation;
     public static Texture coinTexture = new Texture("coin.png");
 
 
+    //OBSTACLES
+    //Balloons
+    public static String blueBalloon = "obstacles/balloons/blue_balloon.png";
+    public static String greenBalloon = "obstacles/balloons/green_balloon.png";
+    public static String redBalloon = "obstacles/balloons/red_balloon.png";
+    public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
+    public static Array<Texture> balloons = new Array<Texture>();
 
-
-
-    //Spillets bakgrunn, bruker samme gjennom hele spillet:
-    //public static String gameBackground = "BackgroundSky.png";
+    //Plane
+    public static String plane = "obstacles/plane.png";
+    public static Texture planeTexture;
 /*
 
 
@@ -47,14 +57,8 @@ public class Asset {
     //Cloud-obstacle:
     public static String cloud = "obstacles/cloud.png";
 
-    //Plane obstacle
-    public static String plane = "obstacles/plane.png";
 
-    //balloon obstacles
-    public static String blueBalloon = "obstacles/balloons/blue_balloon.png";
-    public static String greenBalloon = "obstacles/balloons/green_balloon.png";
-    public static String redBalloon = "obstacles/balloons/red_balloon.png";
-    public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
+
 
     //power-ups and benefits:
     public static String coin = "coin.png";
@@ -78,17 +82,36 @@ public class Asset {
     */
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
+
+        //BACKGROUND
         backgroundTexture = new Texture("BackgroundSky.png");
 
-        pigAnimation = new Animation<Texture>(0.2f, new Texture(pigFrame1), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
 
-        Array<TextureRegion> coinFrames = makeFrames(new Texture("coin.png"), 5);
-        coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4));
+        //PIG
+        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex);
+
+        // pigAnimation = new Animation<TextureRegion>(0.2f, new TextureRegion(new Texture(pigFrame1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
+
+
+        //COIN
+        Array<TextureRegion> coinFrames = makeFrames(new Texture("coin.png"), 6);
+        coinAnimation = new Animation<TextureRegion>(0.025f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4));
         coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
+        //OBSTACLES
+        //Balloons
+        balloons.add(new Texture(blueBalloon), new Texture(greenBalloon), new Texture(redBalloon), new Texture(yellowBalloon));
 
-        //"characters/pig/pig_animation.png"
+        //Plane
+        planeTexture = new Texture(plane);
+
     }
 
 

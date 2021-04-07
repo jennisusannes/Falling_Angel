@@ -17,6 +17,7 @@ import com.fallingangel.model.component.PowerUpComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
+import java.util.Random;
 
 public class World {
 
@@ -32,6 +33,8 @@ public class World {
     public int state;
     public Entity background;
     public Entity coin;
+    public Entity plane;
+    public Entity obstacle;
 
 
     //Usikker på om disse skal være med i spillet (?)
@@ -50,12 +53,14 @@ public class World {
     //Mulig å bruke pooled engine også
 
 
-
+    //skal kanskje ikke ha coin, obstacle osv, det er midlertidig
     public void create(){
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
         this.background = createBackground();
         this.coin = createCoin();
+        this.plane = createPlane();
+        this.obstacle = createObstacle();
 
     }
 
@@ -101,7 +106,7 @@ public class World {
     }
 
     private Entity createCoin() { //kan ha float x, float y som input her hvis vi skal bruke pos som kommentert ut lenger ned
-        Entity coinEntity = engine.createEntity();
+        Entity coinEntity = new Entity();
 
         AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
         CoinComponent coinComponent = engine.createComponent(CoinComponent.class);
@@ -110,6 +115,7 @@ public class World {
         StateComponent stateComponent = engine.createComponent(StateComponent.class);
         TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
 
+        //puts the coin animation on spot nr 2 (index 1 because STATE_NORMAL = 1) in the animations IntMap
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
 
         boundsComponent.bounds.width = CoinComponent.WIDTH;
@@ -117,7 +123,7 @@ public class World {
 
         //transformComponent.pos.set(x, y, 3.0f);
 
-        stateComponent.set(CoinComponent.STATE_NORMAL);
+        stateComponent.set(CoinComponent.STATE_NORMAL); //sets the state as 1
 
         coinEntity.add(coinComponent);
         coinEntity.add(boundsComponent);
@@ -133,17 +139,58 @@ public class World {
 
     public Entity createObstacle(){
         Entity obstacleEntity = new Entity();
-        ObstacleComponent oc = new ObstacleComponent();
-        obstacleEntity.add(oc);
+
+        //create new components
+        ObstacleComponent obstacleComponent = new ObstacleComponent();
+        AnimationComponent animationComponent = new AnimationComponent();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        StateComponent stateComponent = new StateComponent();
+        TextureComponent textureComponent = new TextureComponent();
+
+        //add the comp. to the entity
+        obstacleEntity.add(obstacleComponent);
+        obstacleEntity.add(animationComponent);
+        obstacleEntity.add(boundsComponent);
+        obstacleEntity.add(transformComponent);
+        obstacleEntity.add(stateComponent);
+        obstacleEntity.add(textureComponent);
+
+        //add texture to the obstacle. At this point a random balloon is chosen.
+        Random rand = new Random();
+        textureComponent.texture = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
+
+        //add the entity to the engine
         engine.addEntity(obstacleEntity);
+
         return obstacleEntity;
     }
 
     public Entity createPlane(){
         Entity planeEntity = new Entity();
-        PlaneComponent pc = new PlaneComponent();
-        planeEntity.add(pc);
+
+        //create new components
+        PlaneComponent planeComponent = new PlaneComponent();
+        AnimationComponent animationComponent = new AnimationComponent();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        StateComponent stateComponent = new StateComponent();
+        TextureComponent textureComponent = new TextureComponent();
+
+        //add the comp. to the entity
+        planeEntity.add(planeComponent);
+        planeEntity.add(animationComponent);
+        planeEntity.add(boundsComponent);
+        planeEntity.add(transformComponent);
+        planeEntity.add(stateComponent);
+        planeEntity.add(textureComponent);
+
+        //add texture to the obstacle.
+        textureComponent.texture = Asset.planeTexture;
+
+        //add the entity to the engine
         engine.addEntity(planeEntity);
+
         return planeEntity;
     }
 
