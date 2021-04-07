@@ -98,12 +98,33 @@ public class World {
         return angelEntity;
     }
 
-    public Entity createCoin(){
-        Entity coinEntity = new Entity();
-        CoinComponent cc = new CoinComponent();
-        coinEntity.add(cc);
-        engine.addEntity(coinEntity);
-        return coinEntity;
+    private void createCoin(float x, float y) {
+        Entity entity = engine.createEntity();
+
+        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
+        CoinComponent coinComponent = engine.createComponent(CoinComponent.class);
+        BoundsComponent boundsComponent = engine.createComponent(BoundsComponent.class);
+        TransformComponent transformComponent = engine.createComponent(TransformComponent.class);
+        StateComponent stateComponent = engine.createComponent(StateComponent.class);
+        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
+
+        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
+
+        boundsComponent.bounds.width = CoinComponent.WIDTH;
+        boundsComponent.bounds.height = CoinComponent.HEIGHT;
+
+        transformComponent.pos.set(x, y, 3.0f);
+
+        stateComponent.set(CoinComponent.STATE_NORMAL);
+
+        entity.add(coinComponent);
+        entity.add(boundsComponent);
+        entity.add(transformComponent);
+        entity.add(textureComponent);
+        entity.add(animationComponent);
+        entity.add(stateComponent);
+
+        engine.addEntity(entity);
     }
 
     public Entity createObstacle(){

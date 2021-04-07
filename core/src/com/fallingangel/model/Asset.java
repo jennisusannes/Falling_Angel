@@ -7,9 +7,14 @@ public class Asset {
 
     public static Texture backgroundTexture;
 
-    //Sprite-sheet for pig
+    //Animation for pig:
     public static Animation<Texture> pigAnimation;
 
+    //Animation for coin:
+    public static Animation<Texture> coinAnimation;
+
+
+    //Pig-frames:
     public static String pigFrame1 = "characters/pig/pig_animation_1.PNG";
     public static String pigFrame2 = "characters/pig/pig_animation_2.PNG";
     public static String pigFrame3 = "characters/pig/pig_animation_3.PNG";
@@ -77,7 +82,7 @@ public class Asset {
 
         //pigSpritesheet = new Animation(0.2f, new TextureRegion("characters/pig/pig_animation.png", ))
         pigAnimation = new Animation<Texture>(0.2f, new Texture(pigFrame1), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
-
+        //coinAnimation = new Animation<Texture>(0.2f, );
 
 
         //"characters/pig/pig_animation.png"
