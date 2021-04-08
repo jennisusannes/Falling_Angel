@@ -23,10 +23,6 @@ import java.util.Stack;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class MainController extends ClickListener {
-     /*TODO
-     Bytte mellom skjermene
-     håndtere muligheten for å gå tilbake til hovedmenyen
-    */
 
     public FallingAngel game;
     public GameView gameView = new GameView();
@@ -79,6 +75,10 @@ public class MainController extends ClickListener {
             return true;
         }
         else if (event.getListenerActor().equals(highscorelistView.getBackButton())){
+            game.setScreen(menuView);
+            return true;
+        }
+        else if (event.getListenerActor().equals(gameOverView.getBackButton())){
             game.setScreen(menuView);
             return true;
         }
