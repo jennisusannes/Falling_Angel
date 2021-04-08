@@ -23,8 +23,10 @@ public final class FallingAngel extends Game implements ApplicationListener {
 
 	//Need static variables for the screen's height and width
 
+	/*
 	public final static float HEIGHT = Gdx.graphics.getHeight();
 	public final static float WIDTH = Gdx.graphics.getWidth();
+	 */
 
 	//Need static variables for the viewports height and width
 	/*

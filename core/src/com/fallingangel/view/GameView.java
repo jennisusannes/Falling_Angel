@@ -41,10 +41,8 @@ import com.fallingangel.model.component.TextureComponent;
 
 public class GameView extends ScreenAdapter {
 
-    //prøver denne for animasjonen, kun midlertidig løsning
-    float stateTime;
-
-    //Tar i bruk assets for å hente bilder
+    //TODO: Må rydde opp i kode og fjeren overflødige kommentarer og variabler som ikke brukes.
+    //TODO: også lurt å kommentere ordentlig for alle metoder sånn at det er enkelt å sette seg inn i koden.
 
     static final int GAME_READY = 0;
     static final int GAME_RUNNING = 1;
@@ -53,7 +51,8 @@ public class GameView extends ScreenAdapter {
 
 
     public OrthographicCamera gameCam;
-    private Viewport viewPort; //Viewport manages a Camera's viewportWidth and viewportHeight, ensures that the game will fit to *all* devices
+    private Viewport viewPort;
+    //Viewport manages a Camera's viewportWidth and viewportHeight, ensures that the game will fit to *all* devices
 
 
     public FallingAngel game = FallingAngel.getInstance();
@@ -68,15 +67,18 @@ public class GameView extends ScreenAdapter {
     private String scoreString;
 
 
+    //Might be used for pause button or other buttons
     private Stage stage;
     private Stage settingsStage;
 
     //ASHLEY
     public Engine engine;
-    //CollisionListener collisionListener;
-    private AngelSystem angelSystem;
+
+    //Might need this for multiplayer
     private ImmutableArray angels;
-    private Entity physicsEntity;
+
+    //TODO: This is going to be used if we implement sound-effects and music
+    //CollisionListener collisionListener;
 
     private int state;
 
@@ -87,14 +89,13 @@ public class GameView extends ScreenAdapter {
         Asset.load();
         state = GAME_READY;
 
-        stateTime = 0.0f; //kun midlertidig
 
+        //La stå:
         //Camera (and viewport of the screen)
         /*
         this.gameCam = new OrthographicCamera(game.WIDTH,game.HEIGHT);
         this.viewPort = new StretchViewport(game.WIDTH, game.HEIGHT, gameCam);
         viewPort.apply();
-
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
         gameCam.update();
 
@@ -102,25 +103,19 @@ public class GameView extends ScreenAdapter {
          */
 
 
-        //kan bytte ut med det under, men må legge inn bredde og høyde i FallingAngel filen:
-        /*
-        gameCam = new OrthographicCamera(FallingAngel.V_WIDTH, FallingAngel.V_HEIGHT);
-        viewPort = new StretchViewport(FallingAngel.V_WIDTH, FallingAngel.V_HEIGHT, gameCam);
-        viewPort.apply();
-        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
-        gameCam.update();
-        */
-
-
-        //Initializes new world
+        //Initializes new world, engine, stage and settingsStage.
+        //Uncertain whether we are going to use stage.
         this.engine = new Engine();
         this.world = new World(engine);
         this.stage = new Stage();
         this.settingsStage = new Stage();
 
-        this.angelSystem = engine.getSystem(AngelSystem.class);
+
+        //Gets all the entities for the angel and puts in an array.
+        //Might use this later.
         this.angels = engine.getEntities();
 
+        //Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
         engine.addSystem(new ObstacleSystem());
         engine.addSystem(new PlaneSystem());
@@ -133,13 +128,11 @@ public class GameView extends ScreenAdapter {
         engine.addSystem(new BoundsSystem());
 
 
-        //tror denne tar inn kamera som følger bakgrunnen
+        //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.
         engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
+        //Creates world
         world.create();
-
-        //Tubbywars har maps, trenger vi det?
-
 
     }
 
@@ -147,9 +140,10 @@ public class GameView extends ScreenAdapter {
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
 
+        //delta-time is the time difference between the frames and controls the speed of changing frames. (60*dt = 60fps)
+        //Updates all systems.
         engine.update(dt);
 
-        stateTime += dt;
 
         switch (state) {
             case GAME_READY:
@@ -177,90 +171,60 @@ public class GameView extends ScreenAdapter {
     }
 
     //Updates on what state the game is in
-    //må legge inn metoder for hva som skjer mens spillet kjører
+    //TODO: må legge inn metoder for hva som skjer mens spillet kjører
+    //Koble denne opp mot PlayerActionsController, angelSystem og renderingSystem på et vis :))
     private void updateRunning (float dt) {
+        //Handle input
 
-/*
-        if (Gdx.input.justTouched()) {
-            //camera unproject is used to transform the screen coordinates from a click or touch to the gameworld
-            gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
-
-            if (pauseBounds.contains(touchPoint.x, touchPoint.y)) {
-                state = GAME_PAUSED;
-                pauseSystem();
-                return;
-            }
-        }*/
-        //her må det legges inn metoder for å flytte på Angel
-        /*
-        float accelX = 0.0f;
-
-          //  float accelX = Gdx.input.getAccelerometerX();
-
-        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 5f;
-        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
-
-        engine.getSystem(AngelSystem.class).setAccelX(accelX);
-        */
-
-        //må legge inn hva som skjer når key er pressed, hvordan bruke metodene i AngelSystem?
-        //lurer kanskje på om det er like greit å ha de metodene i GameView og bare sette en accelX i AngelSystem
-        //engine.getSystem(AngelSystem.class).press(, 5, 0);
-
-        //Updates the players score
+        //Updates the players score and presents as a string
         if(world.score != lastScore) {
             lastScore = world.score;
-            scoreString = "SCORE" + lastScore;
+            //This will be shown on the screen at all times. Should be used at drawUI()
+            scoreString = "SCORE: " + lastScore;
         }
 
-        //skal vi bruke states i World? Da kan det løses på denne måten isåfall
-        //If player dies
+        //If player dies then :
         if (world.state == World.WORLD_STATE_GAME_OVER) {
             state = GAME_OVER;
             //legg til en if-setning om denne scoren er høyere enn highscore -> si ny highscore, ellers bare vise scoren
-            //oppdatere ny highscore
+            //oppdatere ny highscore i highscorelist
             pauseSystem();
 
         }
     }
 
-    //When the player has paused the game, can either resume or quit
     private void updatePaused() {
+        //These are "buttons" for pause-menu. Can either resume or quit
         if (Gdx.input.justTouched()) {
             gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
+            //If resume then resume
             if (resumeBounds.contains(touchPoint.x, touchPoint.y)) {
                 state = GAME_RUNNING;
                 resumeSystem();
                 return;
             }
+            //if quit then send to menu-view
             if (quitBounds.contains(touchPoint.x,touchPoint.y)) {
-                //må sendes til menu view
+                //TODO: implement a method so player is sent to menu
                 return;
             }
         }
-
-
     }
 
     //When the player dies and the game is over, the player is sent to GameOverView
     private void updateGameOver() {
-        //må sende spilleren til gameover
+        //TODO: må sende spilleren til gameover-view
     }
 
     public void drawUI () {
-        /*Texture texture = new Texture("BackgroundSky.png");
-        TextureRegion textureRegion = new TextureRegion(texture, 0, 0, 500, 200);
-        Image image = new Image(textureRegion);
-
-        stage.addActor(image);
-
-        stage.draw();
+        //Uncertain if we'll use cam.
+        /*
         gameCam.update();
         game.batch.setProjectionMatrix(gameCam.combined); //setProjectMatrix should be called every time the camera is moved or the screen is resized
         */
-        game.batch.begin();
 
+        game.batch.begin();
 
         switch (state) {
             case GAME_READY:
@@ -280,37 +244,14 @@ public class GameView extends ScreenAdapter {
 
     }
 
-    //Hvis vi legger inn bilder med Ready, GameOver osv. men skal kanskje sendes til et annet view uansett
     public void presentReady() {
-        /*
-        Texture tex = new Texture("BackgroundSky.png");
-        game.batch.draw(tex, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());   //må legge inn Asset for et spill som er klart
-        */
-
-        //DENNE BRUKES
-        //game.batch.draw(world.background.getComponent(TextureComponent.class).textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //TODO: create buttons and connect to bounds, and add text for "Ready". See superjumper for inspo .
+        //TODO: if we have enough time: countdown from 3 before start
     }
 
 
     public void presentRunning() {
-        //Asset for et kjørende spill, må ha en pause knapp og score
-        //game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-
-        //game.batch.draw(world.plane.getComponent(TextureComponent.class).texture, 200, 200, 1000, 500);
-        //game.batch.draw(world.obstacle.getComponent(TextureComponent.class).texture, 150, 500, 300, 1000);
-
-
-        //her prøver vi å få til animasjon gjennom ashley systemet
-
-        //TextureRegion tex = world.coin.getComponent(TextureComponent.class).textureRegion; //hvilken dette er oppdateres gjennom AnimationSystem (GameView.render() -> GameView.update() -> engine.update(dt) -> oppdaterer AnimationSystem -> kjører processEntity)
-        //game.batch.draw(tex, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
-
-        /*
-        //midlertidig animasjon, lettvindt løsning. husk å fjerne statetime felt øverst, i konstruktør og i update-metoden når vi tar den bort:)
-        TextureRegion currentFrame = Asset.coinAnimation.getKeyFrame(stateTime, true);
-        game.batch.draw(currentFrame, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
-*/
+       //TODO: implement / draw pause button and connect to bounds
     }
 
 
