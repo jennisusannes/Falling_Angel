@@ -40,9 +40,7 @@ import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 
 public class GameView extends ScreenAdapter {
-
-    //TODO: Må rydde opp i kode og fjeren overflødige kommentarer og variabler som ikke brukes.
-    //TODO: også lurt å kommentere ordentlig for alle metoder sånn at det er enkelt å sette seg inn i koden.
+    //This view presents playing mode
 
     static final int GAME_READY = 0;
     static final int GAME_RUNNING = 1;
@@ -243,7 +241,7 @@ public class GameView extends ScreenAdapter {
         game.batch.end();
 
     }
-
+    //In the present-methods, all the GUI will be drawn/ shown for the game-view
     public void presentReady() {
         //TODO: create buttons and connect to bounds, and add text for "Ready". See superjumper for inspo .
         //TODO: if we have enough time: countdown from 3 before start
@@ -256,13 +254,14 @@ public class GameView extends ScreenAdapter {
 
 
     public void presentPaused() {
-        //Asset for pause menu, og kanskje vise scoren
+        //TODO: draw buttons for resume and quit and connect to pause
     }
 
     public void presentGameOver() {
-        //Asset for game over og scoren skal vises (må ha asset for font, og så bruke scoreString som er laget her)
+        //We might not need this, because of the gameOverView
     }
 
+    //This method sets all systems updating on pause.
     private void pauseSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(false);
         engine.getSystem(ObstacleSystem.class).setProcessing(false);
@@ -275,6 +274,7 @@ public class GameView extends ScreenAdapter {
 
     }
 
+    //Sets all systems back to working / updating
     private void resumeSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(true);
         engine.getSystem(ObstacleSystem.class).setProcessing(true);
@@ -286,12 +286,14 @@ public class GameView extends ScreenAdapter {
         engine.getSystem(CollisionSystem.class).setProcessing(true);
     }
 
+
     @Override
     public void render(float delta) {
         update(delta);
         drawUI();
     }
 
+    //buildt-in method for pausing game.
     @Override
     public void pause() {
         if (state == GAME_RUNNING) {
