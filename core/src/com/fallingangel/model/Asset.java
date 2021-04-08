@@ -94,7 +94,7 @@ public class Asset {
         TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex);
+        pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex, pigFrame5Tex, pigFrame4Tex, pigFrame3Tex, pigFrame2Tex);
 
         // pigAnimation = new Animation<TextureRegion>(0.2f, new TextureRegion(new Texture(pigFrame1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
 
@@ -102,8 +102,8 @@ public class Asset {
         //COIN
         //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
         Texture coinTexture = new Texture("coin.png");
-        Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6);
-        coinAnimation = new Animation<TextureRegion>(0.025f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4));
+        Array<TextureRegion> coinFrames = makeFrames(coinTexture, 4);
+        coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(2), coinFrames.get(1));
         //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 

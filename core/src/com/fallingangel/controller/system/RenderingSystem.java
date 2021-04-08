@@ -75,7 +75,7 @@ public class RenderingSystem extends IteratingSystem{
         sb.begin();
 
         //0 bakgrunn, 1 plane, 2 obstacle (balloon), 3 angel,
-        sb.draw(renderQueue.get(4).getComponent(TextureComponent.class).textureRegion, 0, 0, 800, 800);
+        //sb.draw(renderQueue.get(4).getComponent(TextureComponent.class).textureRegion, 0, 0, 800, 800);
 
         for (Entity entity : renderQueue) {
             TextureComponent tex = textureM.get(entity);
@@ -100,7 +100,7 @@ public class RenderingSystem extends IteratingSystem{
                     t.scale.x * PIXELS_TO_METRES, t.scale.y * PIXELS_TO_METRES,
                     MathUtils.radiansToDegrees * t.rotation);*/
 
-            //sb.draw(tex.textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            sb.draw(tex.textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         }
 

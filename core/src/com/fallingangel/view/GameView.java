@@ -184,7 +184,7 @@ public class GameView extends ScreenAdapter {
     //må legge inn metoder for hva som skjer mens spillet kjører
     private void updateRunning (float dt) {
 
-        /*
+/*
         if (Gdx.input.justTouched()) {
             //camera unproject is used to transform the screen coordinates from a click or touch to the gameworld
             gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -196,16 +196,17 @@ public class GameView extends ScreenAdapter {
             }
         }*/
         //her må det legges inn metoder for å flytte på Angel
-            /*
-            float accelX = 0.0f;
 
+        float accelX = 0.0f;
 
           //  float accelX = Gdx.input.getAccelerometerX();
 
-            if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 5f;
-            if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
+        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 5f;
+        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
 
-             */
+        engine.getSystem(AngelSystem.class).setAccelX(accelX);
+
+
         //må legge inn hva som skjer når key er pressed, hvordan bruke metodene i AngelSystem?
         //lurer kanskje på om det er like greit å ha de metodene i GameView og bare sette en accelX i AngelSystem
         //engine.getSystem(AngelSystem.class).press(, 5, 0);
@@ -291,7 +292,7 @@ public class GameView extends ScreenAdapter {
         */
 
         //DENNE BRUKES
-        //game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //game.batch.draw(world.background.getComponent(TextureComponent.class).textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
 
@@ -309,11 +310,11 @@ public class GameView extends ScreenAdapter {
         //TextureRegion tex = world.coin.getComponent(TextureComponent.class).textureRegion; //hvilken dette er oppdateres gjennom AnimationSystem (GameView.render() -> GameView.update() -> engine.update(dt) -> oppdaterer AnimationSystem -> kjører processEntity)
         //game.batch.draw(tex, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
 
-/*
+        /*
         //midlertidig animasjon, lettvindt løsning. husk å fjerne statetime felt øverst, i konstruktør og i update-metoden når vi tar den bort:)
         TextureRegion currentFrame = Asset.coinAnimation.getKeyFrame(stateTime, true);
         game.batch.draw(currentFrame, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
-    */
+*/
     }
 
 

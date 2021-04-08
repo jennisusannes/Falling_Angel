@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
@@ -31,6 +32,8 @@ public class AngelSystem extends IteratingSystem {
     private ComponentMapper<StateComponent> state_mapper;
     private ComponentMapper<TransformComponent> transform_mapper;
 
+    private float accelX = 0.0f;
+
     public AngelSystem(com.fallingangel.model.World world){
         super(family); //calls the constructor of the IteratingSystem. Creates an entity system that iterates over each entity and calls processEntity()
         this.world = world;
@@ -39,6 +42,10 @@ public class AngelSystem extends IteratingSystem {
         movement_mapper = ComponentMapper.getFor(MovementComponent.class);
         state_mapper = ComponentMapper.getFor(StateComponent.class);
         transform_mapper = ComponentMapper.getFor(TransformComponent.class);
+    }
+
+    public void setAccelX(float accelX){
+        this.accelX = accelX;
     }
 
 
@@ -95,6 +102,15 @@ public class AngelSystem extends IteratingSystem {
 
         //FOR ALLE OBSTACLES: (sjekk World)
             //ObstacleSystem.decreaseSpeed();
+    }
+
+    public void handleInput(Entity entity){
+        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)){
+            float x = transform_mapper.get(entity).pos.x;
+            float y = transform_mapper.get(entity).pos.y;
+            float z = transform_mapper.get(entity).pos.z;
+            transform_mapper.get(entity).pos.set(x-2f, y, z);
+        }
     }
 
     public void press(Entity angelEntity, int screenX, int screenY){

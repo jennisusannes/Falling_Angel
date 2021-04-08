@@ -44,7 +44,7 @@ public class AnimationSystem extends IteratingSystem {
         Animation<TextureRegion> anim = animation.animations.get(state.get()); //gets the animation that fits the current state (HIT or FALL)
 
         if (anim != null) {
-            texture.textureRegion = anim.getKeyFrame(state.time); //sets the texture to a part of that animation
+            texture.textureRegion = anim.getKeyFrame(state.time, true); //sets the texture to a part of that animation
         }
 
         state.time += deltaTime; //updates the time
