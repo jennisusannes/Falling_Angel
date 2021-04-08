@@ -137,6 +137,9 @@ public class World {
         return coinEntity;
     }
 
+
+
+    //Random whether the obstacle is a devil or baloon, random colour on the baloon.
     public Entity createObstacle(){
         Entity obstacleEntity = new Entity();
 
