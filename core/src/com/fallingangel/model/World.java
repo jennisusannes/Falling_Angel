@@ -1,13 +1,10 @@
 package com.fallingangel.model;
 
-import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
-import com.fallingangel.model.component.BackgroundComponent;
 import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
@@ -97,7 +94,7 @@ public class World {
         //set the state as falling
         stateComponent.set(AngelComponent.STATE_FALL);
         //set the position of the angel
-        transformComponent.pos.set(5.0f, 1.0f, 0.0f); //
+        transformComponent.pos.set(5.0f, 1.0f, 0.5f); //
 
         //add the entity to the engine
         engine.addEntity(angelEntity);
@@ -105,41 +102,8 @@ public class World {
         return angelEntity;
     }
 
-    private Entity createCoin() { //kan ha float x, float y som input her hvis vi skal bruke pos som kommentert ut lenger ned
-        Entity coinEntity = new Entity();
 
-        AnimationComponent animationComponent = engine.createComponent(AnimationComponent.class);
-        CoinComponent coinComponent = engine.createComponent(CoinComponent.class);
-        BoundsComponent boundsComponent = engine.createComponent(BoundsComponent.class);
-        TransformComponent transformComponent = engine.createComponent(TransformComponent.class);
-        StateComponent stateComponent = engine.createComponent(StateComponent.class);
-        TextureComponent textureComponent = engine.createComponent(TextureComponent.class);
-
-        //puts the coin animation on spot nr 2 (index 1 because STATE_NORMAL = 1) in the animations IntMap
-        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
-
-        boundsComponent.bounds.width = CoinComponent.WIDTH;
-        boundsComponent.bounds.height = CoinComponent.HEIGHT;
-
-        transformComponent.pos.set(1.0f, 5.0f, -3.0f);
-
-        stateComponent.set(CoinComponent.STATE_NORMAL); //sets the state as 1
-
-        coinEntity.add(coinComponent);
-        coinEntity.add(boundsComponent);
-        coinEntity.add(transformComponent);
-        coinEntity.add(textureComponent);
-        coinEntity.add(animationComponent);
-        coinEntity.add(stateComponent);
-
-        engine.addEntity(coinEntity);
-
-        return coinEntity;
-    }
-
-
-
-    //Random whether the obstacle is a devil or baloon, random colour on the baloon.
+    //Random whether the obstacle is a devil or balloon, random colour on the balloon.
     public Entity createObstacle(){
         Entity obstacleEntity = new Entity();
 
@@ -161,7 +125,7 @@ public class World {
 
         //add texture to the obstacle. At this point a random balloon is chosen.
         Random rand = new Random();
-        textureComponent.texture = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
+        textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
 
         transformComponent.pos.set(1.0f, 5.0f, 1.0f);
 
@@ -191,7 +155,8 @@ public class World {
         planeEntity.add(textureComponent);
 
         //add texture to the obstacle.
-        textureComponent.texture = Asset.planeTexture;
+        textureComponent.textureRegion = Asset.planeTexture;
+        transformComponent.pos.set(1.0f, 1.0f, 4.0f);
 
         //add the entity to the engine
         engine.addEntity(planeEntity);
@@ -211,17 +176,43 @@ public class World {
         Entity backgroundEntity = new Entity();
         //BackgroundComponent backgroundComponent = new BackgroundComponent();
         TextureComponent textureComponent = new TextureComponent();
-        //TransformComponent transformComponent = new TransformComponent();
+        TransformComponent transformComponent = new TransformComponent();
 
         textureComponent.textureRegion = Asset.backgroundTexture;
+        transformComponent.pos.set(0.0f,0.0f, 5.0f);
 
         //backgroundEntity.add(backgroundComponent);
         backgroundEntity.add(textureComponent);
-        //backgroundEntity.add(transformComponent);
+        backgroundEntity.add(transformComponent);
 
         engine.addEntity(backgroundEntity);
 
         return backgroundEntity;
+    }
+
+    public Entity createCoin(){
+        Entity coinEntity = new Entity();
+
+        TextureComponent textureComponent = new TextureComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        AnimationComponent animationComponent = new AnimationComponent();
+        StateComponent stateComponent = new StateComponent();
+        CoinComponent coinComponent = new CoinComponent();
+
+        //textureComponent.textureRegion = Asset.coinTextureRegion;
+        transformComponent.pos.set(0.0f, 0.0f, 0.0f);
+        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
+        stateComponent.set(CoinComponent.STATE_NORMAL);
+
+        coinEntity.add(textureComponent);
+        coinEntity.add(transformComponent);
+        coinEntity.add(animationComponent);
+        coinEntity.add(stateComponent);
+        coinEntity.add(coinComponent);
+
+        engine.addEntity(coinEntity);
+
+        return coinEntity;
     }
 
 

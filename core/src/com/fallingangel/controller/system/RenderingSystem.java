@@ -16,8 +16,6 @@ import java.util.Comparator;
 
 public class RenderingSystem extends IteratingSystem{
 
-    //Lurer på om denne enten skal være på Controller eller på View... --> se nærmere på hva denne gjør
-
 
     //Skjønner ikke helt hva "FRUSTUM" betyr ...
     //skjønner ikke helt bruken (?)
@@ -51,11 +49,12 @@ public class RenderingSystem extends IteratingSystem{
 
         renderQueue = new Array<Entity>();
 
+        //sorts based on z-value. the highest z-value will be in the back of the screen.
         comparator = new Comparator<Entity>() {
             @Override
             public int compare(Entity entityA, Entity entityB) {
                 return (int)Math.signum(transformM.get(entityB).pos.z -
-                        transformM.get(entityA).pos.z);
+                        transformM.get(entityA).pos.z); //returns -1, 0 or 1 based on which z-value is the largest
             }
         };
 
@@ -69,13 +68,14 @@ public class RenderingSystem extends IteratingSystem{
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        renderQueue.sort(comparator); //the entities are being sorted
+        renderQueue.sort(comparator); //the entities are being sorted based on z-value
 
         cam.update();
         //sb.setProjectionMatrix(cam.combined); //denne zoomer inn kameraet, vet ikke om den skal brukes enda
         sb.begin();
 
-        sb.draw(renderQueue.get(1).getComponent(TextureComponent.class).textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //0 bakgrunn, 1 plane, 2 obstacle (balloon), 3 angel,
+        sb.draw(renderQueue.get(4).getComponent(TextureComponent.class).textureRegion, 0, 0, 800, 800);
 
         for (Entity entity : renderQueue) {
             TextureComponent tex = textureM.get(entity);

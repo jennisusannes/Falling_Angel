@@ -28,7 +28,7 @@ public class Asset {
     //COIN
     //Animation for coin:
     public static Animation<TextureRegion> coinAnimation;
-    public static Texture coinTexture = new Texture("coin.png");
+    //public static TextureRegion coinTextureRegion;
 
 
     //OBSTACLES
@@ -37,11 +37,11 @@ public class Asset {
     public static String greenBalloon = "obstacles/balloons/green_balloon.png";
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
-    public static Array<Texture> balloons = new Array<Texture>();
+    public static Array<TextureRegion> balloons = new Array<TextureRegion>();
 
     //Plane
     public static String plane = "obstacles/plane.png";
-    public static Texture planeTexture;
+    public static TextureRegion planeTexture;
 /*
 
 
@@ -100,17 +100,23 @@ public class Asset {
 
 
         //COIN
-        Array<TextureRegion> coinFrames = makeFrames(new Texture("coin.png"), 6);
+        //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
+        Texture coinTexture = new Texture("coin.png");
+        Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6);
         coinAnimation = new Animation<TextureRegion>(0.025f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4));
-        coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
+        //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
         //OBSTACLES
         //Balloons
-        balloons.add(new Texture(blueBalloon), new Texture(greenBalloon), new Texture(redBalloon), new Texture(yellowBalloon));
+        TextureRegion blueBalloonReg = new TextureRegion(new Texture(blueBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion greenBalloonReg = new TextureRegion(new Texture(greenBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion redBalloonReg = new TextureRegion(new Texture(redBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        balloons.add(blueBalloonReg, greenBalloonReg, redBalloonReg, yellowBalloonReg);
 
         //Plane
-        planeTexture = new Texture(plane);
+        planeTexture = new TextureRegion(new Texture(plane), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     }
 
