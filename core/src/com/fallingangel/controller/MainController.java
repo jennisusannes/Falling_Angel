@@ -82,6 +82,10 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
+        else if (event.getListenerActor().equals(gameView.getGameOverButton())){
+            game.setScreen(gameOverView);
+            return true;
+        }
         else{
             return false;
         }
