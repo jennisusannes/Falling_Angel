@@ -121,7 +121,7 @@ public class World {
         boundsComponent.bounds.width = CoinComponent.WIDTH;
         boundsComponent.bounds.height = CoinComponent.HEIGHT;
 
-        //transformComponent.pos.set(x, y, 3.0f);
+        transformComponent.pos.set(1.0f, 5.0f, -3.0f);
 
         stateComponent.set(CoinComponent.STATE_NORMAL); //sets the state as 1
 
@@ -162,6 +162,8 @@ public class World {
         //add texture to the obstacle. At this point a random balloon is chosen.
         Random rand = new Random();
         textureComponent.texture = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
+
+        transformComponent.pos.set(1.0f, 5.0f, 1.0f);
 
         //add the entity to the engine
         engine.addEntity(obstacleEntity);
@@ -211,7 +213,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
         //TransformComponent transformComponent = new TransformComponent();
 
-        textureComponent.texture = Asset.backgroundTexture;
+        textureComponent.textureRegion = Asset.backgroundTexture;
 
         //backgroundEntity.add(backgroundComponent);
         backgroundEntity.add(textureComponent);

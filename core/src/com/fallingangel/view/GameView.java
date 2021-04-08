@@ -288,32 +288,33 @@ public class GameView extends ScreenAdapter {
         Texture tex = new Texture("BackgroundSky.png");
         game.batch.draw(tex, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());   //må legge inn Asset for et spill som er klart
         */
-        //game.batch.draw(Asset.backgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        //DENNE BRUKES
+        //game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
 
     public void presentRunning() {
         //Asset for et kjørende spill, må ha en pause knapp og score
-        game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //game.batch.draw(world.background.getComponent(TextureComponent.class).texture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        BitmapFont font = new BitmapFont();
-        font.draw(game.batch, "Gratulerer, det funker", 50, 50);
 
-        game.batch.draw(world.plane.getComponent(TextureComponent.class).texture, 200, 200, 1000, 500);
-        game.batch.draw(world.obstacle.getComponent(TextureComponent.class).texture, 150, 500, 300, 1000);
+        //game.batch.draw(world.plane.getComponent(TextureComponent.class).texture, 200, 200, 1000, 500);
+        //game.batch.draw(world.obstacle.getComponent(TextureComponent.class).texture, 150, 500, 300, 1000);
 
 
         //her prøver vi å få til animasjon gjennom ashley systemet
-        /*
-        TextureRegion tex = world.coin.getComponent(TextureComponent.class).textureRegion; //hvilken dette er oppdateres gjennom AnimationSystem (GameView.render() -> GameView.update() -> engine.update(dt) -> oppdaterer AnimationSystem -> kjører processEntity)
-        game.batch.draw(tex, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
-        */
 
+        //TextureRegion tex = world.coin.getComponent(TextureComponent.class).textureRegion; //hvilken dette er oppdateres gjennom AnimationSystem (GameView.render() -> GameView.update() -> engine.update(dt) -> oppdaterer AnimationSystem -> kjører processEntity)
+        //game.batch.draw(tex, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
+
+/*
         //midlertidig animasjon, lettvindt løsning. husk å fjerne statetime felt øverst, i konstruktør og i update-metoden når vi tar den bort:)
         TextureRegion currentFrame = Asset.coinAnimation.getKeyFrame(stateTime, true);
         game.batch.draw(currentFrame, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/2, Gdx.graphics.getWidth()/7, Gdx.graphics.getHeight()/7);
+    */
     }
+
 
     public void presentPaused() {
         //Asset for pause menu, og kanskje vise scoren

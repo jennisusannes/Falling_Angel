@@ -10,7 +10,7 @@ public class Asset {
 
 
     //BACKGROUND
-    public static Texture backgroundTexture;
+    public static TextureRegion backgroundTexture;
 
 
     //PIG
@@ -84,7 +84,7 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
 
         //BACKGROUND
-        backgroundTexture = new Texture("BackgroundSky.png");
+        backgroundTexture = new TextureRegion(new Texture("BackgroundSky.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 
         //PIG

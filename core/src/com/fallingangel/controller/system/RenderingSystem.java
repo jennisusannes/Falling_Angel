@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -45,7 +46,7 @@ public class RenderingSystem extends IteratingSystem{
     public RenderingSystem(SpriteBatch sb) {
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
 
-        textureM = ComponentMapper.getFor(TextureComponent.class);
+        textureM= ComponentMapper.getFor(TextureComponent.class);
         transformM = ComponentMapper.getFor(TransformComponent.class);
 
         renderQueue = new Array<Entity>();
@@ -68,36 +69,39 @@ public class RenderingSystem extends IteratingSystem{
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        renderQueue.sort(comparator);
+        renderQueue.sort(comparator); //the entities are being sorted
 
         cam.update();
         //sb.setProjectionMatrix(cam.combined); //denne zoomer inn kameraet, vet ikke om den skal brukes enda
         sb.begin();
 
+        sb.draw(renderQueue.get(1).getComponent(TextureComponent.class).textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         for (Entity entity : renderQueue) {
             TextureComponent tex = textureM.get(entity);
 
-            if (tex.texture == null) {
+            if (tex.textureRegion == null) {
                 continue;
             }
 
             TransformComponent t = transformM.get(entity);
 
-            /*
-            float width = tex.region.getRegionWidth();
-            float height = tex.region.getRegionHeight();
-             */
-            float width = tex.texture.getWidth();
-            float height = tex.texture.getHeight();
+
+            float width = tex.textureRegion.getRegionWidth();
+            float height = tex.textureRegion.getRegionHeight();
             float originX = width * 0.5f;
             float originY = height * 0.5f;
-/*
-            sb.draw(tex.texture,
+
+            /*
+            sb.draw(tex.textureRegion,
                     t.pos.x - originX, t.pos.y - originY,
                     originX, originY,
                     width, height,
                     t.scale.x * PIXELS_TO_METRES, t.scale.y * PIXELS_TO_METRES,
                     MathUtils.radiansToDegrees * t.rotation);*/
+
+            //sb.draw(tex.textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         }
 
         sb.end();
@@ -105,7 +109,6 @@ public class RenderingSystem extends IteratingSystem{
     }
 
 
-    //Her har de renderQueue --> Jeg lurer på om dette skal være i controlleren. Ganske usikker.
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         renderQueue.add(entity);
