@@ -3,6 +3,7 @@ package com.fallingangel.game;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.fallingangel.model.Asset;
@@ -20,15 +21,10 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	private static final FallingAngel INSTANCE = new FallingAngel(); //Instanciating the game with a singleton-pattern
 	public GameView gameView;
 
-
 	//Need static variables for the screen's height and width
-	/*
-	//Uncertain regarding these variables
 
-	public final static float HEIGHT = graphics.gdx.height();
-	public final static float WIDTH = 320;
-
-	 */
+	public final static float HEIGHT = Gdx.graphics.getHeight();
+	public final static float WIDTH = Gdx.graphics.getWidth();
 
 	//Need static variables for the viewports height and width
 	/*
@@ -38,7 +34,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	 */
 
 	private FallingAngel(){
-
 	}
 
 	//Singleton-pattern for the entire game
@@ -59,7 +54,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		*/
 
 	}
-
 
 	@Override
 	public void dispose () {

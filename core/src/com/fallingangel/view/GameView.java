@@ -91,17 +91,18 @@ public class GameView extends ScreenAdapter {
 
         //Camera (and viewport of the screen)
         /*
-        this.gameCam = new OrthographicCamera(320,480);
-        this.viewPort = new StretchViewport(320, 480, gameCam);
+        this.gameCam = new OrthographicCamera(game.WIDTH,game.HEIGHT);
+        this.viewPort = new StretchViewport(game.WIDTH, game.HEIGHT, gameCam);
         viewPort.apply();
-        gameCam.position.set(320 / 2, 480 / 2, 0);
-        gameCam.update();*/
+
+        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
+        gameCam.update();
 
         this.touchPoint = new Vector3();
+         */
 
 
         //kan bytte ut med det under, men må legge inn bredde og høyde i FallingAngel filen:
-
         /*
         gameCam = new OrthographicCamera(FallingAngel.V_WIDTH, FallingAngel.V_HEIGHT);
         viewPort = new StretchViewport(FallingAngel.V_WIDTH, FallingAngel.V_HEIGHT, gameCam);
