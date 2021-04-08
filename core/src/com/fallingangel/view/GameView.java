@@ -53,7 +53,9 @@ public class GameView extends ScreenAdapter {
 
 
     public OrthographicCamera gameCam;
-    private Viewport viewPort; //Viewport manages a Camera's viewportWidth and viewportHeight
+    private Viewport viewPort; //Viewport manages a Camera's viewportWidth and viewportHeight, ensures that the game will fit to *all* devices
+
+
     public FallingAngel game = FallingAngel.getInstance();
     private World world;
     private Vector3 touchPoint;
@@ -96,7 +98,6 @@ public class GameView extends ScreenAdapter {
         gameCam.update();*/
 
         this.touchPoint = new Vector3();
-
 
 
         //kan bytte ut med det under, men må legge inn bredde og høyde i FallingAngel filen:

@@ -17,9 +17,24 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	//public MainController mc;
 	private MenuView menuView;
 	//Instanciating the game with a singleton-pattern
-	private static final FallingAngel INSTANCE = new FallingAngel();
-
+	private static final FallingAngel INSTANCE = new FallingAngel(); //Instanciating the game with a singleton-pattern
 	public GameView gameView;
+
+
+	//Need static variables for the screen's height and width
+	/*
+	//Uncertain regarding these variables
+	public final static float HEIGHT = 480;
+	public final static float WIDTH = 320;
+
+	 */
+
+	//Need static variables for the viewports height and width
+	/*
+	//We are still uncertain of the benefits of using cam and viewport, as the background currently fits all screens.
+	public final static float V_HEIGHT = 12.8f;
+    public final static float V_WIDTH = 5.76f;
+	 */
 
 	private FallingAngel(){
 
@@ -37,8 +52,10 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		Asset.load();
 		this.gameView = new GameView();
 		setScreen(gameView);
-		/*this.mc = new MainController(); // burde egt sette controller som setter en screen
-		mc.setStartScreen();*/
+		/*
+		this.mc = new MainController(); // burde egt sette controller som setter en screen
+		mc.setStartScreen();
+		*/
 
 	}
 
