@@ -1,31 +1,23 @@
 package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 
-import javax.xml.soap.Text;
-
-
 public class MenuView extends ScreenAdapter {
 
-
-    private Texture playTexture;
     private Texture background;
+
     // textures for buttons
     private Texture singlePlayerTexture;
     private Texture multiPlayerTexture;
@@ -35,7 +27,7 @@ public class MenuView extends ScreenAdapter {
     private FallingAngel game;
     private Stage stage;
     private MainController controller;
-    private Button playButton;
+
     // buttons
     private Button singlePlayerButton;
     private Button multiPlayerButton;
@@ -48,7 +40,7 @@ public class MenuView extends ScreenAdapter {
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
         background = new Texture("backgrounds/mainmenu_background.PNG");
-        playTexture = new Texture("buttons/play.png");
+
         // button textures
         singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
         multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
@@ -59,13 +51,6 @@ public class MenuView extends ScreenAdapter {
 
     // getters and setters for buttons
 
-    public void setPlayButton() {
-        this.playButton = makeButton(playTexture,200, 200, Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight() * 0.4f);
-    }
-    public Button getPlayButtonActor(){
-        return playButton;
-    }
-
     public void setSinglePlayerButton() {
         this.singlePlayerButton = makeButton(singlePlayerTexture,600, 400, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.4f);
     }
@@ -73,6 +58,7 @@ public class MenuView extends ScreenAdapter {
     public Button getSinglePlayerButton(){
         return singlePlayerButton;
     }
+
 
     public void setMultiPlayerButton() {
         this.multiPlayerButton = makeButton(multiPlayerTexture,600, 400, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.4f);
@@ -82,6 +68,7 @@ public class MenuView extends ScreenAdapter {
         return multiPlayerButton;
     }
 
+
     public void setAchievementsButton() {
         this.achievementsButton = makeButton(achievementsTexture, 200,200, Gdx.graphics.getWidth()*0.2f, Gdx.graphics.getHeight() * 0.15f);
     }
@@ -90,6 +77,7 @@ public class MenuView extends ScreenAdapter {
         return achievementsButton;
     }
 
+
     public void setHighscoreListButton() {
         this.highscoreListButton = makeButton(highscoreListTexture,200, 200,Gdx.graphics.getWidth()*0.65f, Gdx.graphics.getHeight() * 0.15f);
     }
@@ -97,6 +85,7 @@ public class MenuView extends ScreenAdapter {
     public Button getHighscoreListButton(){
         return highscoreListButton;
     }
+
 
     public void setSettingsButton() {
         this.settingsButton = makeButton(settingsTexture,200,200,Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight() * 0.89f);
@@ -114,14 +103,19 @@ public class MenuView extends ScreenAdapter {
 
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(stage);
+
         setSinglePlayerButton();
         stage.addActor(getSinglePlayerButton());
+
         setMultiPlayerButton();
         stage.addActor(getMultiPlayerButton());
+
         setAchievementsButton();
         stage.addActor(getAchievementsButton());
+
         setHighscoreListButton();
         stage.addActor(getHighscoreListButton());
+
         setSettingsButton();
         stage.addActor(getSettingsButton());
 
@@ -130,8 +124,6 @@ public class MenuView extends ScreenAdapter {
         game.batch.end();
         stage.draw();
     }
-
-
 
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
@@ -156,4 +148,5 @@ public class MenuView extends ScreenAdapter {
         update(dt);
         draw();
     }
+
 }
