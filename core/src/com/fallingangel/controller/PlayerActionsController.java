@@ -25,7 +25,7 @@ public class PlayerActionsController implements InputProcessor { //this class de
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button){ //Called when the screen was touched or a mouse button was pressed.
-        angelSystem.press(angelEntity, screenX, screenY);
+        angelSystem.press(angelEntity, screenX, 0);
         return false;
     }
 
@@ -34,9 +34,7 @@ public class PlayerActionsController implements InputProcessor { //this class de
         angelSystem.drag(angelEntity, screenX, screenY);
         return false;
     }
-
-
-
+    
 
     //skal ikke bruke disse, men må implementeres pga interfacet
 

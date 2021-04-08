@@ -51,7 +51,6 @@ public class AngelSystem extends IteratingSystem {
 
     public void update(float deltaTime){ //makes sure the IteratingSystem is updated as well
         super.update(deltaTime);
-
     }
 
     @Override
@@ -114,9 +113,14 @@ public class AngelSystem extends IteratingSystem {
     }
 
     public void press(Entity angelEntity, int screenX, int screenY){
+        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) accelX = 0.5f;
+        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) accelX = -0.5f;
+        setAccelX(accelX);
+
+
         //Called when the screen was touched or a mouse button was pressed.
-        Vector3 vector = new Vector3(screenX, Gdx.graphics.getHeight() - screenY, 0); //kan hende denne må flippes, litt usikker
-        transform_mapper.get(angelEntity).pos.set(vector); //gets the comp of this entity and sets the position
+        //Vector3 vector = new Vector3(screenX, Gdx.graphics.getHeight() - screenY, 0); //kan hende denne må flippes, litt usikker
+        //transform_mapper.get(angelEntity).pos.set(vector); //gets the comp of this entity and sets the position
     }
 
     public void drag(Entity angelEntity, int screenX, int screenY){

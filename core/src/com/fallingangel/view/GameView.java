@@ -112,11 +112,6 @@ public class GameView extends ScreenAdapter {
         */
 
 
-
-
-
-
-
         //Initializes new world
         this.engine = new Engine();
         this.world = new World(engine);
@@ -197,7 +192,7 @@ public class GameView extends ScreenAdapter {
             }
         }*/
         //her må det legges inn metoder for å flytte på Angel
-
+        /*
         float accelX = 0.0f;
 
           //  float accelX = Gdx.input.getAccelerometerX();
@@ -206,7 +201,7 @@ public class GameView extends ScreenAdapter {
         if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
 
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
-
+        */
 
         //må legge inn hva som skjer når key er pressed, hvordan bruke metodene i AngelSystem?
         //lurer kanskje på om det er like greit å ha de metodene i GameView og bare sette en accelX i AngelSystem
