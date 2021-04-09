@@ -12,26 +12,27 @@ public class MovementSystem extends IteratingSystem {
 
     private Vector2 tmp = new Vector2();
 
-    private ComponentMapper<TransformComponent> tm;
-    private ComponentMapper<MovementComponent> mm;
+    private ComponentMapper<TransformComponent> transformMapper;
+    private ComponentMapper<MovementComponent> movementMapper;
 
     public MovementSystem() {
         super(Family.all(TransformComponent.class, MovementComponent.class).get());
 
-        tm = ComponentMapper.getFor(TransformComponent.class);
-        mm = ComponentMapper.getFor(MovementComponent.class);
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
+        movementMapper = ComponentMapper.getFor(MovementComponent.class);
     }
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        TransformComponent pos = tm.get(entity);
-        MovementComponent mov = mm.get(entity);;
+        TransformComponent transformComponent = transformMapper.get(entity);
+        MovementComponent movementComponent = movementMapper.get(entity);;
+        /*
+        tmp.set(movementComponent.accel).scl(deltaTime);
+        movementComponent.move.add(tmp);*/
 
-        tmp.set(mov.accel).scl(deltaTime);
-        mov.move.add(tmp);
-
-        tmp.set(mov.move).scl(deltaTime);
-        pos.pos.add(tmp.x, tmp.y, 0.0f);
+        //Scales the move-vector by deltaTime (dt is the scalar) and adds the coordinates to that the position changes
+        tmp.set(movementComponent.move).scl(deltaTime);
+        transformComponent.pos.add(tmp.x, tmp.y, 0.0f);
     }
 
 }

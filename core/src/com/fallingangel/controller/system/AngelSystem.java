@@ -51,6 +51,8 @@ public class AngelSystem extends IteratingSystem {
 
     public void update(float deltaTime){ //makes sure the IteratingSystem is updated as well
         super.update(deltaTime);
+        accelX = 0.0f;
+        //0.0f so that the angel entity does not move if there is no new input
     }
 
     @Override
@@ -58,16 +60,20 @@ public class AngelSystem extends IteratingSystem {
         //the method is called every time the AngelSystem is updated
 
         //get the updated components
-        AngelComponent angel = angel_mapper.get(entity);
-        MovementComponent movement = movement_mapper.get(entity);
-        StateComponent state = state_mapper.get(entity);
-        TransformComponent transform = transform_mapper.get(entity);
+        AngelComponent angelComponent = angel_mapper.get(entity);
+        MovementComponent movementComponent = movement_mapper.get(entity);
+        StateComponent stateComponent = state_mapper.get(entity);
+        TransformComponent transformComponent = transform_mapper.get(entity);
 
         //if-sentences to switch state of the object
-        if (transform.pos.y == world.WORLD_HEIGHT){ //evt bounds?
-            state.set(AngelComponent.STATE_DEAD);
+        /*
+        if (transformComponent.pos.y == world.WORLD_HEIGHT){ //evt bounds?
+            stateComponent.set(AngelComponent.STATE_DEAD);
             //DA MÅ DEN VARSLE OM DET PÅ EN MÅTE
-        }
+        }*/
+
+        //Each entity's move vector should be changed by the accelX from GameView
+        movementComponent.move.x = -accelX;
 
     }
 
