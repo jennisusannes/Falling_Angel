@@ -10,7 +10,7 @@ import com.fallingangel.model.component.TransformComponent;
 
 public class MovementSystem extends IteratingSystem {
 
-    private Vector2 tmp = new Vector2();
+    public Vector2 tmp = new Vector2();
 
     private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<MovementComponent> movementMapper;
@@ -26,7 +26,7 @@ public class MovementSystem extends IteratingSystem {
     public void processEntity(Entity entity, float deltaTime) {
         TransformComponent transformComponent = transformMapper.get(entity);
         MovementComponent movementComponent = movementMapper.get(entity);;
-        /*
+/*
         tmp.set(movementComponent.accel).scl(deltaTime);
         movementComponent.move.add(tmp);*/
 

@@ -9,6 +9,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -36,8 +37,10 @@ import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BackgroundComponent;
+import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
+import com.fallingangel.model.component.TransformComponent;
 
 public class GameView extends ScreenAdapter {
     //This view presents playing mode
@@ -172,10 +175,14 @@ public class GameView extends ScreenAdapter {
     //Koble denne opp mot PlayerActionsController, angelSystem og renderingSystem på et vis :))
     private void updateRunning (float dt) {
         //Handle input. AccelX is changed here and being set in AngelSystem
+
         float accelX = 0.0f;
         if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 5f;
         if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
+
+
+
 
         //Updates the players score and presents as a string
         if(world.score != lastScore) {
@@ -292,6 +299,7 @@ public class GameView extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         update(delta);
         drawUI();
     }
