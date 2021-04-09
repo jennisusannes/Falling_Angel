@@ -177,8 +177,8 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
         TransformComponent transformComponent = new TransformComponent();
 
-        textureComponent.textureRegion = Asset.backgroundTexture;
-        transformComponent.pos.set(0.0f,0.0f, 5.0f);
+        textureComponent.textureRegion = Asset.backgroundTextureRegion;
+        transformComponent.pos.set(0,0, 5.0f);
 
         //backgroundEntity.add(backgroundComponent);
         backgroundEntity.add(textureComponent);
@@ -199,7 +199,7 @@ public class World {
         CoinComponent coinComponent = new CoinComponent();
 
         //textureComponent.textureRegion = Asset.coinTextureRegion;
-        transformComponent.pos.set(Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/4, 0.0f);
+        transformComponent.pos.set(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 

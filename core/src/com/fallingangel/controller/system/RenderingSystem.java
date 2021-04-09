@@ -92,7 +92,9 @@ public class RenderingSystem extends IteratingSystem{
             float originX = width * 0.5f;
             float originY = height * 0.5f;
 
+
             //TODO: create methods for drawing
+
             /*
             sb.draw(textureComponent.textureRegion,
                     transformComponent.pos.x - originX, transformComponent.pos.y - originY,
@@ -101,8 +103,16 @@ public class RenderingSystem extends IteratingSystem{
                     transformComponent.scale.x * PIXELS_TO_METRES, transformComponent.scale.y * PIXELS_TO_METRES,
                     MathUtils.radiansToDegrees * transformComponent.rotation);*/
 
+            sb.draw(textureComponent.textureRegion,
+                    transformComponent.pos.x - originX, transformComponent.pos.y - originY,
+                    originX, originY,
+                    width, height,
+                    transformComponent.scale.x, transformComponent.scale.y,
+                    MathUtils.radiansToDegrees * transformComponent.rotation);
+
+
             //Working code, remove when method is up and running:
-            sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
+            //sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
 
         }
 
