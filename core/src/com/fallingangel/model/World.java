@@ -2,6 +2,7 @@ package com.fallingangel.model;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
@@ -154,7 +155,7 @@ public class World {
 
         //add texture to the obstacle.
         textureComponent.textureRegion = Asset.planeTexture;
-        transformComponent.pos.set(1.0f, 1.0f, 4.0f);
+        transformComponent.pos.set(0, 0, 4.0f);
 
         //add the entity to the engine
         engine.addEntity(planeEntity);
@@ -198,7 +199,7 @@ public class World {
         CoinComponent coinComponent = new CoinComponent();
 
         //textureComponent.textureRegion = Asset.coinTextureRegion;
-        transformComponent.pos.set(0.0f, 0.0f, 0.0f);
+        transformComponent.pos.set(Gdx.graphics.getWidth()/4, Gdx.graphics.getHeight()/4, 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 

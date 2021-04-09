@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
@@ -101,7 +102,7 @@ public class RenderingSystem extends IteratingSystem{
                     MathUtils.radiansToDegrees * transformComponent.rotation);*/
 
             //Working code, remove when method is up and running:
-            sb.draw(textureComponent.textureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
 
         }
 
