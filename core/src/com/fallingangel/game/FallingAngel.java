@@ -20,10 +20,11 @@ public class FallingAngel extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
-		//FBI.SetValueInDb("message", "this is new text");
 		FBI.SomeFunction();
+		System.out.println("hallla");
 		FBI.FirstFireBaseTest();
-	//	FBI.SetOnValueChangedListener();
+		//FBI.SetOnValueChangedListener();
+		//FBI.SetValueInDb("message", "this is new text");
 	}
 
 	@Override
