@@ -26,8 +26,8 @@ public class AchievementsView extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
-        background = new Texture("backgrounds/achievements_blurred_background.PNG");
-        backTexture = new Texture("buttons/back_button.PNG");
+        background = new Texture("backgrounds/achievements_blurred_background.png");
+        backTexture = new Texture("buttons/back_button.png");
     }
 
     public void setBackButton() {

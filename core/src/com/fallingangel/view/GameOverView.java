@@ -26,8 +26,8 @@ public class GameOverView extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
-        background = new Texture("backgrounds/winner_player1_background.PNG");
-        backTexture = new Texture("buttons/back_button.PNG");
+        background = new Texture("backgrounds/winner_player1_background.png");
+        backTexture = new Texture("buttons/back_button.png");
     }
 
     public void setBackButton() {

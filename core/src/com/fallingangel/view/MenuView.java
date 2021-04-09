@@ -39,7 +39,7 @@ public class MenuView extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
-        background = new Texture("backgrounds/mainmenu_background.PNG");
+        background = new Texture("backgrounds/mainmenu_background.png");
 
         // button textures
         singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
