@@ -77,7 +77,6 @@ public class GameView extends ScreenAdapter {
 
     //TODO: This is going to be used if we implement sound-effects and music
     //CollisionListener collisionListener;
-
     private int state;
 
 
@@ -172,7 +171,11 @@ public class GameView extends ScreenAdapter {
     //TODO: må legge inn metoder for hva som skjer mens spillet kjører
     //Koble denne opp mot PlayerActionsController, angelSystem og renderingSystem på et vis :))
     private void updateRunning (float dt) {
-        //Handle input
+        //Handle input. AccelX is changed here and being set in AngelSystem
+        float accelX = 0.0f;
+        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 5f;
+        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
+        engine.getSystem(AngelSystem.class).setAccelX(accelX);
 
         //Updates the players score and presents as a string
         if(world.score != lastScore) {

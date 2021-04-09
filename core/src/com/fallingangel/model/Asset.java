@@ -89,12 +89,12 @@ public class Asset {
 
 
         //PIG
-        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, new Texture(pigFrame1).getWidth(), new Texture(pigFrame1).getHeight());
+        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, new Texture(pigFrame2).getWidth(), new Texture(pigFrame2).getHeight());
+        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, new Texture(pigFrame3).getWidth(), new Texture(pigFrame3).getHeight());
+        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, new Texture(pigFrame4).getWidth(), new Texture(pigFrame4).getHeight());
+        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, new Texture(pigFrame5).getWidth(), new Texture(pigFrame5).getHeight());
+        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, new Texture(pigFrame6).getWidth(), new Texture(pigFrame6).getHeight());
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex, pigFrame5Tex, pigFrame4Tex, pigFrame3Tex, pigFrame2Tex);
 
         // pigAnimation = new Animation<TextureRegion>(0.2f, new TextureRegion(new Texture(pigFrame1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
@@ -110,14 +110,14 @@ public class Asset {
 
         //OBSTACLES
         //Balloons
-        TextureRegion blueBalloonReg = new TextureRegion(new Texture(blueBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion greenBalloonReg = new TextureRegion(new Texture(greenBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion redBalloonReg = new TextureRegion(new Texture(redBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        TextureRegion blueBalloonReg = new TextureRegion(new Texture(blueBalloon), 0, 0, new Texture(blueBalloon).getWidth(), new Texture(blueBalloon).getHeight());
+        TextureRegion greenBalloonReg = new TextureRegion(new Texture(greenBalloon), 0, 0, new Texture(greenBalloon).getWidth(), new Texture(greenBalloon).getHeight());
+        TextureRegion redBalloonReg = new TextureRegion(new Texture(redBalloon), 0, 0, new Texture(redBalloon).getWidth(), new Texture(redBalloon).getHeight());
+        TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, new Texture(yellowBalloon).getWidth(), new Texture(yellowBalloon).getHeight());
         balloons.add(blueBalloonReg, greenBalloonReg, redBalloonReg, yellowBalloonReg);
 
         //Plane
-        planeTexture = new TextureRegion(new Texture(plane), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
 
     }
 
