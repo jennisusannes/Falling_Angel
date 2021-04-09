@@ -104,16 +104,19 @@ public class RenderingSystem extends IteratingSystem{
                     transformComponent.scale.x * PIXELS_TO_METRES, transformComponent.scale.y * PIXELS_TO_METRES,
                     MathUtils.radiansToDegrees * transformComponent.rotation);*/
 
+            /*
             sb.draw(textureComponent.textureRegion,
-                    transformComponent.pos.x - originX, transformComponent.pos.y - originY,
+                    0, 0,
                     originX, originY,
                     width, height,
                     transformComponent.scale.x, transformComponent.scale.y,
                     MathUtils.radiansToDegrees * transformComponent.rotation);
 
 
+             */
+
             //Working code, remove when method is up and running:
-            //sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
+            sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
 
         }
 
