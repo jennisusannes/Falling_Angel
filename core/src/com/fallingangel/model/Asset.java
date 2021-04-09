@@ -9,7 +9,9 @@ import com.badlogic.gdx.utils.Array;
 public class Asset {
 
 
-    //BACKGROUND
+    //BACKGROUNDS:
+
+    //play-view background
     public static TextureRegion backgroundTextureRegion;
 
 
@@ -84,7 +86,7 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
 
         //BACKGROUND
-        Texture backgroundTexture = new Texture("BackgroundSky.png");
+        Texture backgroundTexture = new Texture("heaven_game_background.PNG");
         backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, backgroundTexture.getWidth(), backgroundTexture.getHeight());
 
 
