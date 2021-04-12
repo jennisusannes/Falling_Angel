@@ -1,6 +1,5 @@
 package com.fallingangel.game;
 
-import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +24,8 @@ public class AndroidInterfaceClass implements FireBaseInterface{
     @Override
     public void FirstFireBaseTest() {
         if(myRef != null){
-            myRef.setValue("Hello World");
+            myRef.setValue("Bajs");
+            System.out.println("Set new databasereference");
         }
         else{
             System.out.println("Databasereference was not set -> therefore could not writ to DB");
@@ -39,7 +39,7 @@ public class AndroidInterfaceClass implements FireBaseInterface{
 
            //read from the database
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onDataChange( DataSnapshot snapshot) {
                 //This method is called once with the initial value and again
                 // whenever data at this location is updated
               //  String value = snapshot.getValue(String.class);
@@ -47,7 +47,7 @@ public class AndroidInterfaceClass implements FireBaseInterface{
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled( DatabaseError error) {
 
             }
         });

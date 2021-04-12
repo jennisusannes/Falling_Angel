@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.fallingangel.controller.MainController;
 
+
+
 public final class FallingAngel extends Game implements ApplicationListener {
 
 
@@ -51,7 +53,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		batch = new SpriteBatch();
 		font = new BitmapFont();
 		FBI.SomeFunction();
-		System.out.println("hallla");
 		FBI.FirstFireBaseTest();
 		//FBI.SetOnValueChangedListener();
 		//FBI.SetValueInDb("message", "this
