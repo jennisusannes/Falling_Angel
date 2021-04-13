@@ -28,6 +28,9 @@ public class World {
     public static final float WORLD_HEIGHT = 15*20;
     public static final float WORLD_WIDTH = 10;
 
+    public static final int VP_WIDTH  = 1714;
+    public static final int VP_HEIGHT = 4096;
+
 
     public int score;
     public Entity angel;
