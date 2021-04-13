@@ -12,6 +12,7 @@ import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
+import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
 //GJLR OM TIL SAMME SPEED SOM OBSTACLES PÅ HITOBSTACLE
@@ -72,8 +73,17 @@ public class AngelSystem extends IteratingSystem {
             //DA MÅ DEN VARSLE OM DET PÅ EN MÅTE
         }*/
 
+        movementComponent.move.x = - accelX;
+
+        if (transformComponent.pos.x < 0){
+            transformComponent.pos.x = 0;
+        }
+
+        if (transformComponent.pos.x > Gdx.graphics.getWidth() - AngelComponent.WIDTH){
+            transformComponent.pos.x = Gdx.graphics.getWidth() - AngelComponent.WIDTH;
+        }
         //Each entity's move vector should be changed by the accelX from GameView
-        movementComponent.move.x = -accelX;
+        //movementComponent.move.x = - accelX;
 
     }
 
@@ -138,4 +148,6 @@ public class AngelSystem extends IteratingSystem {
     public void unpress(Entity angelEntity){ //kan kanskje kuttes
         //hva skjer når man slipper musen/piltastene
     }
+
+
 }

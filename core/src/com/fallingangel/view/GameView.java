@@ -177,9 +177,10 @@ public class GameView extends ScreenAdapter {
         //Handle input. AccelX is changed here and being set in AngelSystem
 
         float accelX = 0.0f;
-        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 5f;
-        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -5f;
+        if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)) accelX = 10f;
+        if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)) accelX = -10f;
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
+
 
 
 
