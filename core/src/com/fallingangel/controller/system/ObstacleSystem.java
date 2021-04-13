@@ -43,6 +43,12 @@ public class ObstacleSystem extends IteratingSystem {
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         ObstacleComponent obstacle = om.get(entity);
+        MovementComponent movementComponent = mm.get(entity);
+        TransformComponent transformComponent = tm.get(entity);
+
+        movementComponent.move.x = 5.0f;
+        transformComponent.pos.y += 4.0f;
+
     }
 
     /*
