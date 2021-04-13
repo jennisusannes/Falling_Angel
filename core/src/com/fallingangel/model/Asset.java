@@ -25,6 +25,8 @@ public class Asset {
     public static String pigFrame4 = "characters/pig/pig_animation_4.PNG";
     public static String pigFrame5 = "characters/pig/pig_animation_5.PNG";
     public static String pigFrame6 = "characters/pig/pig_animation_6.PNG";
+    //public static String pigSpriteSheet = "characters/pig/pig_animation.png";
+    public static Texture pigSpriteSheet;
 
 
     //COIN
@@ -91,22 +93,25 @@ public class Asset {
 
 
         //PIG
-        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, new Texture(pigFrame1).getWidth(), new Texture(pigFrame1).getHeight());
-        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, new Texture(pigFrame2).getWidth(), new Texture(pigFrame2).getHeight());
-        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, new Texture(pigFrame3).getWidth(), new Texture(pigFrame3).getHeight());
-        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, new Texture(pigFrame4).getWidth(), new Texture(pigFrame4).getHeight());
-        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, new Texture(pigFrame5).getWidth(), new Texture(pigFrame5).getHeight());
-        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, new Texture(pigFrame6).getWidth(), new Texture(pigFrame6).getHeight());
+        /*
+        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, new Texture(pigFrame1).getWidth() / 3, new Texture(pigFrame1).getHeight() / 3);
+        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, new Texture(pigFrame2).getWidth() / 3, new Texture(pigFrame2).getHeight() / 3);
+        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, new Texture(pigFrame3).getWidth() / 3, new Texture(pigFrame3).getHeight() / 3);
+        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, new Texture(pigFrame4).getWidth() / 3, new Texture(pigFrame4).getHeight() / 3);
+        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, new Texture(pigFrame5).getWidth() / 3, new Texture(pigFrame5).getHeight() / 3);
+        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, new Texture(pigFrame6).getWidth() / 3, new Texture(pigFrame6).getHeight() / 3);
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex, pigFrame5Tex, pigFrame4Tex, pigFrame3Tex, pigFrame2Tex);
-
-        // pigAnimation = new Animation<TextureRegion>(0.2f, new TextureRegion(new Texture(pigFrame1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Texture(pigFrame2), new Texture(pigFrame3), new Texture(pigFrame4), new Texture(pigFrame5), new Texture(pigFrame6));
+*/
+        pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
+        Array<TextureRegion> pigFrames = makeFrames(pigSpriteSheet, 3, 2);
+        pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
 
         //COIN
         //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
         Texture coinTexture = new Texture("coin.png");
-        Array<TextureRegion> coinFrames = makeFrames(coinTexture, 4);
-        coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(2), coinFrames.get(1));
+        Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
+        coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
         //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
@@ -124,18 +129,21 @@ public class Asset {
     }
 
 
-    //Helpmethod in order to create a list of frames. Used in order to create animations.
-    public static Array<TextureRegion> makeFrames(Texture texture, int frameCount){
+    public static Array<TextureRegion> makeFrames(Texture texture, int frameCountX, int frameCountY){
         Array<TextureRegion> frames = new Array<TextureRegion>();
         TextureRegion temp;
-        int frameWidth = texture.getWidth() / frameCount;
-        for(int i = 0; i < frameCount; i++){
-            temp = new TextureRegion(texture, i * frameWidth, 0, frameWidth, texture.getHeight());
-            frames.add(temp);
+        int frameWidth = texture.getWidth() / frameCountX;
+        int frameHeight = texture.getHeight() / frameCountY;
+        for(int j = 0; j < frameCountY; j++){
+            for (int i = 0; i < frameCountX; i++){
+                temp = new TextureRegion(texture, i * frameWidth, j * frameHeight, frameWidth, texture.getHeight()/ frameCountY);
+                frames.add(temp);
+            }
         }
         return frames;
 
     }
+
 
 /*
     public static Texture getTexture(String textureName){

@@ -1,6 +1,7 @@
 package com.fallingangel.model.component;
 
 import com.badlogic.ashley.core.Component;
+import com.fallingangel.model.Asset;
 
 public class AngelComponent implements Component {
 
@@ -10,7 +11,7 @@ public class AngelComponent implements Component {
     public static final int STATE_HIT = 1;
     public static final int STATE_DEAD = 2;
     public static final float MOVE_VELOCITY = 15;
-    public static final float WIDTH = 0.8f;
-    public static final float HEIGHT = 0.8f;
+    public static final float WIDTH = Asset.pigSpriteSheet.getWidth()/3;
+    public static final float HEIGHT = Asset.pigSpriteSheet.getHeight()/2;
     //public static final float SCORE = 0;
 }
