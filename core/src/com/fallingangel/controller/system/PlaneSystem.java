@@ -24,20 +24,24 @@ public class PlaneSystem extends IteratingSystem{
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        TransformComponent t = tm.get(entity);
-        MovementComponent mov = mm.get(entity);
+        TransformComponent transformComponent = tm.get(entity);
+        MovementComponent movementComponent = mm.get(entity);
 
 
-        //TODO: Endre logikken her: Flyvende hinder skal bare fly "igjennom" skjærmen, og ikke snu"
+        //TODO: Endre logikken her: Flyvende hinder skal bare fly "igjennom" skjermen, og ikke snu"
 
-        if (t.pos.x < PlaneComponent.WIDTH * 0.5f) {
-            t.pos.x = PlaneComponent.WIDTH * 0.5f;
-            mov.move.x = PlaneComponent.VELOCITY;
+        movementComponent.move.x += 5.0f;
+        transformComponent.pos.y += 5.0f;
+
+        /*
+        if (transformComponent.pos.x < PlaneComponent.WIDTH * 0.5f) {
+            transformComponent.pos.x = PlaneComponent.WIDTH * 0.5f;
+            movementComponent.move.x = PlaneComponent.VELOCITY;
         }
-        if (t.pos.x > World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f) {
-            t.pos.x = World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f;
-            mov.move.x = -PlaneComponent.VELOCITY;
-        }
+        if (transformComponent.pos.x > World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f) {
+            transformComponent.pos.x = World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f;
+            movementComponent.move.x = -PlaneComponent.VELOCITY;
+        }*/
 
 
         //Tror disse to sier det samme:
@@ -50,7 +54,7 @@ public class PlaneSystem extends IteratingSystem{
         //     t.scale.x = Math.abs(t.scale.x)
         //     }
 
-        t.scale.x = mov.move.x < 0.0f ? Math.abs(t.scale.x) * -1.0f : Math.abs(t.scale.x);
+        //transformComponent.scale.x = movementComponent.move.x < 0.0f ? Math.abs(transformComponent.scale.x) * -1.0f : Math.abs(transformComponent.scale.x);
     }
 
 }

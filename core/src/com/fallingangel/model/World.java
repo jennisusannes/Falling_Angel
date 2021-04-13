@@ -3,7 +3,10 @@ package com.fallingangel.model;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector2;
+import com.fallingangel.controller.system.MovementSystem;
+import com.fallingangel.controller.system.PlaneSystem;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -19,6 +22,7 @@ import java.util.Random;
 
 public class World {
 
+    public static Random rand = new Random();
 
     //Might have some other values here.
     public static final float WORLD_HEIGHT = 15*20;
@@ -55,8 +59,8 @@ public class World {
         this.state = WORLD_STATE_RUNNING;
         this.background = createBackground();
         this.coin = createCoin();
-        this.plane = createPlane();
-        this.obstacle = createObstacle();
+        //this.plane = createPlane(0,0);
+        //this.obstacle = createObstacle(0,0);
 
     }
 
@@ -93,7 +97,7 @@ public class World {
         //set the state as falling
         stateComponent.set(AngelComponent.STATE_FALL);
         //set the position of the angel
-        transformComponent.pos.set(5.0f, 1.0f, 0.5f); //
+        transformComponent.pos.set(Gdx.graphics.getWidth()/2 - AngelComponent.WIDTH/2, Gdx.graphics.getHeight()* 5/6, 0.5f); //
 
         //add the entity to the engine
         engine.addEntity(angelEntity);
@@ -103,7 +107,7 @@ public class World {
 
 
     //Random whether the obstacle is a devil or balloon, random colour on the balloon.
-    public Entity createObstacle(){
+    public Entity createObstacle(float x, float y){
         Entity obstacleEntity = new Entity();
 
         //create new components
@@ -113,6 +117,7 @@ public class World {
         TransformComponent transformComponent = new TransformComponent();
         StateComponent stateComponent = new StateComponent();
         TextureComponent textureComponent = new TextureComponent();
+        MovementComponent movementComponent = new MovementComponent();
 
         //add the comp. to the entity
         obstacleEntity.add(obstacleComponent);
@@ -121,12 +126,13 @@ public class World {
         obstacleEntity.add(transformComponent);
         obstacleEntity.add(stateComponent);
         obstacleEntity.add(textureComponent);
+        obstacleEntity.add(movementComponent);
 
         //add texture to the obstacle. At this point a random balloon is chosen.
         Random rand = new Random();
         textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
 
-        transformComponent.pos.set(1.0f, 5.0f, 1.0f);
+        transformComponent.pos.set(x, y, 1.0f);
 
         //add the entity to the engine
         engine.addEntity(obstacleEntity);
@@ -134,28 +140,33 @@ public class World {
         return obstacleEntity;
     }
 
-    public Entity createPlane(){
+    public Entity createPlane(float x, float y){
         Entity planeEntity = new Entity();
 
         //create new components
         PlaneComponent planeComponent = new PlaneComponent();
         AnimationComponent animationComponent = new AnimationComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
+        MovementComponent movementComponent = new MovementComponent();
         TransformComponent transformComponent = new TransformComponent();
         StateComponent stateComponent = new StateComponent();
         TextureComponent textureComponent = new TextureComponent();
+
 
         //add the comp. to the entity
         planeEntity.add(planeComponent);
         planeEntity.add(animationComponent);
         planeEntity.add(boundsComponent);
+        planeEntity.add(movementComponent);
         planeEntity.add(transformComponent);
         planeEntity.add(stateComponent);
         planeEntity.add(textureComponent);
 
         //add texture to the obstacle.
         textureComponent.textureRegion = Asset.planeTexture;
-        transformComponent.pos.set(0, 0, 4.0f);
+
+        //add the position of the plane
+        transformComponent.pos.set(x, y, 4.0f);
 
         //add the entity to the engine
         engine.addEntity(planeEntity);
@@ -199,7 +210,7 @@ public class World {
         CoinComponent coinComponent = new CoinComponent();
 
         //textureComponent.textureRegion = Asset.coinTextureRegion;
-        transformComponent.pos.set(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2, 0.0f);
+        transformComponent.pos.set(Gdx.graphics.getWidth()/rand.nextInt(), Gdx.graphics.getHeight()/rand.nextInt(), 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
