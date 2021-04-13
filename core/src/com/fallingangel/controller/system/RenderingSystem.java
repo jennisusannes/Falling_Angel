@@ -22,6 +22,11 @@ public class RenderingSystem extends IteratingSystem{
     static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
 
+/*
+    static final float FRUSTUM_WIDTH = 1714;
+    static final float FRUSTUM_HEIGHT = 4096;
+*/
+
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
     private SpriteBatch sb;
