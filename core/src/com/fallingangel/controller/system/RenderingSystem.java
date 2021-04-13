@@ -16,11 +16,16 @@ import java.util.Comparator;
 
 public class RenderingSystem extends IteratingSystem{
 
-    //RenderingSystem
+    /**
+     * RenderingSystem, used for drawing
+     * **/
 
 
     static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
+
+
+
 
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
 
