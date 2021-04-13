@@ -92,15 +92,15 @@ public class GameView extends ScreenAdapter {
 
         //La stå:
         //Camera (and viewport of the screen)
-        /*
-        this.gameCam = new OrthographicCamera(game.WIDTH,game.HEIGHT);
-        this.viewPort = new StretchViewport(game.WIDTH, game.HEIGHT, gameCam);
+
+        this.gameCam = new OrthographicCamera(1714,4096);
+        this.viewPort = new StretchViewport(1714, 4096);
         viewPort.apply();
-        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
+        gameCam.position.set(1714 / 2, 4096 / 2, 0);
         gameCam.update();
 
         this.touchPoint = new Vector3();
-         */
+
 
 
         //Initializes new world, engine, stage and settingsStage.
