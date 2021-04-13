@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.fallingangel.controller.system.MovementSystem;
 import com.fallingangel.controller.system.PlaneSystem;
 import com.fallingangel.model.component.AngelComponent;
@@ -61,9 +62,20 @@ public class World {
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
         this.background = createBackground();
-        this.coin = createCoin();
-        //this.plane = createPlane(0,0);
-        //this.obstacle = createObstacle(0,0);
+
+        this.plane = createPlane(0,rand.nextInt(Gdx.graphics.getHeight()/2));
+
+        //creating the coins that will be used
+        Array<Entity> coins = new Array<Entity>();
+        for (int i = 1; i <= 5; i++) {
+            coins.add(createCoin(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
+        }
+
+        //creating the obstacles that will be used
+        Array<Entity> obstacles = new Array<Entity>();
+        for (int i = 1; i <= 5; i++){
+            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 3));
+        }
 
     }
 
@@ -203,7 +215,7 @@ public class World {
         return backgroundEntity;
     }
 
-    public Entity createCoin(){
+    public Entity createCoin(float x, float y){
         Entity coinEntity = new Entity();
 
         TextureComponent textureComponent = new TextureComponent();
@@ -213,7 +225,7 @@ public class World {
         CoinComponent coinComponent = new CoinComponent();
 
         //textureComponent.textureRegion = Asset.coinTextureRegion;
-        transformComponent.pos.set(Gdx.graphics.getWidth()/rand.nextInt(), Gdx.graphics.getHeight()/rand.nextInt(), 0.0f);
+        transformComponent.pos.set(x, y, 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
