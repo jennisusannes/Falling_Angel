@@ -57,13 +57,19 @@ public class World {
     //Mulig å bruke pooled engine også
 
 
-    //skal kanskje ikke ha coin, obstacle osv, det er midlertidig
     public void create(){
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
         this.background = createBackground();
 
-        this.plane = createPlane(0,rand.nextInt(Gdx.graphics.getHeight()/2));
+        //creating the planes that will be used
+        Array<Entity> planes = new Array<Entity>();
+        for (int i = 1; i<= 3; i++){
+            int a = 0;
+            int b = Gdx.graphics.getWidth();
+            int randomOfTwoInts = rand.nextBoolean() ? a : b;
+            planes.add(createPlane(randomOfTwoInts, Gdx.graphics.getHeight()/2));
+        }
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
@@ -224,16 +230,15 @@ public class World {
         StateComponent stateComponent = new StateComponent();
         CoinComponent coinComponent = new CoinComponent();
 
-        //textureComponent.textureRegion = Asset.coinTextureRegion;
-        transformComponent.pos.set(x, y, 0.0f);
-        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
-        stateComponent.set(CoinComponent.STATE_NORMAL);
-
         coinEntity.add(textureComponent);
         coinEntity.add(transformComponent);
         coinEntity.add(animationComponent);
         coinEntity.add(stateComponent);
         coinEntity.add(coinComponent);
+
+        transformComponent.pos.set(x, y, 0.0f);
+        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
+        stateComponent.set(CoinComponent.STATE_NORMAL);
 
         engine.addEntity(coinEntity);
 

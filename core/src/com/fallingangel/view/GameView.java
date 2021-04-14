@@ -25,6 +25,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BackgroundSystem;
 import com.fallingangel.controller.system.BoundsSystem;
+import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
 import com.fallingangel.controller.system.MovementSystem;
 import com.fallingangel.controller.system.PlaneSystem;
@@ -126,6 +127,7 @@ public class GameView extends ScreenAdapter {
         engine.addSystem(new RenderingSystem(game.batch));
         engine.addSystem(new StateSystem());
         engine.addSystem(new BoundsSystem());
+        engine.addSystem(new CoinSystem());
 
 
         //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.

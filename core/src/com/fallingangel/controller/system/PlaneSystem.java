@@ -13,6 +13,7 @@ public class PlaneSystem extends IteratingSystem{
 
     private ComponentMapper<TransformComponent> tm;
     private ComponentMapper<MovementComponent> mm;
+    private ComponentMapper<PlaneComponent> planeMapper;
 
     public PlaneSystem() {
         super(Family.all(PlaneComponent.class, TransformComponent.class, MovementComponent.class).get());
@@ -20,6 +21,7 @@ public class PlaneSystem extends IteratingSystem{
 
         tm = ComponentMapper.getFor(TransformComponent.class);
         mm = ComponentMapper.getFor(MovementComponent.class);
+        planeMapper = ComponentMapper.getFor(PlaneComponent.class);
     }
 
     @Override
@@ -30,18 +32,15 @@ public class PlaneSystem extends IteratingSystem{
 
         //TODO: Endre logikken her: Flyvende hinder skal bare fly "igjennom" skjermen, og ikke snu"
 
-        movementComponent.move.x += 5.0f;
-        transformComponent.pos.y += 5.0f;
 
-        /*
         if (transformComponent.pos.x < PlaneComponent.WIDTH * 0.5f) {
             transformComponent.pos.x = PlaneComponent.WIDTH * 0.5f;
-            movementComponent.move.x = PlaneComponent.VELOCITY;
+            transformComponent.pos.x += PlaneComponent.VELOCITY;
         }
         if (transformComponent.pos.x > World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f) {
             transformComponent.pos.x = World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f;
-            movementComponent.move.x = -PlaneComponent.VELOCITY;
-        }*/
+            transformComponent.pos.x -= PlaneComponent.VELOCITY;
+        }
 
 
         //Tror disse to sier det samme:
