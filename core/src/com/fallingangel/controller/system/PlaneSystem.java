@@ -4,10 +4,13 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.PlaneComponent;
 import com.fallingangel.model.component.TransformComponent;
+
+import java.util.Random;
 
 public class PlaneSystem extends IteratingSystem{
 
@@ -28,6 +31,7 @@ public class PlaneSystem extends IteratingSystem{
     public void processEntity(Entity entity, float deltaTime) {
         TransformComponent transformComponent = tm.get(entity);
         MovementComponent movementComponent = mm.get(entity);
+        PlaneComponent planeComponent = planeMapper.get(entity);
 
 
         //TODO: Endre logikken her: Flyvende hinder skal bare fly "igjennom" skjermen, og ikke snu"
@@ -47,6 +51,16 @@ public class PlaneSystem extends IteratingSystem{
         transformComponent.pos.x += PlaneComponent.VELOCITY;
         transformComponent.pos.y += PlaneComponent.VELOCITY;
 
+        Random rand = new Random();
+
+        int low = Gdx.graphics.getHeight()/2;
+        int high = Gdx.graphics.getHeight()*5/6;
+        int area = rand.nextInt(high-low) + low;
+/*
+        if (transformComponent.pos.x > Gdx.graphics.getWidth()){
+            transformComponent.pos.x = - planeComponent.WIDTH - Gdx.graphics.getWidth();
+            transformComponent.pos.y = rand.nextInt(area);
+        }*/
 
 
         //Tror disse to sier det samme:

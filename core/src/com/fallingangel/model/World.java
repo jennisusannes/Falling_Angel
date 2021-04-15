@@ -77,19 +77,37 @@ public class World {
         //The plane should only come out at the top of the screen, so this generates a random number between screen-height/2 and screen-height
         int low = Gdx.graphics.getHeight()*2/3;
         int high = Gdx.graphics.getHeight();
-        int result = rand.nextInt(high-low) + low;
+        int area = rand.nextInt(high-low) + low;
+        //Random number so the planes will come at random times
+        int randomNumber = rand.nextInt(10);
 
+        //creating the planes
         Array<Entity> planes = new Array<Entity>();
-        for (int i = 1; i <= 5; i++) {
-            planes.add(createPlane(0,result));
+        for (int i = 1; i <= 3; i++) {
+            int a = 0;
+            int b = Gdx.graphics.getWidth();
+            int randomPick = rand.nextBoolean() ? a : b;
+            if (randomPick == a) {
+                planes.add(createPlane(-i*randomNumber*a,area));
+            }
+            else {
+                Asset.planeTexture.flip(true,false);
+                planes.add(createPlane(i*randomNumber*b,area));
+            }
+
         }
 
-        /*
+
         //making an Array with planes that fly from the right
         //TODO: flip the plane
+        /*
+        TextureComponent textureComponent = new TextureComponent();
+
+        Asset.planeTexture.flip(true,false);
+
         Array<Entity> planesFlipped = new Array<Entity>();
-        for (int i = 1; i <= 5; i++) {
-            planesFlipped.add(createPlane(Gdx.graphics.getWidth(),result));
+        for (int i = 1; i <= 3; i++) {
+            planesFlipped.add(createPlane(Gdx.graphics.getWidth(),area));
         }*/
 
 
