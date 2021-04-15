@@ -12,23 +12,22 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class HighScoreListView extends ScreenAdapter {
 
     private FallingAngel game;
     private Texture background;
-    private Texture backTexture;
     private Button backButton;
     private MainController controller;
     private Stage stage;
+    private Asset asset;
 
     public HighScoreListView(){
         super();
         this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc; //sets the controller as the main controller
         background = new Texture("backgrounds/highscorelist_blurred_background.png");
-        backTexture = new Texture("buttons/back_button.png");
-
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor
         setBackButton(); //creates a button
@@ -37,7 +36,7 @@ public class HighScoreListView extends ScreenAdapter {
 
     //setter and getter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(asset.backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getBackButton(){

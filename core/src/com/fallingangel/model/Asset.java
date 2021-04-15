@@ -50,6 +50,7 @@ public class Asset {
     public static Texture achievementsTexture;
     public static Texture highscoreListTexture;
     public static Texture settingsTexture;
+    public static Texture backTexture;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -107,6 +108,7 @@ public class Asset {
         achievementsTexture = new Texture("buttons/achievements_button.PNG");
         highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
         settingsTexture = new Texture("buttons/settings_button.PNG");
+        backTexture = new Texture("buttons/back_button.png");
 
         //Music and sounds
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
