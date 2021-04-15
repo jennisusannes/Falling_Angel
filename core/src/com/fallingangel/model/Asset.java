@@ -21,12 +21,12 @@ public class Asset {
     //Animation for pig:
     public static Animation<TextureRegion> pigAnimation;
     //Pig-frames:
-    public static String pigFrame1 = "characters/pig/pig_animation_1.PNG";
-    public static String pigFrame2 = "characters/pig/pig_animation_2.PNG";
-    public static String pigFrame3 = "characters/pig/pig_animation_3.PNG";
-    public static String pigFrame4 = "characters/pig/pig_animation_4.PNG";
-    public static String pigFrame5 = "characters/pig/pig_animation_5.PNG";
-    public static String pigFrame6 = "characters/pig/pig_animation_6.PNG";
+    public static String pigFrame1 = "characters/pig/pig_animation_1.png";
+    public static String pigFrame2 = "characters/pig/pig_animation_2.png";
+    public static String pigFrame3 = "characters/pig/pig_animation_3.png";
+    public static String pigFrame4 = "characters/pig/pig_animation_4.png";
+    public static String pigFrame5 = "characters/pig/pig_animation_5.png";
+    public static String pigFrame6 = "characters/pig/pig_animation_6.png";
     //public static String pigSpriteSheet = "characters/pig/pig_animation.png";
     public static Texture pigSpriteSheet;
 
