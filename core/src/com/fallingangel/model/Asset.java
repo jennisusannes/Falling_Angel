@@ -88,7 +88,7 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
 
         //BACKGROUND
-        Texture backgroundTexture = new Texture("heaven_game_background.PNG");
+        Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
         backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, backgroundTexture.getWidth(), backgroundTexture.getHeight());
 
 
@@ -109,7 +109,7 @@ public class Asset {
 
         //COIN
         //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
-        coinTexture = new Texture("coin.png");
+        coinTexture = new Texture("powerups/coin.png");
         Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
         //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);

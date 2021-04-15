@@ -102,11 +102,11 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
-        else if (event.getListenerActor().equals(gameView.getGameOverButton())){
+        /*else if (event.getListenerActor().equals(gameView.getGameOverButton())){
             clickSound.play(0.2f);
             game.setScreen(gameOverView);
             return true;
-        }
+        }*/
         else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
             clickSound.play(0.2f);
             game.music.pause();

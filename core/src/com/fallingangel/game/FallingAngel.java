@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.fallingangel.controller.MainController;
+import com.fallingangel.model.Asset;
 
 public final class FallingAngel extends Game implements ApplicationListener {
 
@@ -15,6 +16,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public BitmapFont font;
 	public Music music;
 	public MainController mc;
+	public Asset assets;
 	private static final FallingAngel INSTANCE = new FallingAngel(); //initializing the game as INSTANCE
 
 	private FallingAngel(){ //private constructor for the game
@@ -40,6 +42,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller
 		// Music from Zapsplat.com
+		assets.load();
 		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3")); //sets the music
 		music.setVolume(0.02f); //sets the volume of the background music
 		music.setLooping(true); //the backgrouns music will continuously loop
