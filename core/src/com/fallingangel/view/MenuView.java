@@ -20,6 +20,12 @@ public class MenuView extends ScreenAdapter {
     private Texture background;
 
     // textures for buttons
+    private Texture singlePlayerTexture;
+    private Texture multiPlayerTexture;
+    private Texture achievementsTexture;
+    private Texture highscoreListTexture;
+    private Texture settingsTexture;
+    private Texture questionTexture;
     private FallingAngel game;
     private Stage stage;
     private Asset asset;
@@ -31,6 +37,7 @@ public class MenuView extends ScreenAdapter {
     private Button achievementsButton;
     private Button highscoreListButton;
     private Button settingsButton;
+    private Button questionButton;
 
     public MenuView(){
         super();
@@ -39,6 +46,12 @@ public class MenuView extends ScreenAdapter {
         background = new Texture("backgrounds/mainmenu_background.png");
         Asset asset = new Asset();
         // button textures
+        singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
+        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
+        achievementsTexture = new Texture("buttons/achievements_button.PNG");
+        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
+        settingsTexture = new Texture("buttons/settings_button.PNG");
+        questionTexture = new Texture("buttons/question.png");
         stage = new Stage(new ScreenViewport()); //crates a new stage and a viewport
 
         //created buttons and adds them to the stage as actors
@@ -58,6 +71,9 @@ public class MenuView extends ScreenAdapter {
         setSettingsButton();
         stage.addActor(getSettingsButton());
 
+        setQuestionButton();
+        stage.addActor(getQuestionButton());
+
     }
 
     // getters and setters for buttons
@@ -68,6 +84,14 @@ public class MenuView extends ScreenAdapter {
 
     public Button getSinglePlayerButton(){
         return singlePlayerButton;
+    }
+
+    public void setQuestionButton() {
+        this.questionButton = makeButton(questionTexture,200, 200, Gdx.graphics.getWidth()*0.5f - 100, Gdx.graphics.getHeight() * 0.05f);
+    }
+
+    public Button getQuestionButton(){
+        return questionButton;
     }
 
 

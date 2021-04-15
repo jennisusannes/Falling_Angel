@@ -10,6 +10,9 @@ import com.fallingangel.model.Asset;
 import com.fallingangel.view.AchievementsView;
 import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
+import com.fallingangel.view.HelpView1;
+import com.fallingangel.view.HelpView2;
+import com.fallingangel.view.HelpView3;
 import com.fallingangel.view.HighScoreListView;
 import com.fallingangel.view.MenuView;
 import com.fallingangel.view.SettingsView;
@@ -20,6 +23,9 @@ public class MainController extends ClickListener {
     //initializing the different views
     public GameView gameView = new GameView();
     public GameOverView gameOverView = new GameOverView();
+    public HelpView1 helpView1 = new HelpView1();
+    public HelpView2 helpView2 = new HelpView2();
+    public HelpView3 helpView3 = new HelpView3();
     public AchievementsView achievementsView = new AchievementsView();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
@@ -77,6 +83,15 @@ public class MainController extends ClickListener {
             game.setScreen(gameView);
             return true;
         }
+        else if (event.getListenerActor().equals(menuView.getQuestionButton())){ //fjerne denne
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(helpView1);
+            return true;
+        }
+
         else if (event.getListenerActor().equals(menuView.getAchievementsButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
@@ -85,6 +100,8 @@ public class MainController extends ClickListener {
             game.setScreen(achievementsView);
             return true;
         }
+
+
         else if (event.getListenerActor().equals(menuView.getHighscoreListButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
@@ -138,6 +155,31 @@ public class MainController extends ClickListener {
             game.setScreen(gameOverView);
             return true;
         }*/
+        else if (event.getListenerActor().equals(helpView1.getNextButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(helpView2);
+            return true;
+        }
+        else if (event.getListenerActor().equals(helpView2.getNextButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(helpView3);
+            return true;
+        }
+        else if (event.getListenerActor().equals(helpView3.getNextButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(menuView);
+            return true;
+        }
+
         else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
             clickSound.play(0.0f);
             game.music.pause();
