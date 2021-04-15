@@ -1,6 +1,8 @@
 package com.fallingangel.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -46,6 +48,12 @@ public class Asset {
     //Plane
     public static String plane = "obstacles/plane.png";
     public static TextureRegion planeTexture;
+
+    //Music and sounds
+    public static Music backgroundMusic;
+    public static Sound clickSound;
+
+
 /*
 
 
@@ -126,6 +134,17 @@ public class Asset {
         //Plane
         planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
 
+
+
+        //Music and sounds
+        clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
+
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
+        backgroundMusic.setVolume(0.02f); //sets the volume of the background music
+        backgroundMusic.setLooping(true); //the backgrouns music will continuously loop
+        //backgroundMusic.play(); //plays the music
+
+
     }
 
 
@@ -154,6 +173,7 @@ public class Asset {
     public void update(){
 
     }
+
 
 
     /*
