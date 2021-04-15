@@ -3,11 +3,8 @@ package com.fallingangel.model;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.fallingangel.controller.system.MovementSystem;
-import com.fallingangel.controller.system.PlaneSystem;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -19,8 +16,6 @@ import com.fallingangel.model.component.PowerUpComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
-
-import org.omg.CORBA.Bounds;
 
 import java.util.Random;
 
@@ -65,15 +60,16 @@ public class World {
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
         this.background = createBackground();
+        //generateObjects();
 
         //creating the planes that will be used
-       /* Array<Entity> planes = new Array<Entity>();
+        Array<Entity> planes = new Array<Entity>();
         for (int i = 1; i<= 3; i++){
             int a = 0;
             int b = Gdx.graphics.getWidth();
             int randomOfTwoInts = rand.nextBoolean() ? a : b;
             planes.add(createPlane(randomOfTwoInts, Gdx.graphics.getHeight()/2));
-        }*/
+        }
 
         //The plane should only come out at the top of the screen, so this generates a random number between screen-height/2 and screen-height
         int low = Gdx.graphics.getHeight()*2/3;
@@ -88,7 +84,7 @@ public class World {
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 8; i++) {
             coins.add(createCoin(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
         }
 
@@ -99,6 +95,29 @@ public class World {
         }
 
     }
+
+    /*
+    public void generateObjects(){
+
+        float y = ObstacleComponent.HEIGHT / 2; //0.15f
+        while (y < WORLD_HEIGHT -WORLD_WIDTH / 2) { //300-5
+
+            //creating an obstacle
+            float x = rand.nextFloat() * (WORLD_WIDTH - ObstacleComponent.WIDTH) + ObstacleComponent.WIDTH / 2;
+            createObstacle(x, y);
+            //createObstacle(rand.nextInt(Gdx.graphics.getWidth()), Gdx.graphics.getHeight()/ 3);
+
+            //creating a plane
+            if (y > WORLD_HEIGHT / 3 && rand.nextFloat() > 0.8f) {
+                createPlane(x + rand.nextFloat(), y + PlaneComponent.HEIGHT + rand.nextFloat() * 2);
+            }
+
+            if (rand.nextFloat() > 0.6f) {
+                createCoin(x + MathUtils.random(-0.5f, 0.5f), y + CoinComponent.HEIGHT + rand.nextFloat() * 3);
+            }
+        }
+
+    }*/
 
 
     public Entity createAngel(){
@@ -118,8 +137,8 @@ public class World {
         //animations for when a collision occurs and when the pig is dead
 
         //put the bounds as the angels width and height
-        boundsComponent.bounds.width = AngelComponent.WIDTH;
-        boundsComponent.bounds.height = AngelComponent.HEIGHT;
+        boundsComponent.rectangle.width = AngelComponent.WIDTH;
+        boundsComponent.rectangle.height = AngelComponent.HEIGHT;
 
         //connect the comp. to the entity
         angelEntity.add(angelComponent);
@@ -167,8 +186,9 @@ public class World {
         //add texture to the obstacle. At this point a random balloon is chosen.
         Random rand = new Random();
         textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
-
         transformComponent.pos.set(x, y, 1.0f);
+        boundsComponent.rectangle.width = obstacleComponent.WIDTH;
+        boundsComponent.rectangle.height = obstacleComponent.HEIGHT;
 
         //add the entity to the engine
         engine.addEntity(obstacleEntity);
@@ -256,8 +276,9 @@ public class World {
         transformComponent.pos.set(x, y, 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
-        boundsComponent.bounds.width = Asset.coinTexture.getWidth()/6;
-        boundsComponent.bounds.height = Asset.coinTexture.getHeight();
+
+        boundsComponent.rectangle.width = coinComponent.WIDTH;
+        boundsComponent.rectangle.height = coinComponent.HEIGHT;
 
         engine.addEntity(coinEntity);
 

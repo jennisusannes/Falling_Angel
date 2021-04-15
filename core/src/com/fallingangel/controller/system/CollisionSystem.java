@@ -8,12 +8,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.fallingangel.model.World;
 
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
+import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 import com.fallingangel.model.component.PlaneComponent;
 import com.fallingangel.model.component.ObstacleComponent;
@@ -22,10 +24,11 @@ import com.fallingangel.model.component.PowerUpComponent;
 
 public class CollisionSystem extends EntitySystem { //EntitySystem: abstact class for processing sets of Entity objects
     //component mappers to get components
-    private ComponentMapper<BoundsComponent> bm;
-    private ComponentMapper<MovementComponent> mm;
-    private ComponentMapper<StateComponent> sm;
-    private ComponentMapper<TransformComponent> tm;
+    private ComponentMapper<BoundsComponent> boundsMapper;
+    private ComponentMapper<MovementComponent> movementMapper;
+    private ComponentMapper<StateComponent> stateMapper;
+    private ComponentMapper<TransformComponent> transformMapper;
+    private ComponentMapper<TextureComponent> textureMapper;
 
     //CollisionListener brukes hvis vi skal lage lyde når den treffer noe
    /* public static interface CollisionListener {
@@ -51,10 +54,11 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
      //   this.listener = listener;
 
         //creates our componentMappers
-        bm = ComponentMapper.getFor(BoundsComponent.class);
-        mm = ComponentMapper.getFor(MovementComponent.class);
-        sm = ComponentMapper.getFor(StateComponent.class);
-        tm = ComponentMapper.getFor(TransformComponent.class);
+        boundsMapper = ComponentMapper.getFor(BoundsComponent.class);
+        movementMapper = ComponentMapper.getFor(MovementComponent.class);
+        stateMapper = ComponentMapper.getFor(StateComponent.class);
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
+        textureMapper = ComponentMapper.getFor(TextureComponent.class);
     }
 
     @Override
@@ -72,7 +76,6 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         //gets all entities with a PowerUpComponent and BoundsComponent
         powerups = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());
 
-        //trenger angel og obstacle TransformComponent??
     }
 
     @Override
@@ -83,7 +86,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         for (int i = 0; i < angels.size(); ++i) {
             Entity angel = angels.get(i);
 
-            StateComponent angelState = sm.get(angel);
+            StateComponent angelState = stateMapper.get(angel);
 
             if (angelState.get() == AngelComponent.STATE_HIT) {
                 continue;
@@ -91,23 +94,24 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
             }
 
-            MovementComponent angelMov = mm.get(angel);
-            BoundsComponent angelBounds = bm.get(angel);
+            MovementComponent angelMov = movementMapper.get(angel);
+            BoundsComponent angelBounds = boundsMapper.get(angel);
+            TransformComponent angelPos = transformMapper.get(angel);
 
-
+/*
             if (angelMov.move.x != 0.0f) { //?? funker dette?
-                TransformComponent angelPos = tm.get(angel);
+                TransformComponent angelPos = transformMapper.get(angel);
 
                 for (int j = 0; j < obstacles.size(); ++j) {
                     Entity obstacle = obstacles.get(j);
 
-                    TransformComponent obsPos = tm.get(obstacle);
+                    TransformComponent obsPos = transformMapper.get(obstacle);
 
                     //checks if angelBounds and obsBounds are overlapping if angel position is higher than or the same as obstacle position
                     if (angelPos.pos.y >= obsPos.pos.y) {
-                        BoundsComponent obsBounds = bm.get(obstacle);
+                        BoundsComponent obsBounds = boundsMapper.get(obstacle);
 
-                        if (angelBounds.bounds.overlaps(obsBounds.bounds)) {
+                        if (angelBounds.rectangle.overlaps(obsBounds.rectangle)) {
                             angelSystem.hitObstacle(angel);
                             //listener.hitObs();
                             //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
@@ -115,15 +119,29 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                     }
                 }
-            }
+            }*/
+/*
+            for (int j = 0; j < obstacles.size(); ++j) {
+                Entity obstacle = obstacles.get(j);
+
+                TransformComponent obsPos = transformMapper.get(obstacle);
+                BoundsComponent boundsComponent = boundsMapper.get(obstacle);
+
+                if (angelBounds.rectangle.overlaps(boundsComponent.rectangle)) {
+                    angelSystem.hitObstacle(angel);
+                        //listener.hitObs();
+                        //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
+                }
+            }*/
+
 
             //if angel hits a moving obstacle (plane), the player dies
             for (int j = 0; j < planes.size(); ++j) {
                 Entity plane = planes.get(j);
 
-                BoundsComponent planeBounds = bm.get(plane);
+                BoundsComponent planeBounds = boundsMapper.get(plane);
 
-                if (planeBounds.bounds.overlaps(angelBounds.bounds)) {
+                if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
                     angelSystem.hitPlane(angel);
                    // listener.hitObs();
                 }
@@ -133,11 +151,14 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             for (int j = 0; j < coins.size(); ++j) {
                 Entity coin = coins.get(j);
 
-                BoundsComponent coinBounds = bm.get(coin);
+                BoundsComponent boundsComponent = boundsMapper.get(coin);
+                TransformComponent transformComponent = transformMapper.get(coin);
+                TextureComponent textureComponent = textureMapper.get(coin);
 
-                if (coinBounds.bounds.overlaps(angelBounds.bounds)) {
+                if (boundsComponent.rectangle.overlaps(angelBounds.rectangle)) {
                     //engine.removeEntity(coin);
-                    //den må bli "usynlig"
+                    //transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
+                    //transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
                     //listener.hitCoin();
                     world.score += CoinComponent.SCORE; //score må legges til i world
                 }
@@ -147,9 +168,9 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             for (int j = 0; j < powerups.size(); ++j) {
                 Entity powerup = powerups.get(j);
 
-                BoundsComponent powerupBounds = bm.get(powerup);
+                BoundsComponent powerupBounds = boundsMapper.get(powerup);
 
-                if (powerupBounds.bounds.overlaps(angelBounds.bounds)) {
+                if (powerupBounds.rectangle.overlaps(angelBounds.rectangle)) {
                     engine.removeEntity(powerup);
                     angelSystem.hitPowerUp(angel); //hitPowerup må lages i AngelSystem
                     //listener.hitPU();

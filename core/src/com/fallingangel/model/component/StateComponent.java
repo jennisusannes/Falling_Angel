@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Component;
 
 public class StateComponent implements Component {
 
-    private int state = 0; //begins at state 0, STATE_FALL
+    public int state = 0; //begins at state 0, STATE_FALL
     public float time = 0.0f;
 
     public int get() {

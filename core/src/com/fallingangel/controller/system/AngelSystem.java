@@ -14,6 +14,7 @@ import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
+import com.fallingangel.view.GameView;
 
 //GJLR OM TIL SAMME SPEED SOM OBSTACLES PÅ HITOBSTACLE
 
@@ -66,11 +67,9 @@ public class AngelSystem extends IteratingSystem {
         StateComponent stateComponent = state_mapper.get(entity);
         TransformComponent transformComponent = transform_mapper.get(entity);
 
-        //if-sentences to switch state of the object
-        /*
-        if (transformComponent.pos.y == world.WORLD_HEIGHT){ //evt bounds?
-            stateComponent.set(AngelComponent.STATE_DEAD);
-            //DA MÅ DEN VARSLE OM DET PÅ EN MÅTE
+        //if the angel has hit an obstacle/plane, the game is over and the state of the world changes.
+        /*if (stateComponent.state == angelComponent.STATE_HIT){
+            world.state = world.WORLD_STATE_GAME_OVER;
         }*/
 
         movementComponent.move.x = - accelX;
@@ -96,7 +95,7 @@ public class AngelSystem extends IteratingSystem {
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
         MovementComponent movement = movement_mapper.get(entity);
 
-        movement.move.set(0, ObstacleComponent.VELOCITY); //it will move with the obstacle
+        //movement.move.set(0, 0);
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
     }
 

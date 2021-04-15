@@ -5,6 +5,6 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class BoundsComponent implements Component {
 
-    public final Rectangle bounds = new Rectangle(); //using a rectangle to set the bounds of the screen
+    public final Rectangle rectangle = new Rectangle(); //using a rectangle to set the bounds of the screen
 
 }
