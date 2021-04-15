@@ -84,6 +84,7 @@ public class AngelSystem extends IteratingSystem {
         }
         //Each entity's move vector should be changed by the accelX from GameView
         //movementComponent.move.x = - accelX;
+        //TODO: implementere samme logikk som Brent Aureli i Supermario Bro's
 
     }
 

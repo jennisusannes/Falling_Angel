@@ -44,7 +44,6 @@ public class World {
     public Entity plane;
     public Entity obstacle;
 
-    public int tall;
 
 
     public static final int WORLD_STATE_RUNNING = 0;

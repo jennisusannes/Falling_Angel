@@ -13,5 +13,9 @@ public class AngelComponent implements Component {
     public static final float MOVE_VELOCITY = 15;
     public static final float WIDTH = Asset.pigSpriteSheet.getWidth()/3;
     public static final float HEIGHT = Asset.pigSpriteSheet.getHeight()/2;
+
+    //THese are used to render the score and airtime
+    public static int SCORE = 0;
+    public static float AIRTIME = 0;
     //public static final float SCORE = 0;
 }
