@@ -136,7 +136,8 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 BoundsComponent coinBounds = bm.get(coin);
 
                 if (coinBounds.bounds.overlaps(angelBounds.bounds)) {
-                    engine.removeEntity(coin);
+                    //engine.removeEntity(coin);
+                    //den må bli "usynlig"
                     //listener.hitCoin();
                     world.score += CoinComponent.SCORE; //score må legges til i world
                 }

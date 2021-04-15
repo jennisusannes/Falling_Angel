@@ -19,6 +19,9 @@ import com.fallingangel.model.component.PowerUpComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
+
+import org.omg.CORBA.Bounds;
+
 import java.util.Random;
 
 public class World {
@@ -229,16 +232,20 @@ public class World {
         AnimationComponent animationComponent = new AnimationComponent();
         StateComponent stateComponent = new StateComponent();
         CoinComponent coinComponent = new CoinComponent();
+        BoundsComponent boundsComponent = new BoundsComponent();
 
         coinEntity.add(textureComponent);
         coinEntity.add(transformComponent);
         coinEntity.add(animationComponent);
         coinEntity.add(stateComponent);
         coinEntity.add(coinComponent);
+        coinEntity.add(boundsComponent);
 
         transformComponent.pos.set(x, y, 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
+        boundsComponent.bounds.width = Asset.coinTexture.getWidth()/6;
+        boundsComponent.bounds.height = Asset.coinTexture.getHeight();
 
         engine.addEntity(coinEntity);
 

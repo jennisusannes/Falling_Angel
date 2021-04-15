@@ -32,7 +32,7 @@ public class Asset {
     //COIN
     //Animation for coin:
     public static Animation<TextureRegion> coinAnimation;
-    //public static TextureRegion coinTextureRegion;
+    public static Texture coinTexture;
 
 
     //OBSTACLES
@@ -109,7 +109,7 @@ public class Asset {
 
         //COIN
         //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
-        Texture coinTexture = new Texture("coin.png");
+        coinTexture = new Texture("coin.png");
         Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
         //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
