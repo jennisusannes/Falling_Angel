@@ -76,7 +76,7 @@ public class World {
 
         //Generates a random number at the top of the screen, where the plane should come out
         int low = Gdx.graphics.getHeight()/2;
-        int high = Gdx.graphics.getHeight()*4/5;
+        int high = Gdx.graphics.getHeight()*3/4;
         int area = rand.nextInt(high-low) + low;
         //Random number so the planes will come at random times
         int randomNumber = rand.nextInt(10);
@@ -99,7 +99,6 @@ public class World {
 
 
         //making an Array with planes that fly from the right
-        //TODO: flip the plane
         /*
         TextureComponent textureComponent = new TextureComponent();
 

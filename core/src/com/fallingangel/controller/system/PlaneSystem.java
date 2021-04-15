@@ -58,16 +58,18 @@ public class PlaneSystem extends IteratingSystem{
 
         //The plane has a positive velocity when it flies from the left of the screen, and a negative velocity from the right
 
+        transformComponent.pos.y += PlaneComponent.VELOCITY/3;
+        transformComponent.pos.x += PlaneComponent.VELOCITY;
+
         if (transformComponent.pos.x < 0) {
-            transformComponent.pos.y += PlaneComponent.VELOCITY/3;
-            transformComponent.pos.x += PlaneComponent.VELOCITY;
+
         }
 
-       /* if (transformComponent.pos.x > Gdx.graphics.getWidth()) {
-            movementComponent.move.set(-planeComponent.VELOCITY, planeComponent.VELOCITY);
-        }*/
+        if (transformComponent.pos.x > Gdx.graphics.getWidth()) {
 
+        }
 
+        // movementComponent.move.set(-planeComponent.VELOCITY, planeComponent.VELOCITY);
 
         Random rand = new Random();
 
