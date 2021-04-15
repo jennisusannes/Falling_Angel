@@ -32,7 +32,7 @@ public class PlaneSystem extends IteratingSystem{
 
         //TODO: Endre logikken her: Flyvende hinder skal bare fly "igjennom" skjermen, og ikke snu"
 
-
+        /*
         if (transformComponent.pos.x < PlaneComponent.WIDTH * 0.5f) {
             transformComponent.pos.x = PlaneComponent.WIDTH * 0.5f;
             transformComponent.pos.x += PlaneComponent.VELOCITY;
@@ -41,7 +41,10 @@ public class PlaneSystem extends IteratingSystem{
             transformComponent.pos.x = World.WORLD_WIDTH - PlaneComponent.WIDTH * 0.5f;
             transformComponent.pos.x -= PlaneComponent.VELOCITY;
         }
+         */
 
+        transformComponent.pos.x += PlaneComponent.VELOCITY;
+        transformComponent.pos.y += PlaneComponent.VELOCITY;
 
         //Tror disse to sier det samme:
 
