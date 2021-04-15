@@ -43,8 +43,11 @@ public class PlaneSystem extends IteratingSystem{
         }
          */
 
+
         transformComponent.pos.x += PlaneComponent.VELOCITY;
         transformComponent.pos.y += PlaneComponent.VELOCITY;
+
+
 
         //Tror disse to sier det samme:
 

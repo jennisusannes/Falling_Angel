@@ -81,6 +81,13 @@ public class World {
             planes.add(createPlane(0,result));
         }
 
+        //making an Array with planes that fly from the right
+        //TODO: flip the plane
+        Array<Entity> planesFlipped = new Array<Entity>();
+        for (int i = 1; i <= 5; i++) {
+            planesFlipped.add(createPlane(Gdx.graphics.getWidth(),result));
+        }
+
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
