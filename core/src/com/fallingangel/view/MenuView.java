@@ -71,7 +71,7 @@ public class MenuView extends ScreenAdapter {
     // getters and setters for buttons
 
     public void setSinglePlayerButton() {
-        this.singlePlayerButton = makeButton(singlePlayerTexture,600, 400, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.4f);
+        this.singlePlayerButton = makeButton(singlePlayerTexture,600, 400, 600*0.1f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getSinglePlayerButton(){
@@ -80,7 +80,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setMultiPlayerButton() {
-        this.multiPlayerButton = makeButton(multiPlayerTexture,600, 400, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.4f);
+        this.multiPlayerButton = makeButton(multiPlayerTexture,600, 400, Gdx.graphics.getWidth() - 600*1.1f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getMultiPlayerButton(){
@@ -89,7 +89,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setAchievementsButton() {
-        this.achievementsButton = makeButton(achievementsTexture, 200,200, Gdx.graphics.getWidth()*0.2f, Gdx.graphics.getHeight() * 0.15f);
+        this.achievementsButton = makeButton(achievementsTexture, 200,200, Gdx.graphics.getWidth()*0.1f + 100, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getAchievementsButton(){
@@ -98,7 +98,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setHighscoreListButton() {
-        this.highscoreListButton = makeButton(highscoreListTexture,200, 200,Gdx.graphics.getWidth()*0.65f, Gdx.graphics.getHeight() * 0.15f);
+        this.highscoreListButton = makeButton(highscoreListTexture,200, 200,Gdx.graphics.getWidth()*0.75f -100, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getHighscoreListButton(){
