@@ -31,7 +31,6 @@ public class MainController extends ClickListener {
     public SettingsView settingsView = new SettingsView();
     public MenuView menuView;
     public Asset asset;
-    // Sound from Zapsplat.com
     private Sound clickSound;
     //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 

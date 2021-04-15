@@ -41,7 +41,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		batch = new SpriteBatch(); //creates a new spritebatch
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller
-		// Music from Zapsplat.com
 		assets.load();
 
 

@@ -15,12 +15,13 @@ public class Asset {
     //play-view background
     public static TextureRegion backgroundTextureRegion;
 
-
     //PIG
     public static Animation<TextureRegion> pigAnimation;
-    public static String pigFrame1 = "characters/pig/pig_animation_1.png";
     public static Texture pigSpriteSheet;
 
+    //BUNNY
+    public static Animation<TextureRegion> bunnyAnimation;
+    public static Texture bunnySpriteSheet;
 
     //POWER-UPS and COIN
     //Animation for coin:
@@ -70,7 +71,6 @@ public class Asset {
 
     */
 
-
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
 
@@ -78,11 +78,15 @@ public class Asset {
         Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
         backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, backgroundTexture.getWidth(), backgroundTexture.getHeight());
 
-
         //PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
         Array<TextureRegion> pigFrames = makeFrames(pigSpriteSheet, 3, 2);
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
+
+        //BUNNY
+        bunnySpriteSheet = new Texture("characters/bunny/bunny_animation.png");
+        Array<TextureRegion> bunnyFrames = makeFrames(bunnySpriteSheet, 3, 2);
+        bunnyAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
 
         //COIN
@@ -111,8 +115,9 @@ public class Asset {
         backTexture = new Texture("buttons/back_button.png");
 
         //Music and sounds
+        // Sound from Zapsplat.com
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
-
+        // Music from Zapsplat.com
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
         backgroundMusic.setVolume(0.02f); //sets the volume of the background music
         backgroundMusic.setLooping(true); //the backgrounds music will continuously loop
