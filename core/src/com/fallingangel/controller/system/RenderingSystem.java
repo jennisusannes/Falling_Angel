@@ -6,9 +6,11 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
@@ -36,6 +38,9 @@ public class RenderingSystem extends IteratingSystem{
 
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
+
+    public static float coinsHit = 0;
+    public static float score = 0 + coinsHit;
 
 
     //Instanciate a RenderingSystem
@@ -91,6 +96,11 @@ public class RenderingSystem extends IteratingSystem{
                 continue;
             }
 
+            //updates the score, which is saved to the angelComponent
+            if (entity.getComponent(AngelComponent.class) != null){
+                coinsHit = entity.getComponent(AngelComponent.class).COINS_HIT;
+            }
+
 
             //Not used yet
             float width = textureComponent.textureRegion.getRegionWidth();
@@ -124,6 +134,15 @@ public class RenderingSystem extends IteratingSystem{
             sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
 
         }
+
+        //print the updated score
+        //nå oppdateres den på kollisjon med coin (men flere ganger) men ikke delta time
+        BitmapFont font = new BitmapFont();
+        score += deltaTime;
+        int scoreInt = (int) score;
+        String scoreString = String.valueOf(scoreInt);
+        font.getData().setScale(5, 5);
+        font.draw(sb, scoreString, 40,Gdx.graphics.getHeight() - 40);
 
         sb.end();
         renderQueue.clear();

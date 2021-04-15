@@ -157,10 +157,11 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
                 if (boundsComponent.rectangle.overlaps(angelBounds.rectangle)) {
                     //engine.removeEntity(coin);
+                    //listener.hitCoin();
+                    //angel.getComponent(AngelComponent.class).SCORE += CoinComponent.SCORE;
+                    angel.getComponent(AngelComponent.class).COINS_HIT += 1;
                     //transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
                     //transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
-                    //listener.hitCoin();
-                    world.score += CoinComponent.SCORE; //score må legges til i world
                 }
             }
 

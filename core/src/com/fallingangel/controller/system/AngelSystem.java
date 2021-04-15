@@ -36,6 +36,8 @@ public class AngelSystem extends IteratingSystem {
 
     private float accelX = 0.0f;
 
+    private float timeCount = 0;
+
     public AngelSystem(com.fallingangel.model.World world){
         super(family); //calls the constructor of the IteratingSystem. Creates an entity system that iterates over each entity and calls processEntity()
         this.world = world;
@@ -84,6 +86,9 @@ public class AngelSystem extends IteratingSystem {
         //Each entity's move vector should be changed by the accelX from GameView
         //movementComponent.move.x = - accelX;
         //TODO: implementere samme logikk som Brent Aureli i Supermario Bro's
+
+        angelComponent.AIRTIME += deltaTime;
+        angelComponent.SCORE += deltaTime;
 
     }
 
