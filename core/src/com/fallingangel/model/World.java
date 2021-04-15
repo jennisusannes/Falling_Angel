@@ -74,9 +74,9 @@ public class World {
 
          */
 
-        //The plane should only come out at the top of the screen, so this generates a random number between screen-height/2 and screen-height
-        int low = Gdx.graphics.getHeight()*2/3;
-        int high = Gdx.graphics.getHeight();
+        //Generates a random number at the top of the screen, where the plane should come out
+        int low = Gdx.graphics.getHeight()/2;
+        int high = Gdx.graphics.getHeight()*4/5;
         int area = rand.nextInt(high-low) + low;
         //Random number so the planes will come at random times
         int randomNumber = rand.nextInt(10);
@@ -92,7 +92,7 @@ public class World {
             }
             else {
                 Asset.planeTexture.flip(true,false);
-                planes.add(createPlane(i*randomNumber*b,area));
+                planes.add(createPlane(-i*randomNumber*b,area));
             }
 
         }

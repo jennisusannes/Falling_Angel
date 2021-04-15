@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.PlaneComponent;
@@ -18,6 +20,7 @@ public class PlaneSystem extends IteratingSystem{
     private ComponentMapper<MovementComponent> mm;
     private ComponentMapper<PlaneComponent> planeMapper;
 
+
     public PlaneSystem() {
         super(Family.all(PlaneComponent.class, TransformComponent.class, MovementComponent.class).get());
 
@@ -25,6 +28,8 @@ public class PlaneSystem extends IteratingSystem{
         tm = ComponentMapper.getFor(TransformComponent.class);
         mm = ComponentMapper.getFor(MovementComponent.class);
         planeMapper = ComponentMapper.getFor(PlaneComponent.class);
+
+
     }
 
     @Override
@@ -46,10 +51,23 @@ public class PlaneSystem extends IteratingSystem{
             transformComponent.pos.x -= PlaneComponent.VELOCITY;
         }
          */
+        //bruke en speed som enten er negativ eller positiv
+
+        //transformComponent.pos.y += PlaneComponent.VELOCITY/3;
+        //transformComponent.pos.x += PlaneComponent.VELOCITY;
+
+        //The plane has a positive velocity when it flies from the left of the screen, and a negative velocity from the right
+
+        if (transformComponent.pos.x < 0) {
+            transformComponent.pos.y += PlaneComponent.VELOCITY/3;
+            transformComponent.pos.x += PlaneComponent.VELOCITY;
+        }
+
+       /* if (transformComponent.pos.x > Gdx.graphics.getWidth()) {
+            movementComponent.move.set(-planeComponent.VELOCITY, planeComponent.VELOCITY);
+        }*/
 
 
-        transformComponent.pos.x += PlaneComponent.VELOCITY;
-        transformComponent.pos.y += PlaneComponent.VELOCITY;
 
         Random rand = new Random();
 
