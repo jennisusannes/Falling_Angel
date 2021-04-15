@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class MenuView extends ScreenAdapter {
 
@@ -26,6 +27,7 @@ public class MenuView extends ScreenAdapter {
     private Texture settingsTexture;
     private FallingAngel game;
     private Stage stage;
+    private Asset asset;
     private MainController controller;
 
     // buttons
@@ -42,7 +44,7 @@ public class MenuView extends ScreenAdapter {
         background = new Texture("backgrounds/mainmenu_background.png");
 
         // button textures
-        singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
+        //singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
         multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
         achievementsTexture = new Texture("buttons/achievements_button.PNG");
         highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
@@ -71,7 +73,7 @@ public class MenuView extends ScreenAdapter {
     // getters and setters for buttons
 
     public void setSinglePlayerButton() {
-        this.singlePlayerButton = makeButton(singlePlayerTexture,600, 400, Gdx.graphics.getWidth()*0.33f - 600*0.67f, Gdx.graphics.getHeight() * 0.4f);
+        this.singlePlayerButton = makeButton(asset.singlePlayerTexture,600, 400, Gdx.graphics.getWidth()*0.33f - 600*0.67f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getSinglePlayerButton(){

@@ -45,8 +45,13 @@ public class Asset {
     public static Sound clickSound;
 
 
+    public static Texture singlePlayerTexture;
+    public static Texture multiPlayerTexture;
+    public static Texture achievementsTexture;
+    public static Texture highscoreListTexture;
+    public static Texture settingsTexture;
 /*
-    //PNGs for select character siden:
+    //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
 
     //Devil obstacles:
@@ -96,7 +101,12 @@ public class Asset {
         //Plane
         planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
 
-
+        //Buttons
+        singlePlayerTexture= new Texture("buttons/singleplayer_button.PNG");
+        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
+        achievementsTexture = new Texture("buttons/achievements_button.PNG");
+        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
+        settingsTexture = new Texture("buttons/settings_button.PNG");
 
         //Music and sounds
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
