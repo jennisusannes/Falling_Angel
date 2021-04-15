@@ -101,8 +101,10 @@ public class MenuView extends ScreenAdapter {
         gl.glClearColor(1, 0, 0, 1);
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+        stage = new Stage(new ScreenViewport()); //crates a new stage and a viewport
+        Gdx.input.setInputProcessor(stage); //sets the input processor
+
+        //created buttons and adds them to the stage as actors
 
         setSinglePlayerButton();
         stage.addActor(getSinglePlayerButton());
@@ -122,9 +124,10 @@ public class MenuView extends ScreenAdapter {
         game.batch.begin(); // Draw elements to Sprite Batch
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         game.batch.end();
-        stage.draw();
+        stage.draw(); //draws the stage
     }
 
+    //method for creating a button. This will set the MainController as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);

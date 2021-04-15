@@ -24,12 +24,13 @@ public class AchievementsView extends ScreenAdapter {
 
     public AchievementsView(){
         super();
-        this.game = FallingAngel.getInstance();
-        this.controller = game.mc;
+        this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
+        this.controller = game.mc;  //sets the controller as the main controller
         background = new Texture("backgrounds/achievements_blurred_background.png");
         backTexture = new Texture("buttons/back_button.png");
     }
 
+    //setter and getter for the back button
     public void setBackButton() {
         this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
@@ -38,6 +39,7 @@ public class AchievementsView extends ScreenAdapter {
         return backButton;
     }
 
+    //method for creating a button and adding the main controller as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);
@@ -53,15 +55,15 @@ public class AchievementsView extends ScreenAdapter {
     }
 
     public void draw(){
-        stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
-        setBackButton();
-        stage.addActor(getBackButton());
+        stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
+        Gdx.input.setInputProcessor(stage); //sets input processor
+        setBackButton(); //creates a button
+        stage.addActor(getBackButton()); //adds the button as an actor to the stage
 
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         game.batch.end();
-        stage.draw();
+        stage.draw(); //draws the stage
     }
 
     public void update(float dt) {
