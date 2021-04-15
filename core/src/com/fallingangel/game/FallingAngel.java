@@ -53,5 +53,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		font.dispose(); //kan denne fjernes?
 		music.dispose();
 	}
+	//Comment
 
 }
