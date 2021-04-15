@@ -18,20 +18,12 @@ public class Asset {
 
 
     //PIG
-    //Animation for pig:
     public static Animation<TextureRegion> pigAnimation;
-    //Pig-frames:
     public static String pigFrame1 = "characters/pig/pig_animation_1.png";
-    public static String pigFrame2 = "characters/pig/pig_animation_2.png";
-    public static String pigFrame3 = "characters/pig/pig_animation_3.png";
-    public static String pigFrame4 = "characters/pig/pig_animation_4.png";
-    public static String pigFrame5 = "characters/pig/pig_animation_5.png";
-    public static String pigFrame6 = "characters/pig/pig_animation_6.png";
-    //public static String pigSpriteSheet = "characters/pig/pig_animation.png";
     public static Texture pigSpriteSheet;
 
 
-    //COIN
+    //POWER-UPS and COIN
     //Animation for coin:
     public static Animation<TextureRegion> coinAnimation;
     public static Texture coinTexture;
@@ -44,12 +36,12 @@ public class Asset {
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
     public static Array<TextureRegion> balloons = new Array<TextureRegion>();
-
     //Plane
     public static String plane = "obstacles/plane.png";
     public static TextureRegion planeTexture;
 
-    //Music and sounds
+
+    //MUSIC AND SOUNDS
     public static Music backgroundMusic;
     public static Sound clickSound;
 
@@ -142,8 +134,6 @@ public class Asset {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
         backgroundMusic.setVolume(0.02f); //sets the volume of the background music
         backgroundMusic.setLooping(true); //the backgrouns music will continuously loop
-        //backgroundMusic.play(); //plays the music
-
 
     }
 

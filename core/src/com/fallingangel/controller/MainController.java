@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 import com.fallingangel.view.AchievementsView;
 import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
@@ -23,12 +24,15 @@ public class MainController extends ClickListener {
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public MenuView menuView;
+    public Asset asset;
     // Sound from Zapsplat.com
-    private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
+    private Sound clickSound;
+    //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 
 
     public MainController() {
         this.game = FallingAngel.getInstance();
+        clickSound = asset.clickSound;
     }
 
     public void setStartScreen(){ //setStartScreen method is called in the game class.
