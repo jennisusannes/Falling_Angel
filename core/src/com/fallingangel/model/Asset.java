@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
-
     //BACKGROUNDS:
 
     //play-view background
@@ -47,8 +46,6 @@ public class Asset {
 
 
 /*
-
-
     //PNGs for select character siden:
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
 
@@ -61,29 +58,13 @@ public class Asset {
     //Cloud-obstacle:
     public static String cloud = "obstacles/cloud.png";
 
-
-
-
     //power-ups and benefits:
     public static String coin = "coin.png";
     //public static String powerUp = "[path]";
 
-
-    //importerer assetManager for å håndtere innlasting av filer.
-    private static AssetManager assetManager = new AssetManager();
-
-
-
-
-    public Asset(){
-        //this.assetManager = new AssetManager();
-    }
-
-
-    public static void dispose(){
-        assetManager.dispose();
-    }
     */
+
+
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
 
@@ -93,26 +74,15 @@ public class Asset {
 
 
         //PIG
-        /*
-        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, new Texture(pigFrame1).getWidth() / 3, new Texture(pigFrame1).getHeight() / 3);
-        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, new Texture(pigFrame2).getWidth() / 3, new Texture(pigFrame2).getHeight() / 3);
-        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, new Texture(pigFrame3).getWidth() / 3, new Texture(pigFrame3).getHeight() / 3);
-        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, new Texture(pigFrame4).getWidth() / 3, new Texture(pigFrame4).getHeight() / 3);
-        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, new Texture(pigFrame5).getWidth() / 3, new Texture(pigFrame5).getHeight() / 3);
-        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, new Texture(pigFrame6).getWidth() / 3, new Texture(pigFrame6).getHeight() / 3);
-        pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex, pigFrame5Tex, pigFrame4Tex, pigFrame3Tex, pigFrame2Tex);
-*/
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
         Array<TextureRegion> pigFrames = makeFrames(pigSpriteSheet, 3, 2);
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
 
         //COIN
-        //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
         coinTexture = new Texture("powerups/coin.png");
         Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
-        //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
         //OBSTACLES
@@ -133,7 +103,7 @@ public class Asset {
 
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
         backgroundMusic.setVolume(0.02f); //sets the volume of the background music
-        backgroundMusic.setLooping(true); //the backgrouns music will continuously loop
+        backgroundMusic.setLooping(true); //the backgrounds music will continuously loop
 
     }
 
@@ -154,11 +124,6 @@ public class Asset {
     }
 
 
-/*
-    public static Texture getTexture(String textureName){
-        //return assetManager.get(textureName, Texture.class);
-        return
-    }*/
 
     public void update(){
 
