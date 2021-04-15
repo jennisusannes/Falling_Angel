@@ -28,7 +28,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	}
 
 	public boolean soundOn(){
-		if (music.getVolume() > 0){
+		if (music.isPlaying()){
 			return true;
 		}
 		else{

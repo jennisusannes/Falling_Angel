@@ -55,7 +55,10 @@ public class MainController extends ClickListener {
     @Override
     public boolean handle(Event event) { //the Main controller listenens to the buttons on the different views and changes bewteen the different views
         if (event.getListenerActor().equals(menuView.getSinglePlayerButton())) {
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             //long id = clickSound.play(0.2f);
             //clickSound.setPitch(id,2);
             //clickSound.setLooping(id,false);
@@ -63,42 +66,66 @@ public class MainController extends ClickListener {
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(gameView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getAchievementsButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(achievementsView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getHighscoreListButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(highscorelistView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getSettingsButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(settingsView);
             return true;
         }
         else if (event.getListenerActor().equals(achievementsView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(highscorelistView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(gameOverView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
@@ -108,7 +135,7 @@ public class MainController extends ClickListener {
             return true;
         }*/
         else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
-            clickSound.play(0.2f);
+            clickSound.play(0.0f);
             game.music.pause();
             //settingsView.stage.clear();
             //settingsView.stage.addActor(settingsView.getMusicOffButton());
