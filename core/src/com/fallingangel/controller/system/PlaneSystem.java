@@ -61,13 +61,17 @@ public class PlaneSystem extends IteratingSystem{
         transformComponent.pos.y += PlaneComponent.VELOCITY/3;
         transformComponent.pos.x += PlaneComponent.VELOCITY;
 
+        /*
         if (transformComponent.pos.x < 0) {
-
+            movementComponent.move.x = - movementComponent.move.x;
+            transformComponent.pos.x = planeComponent.VELOCITY;
         }
 
         if (transformComponent.pos.x > Gdx.graphics.getWidth()) {
 
         }
+
+        */
 
         // movementComponent.move.set(-planeComponent.VELOCITY, planeComponent.VELOCITY);
 

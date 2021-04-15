@@ -74,16 +74,16 @@ public class World {
 
          */
 
-        //Generates a random number at the top of the screen, where the plane should come out
-        int low = Gdx.graphics.getHeight()/2;
-        int high = Gdx.graphics.getHeight()*3/4;
-        int area = rand.nextInt(high-low) + low;
-        //Random number so the planes will come at random times
-        int randomNumber = rand.nextInt(10);
 
         //creating the planes
         Array<Entity> planes = new Array<Entity>();
         for (int i = 1; i <= 3; i++) {
+            //Generates a random number at the top of the screen, where the plane should come out
+            int low = Gdx.graphics.getHeight()/2;
+            int high = Gdx.graphics.getHeight()*3/4;
+            int area = rand.nextInt(high-low) + low;
+            //Random number so the planes will come at random times
+            int randomNumber = rand.nextInt(10);
             int a = 0;
             int b = Gdx.graphics.getWidth();
             int randomPick = rand.nextBoolean() ? a : b;
