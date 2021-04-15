@@ -63,6 +63,7 @@ public class World {
         //generateObjects();
 
         //creating the planes that will be used
+        /*
         Array<Entity> planes = new Array<Entity>();
         for (int i = 1; i<= 3; i++){
             int a = 0;
@@ -70,6 +71,8 @@ public class World {
             int randomOfTwoInts = rand.nextBoolean() ? a : b;
             planes.add(createPlane(randomOfTwoInts, Gdx.graphics.getHeight()/2));
         }
+
+         */
 
         //The plane should only come out at the top of the screen, so this generates a random number between screen-height/2 and screen-height
         int low = Gdx.graphics.getHeight()*2/3;
@@ -81,12 +84,13 @@ public class World {
             planes.add(createPlane(0,result));
         }
 
+        /*
         //making an Array with planes that fly from the right
         //TODO: flip the plane
         Array<Entity> planesFlipped = new Array<Entity>();
         for (int i = 1; i <= 5; i++) {
             planesFlipped.add(createPlane(Gdx.graphics.getWidth(),result));
-        }
+        }*/
 
 
         //creating the coins that will be used
