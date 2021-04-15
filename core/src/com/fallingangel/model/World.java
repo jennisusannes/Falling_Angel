@@ -77,12 +77,15 @@ public class World {
         }*/
 
         //The plane should only come out at the top of the screen, so this generates a random number between screen-height/2 and screen-height
-
-        int low = Gdx.graphics.getHeight()/2;
+        int low = Gdx.graphics.getHeight()*2/3;
         int high = Gdx.graphics.getHeight();
         int result = rand.nextInt(high-low) + low;
 
-        this.plane = createPlane(0, result);
+        Array<Entity> planes = new Array<Entity>();
+        for (int i = 1; i <= 5; i++) {
+            planes.add(createPlane(0,result));
+        }
+
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
