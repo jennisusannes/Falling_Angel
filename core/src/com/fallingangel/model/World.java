@@ -78,21 +78,21 @@ public class World {
         //creating the planes
         Array<Entity> planes = new Array<Entity>();
         for (int i = 1; i <= 3; i++) {
-            //Generates a random number at the top of the screen, where the plane should come out
-            int low = Gdx.graphics.getHeight()/2;
+            //Generates a random area at the top of the screen, where the plane should come out
+            int low = Gdx.graphics.getHeight()*2/3;
             int high = Gdx.graphics.getHeight()*3/4;
             int area = rand.nextInt(high-low) + low;
-            //Random number so the planes will come at random times
-            int randomNumber = rand.nextInt(10);
+            //Random number so the planes will come at random times (must *randomnumber when creating a plane)
+            //int randomNumber = rand.nextInt(10);
             int a = 0;
             int b = Gdx.graphics.getWidth();
             int randomPick = rand.nextBoolean() ? a : b;
             if (randomPick == a) {
-                planes.add(createPlane(-i*randomNumber*a,area));
+                planes.add(createPlane(-i*a,area));
             }
             else {
                 Asset.planeTexture.flip(true,false);
-                planes.add(createPlane(-i*randomNumber*b,area));
+                planes.add(createPlane(-i*b,area));
             }
 
         }
