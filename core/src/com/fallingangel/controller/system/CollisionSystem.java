@@ -141,6 +141,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                     if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
                         angelSystem.hitObstacle(angel);
 
+
                         int randomNumber = rand.nextInt(10);
                         int low = - Gdx.graphics.getHeight() - randomNumber;
                         int high = 0;
