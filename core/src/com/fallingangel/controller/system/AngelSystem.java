@@ -100,9 +100,14 @@ public class AngelSystem extends IteratingSystem {
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
         MovementComponent movement = movement_mapper.get(entity);
 
-        //movement.move.set(0, 0);
+        movement.move.set(0, 0);
         //state.set(AngelComponent.STATE_HIT); //the state is changed to hit
-        //entity.getComponent(TransformComponent.class).pos.y = 0;
+
+        if (entity.getComponent(TransformComponent.class).pos.y > Gdx.graphics.getHeight()/2) {
+            entity.getComponent(TransformComponent.class).pos.y = Gdx.graphics.getHeight()/2;
+        } else {
+            entity.getComponent(TransformComponent.class).pos.y = Gdx.graphics.getHeight()*5/6;
+        }
     }
 
     public void hitPlane(Entity entity){

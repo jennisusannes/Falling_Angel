@@ -22,6 +22,8 @@ import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.PowerUpComponent;
 
+import sun.corba.EncapsInputStreamFactory;
+
 public class CollisionSystem extends EntitySystem { //EntitySystem: abstact class for processing sets of Entity objects
     //component mappers to get components
     private ComponentMapper<BoundsComponent> boundsMapper;
@@ -83,23 +85,29 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         AngelSystem angelSystem = engine.getSystem(AngelSystem.class);
         ObstacleSystem obstacleSystem = engine.getSystem(ObstacleSystem.class);
 
-        for (int i = 0; i < angels.size(); ++i) {
-            Entity angel = angels.get(i);
+        Entity angel = angels.get(0);
 
-            StateComponent angelState = stateMapper.get(angel);
+        MovementComponent angelMov = movementMapper.get(angel);
+        BoundsComponent angelBounds = boundsMapper.get(angel);
+        TransformComponent angelPos = transformMapper.get(angel);
+
+        /*for (int i = 0; i < angels.size(); ++i) {
+          //  Entity angel = angels.get(i);
+
+           /* StateComponent angelState = stateMapper.get(angel);
 
             if (angelState.get() == AngelComponent.STATE_HIT) {
                 continue;
 
-
             }
+
 
             MovementComponent angelMov = movementMapper.get(angel);
             BoundsComponent angelBounds = boundsMapper.get(angel);
             TransformComponent angelPos = transformMapper.get(angel);
+        */
 
-/*
-            if (angelMov.move.x != 0.0f) { //?? funker dette?
+          /*  if (angelMov.move.x != 0.0f) { //?? funker dette?
                 TransformComponent angelPos = transformMapper.get(angel);
 
                 for (int j = 0; j < obstacles.size(); ++j) {
@@ -121,17 +129,27 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 }
             }*/
 
-            for (int j = 0; j < obstacles.size(); ++j) {
+           for (int j = 0; j < obstacles.size(); ++j) {
                 Entity obstacle = obstacles.get(j);
 
                 TransformComponent obsPos = transformMapper.get(obstacle);
-                BoundsComponent boundsComponent = boundsMapper.get(obstacle);
+              //  BoundsComponent obsBounds = boundsMapper.get(obstacle);
+                TextureComponent obsTexture = textureMapper.get(obstacle);
 
-                if (angelBounds.rectangle.overlaps(boundsComponent.rectangle)) {
-                    //angelSystem.hitObstacle(angel);
+                if (angelPos.pos.y >= obsPos.pos.y + obsTexture.textureRegion.getRegionHeight()/2) {
+                    BoundsComponent obsBounds = boundsMapper.get(obstacle);
+                    if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                        angelSystem.hitObstacle(angel);
+
+                        int randomNumber = rand.nextInt(10);
+                        int low = - Gdx.graphics.getHeight() - randomNumber;
+                        int high = 0;
+                        int area = rand.nextInt(high-low) + low;
+                }
+
                     //angelPos.pos.y = 0;
-                        //listener.hitObs();
-                        //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
+                    //listener.hitObs();
+                    //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
                 }
             }
 
@@ -143,7 +161,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 BoundsComponent planeBounds = boundsMapper.get(plane);
 
                 if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                    angelSystem.hitPlane(angel);
+                    //angelSystem.hitPlane(angel);
                    // listener.hitObs();
                 }
             }
@@ -152,16 +170,25 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             for (int j = 0; j < coins.size(); ++j) {
                 Entity coin = coins.get(j);
 
-                BoundsComponent boundsComponent = boundsMapper.get(coin);
+                BoundsComponent coinBounds = boundsMapper.get(coin);
                 TransformComponent transformComponent = transformMapper.get(coin);
                 TextureComponent textureComponent = textureMapper.get(coin);
 
-                if (boundsComponent.rectangle.overlaps(angelBounds.rectangle)) {
+                if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
                     //engine.removeEntity(coin);
                     //listener.hitCoin();
+                    int randomNumber = rand.nextInt(10);
+                    int low = - Gdx.graphics.getHeight() - randomNumber;
+                    int high = 0;
+                    int area = rand.nextInt(high-low) + low;
+
                     angel.getComponent(AngelComponent.class).COINS_HIT += 20;
-                    transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
-                    transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
+                    transformComponent.pos.y = area;
+                    transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth());
+
+
+                    //transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
+                    //transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
                     //reposition(coin);
                 }
             }
@@ -194,7 +221,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
 
 
-    }
+    //}
 
     public void reposition(Entity entity){
         entity.getComponent(TransformComponent.class).pos.x = 0;
