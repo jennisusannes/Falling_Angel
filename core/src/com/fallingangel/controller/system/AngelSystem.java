@@ -103,11 +103,11 @@ public class AngelSystem extends IteratingSystem {
        // movement.move.set(0, 0);
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
 
-      /*  if (entity.getComponent(TransformComponent.class).pos.y > Gdx.graphics.getHeight()/2) {
+      /* if (entity.getComponent(TransformComponent.class).pos.y > Gdx.graphics.getHeight()/2) {
             entity.getComponent(TransformComponent.class).pos.y = Gdx.graphics.getHeight()/2;
         } else {
             entity.getComponent(TransformComponent.class).pos.y = Gdx.graphics.getHeight()*5/6;
-        } */
+        }*/
 
     }
 

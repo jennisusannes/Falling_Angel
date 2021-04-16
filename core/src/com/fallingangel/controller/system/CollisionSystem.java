@@ -136,17 +136,18 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
               //  BoundsComponent obsBounds = boundsMapper.get(obstacle);
                 TextureComponent obsTexture = textureMapper.get(obstacle);
 
-                if (angelPos.pos.y >= obsPos.pos.y + obsTexture.textureRegion.getRegionHeight()/2) {
+
+                /*if (angelPos.pos.y >= obsPos.pos.y + obsTexture.textureRegion.getRegionHeight()/2) {
                     BoundsComponent obsBounds = boundsMapper.get(obstacle);
                     if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
                         angelSystem.hitObstacle(angel);
 
+                }*/
 
-                        int randomNumber = rand.nextInt(10);
-                        int low = - Gdx.graphics.getHeight() - randomNumber;
-                        int high = 0;
-                        int area = rand.nextInt(high-low) + low;
-                }
+               BoundsComponent obsBounds = boundsMapper.get(obstacle);
+
+               if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                   angelSystem.hitObstacle(angel);
 
                     //angelPos.pos.y = 0;
                     //listener.hitObs();
@@ -162,7 +163,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 BoundsComponent planeBounds = boundsMapper.get(plane);
 
                 if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                    //angelSystem.hitPlane(angel);
+                    angelSystem.hitPlane(angel);
                    // listener.hitObs();
                 }
             }
@@ -172,7 +173,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 Entity coin = coins.get(j);
 
                 BoundsComponent coinBounds = boundsMapper.get(coin);
-                TransformComponent transformComponent = transformMapper.get(coin);
+                TransformComponent coinPos = transformMapper.get(coin);
                 TextureComponent textureComponent = textureMapper.get(coin);
 
                 if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
@@ -184,8 +185,8 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                     int area = rand.nextInt(high-low) + low;
 
                     angel.getComponent(AngelComponent.class).COINS_HIT += 20;
-                    transformComponent.pos.y = area;
-                    transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth());
+                    coinPos.pos.y = area;
+                    coinPos.pos.x = rand.nextInt(Gdx.graphics.getWidth());
 
 
                     //transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;

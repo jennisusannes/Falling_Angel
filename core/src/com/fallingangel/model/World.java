@@ -78,7 +78,8 @@ public class World {
         //creating the planes
         Array<Entity> planes = new Array<Entity>();
         for (int i = 1; i <= 3; i++) {
-            planes.add(createPlane(rand.nextInt(Gdx.graphics.getWidth()), -i * Gdx.graphics.getHeight()));
+
+            planes.add(createPlane(rand.nextInt(Gdx.graphics.getWidth()) - Asset.planeTexture.getRegionWidth() , -i * Gdx.graphics.getHeight()));
         }
             /*
             //Generates a random area at the top of the screen, where the plane should come out
@@ -222,8 +223,8 @@ public class World {
         Random rand = new Random();
         textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
         transformComponent.pos.set(x, y, 1.0f);
-        boundsComponent.rectangle.width = obstacleComponent.WIDTH;
-        boundsComponent.rectangle.height = obstacleComponent.HEIGHT;
+        //boundsComponent.rectangle.width = obstacleComponent.WIDTH;
+        //boundsComponent.rectangle.height = obstacleComponent.HEIGHT;
 
         //add the entity to the engine
         engine.addEntity(obstacleEntity);
@@ -320,8 +321,8 @@ public class World {
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
-        boundsComponent.rectangle.width = coinComponent.WIDTH;
-        boundsComponent.rectangle.height = coinComponent.HEIGHT;
+        //boundsComponent.rectangle.width = coinComponent.WIDTH;
+        //boundsComponent.rectangle.height = coinComponent.HEIGHT;
 
         engine.addEntity(coinEntity);
 
