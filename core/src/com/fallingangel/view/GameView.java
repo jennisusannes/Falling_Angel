@@ -226,6 +226,7 @@ public class GameView extends ScreenAdapter {
     //When the player dies and the game is over, the player is sent to GameOverView
     private void updateGameOver() {
         //TODO: må sende spilleren til gameover-view
+        game.setScreen(new GameOverView());
     }
 
     public void drawUI () {

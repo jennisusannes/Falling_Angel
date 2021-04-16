@@ -70,9 +70,9 @@ public class AngelSystem extends IteratingSystem {
         TransformComponent transformComponent = transform_mapper.get(entity);
 
         //if the angel has hit an obstacle/plane, the game is over and the state of the world changes.
-        /*if (stateComponent.state == angelComponent.STATE_HIT){
+        if (stateComponent.state == angelComponent.STATE_HIT){
             world.state = world.WORLD_STATE_GAME_OVER;
-        }*/
+        }
 
         movementComponent.move.x = - accelX;
 
@@ -114,9 +114,7 @@ public class AngelSystem extends IteratingSystem {
         if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
 
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
-        MovementComponent movement = movement_mapper.get(entity);
 
-        movement.move.set(0, 0); //it can't keep falling down in the y-direction
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
     }
 

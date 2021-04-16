@@ -8,8 +8,8 @@ public class PlaneComponent implements Component {
     public static final float WIDTH = Asset.planeTexture.getRegionWidth();
     public static final float HEIGHT = Asset.planeTexture.getRegionHeight();
 
-    public static float VELOCITY = 3f;
-    public static float SPEED;
+    public float VELOCITY = 3f;
+    public float SPEED;
 
     public static final int STATE_NORMAL = 0;
 
