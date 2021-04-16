@@ -13,5 +13,7 @@ public class PlaneComponent implements Component {
 
     public static final int STATE_NORMAL = 0;
 
+    public boolean IS_FLIPPED = false;
+
 
 }

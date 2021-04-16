@@ -45,14 +45,10 @@ public class PlaneSystem extends IteratingSystem{
             transformComponent.pos.y = Gdx.graphics.getHeight() *2;
         }
 
-        if (transformComponent.pos.x < 0 || transformComponent.pos.x > Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth()){
+        if (transformComponent.pos.x <= 0 || transformComponent.pos.x >= Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth()){
             planeComponent.SPEED = - planeComponent.SPEED;
-
         }
 
-        if (planeComponent.SPEED < 0){
-            textureComponent.textureRegion.flip(true, false);
-        }
 
     /*
     public void reposition(Entity entity) {

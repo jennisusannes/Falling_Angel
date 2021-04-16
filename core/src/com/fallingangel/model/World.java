@@ -264,9 +264,6 @@ public class World {
         int b = -1;
         int randomPick = rand.nextBoolean() ? a : b;
         planeComponent.SPEED = randomPick * planeComponent.VELOCITY;
-        if (randomPick == b){
-            textureComponent.textureRegion.flip(true, false);
-        }
 
         //add the entity to the engine
         engine.addEntity(planeEntity);
