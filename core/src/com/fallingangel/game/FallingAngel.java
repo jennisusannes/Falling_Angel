@@ -14,6 +14,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 
 
 	public FireBaseInterface FBI;
+	//private FirebaseAuth mAuth;
 	public SpriteBatch batch;
 	public BitmapFont font;
 	private Music music;
@@ -50,19 +51,24 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	}
 	@Override
 	public void create () {
+		/*FBI.SomeFunction();
+		FBI.FirstFireBaseTest();
+		FBI.SetOnValueChangedListener();
+		FBI.SetValueInDb("message", "this is new text");
+		FBI.SetValueInDb("message2", "this is some other text");*/
+		FBI.createUser("TestUserID", "test@user.no", "usernametest", "user123");
+		FBI.addFriend("id","usernametest" );
 		batch = new SpriteBatch();
 		font = new BitmapFont();
-		FBI.SomeFunction();
-		FBI.FirstFireBaseTest();
-		//FBI.SetOnValueChangedListener();
-		//FBI.SetValueInDb("message", "this
+
 		this.mc = new MainController();
-		// Music from Zapsplat.com
-		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
-		music.setVolume(0.02f);
-		music.setLooping(true);
-		music.play();
+		//Music from Zapsplat.com
+		//music = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
+		//music.setVolume(0.02f);
+		//music.setLooping(true);
+		//music.play();
 		mc.setStartScreen();
+
 	}
 
 	@Override

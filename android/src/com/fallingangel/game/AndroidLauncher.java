@@ -5,9 +5,13 @@ import android.os.Bundle;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.provider.FirebaseInitProvider;
 
 public class AndroidLauncher extends AndroidApplication {
+
+
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -15,4 +19,7 @@ public class AndroidLauncher extends AndroidApplication {
 		initialize( FallingAngel.getInstance(new AndroidInterfaceClass()), config);
 
 	}
+
+
+
 }
