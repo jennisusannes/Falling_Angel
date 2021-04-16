@@ -3,8 +3,12 @@ package com.fallingangel.model;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.controller.MainController;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -38,6 +42,9 @@ public class World {
     public Entity coin;
     public Entity plane;
     public Entity obstacle;
+    private FallingAngel game;
+    private MainController controller;
+    private Asset asset;
 
 
 
@@ -52,9 +59,19 @@ public class World {
 
     public World(Engine engine){
         this.engine = engine;
+        this.game = FallingAngel.getInstance();
+        this.controller = game.mc;
     }
     //Mulig å bruke pooled engine også
 
+    public Animation<TextureRegion> getCharacter(){
+        if (controller.getChosenCharacter().equals(null)){
+            return Asset.pigAnimation;
+        }
+        else {
+            return controller.getChosenCharacter();
+        }
+    }
 
     public void create(){
         this.angel = createAngel();
@@ -144,7 +161,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
 
         //connect the animation from Assets to the an.comp. IntMap
-        animationComponent.animations.put(AngelComponent.STATE_FALL, Asset.pigAnimation);
+        animationComponent.animations.put(AngelComponent.STATE_FALL, controller.getChosenCharacter()); //Asset.pigAnimation controller.getChosenCharacter()
         //animations for when a collision occurs and when the pig is dead
 
         //put the bounds as the angels width and height

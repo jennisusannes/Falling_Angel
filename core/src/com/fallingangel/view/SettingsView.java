@@ -22,9 +22,13 @@ public class SettingsView extends ScreenAdapter {
     private Texture backTexture;
     private Texture musicOnTexture;
     private Texture musicOffTexture;
+    private Texture bunnyTexture;
+    private Texture pigTexture;
     private Button backButton;
     private Button musicOnButton;
     private Button musicOffButton;
+    private Button bunnyButton;
+    private Button pigButton;
     private MainController controller;
     public Stage stage;
 
@@ -36,20 +40,26 @@ public class SettingsView extends ScreenAdapter {
         backTexture = new Texture("buttons/back_button.png");
         musicOnTexture = new Texture("buttons/on_button.png");
         musicOffTexture = new Texture("buttons/off_button.png");
+        bunnyTexture = new Texture("characters/bunny/bunny_select_character.png");
+        pigTexture = new Texture("characters/pig/pig_select_character.PNG");
         stage = new Stage(new ScreenViewport());//sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage);//sets input processor
         setBackButton();//creates a button
-        stage.addActor(getBackButton());//adds the button as an actor to the stage
         setMusicOnButton();
         setMusicOffButton();
-        //stage.addActor(rightSoundButton());
+        setBunnyButton();
+        setPigButton();
+        stage.addActor(getBackButton());//adds the button as an actor to the stage
         stage.addActor(musicOnButton);
         stage.addActor(musicOffButton);
+        stage.addActor(bunnyButton);
+        stage.addActor(pigButton);
+
     }
 
     //setter and getter for the buttons
     public void setBackButton() {
-        this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.5f-300, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getBackButton(){
@@ -57,7 +67,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOnButton() {
-        this.musicOnButton = makeButton(musicOnTexture,400,300, Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
+        this.musicOnButton = makeButton(musicOnTexture,400,300, Gdx.graphics.getWidth()*0.7f-200, Gdx.graphics.getHeight() * 0.6f);
     }
 
     public Button getMusicOnButton(){
@@ -72,26 +82,22 @@ public class SettingsView extends ScreenAdapter {
         return musicOffButton;
     }
 
-    public Button rightSoundButton(){
-        if (game.music.isPlaying()) {
-            return musicOnButton;
-        }
-        else {
-            return musicOffButton;
-        }
-    }
-/*
-    public Button otherSoundButton(){
-        if (rightSoundButton().equals(musicOnButton)) {
-            return musicOffButton;
-        }
-        else {
-            return musicOnButton;
-        }
+    //buttons for choosing character
+    public void setBunnyButton() {
+        this.bunnyButton = makeButton(bunnyTexture,200,400, -1000, -1000);
     }
 
- */
+    public Button getBunnyButton(){
+        return bunnyButton;
+    }
 
+    public void setPigButton() {
+        this.pigButton = makeButton(pigTexture,200,300, Gdx.graphics.getWidth()*0.75f-200, Gdx.graphics.getHeight() * 0.42f);
+    }
+
+    public Button getPigButton(){
+        return pigButton;
+    }
 
 
     //method for creating a button and adding the main controller as a listener
@@ -111,28 +117,10 @@ public class SettingsView extends ScreenAdapter {
 
     public void draw(){
         Gdx.input.setInputProcessor(stage);//sets input processor
-        //stage.addActor(rightSoundButton());
-        //otherSoundButton().remove();
-        //stage.addActor(getMusicOffButton());
-        //rightSoundButton().setVisible(true);
-        //otherSoundButton().setVisible(true);
-
-        /* stage.addActor(getMusicOffButton());
-        if (game.music.getVolume() > 0f){
-            getMusicOnButton().setVisible(true);
-            getMusicOffButton().setVisible(false);
-        }
-        else{
-            getMusicOffButton().setVisible(true);
-            getMusicOnButton().setVisible(false);
-        }
-
-         */
-        //getMusicOnButton().setVisible(true);
-        //getMusicOffButton().setVisible(false);
         game.batch.begin();
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//draws the sprite batch
         game.font.draw(game.batch, "Music: ", Gdx.graphics.getWidth() * .1f, Gdx.graphics.getHeight() * .68f);
+        game.font.draw(game.batch, "Character: ", Gdx.graphics.getWidth() * .1f, Gdx.graphics.getHeight() * .5f);
         game.font.getData().setScale(8, 8);
         game.font.setColor(Color.BLACK);
         game.batch.end();

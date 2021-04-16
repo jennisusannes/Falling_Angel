@@ -4,9 +4,11 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.model.Asset;
 
@@ -27,7 +29,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		return INSTANCE;
 	}
 
-	public boolean soundOn(){
+	public boolean soundOn(){ //burde denne være i controlleren??
 		if (music.isPlaying()){
 			return true;
 		}
@@ -35,6 +37,9 @@ public final class FallingAngel extends Game implements ApplicationListener {
 			return false;
 		}
 	}
+
+
+
 
 	@Override
 	public void create () {

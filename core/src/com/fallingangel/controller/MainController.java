@@ -3,6 +3,8 @@ package com.fallingangel.controller;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
@@ -21,28 +23,53 @@ public class MainController extends ClickListener {
 
     public FallingAngel game;
     //initializing the different views
-    public GameView gameView = new GameView();
-    public GameOverView gameOverView = new GameOverView();
-    public HelpView1 helpView1 = new HelpView1();
-    public HelpView2 helpView2 = new HelpView2();
-    public HelpView3 helpView3 = new HelpView3();
-    public AchievementsView achievementsView = new AchievementsView();
-    public HighScoreListView highscorelistView = new HighScoreListView();
-    public SettingsView settingsView = new SettingsView();
+    public GameView gameView;
+    public GameOverView gameOverView;
+    public HelpView1 helpView1;
+    public HelpView2 helpView2;
+    public HelpView3 helpView3;
+    public AchievementsView achievementsView;
+    public HighScoreListView highscorelistView;
+    public SettingsView settingsView;
     public MenuView menuView;
     public Asset asset;
     private Sound clickSound;
+    private Animation<TextureRegion> chosenCharacter;
     //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 
 
     public MainController() {
         this.game = FallingAngel.getInstance();
         clickSound = asset.clickSound;
+        setChosenCharacter("pig");
+        this.gameView = new GameView();
+        this.gameOverView = new GameOverView();
+        this.helpView1 = new HelpView1();
+        this.helpView2 = new HelpView2();
+        this.helpView3 = new HelpView3();
+        this.achievementsView = new AchievementsView();
+        this.highscorelistView = new HighScoreListView();
+        this.settingsView = new SettingsView();
+
     }
 
     public void setStartScreen(){ //setStartScreen method is called in the game class.
         this.menuView = new MenuView();
         game.setScreen(menuView);
+    }
+
+    public void setChosenCharacter(String string){ //setStartScreen method is called in the game class.
+        if (string.equals("pig")){
+            this.chosenCharacter = asset.pigAnimation;
+        }
+        else if (string.equals("bunny")){
+            this.chosenCharacter = asset.bunnyAnimation;
+        }
+        //else;
+    }
+
+    public Animation<TextureRegion> getChosenCharacter(){
+        return chosenCharacter;
     }
 
     /* fjerne disse?
@@ -68,9 +95,7 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             else;
-            //long id = clickSound.play(0.2f);
-            //clickSound.setPitch(id,2);
-            //clickSound.setLooping(id,false);
+
             game.setScreen(gameView);
             return true;
         }
@@ -182,17 +207,8 @@ public class MainController extends ClickListener {
         else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
             clickSound.play(0.0f);
             game.music.pause();
-            //settingsView.stage.clear();
-            //settingsView.stage.addActor(settingsView.getMusicOffButton());
-            //game.setScreen(settingsView);
-            //settingsView.getMusicOnButton().remove();
-            //settingsView.getMusicOnButton().setVisible(false);
-            //settingsView.getMusicOffButton().setVisible(true);
             settingsView.getMusicOnButton().setPosition(-1000,-1000);
             settingsView.getMusicOffButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
-            //settingsView.stage.addActor(settingsView.rightSoundButton());
-            //settingsView.getMusicOnButton().remove();
-            //settingsView.stage.draw();
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getMusicOffButton())){
@@ -201,11 +217,26 @@ public class MainController extends ClickListener {
             game.music.play();
             settingsView.getMusicOffButton().setPosition(-1000,-1000);
             settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
-            //settingsView.stage.clear();
-            //settingsView.stage.addActor(settingsView.getMusicOnButton());
-            //game.setScreen(settingsView);
-            //settingsView.getMusicOffButton().remove();
-            //settingsView.stage.draw();
+            return true;
+        }
+        else if (event.getListenerActor().equals(settingsView.getPigButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            settingsView.getPigButton().setPosition(-1000,-1000);
+            settingsView.getBunnyButton().setPosition(Gdx.graphics.getWidth()*0.75f-200, Gdx.graphics.getHeight() * 0.42f);
+            setChosenCharacter("bunny");
+            return true;
+        }
+        else if (event.getListenerActor().equals(settingsView.getBunnyButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            settingsView.getBunnyButton().setPosition(-1000,-1000);
+            settingsView.getPigButton().setPosition(Gdx.graphics.getWidth()*0.75f-200, Gdx.graphics.getHeight() * 0.42f);
+            setChosenCharacter("pig");
             return true;
         }
         else{
