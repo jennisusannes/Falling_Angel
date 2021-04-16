@@ -120,7 +120,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                     }
                 }
             }*/
-/*
+
             for (int j = 0; j < obstacles.size(); ++j) {
                 Entity obstacle = obstacles.get(j);
 
@@ -128,11 +128,12 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 BoundsComponent boundsComponent = boundsMapper.get(obstacle);
 
                 if (angelBounds.rectangle.overlaps(boundsComponent.rectangle)) {
-                    angelSystem.hitObstacle(angel);
+                    //angelSystem.hitObstacle(angel);
+                    //angelPos.pos.y = 0;
                         //listener.hitObs();
                         //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
                 }
-            }*/
+            }
 
 
             //if angel hits a moving obstacle (plane), the player dies
@@ -158,10 +159,10 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 if (boundsComponent.rectangle.overlaps(angelBounds.rectangle)) {
                     //engine.removeEntity(coin);
                     //listener.hitCoin();
-                    //angel.getComponent(AngelComponent.class).SCORE += CoinComponent.SCORE;
-                    angel.getComponent(AngelComponent.class).COINS_HIT += 1;
-                    //transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
-                    //transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
+                    angel.getComponent(AngelComponent.class).COINS_HIT += 20;
+                    transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
+                    transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
+                    //reposition(coin);
                 }
             }
 
@@ -193,5 +194,10 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
 
 
+    }
+
+    public void reposition(Entity entity){
+        entity.getComponent(TransformComponent.class).pos.x = 0;
+        entity.getComponent(TransformComponent.class).pos.y = 0;
     }
 }

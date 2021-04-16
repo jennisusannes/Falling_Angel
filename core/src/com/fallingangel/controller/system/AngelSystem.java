@@ -88,7 +88,7 @@ public class AngelSystem extends IteratingSystem {
         //TODO: implementere samme logikk som Brent Aureli i Supermario Bro's
 
         angelComponent.AIRTIME += deltaTime;
-        angelComponent.SCORE += deltaTime;
+        angelComponent.SCORE = angelComponent.AIRTIME + angelComponent.COINS_HIT;
 
     }
 
@@ -101,7 +101,8 @@ public class AngelSystem extends IteratingSystem {
         MovementComponent movement = movement_mapper.get(entity);
 
         //movement.move.set(0, 0);
-        state.set(AngelComponent.STATE_HIT); //the state is changed to hit
+        //state.set(AngelComponent.STATE_HIT); //the state is changed to hit
+        //entity.getComponent(TransformComponent.class).pos.y = 0;
     }
 
     public void hitPlane(Entity entity){

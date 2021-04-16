@@ -5,9 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.fallingangel.model.World;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.PlaneComponent;
 import com.fallingangel.model.component.TransformComponent;
@@ -16,8 +13,8 @@ import java.util.Random;
 
 public class PlaneSystem extends IteratingSystem{
 
-    private ComponentMapper<TransformComponent> tm;
-    private ComponentMapper<MovementComponent> mm;
+    private ComponentMapper<TransformComponent> transformMapper;
+    private ComponentMapper<MovementComponent> movementMapper;
     private ComponentMapper<PlaneComponent> planeMapper;
 
 
@@ -25,8 +22,8 @@ public class PlaneSystem extends IteratingSystem{
         super(Family.all(PlaneComponent.class, TransformComponent.class, MovementComponent.class).get());
 
 
-        tm = ComponentMapper.getFor(TransformComponent.class);
-        mm = ComponentMapper.getFor(MovementComponent.class);
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
+        movementMapper = ComponentMapper.getFor(MovementComponent.class);
         planeMapper = ComponentMapper.getFor(PlaneComponent.class);
 
 
@@ -34,8 +31,8 @@ public class PlaneSystem extends IteratingSystem{
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        TransformComponent transformComponent = tm.get(entity);
-        MovementComponent movementComponent = mm.get(entity);
+        TransformComponent transformComponent = transformMapper.get(entity);
+        MovementComponent movementComponent = movementMapper.get(entity);
         PlaneComponent planeComponent = planeMapper.get(entity);
 
 

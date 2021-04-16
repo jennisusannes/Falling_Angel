@@ -39,8 +39,8 @@ public class RenderingSystem extends IteratingSystem{
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
 
-    public static float coinsHit = 0;
-    public static float score = 0 + coinsHit;
+    //public static float coinsHit = 0;
+    public static float score = 0;
 
 
     //Instanciate a RenderingSystem
@@ -98,7 +98,7 @@ public class RenderingSystem extends IteratingSystem{
 
             //updates the score, which is saved to the angelComponent
             if (entity.getComponent(AngelComponent.class) != null){
-                coinsHit = entity.getComponent(AngelComponent.class).COINS_HIT;
+                score = entity.getComponent(AngelComponent.class).SCORE;
             }
 
 
@@ -138,7 +138,7 @@ public class RenderingSystem extends IteratingSystem{
         //print the updated score
         //nå oppdateres den på kollisjon med coin (men flere ganger) men ikke delta time
         BitmapFont font = new BitmapFont();
-        score += deltaTime;
+        //score += deltaTime;
         int scoreInt = (int) score;
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
