@@ -67,13 +67,13 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     public void addedToEngine(Engine engine) {
         this.engine = engine;
 
-        //gets all entities with a AngelComponent, BoundsComponent, TransformCompont and StateComponent
+        //gets all entities with a AngelComponent, BoundsComponent, TransformComponent and StateComponent
         angels = engine.getEntitiesFor(Family.all(AngelComponent.class, BoundsComponent.class, TransformComponent.class, StateComponent.class).get());
         //gets all entities with a CoinComponent and BoundsComponent
         coins = engine.getEntitiesFor(Family.all(CoinComponent.class, BoundsComponent.class).get());
         //gets all entities with a PlaneComponent and BoundsComponent
         planes = engine.getEntitiesFor(Family.all(PlaneComponent.class, BoundsComponent.class).get());
-        //gets all entities with a ObstacleComponent, BoundsComponent and TransformCompon
+        //gets all entities with a ObstacleComponent, BoundsComponent and TransformComponent
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
         //gets all entities with a PowerUpComponent and BoundsComponent
         powerups = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());

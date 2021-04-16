@@ -223,6 +223,7 @@ public class World {
         Random rand = new Random();
         textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
         transformComponent.pos.set(x, y, 1.0f);
+
         //boundsComponent.rectangle.width = obstacleComponent.WIDTH;
         //boundsComponent.rectangle.height = obstacleComponent.HEIGHT;
 
