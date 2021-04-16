@@ -43,8 +43,9 @@ public class World {
     public Entity plane;
     public Entity obstacle;
     private FallingAngel game;
-    private MainController controller;
-    private Asset asset;
+    private Animation<TextureRegion> character;
+    //private MainController controller;
+    //private Asset asset;
 
 
 
@@ -60,18 +61,22 @@ public class World {
     public World(Engine engine){
         this.engine = engine;
         this.game = FallingAngel.getInstance();
-        this.controller = game.mc;
+        this.character = game.getChosenCharacter();
     }
     //Mulig å bruke pooled engine også
 
+/*
+
+
     public Animation<TextureRegion> getCharacter(){
-        if (controller.getChosenCharacter().equals(null)){
-            return Asset.pigAnimation;
+        if (game.getChosenCharacter().equals(Asset.bunnyAnimation)){
+            return Asset.bunnyAnimation;
         }
         else {
-            return controller.getChosenCharacter();
+            return Asset.pigAnimation;
         }
     }
+ */
 
     public void create(){
         this.angel = createAngel();
@@ -161,7 +166,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
 
         //connect the animation from Assets to the an.comp. IntMap
-        animationComponent.animations.put(AngelComponent.STATE_FALL, controller.getChosenCharacter()); //Asset.pigAnimation controller.getChosenCharacter()
+        animationComponent.animations.put(AngelComponent.STATE_FALL, character) ; //game.getChosenCharacter()
         //animations for when a collision occurs and when the pig is dead
 
         //put the bounds as the angels width and height

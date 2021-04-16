@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class SettingsView extends ScreenAdapter {
 
@@ -54,7 +55,7 @@ public class SettingsView extends ScreenAdapter {
         stage.addActor(musicOffButton);
         stage.addActor(bunnyButton);
         stage.addActor(pigButton);
-
+        game.setChosenCharacter(Asset.pigAnimation);
     }
 
     //setter and getter for the buttons
@@ -67,7 +68,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOnButton() {
-        this.musicOnButton = makeButton(musicOnTexture,400,300, Gdx.graphics.getWidth()*0.7f-200, Gdx.graphics.getHeight() * 0.6f);
+        this.musicOnButton = makeButton(musicOnTexture,400,300, Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
     }
 
     public Button getMusicOnButton(){
@@ -92,7 +93,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setPigButton() {
-        this.pigButton = makeButton(pigTexture,200,300, Gdx.graphics.getWidth()*0.75f-200, Gdx.graphics.getHeight() * 0.42f);
+        this.pigButton = makeButton(pigTexture,200,300, Gdx.graphics.getWidth()*0.8f-200, Gdx.graphics.getHeight() * 0.42f);
     }
 
     public Button getPigButton(){

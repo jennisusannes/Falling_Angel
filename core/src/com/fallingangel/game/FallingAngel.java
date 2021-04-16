@@ -18,10 +18,13 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public BitmapFont font;
 	public Music music;
 	public MainController mc;
-	public Asset assets;
+	//public Asset assets;
 	private static final FallingAngel INSTANCE = new FallingAngel(); //initializing the game as INSTANCE
+	private Animation<TextureRegion> chosenCharacter;
 
 	private FallingAngel(){ //private constructor for the game
+		//setChosenCharacter(Asset.pigAnimation);
+
 	}
 
 	//getter method for the singleton object of FallingAngel
@@ -39,6 +42,24 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	}
 
 
+	public void setChosenCharacter(Animation<TextureRegion> animation){ //setStartScreen method is called in the game class.
+		this.chosenCharacter = animation;
+		/*
+		if (animation.equals("pig")){
+			this.chosenCharacter = Asset.pigAnimation;
+		}
+		else if (string.equals("bunny")){
+			this.chosenCharacter = Asset.bunnyAnimation;
+		}
+		else;
+
+		 */
+	}
+
+	public Animation<TextureRegion> getChosenCharacter(){
+		return chosenCharacter;
+	}
+
 
 
 	@Override
@@ -46,10 +67,10 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		batch = new SpriteBatch(); //creates a new spritebatch
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller
-		assets.load();
+		Asset.load();
 
 
-		music = assets.backgroundMusic;
+		music = Asset.backgroundMusic;
 		music.setVolume(0.02f); //sets the volume of the background music
 		music.setLooping(true); //the backgrounds music will continuously loop
 		music.play(); //plays the music

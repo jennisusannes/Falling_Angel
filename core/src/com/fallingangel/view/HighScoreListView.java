@@ -36,7 +36,7 @@ public class HighScoreListView extends ScreenAdapter {
 
     //setter and getter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(asset.backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(Asset.backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getBackButton(){

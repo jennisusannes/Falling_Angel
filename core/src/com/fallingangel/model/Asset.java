@@ -86,7 +86,7 @@ public class Asset {
         //BUNNY
         bunnySpriteSheet = new Texture("characters/bunny/bunny_animation.png");
         Array<TextureRegion> bunnyFrames = makeFrames(bunnySpriteSheet, 3, 2);
-        bunnyAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
+        bunnyAnimation = new Animation<TextureRegion>(0.2f, bunnyFrames.get(0), bunnyFrames.get(1), bunnyFrames.get(2), bunnyFrames.get(3), bunnyFrames.get(4), bunnyFrames.get(5), bunnyFrames.get(4), bunnyFrames.get(3), bunnyFrames.get(2), bunnyFrames.get(1));
 
 
         //COIN
