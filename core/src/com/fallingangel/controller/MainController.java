@@ -1,5 +1,6 @@
 package com.fallingangel.controller;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -21,7 +22,7 @@ public class MainController extends ClickListener {
 
     public FallingAngel game;
     //initializing the different views
-    public GameView gameView = new GameView();
+    //public GameView gameView = new GameView();
     public GameActionsController gameActionsController;
     public GameOverView gameOverView = new GameOverView();
     public HelpView1 helpView1 = new HelpView1();
@@ -72,7 +73,9 @@ public class MainController extends ClickListener {
             //long id = clickSound.play(0.2f);
             //clickSound.setPitch(id,2);
             //clickSound.setLooping(id,false);
-            game.setScreen(gameView);
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
+            //game.setScreen(gameView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
@@ -80,7 +83,9 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             else;
-            game.setScreen(gameView);
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
+            //game.setScreen(gameView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getQuestionButton())){ //fjerne denne

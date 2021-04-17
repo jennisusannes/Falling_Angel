@@ -46,12 +46,12 @@ import com.fallingangel.model.component.TransformComponent;
 
 public class GameView extends ScreenAdapter {
     //This view presents playing mode
-
+    /*
     static final int GAME_READY = 0;
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
-
+    */
 
     public OrthographicCamera gameCam;
     private Viewport viewPort;
@@ -59,37 +59,37 @@ public class GameView extends ScreenAdapter {
 
 
     public FallingAngel game = FallingAngel.getInstance();
-    private World world;
+    /*private World world;
     private Vector3 touchPoint;
     private Rectangle pauseBounds;
     private Rectangle resumeBounds;
     private Rectangle quitBounds;
-
-
+    */
+    /*
     private int lastScore = 0;
     private String scoreString;
-
+    */
 
     //Might be used for pause button or other buttons
     private Stage stage;
     private Stage settingsStage;
 
     //ASHLEY
-    public Engine engine;
+    //public Engine engine;
 
     //Might need this for multiplayer
-    private ImmutableArray angels;
+    //private ImmutableArray angels;
 
     //TODO: This is going to be used if we implement sound-effects and music
     //CollisionListener collisionListener;
-    private int state;
+    //private int state;
 
 
     public GameView() {
         super();
         //this.game  = FallingAngel.getInstance();
         Asset.load();
-        state = GAME_READY;
+        //state = GAME_READY;
 
 
         //La stå:
@@ -102,20 +102,21 @@ public class GameView extends ScreenAdapter {
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
         gameCam.update();
 
-        this.touchPoint = new Vector3();
+        //this.touchPoint = new Vector3();
 
 
 
         //Initializes new world, engine, stage and settingsStage.
         //Uncertain whether we are going to use stage.
-        this.engine = new Engine();
-        this.world = new World(engine);
+        //this.engine = new Engine();
+        //this.world = new World(engine);
         this.stage = new Stage();
         this.settingsStage = new Stage();
 
 
         //Gets all the entities for the angel and puts in an array.
         //Might use this later.
+        /*
         this.angels = engine.getEntities();
 
         //Adds all the systems to the engine
@@ -131,15 +132,21 @@ public class GameView extends ScreenAdapter {
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new CoinSystem());
 
+         */
+
 
         //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.
-        engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
+
+        // Denne fikser bakgrunnen feil? fikse som de andre
+        //TODO: fikse bakgrunn
+
+        //engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
 
         //Creates world
-        world.create();
+        //world.create();
 
     }
-
+    /*
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -167,12 +174,14 @@ public class GameView extends ScreenAdapter {
         }
 
     //Ready to start a new game
-    private void updateReady () {
+    private void updateReady() {
         if (Gdx.input.justTouched()) {
             state = GAME_RUNNING;
             resumeSystem();
         }
     }
+
+
 
     //Updates on what state the game is in
     //TODO: må legge inn metoder for hva som skjer mens spillet kjører
@@ -229,7 +238,7 @@ public class GameView extends ScreenAdapter {
     private void updateGameOver() {
         //TODO: må sende spilleren til gameover-view
     }
-
+    */
     public void drawUI () {
         //Uncertain if we'll use cam.
         /*
@@ -238,7 +247,8 @@ public class GameView extends ScreenAdapter {
         */
 
         game.batch.begin();
-
+        //TODO: hent ut riktig state fra gameActionsController
+        /*
         switch (state) {
             case GAME_READY:
                 presentReady();
@@ -253,10 +263,14 @@ public class GameView extends ScreenAdapter {
                 presentGameOver();
                 break;
         }
+
+         */
         game.batch.end();
 
     }
+    /*
     //In the present-methods, all the GUI will be drawn/ shown for the game-view
+
     public void presentReady() {
         //TODO: create buttons and connect to bounds, and add text for "Ready". See superjumper for inspo .
         //TODO: if we have enough time: countdown from 3 before start
@@ -300,15 +314,16 @@ public class GameView extends ScreenAdapter {
         engine.getSystem(AnimationSystem.class).setProcessing(true);
         engine.getSystem(CollisionSystem.class).setProcessing(true);
     }
-
+    */
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //TODO: henger sammen med å fikse bakgrunnen
         update(delta);
         drawUI();
     }
-
+    /*
     //buildt-in method for pausing game.
     @Override
     public void pause() {
@@ -317,4 +332,5 @@ public class GameView extends ScreenAdapter {
             pauseSystem();
         }
     }
+     */
 }
