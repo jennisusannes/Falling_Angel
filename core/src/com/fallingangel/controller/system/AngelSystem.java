@@ -16,8 +16,6 @@ import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 import com.fallingangel.view.GameView;
 
-//GJLR OM TIL SAMME SPEED SOM OBSTACLES PÅ HITOBSTACLE
-
 
 public class AngelSystem extends IteratingSystem {
     //IteratingSystem is s simple EntitySystem that iterates over each entity and calls processEntity() for each entity every time the EntitySystem is updated.
