@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.AnimationSystem;
@@ -260,4 +261,18 @@ public class GameActionsController extends ClickListener {
             pauseSystem();
         }
     }
+
+    public boolean handle(Event event) { //the Main controller listenens to the buttons on the different views and changes bewteen the different views
+        if (event.getListenerActor().equals(gameView.getPauseButton())) {
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+
+            game.setScreen(pauseView); //må lege et pauseView
+            return true;
+        }
+        else {
+            return false;
+        }
 }

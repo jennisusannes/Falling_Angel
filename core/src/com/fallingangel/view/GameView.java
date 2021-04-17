@@ -16,13 +16,19 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Input.Keys;
 
+import com.fallingangel.controller.GameActionsController;
+import com.fallingangel.controller.MainController;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BackgroundSystem;
 import com.fallingangel.controller.system.BoundsSystem;
@@ -45,6 +51,17 @@ import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
 public class GameView extends ScreenAdapter {
+
+    private FallingAngel game;
+    private Texture background;
+    private Texture pauseTexture;
+    private Button pauseButton;
+    private GameActionsController gameController;
+    private MainController mainController;
+    private Stage stage;
+    private Stage settingsStage;
+
+
     //This view presents playing mode
     /*
     static final int GAME_READY = 0;
@@ -53,12 +70,13 @@ public class GameView extends ScreenAdapter {
     static final int GAME_OVER = 3;
     */
 
-    public OrthographicCamera gameCam;
-    private Viewport viewPort;
+    //public OrthographicCamera gameCam;
+    //private Viewport viewPort;
+
     //Viewport manages a Camera's viewportWidth and viewportHeight, ensures that the game will fit to *all* devices
 
 
-    public FallingAngel game = FallingAngel.getInstance();
+    //public FallingAngel game = FallingAngel.getInstance();
     /*private World world;
     private Vector3 touchPoint;
     private Rectangle pauseBounds;
@@ -71,8 +89,6 @@ public class GameView extends ScreenAdapter {
     */
 
     //Might be used for pause button or other buttons
-    private Stage stage;
-    private Stage settingsStage;
 
     //ASHLEY
     //public Engine engine;
@@ -89,18 +105,28 @@ public class GameView extends ScreenAdapter {
         super();
         //this.game  = FallingAngel.getInstance();
         Asset.load();
+        this.game = FallingAngel.getInstance();
+        this.gameController = mainController.gameActionsController;
+        background = new Texture("backgrounds/level_hell_score_background.png");
+        pauseTexture = new Texture("buttons/pause_button.PNG");
+        Gdx.input.setInputProcessor(stage);
+        this.stage = new Stage();
+        this.settingsStage = new Stage(); //hva gjør denne??
         //state = GAME_READY;
 
 
         //La stå:
         //Camera (and viewport of the screen)
 
+        /*
         this.gameCam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         //this.viewPort = new StretchViewport(World.VP_WIDTH, World.VP_HEIGHT);
         this.viewPort = new ScreenViewport();
         viewPort.apply();
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
         gameCam.update();
+
+         */
 
         //this.touchPoint = new Vector3();
 
@@ -110,8 +136,6 @@ public class GameView extends ScreenAdapter {
         //Uncertain whether we are going to use stage.
         //this.engine = new Engine();
         //this.world = new World(engine);
-        this.stage = new Stage();
-        this.settingsStage = new Stage();
 
 
         //Gets all the entities for the angel and puts in an array.
@@ -145,6 +169,29 @@ public class GameView extends ScreenAdapter {
         //Creates world
         //world.create();
 
+    }
+    //setter and getter for the back button
+    public void setBackButton() {
+        this.pauseButton = makeButton(pauseTexture,300,300, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight() * 0.9f);
+    }
+
+    public Button getPauseButton(){
+        return pauseButton;
+    }
+
+    //method for creating a button and adding the main controller as a listener
+    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        button.setSize(width, height);
+        button.setPosition(xPos, yPos);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
+                gameController = mainController.gameActionsController;
+                gameController.handle(inputEvent);
+            }
+        });
+        return button;
     }
     /*
     //Calls on different functions depending on which state the game is in
@@ -239,7 +286,7 @@ public class GameView extends ScreenAdapter {
         //TODO: må sende spilleren til gameover-view
     }
     */
-    public void drawUI () {
+    public void draw () {
         //Uncertain if we'll use cam.
         /*
         gameCam.update();
@@ -247,6 +294,7 @@ public class GameView extends ScreenAdapter {
         */
 
         game.batch.begin();
+        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         //TODO: hent ut riktig state fra gameActionsController
         /*
         switch (state) {
@@ -315,13 +363,17 @@ public class GameView extends ScreenAdapter {
         engine.getSystem(CollisionSystem.class).setProcessing(true);
     }
     */
+    public void update(float dt) {
+
+    }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         //TODO: henger sammen med å fikse bakgrunnen
         update(delta);
-        drawUI();
+        draw();
+        stage.act(delta);
     }
     /*
     //buildt-in method for pausing game.
