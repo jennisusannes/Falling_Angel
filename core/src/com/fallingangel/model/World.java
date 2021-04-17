@@ -173,8 +173,8 @@ public class World {
         //animations for when a collision occurs and when the pig is dead
 
         //put the bounds as the angels width and height
-        boundsComponent.rectangle.width = AngelComponent.WIDTH;
-        boundsComponent.rectangle.height = AngelComponent.HEIGHT;
+       // boundsComponent.rectangle.width = AngelComponent.WIDTH;
+       // boundsComponent.rectangle.height = AngelComponent.HEIGHT;
 
         //connect the comp. to the entity
         angelEntity.add(angelComponent);
