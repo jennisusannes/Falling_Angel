@@ -30,14 +30,12 @@ public class MovementSystem extends IteratingSystem {
         TransformComponent transformComponent = transformMapper.get(entity);
         MovementComponent movementComponent = movementMapper.get(entity);;
 
-        /*tmp.set(movementComponent.accel).scl(deltaTime);
-        movementComponent.move.add(tmp);*/
 
-        //Scales the move-vector by deltaTime (dt is the scalar) and adds the coordinates to that the position changes
+        //scales the move-vector by deltaTime (dt is the scalar) and adds the coordinates to that the position changes
         tmp.set(movementComponent.move);
         transformComponent.pos.add(tmp.x, tmp.y, 0.0f);
 
-        //transformComponent.pos.add(tmp.x, tmp.y, 0.0f);
+
 
     }
 

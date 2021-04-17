@@ -41,7 +41,7 @@ public class DroneSystem extends IteratingSystem{
 
         //reposition when it leaves the screen
         if (transformComponent.pos.y > Gdx.graphics.getHeight()){
-            transformComponent.pos.y = - Gdx.graphics.getHeight() *2;
+            transformComponent.pos.y = - Gdx.graphics.getHeight() * 2;
         }
 
         //change direction when it hits the edges of the screen
