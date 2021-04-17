@@ -36,6 +36,7 @@ import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
+import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BackgroundComponent;
 import com.fallingangel.model.component.MovementComponent;

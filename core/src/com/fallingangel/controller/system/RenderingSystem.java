@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
@@ -42,6 +43,8 @@ public class RenderingSystem extends IteratingSystem{
     //public static float coinsHit = 0;
     public static float score = 0;
 
+
+    public FallingAngel game = FallingAngel.getInstance();
 
     //Instanciate a RenderingSystem
     public RenderingSystem(SpriteBatch sb) {
@@ -140,6 +143,7 @@ public class RenderingSystem extends IteratingSystem{
         BitmapFont font = new BitmapFont();
         //score += deltaTime;
         int scoreInt = (int) score;
+        this.game.FBI.setHighScore("Jy48548u9", "Jenni", "09.18.20", (int)AngelComponent.SCORE);
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
         font.draw(sb, scoreString, 40,Gdx.graphics.getHeight() - 40);

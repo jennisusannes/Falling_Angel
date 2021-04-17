@@ -1,4 +1,4 @@
-package com.fallingangel.game;
+package com.fallingangel.backend;
 
 public class User {
 

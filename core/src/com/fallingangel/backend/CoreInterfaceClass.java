@@ -1,4 +1,4 @@
-package com.fallingangel.game;
+package com.fallingangel.backend;
 
 public class CoreInterfaceClass implements FireBaseInterface{
     @Override
@@ -20,23 +20,10 @@ public class CoreInterfaceClass implements FireBaseInterface{
     public void addFriend(String UID, String friendUsername) {
 
     }
-    /*@Override
-    public void SomeFunction() {
-        System.out.println("blablablaa");
-    }
 
     @Override
-    public void FirstFireBaseTest() {
+    public void connectToRoom(String roomName) {
 
     }
 
-    @Override
-    public void SetOnValueChangedListener() {
-
-    }
-
-    @Override
-    public void SetValueInDb(String target, String value) {
-
-    }*/
 }

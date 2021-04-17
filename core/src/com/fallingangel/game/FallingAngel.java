@@ -7,13 +7,14 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import com.fallingangel.backend.FireBaseInterface;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.model.Asset;
 
 public final class FallingAngel extends Game implements ApplicationListener {
 
 
-	public FireBaseInterface FBI;
+	public com.fallingangel.backend.FireBaseInterface FBI;
 	//private FirebaseAuth mAuth;
 	public SpriteBatch batch;
 	public BitmapFont font;
@@ -22,7 +23,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	private static FallingAngel INSTANCE;
 	public Asset assets;
 
-	private FallingAngel(FireBaseInterface fireBaseInterface){
+	private FallingAngel(com.fallingangel.backend.FireBaseInterface fireBaseInterface){
 		FBI = fireBaseInterface;
 	}
 
@@ -63,7 +64,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	@Override
 	public void create () {
 		FBI.createUser("TestUserID", "test@user.no", "usernametest", "user123");
-		FBI.addFriend("id","usernametest" );
+		//FBI.addFriend("id","usernametest" );
 		batch = new SpriteBatch(); //creates a new spritebatch
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller

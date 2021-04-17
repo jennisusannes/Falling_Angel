@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;

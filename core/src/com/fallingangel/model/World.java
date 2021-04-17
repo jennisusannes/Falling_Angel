@@ -181,7 +181,7 @@ public class World {
         angelEntity.add(animationComponent);
         angelEntity.add(boundsComponent);
         angelEntity.add(movementComponent);
-        angelEntity.add(transformComponent);
+        angelEntity.add(transformComponent); //(x,y)-coordinate
         angelEntity.add(stateComponent);
         angelEntity.add(textureComponent);
 

@@ -26,7 +26,7 @@ public class GameOverView extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc;//sets the controller as the main controller
-        background = new Texture("backgrounds/winner_player1_background.PNG");
+//        background = new Texture("backgrounds/winner_player1_background.PNG");
         backTexture = new Texture("buttons/back_button.png");
 
         stage = new Stage(new ScreenViewport());//sets the stage as a new stage and a new viewport
