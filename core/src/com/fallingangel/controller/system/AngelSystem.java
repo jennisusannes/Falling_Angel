@@ -25,7 +25,6 @@ public class AngelSystem extends IteratingSystem {
     private static final Family family = Family.all(AngelComponent.class, MovementComponent.class, StateComponent.class, TransformComponent.class).get();
     //Family is an ashley class and represents a group of components.
     //used to describe what entity objects an entitysystem should process
-    //the angel, movement, state and trans comp are now in the system
 
     private World world;
 
@@ -35,6 +34,8 @@ public class AngelSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transform_mapper;
 
     private float accelX = 0.0f;
+
+    private float timeCount = 0;
 
     public AngelSystem(com.fallingangel.model.World world){
         super(family); //calls the constructor of the IteratingSystem. Creates an entity system that iterates over each entity and calls processEntity()
@@ -68,9 +69,9 @@ public class AngelSystem extends IteratingSystem {
         TransformComponent transformComponent = transform_mapper.get(entity);
 
         //if the angel has hit an obstacle/plane, the game is over and the state of the world changes.
-        /*if (stateComponent.state == angelComponent.STATE_HIT){
+        if (stateComponent.state == angelComponent.STATE_HIT){
             world.state = world.WORLD_STATE_GAME_OVER;
-        }*/
+        }
 
         movementComponent.move.x = - accelX;
 
@@ -85,6 +86,9 @@ public class AngelSystem extends IteratingSystem {
         //movementComponent.move.x = - accelX;
         //TODO: implementere samme logikk som Brent Aureli i Supermario Bro's
 
+        angelComponent.AIRTIME += deltaTime;
+        angelComponent.SCORE = angelComponent.AIRTIME + angelComponent.COINS_HIT;
+
     }
 
     //DISSE STATESENE MÅ ENDRES TILBAKE PÅ ET TIDSPUNKT
@@ -93,19 +97,24 @@ public class AngelSystem extends IteratingSystem {
         if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
 
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
-        MovementComponent movement = movement_mapper.get(entity);
+       // MovementComponent movement = movement_mapper.get(entity);
 
-        //movement.move.set(0, 0);
+       // movement.move.set(0, 0);
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
+
+      /* if (entity.getComponent(TransformComponent.class).pos.y > Gdx.graphics.getHeight()/2) {
+            entity.getComponent(TransformComponent.class).pos.y = Gdx.graphics.getHeight()/2;
+        } else {
+            entity.getComponent(TransformComponent.class).pos.y = Gdx.graphics.getHeight()*5/6;
+        }*/
+
     }
 
     public void hitPlane(Entity entity){
         if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
 
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
-        MovementComponent movement = movement_mapper.get(entity);
 
-        movement.move.set(0, 0); //it can't keep falling down in the y-direction
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
     }
 
