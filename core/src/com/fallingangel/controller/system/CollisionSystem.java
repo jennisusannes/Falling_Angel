@@ -9,6 +9,8 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
+import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 
 import com.fallingangel.model.component.AngelComponent;
@@ -86,13 +88,22 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         TransformComponent angelPos = transformMapper.get(angel);
 
 
+
         //if angel hits an obstacle, the player dies
         for (int j = 0; j < obstacles.size(); ++j) {
             Entity obstacle = obstacles.get(j);
 
             BoundsComponent obsBounds = boundsMapper.get(obstacle);
 
-               if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
+            Rectangle rec = new Rectangle();
+
+            rec.x = (int) obsBounds.rectangle.x;
+            rec.y = (int) (obsBounds.rectangle.y + Asset.balloons.first().getRegionHeight() * 1/2);
+            rec.width = (int) obsBounds.rectangle.width;
+            rec.height = (int) obsBounds.rectangle.height * 1/2;
+
+
+               if (rec.overlaps(angelBounds.rectangle)) {
                    angelSystem.hitObstacle(angel);
                     //listener.hitObs();
                 }
