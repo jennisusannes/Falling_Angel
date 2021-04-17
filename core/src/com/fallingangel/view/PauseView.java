@@ -67,6 +67,8 @@ public class PauseView extends ScreenAdapter {
         stage.draw(); //draws the stage
     }
 
+
+
     public void update(float dt) {
 
     }

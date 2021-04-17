@@ -9,6 +9,8 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
+import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 
 import com.fallingangel.model.component.AngelComponent;
@@ -17,12 +19,10 @@ import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
-import com.fallingangel.model.component.PlaneComponent;
+import com.fallingangel.model.component.DroneComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.PowerUpComponent;
-
-import sun.corba.EncapsInputStreamFactory;
 
 public class CollisionSystem extends EntitySystem { //EntitySystem: abstact class for processing sets of Entity objects
     //component mappers to get components
@@ -53,7 +53,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     // om vi skal ha listener (lyd): public CollisionSystem(World world, CollisionListener listener)
     public CollisionSystem(World world) {
         this.world = world;
-     //   this.listener = listener;
+        //   this.listener = listener;
 
         //creates our componentMappers
         boundsMapper = ComponentMapper.getFor(BoundsComponent.class);
@@ -67,15 +67,11 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     public void addedToEngine(Engine engine) {
         this.engine = engine;
 
-        //gets all entities with a AngelComponent, BoundsComponent, TransformComponent and StateComponent
+        //returns a collection of the entities that contain the components in the family
         angels = engine.getEntitiesFor(Family.all(AngelComponent.class, BoundsComponent.class, TransformComponent.class, StateComponent.class).get());
-        //gets all entities with a CoinComponent and BoundsComponent
         coins = engine.getEntitiesFor(Family.all(CoinComponent.class, BoundsComponent.class).get());
-        //gets all entities with a PlaneComponent and BoundsComponent
-        planes = engine.getEntitiesFor(Family.all(PlaneComponent.class, BoundsComponent.class).get());
-        //gets all entities with a ObstacleComponent, BoundsComponent and TransformComponent
+        planes = engine.getEntitiesFor(Family.all(DroneComponent.class, BoundsComponent.class).get());
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
-        //gets all entities with a PowerUpComponent and BoundsComponent
         powerups = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());
 
     }
@@ -91,142 +87,69 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         BoundsComponent angelBounds = boundsMapper.get(angel);
         TransformComponent angelPos = transformMapper.get(angel);
 
-        /*for (int i = 0; i < angels.size(); ++i) {
-          //  Entity angel = angels.get(i);
-
-           /* StateComponent angelState = stateMapper.get(angel);
-
-            if (angelState.get() == AngelComponent.STATE_HIT) {
-                continue;
-
-            }
 
 
-            MovementComponent angelMov = movementMapper.get(angel);
-            BoundsComponent angelBounds = boundsMapper.get(angel);
-            TransformComponent angelPos = transformMapper.get(angel);
-        */
+        //if angel hits an obstacle, the player dies
+        for (int j = 0; j < obstacles.size(); ++j) {
+            Entity obstacle = obstacles.get(j);
 
-          /*  if (angelMov.move.x != 0.0f) { //?? funker dette?
-                TransformComponent angelPos = transformMapper.get(angel);
+            BoundsComponent obsBounds = boundsMapper.get(obstacle);
 
-                for (int j = 0; j < obstacles.size(); ++j) {
-                    Entity obstacle = obstacles.get(j);
+            Rectangle rec = new Rectangle();
 
-                    TransformComponent obsPos = transformMapper.get(obstacle);
-
-                    //checks if angelBounds and obsBounds are overlapping if angel position is higher than or the same as obstacle position
-                    if (angelPos.pos.y >= obsPos.pos.y) {
-                        BoundsComponent obsBounds = boundsMapper.get(obstacle);
-
-                        if (angelBounds.rectangle.overlaps(obsBounds.rectangle)) {
-                            angelSystem.hitObstacle(angel);
-                            //listener.hitObs();
-                            //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
-                        }
-
-                    }
-                }
-            }*/
-
-           for (int j = 0; j < obstacles.size(); ++j) {
-                Entity obstacle = obstacles.get(j);
-
-                TransformComponent obsPos = transformMapper.get(obstacle);
-              //  BoundsComponent obsBounds = boundsMapper.get(obstacle);
-                TextureComponent obsTexture = textureMapper.get(obstacle);
+            rec.x = (int) obsBounds.rectangle.x;
+            rec.y = (int) (obsBounds.rectangle.y + Asset.balloons.first().getRegionHeight() * 1/2);
+            rec.width = (int) obsBounds.rectangle.width;
+            rec.height = (int) obsBounds.rectangle.height * 1/2;
 
 
-                /*if (angelPos.pos.y >= obsPos.pos.y + obsTexture.textureRegion.getRegionHeight()/2) {
-                    BoundsComponent obsBounds = boundsMapper.get(obstacle);
-                    if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                        angelSystem.hitObstacle(angel);
-
-                }*/
-
-               BoundsComponent obsBounds = boundsMapper.get(obstacle);
-
-               if (obsBounds.rectangle.overlaps(angelBounds.rectangle)) {
+               if (rec.overlaps(angelBounds.rectangle)) {
                    angelSystem.hitObstacle(angel);
-
-                    //angelPos.pos.y = 0;
                     //listener.hitObs();
-                    //break; skal den egentlig breake her eller bare kalle på hitObstacle som fører til GameOver
                 }
-            }
-
-
-            //if angel hits a moving obstacle (plane), the player dies
-            for (int j = 0; j < planes.size(); ++j) {
-                Entity plane = planes.get(j);
-
-                BoundsComponent planeBounds = boundsMapper.get(plane);
-
-                if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                    angelSystem.hitPlane(angel);
-                   // listener.hitObs();
-                }
-            }
-
-            //if angel hits a coin, the player gets points added to their score and the coin disappears
-            for (int j = 0; j < coins.size(); ++j) {
-                Entity coin = coins.get(j);
-
-                BoundsComponent coinBounds = boundsMapper.get(coin);
-                TransformComponent coinPos = transformMapper.get(coin);
-                TextureComponent textureComponent = textureMapper.get(coin);
-
-                if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                    //engine.removeEntity(coin);
-                    //listener.hitCoin();
-                    int randomNumber = rand.nextInt(10);
-                    int low = - Gdx.graphics.getHeight() - randomNumber;
-                    int high = 0;
-                    int area = rand.nextInt(high-low) + low;
-
-                    angel.getComponent(AngelComponent.class).COINS_HIT += 20;
-                    coinPos.pos.y = area;
-                    coinPos.pos.x = rand.nextInt(Gdx.graphics.getWidth());
-
-
-                    //transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
-                    //transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
-                    //reposition(coin);
-                }
-            }
-
-            //when player hits a powerup, the powerup disappears and the player gets an advantage
-            for (int j = 0; j < powerups.size(); ++j) {
-                Entity powerup = powerups.get(j);
-
-                BoundsComponent powerupBounds = boundsMapper.get(powerup);
-
-                if (powerupBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                    engine.removeEntity(powerup);
-                    angelSystem.hitPowerUp(angel); //hitPowerup må lages i AngelSystem
-                    //listener.hitPU();
-                }
-            }
-
-
-
-            //så kanskje noe sånt når man treffer et hinder:
-              /*  if AngelComponent.LIFE > 0 {
-                    AngelComponent.LIFE +- 1;
-                } else {
-                    world.state = WORLD_STATE_GAME_OVER; ?
-                }
-                 */
-
 
         }
 
 
+        //if angel hits a drone, the player dies
+        for (int j = 0; j < planes.size(); ++j) {
+            Entity plane = planes.get(j);
 
-    //}
+            BoundsComponent planeBounds = boundsMapper.get(plane);
 
-    public void reposition(Entity entity){
-        entity.getComponent(TransformComponent.class).pos.x = 0;
-        entity.getComponent(TransformComponent.class).pos.y = 0;
+            if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                angelSystem.hitPlane(angel);
+                // listener.hitObs();
+            }
+        }
+
+        //if angel hits a coin, the player gets points added to their score and the coin disappears
+        for (int j = 0; j < coins.size(); ++j) {
+            Entity coin = coins.get(j);
+
+            BoundsComponent coinBounds = boundsMapper.get(coin);
+            TransformComponent coinPos = transformMapper.get(coin);
+            TextureComponent textureComponent = textureMapper.get(coin);
+
+            if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                coinPos.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
+                coinPos.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
+            }
+        }
+
+        //when player hits a powerup, the powerup disappears and the player gets an advantage
+        for (int j = 0; j < powerups.size(); ++j) {
+            Entity powerup = powerups.get(j);
+
+            BoundsComponent powerupBounds = boundsMapper.get(powerup);
+
+            if (powerupBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                engine.removeEntity(powerup);
+                angelSystem.hitPowerUp(angel);
+                //listener.hitPU();
+            }
+        }
+        }
+
     }
-}
+

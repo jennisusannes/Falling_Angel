@@ -22,9 +22,7 @@ public class CoinSystem extends IteratingSystem {
     private static final Family family = Family.all(CoinComponent.class, TextureComponent.class, TransformComponent.class, AnimationComponent.class, StateComponent.class).get();
 
     private Engine engine;
-    private ComponentMapper<TransformComponent> tm;
-    private ComponentMapper<MovementComponent> mm;
-    private ComponentMapper<ObstacleComponent> om;
+    private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<TextureComponent> textureMapper;
 
     public static Random rand = new Random();
@@ -32,11 +30,8 @@ public class CoinSystem extends IteratingSystem {
     public CoinSystem () {
         super(family);
 
-        tm = ComponentMapper.getFor(TransformComponent.class);
-        mm = ComponentMapper.getFor(MovementComponent.class);
-        om = ComponentMapper.getFor(ObstacleComponent.class);
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
-
     }
 
     @Override
@@ -47,12 +42,12 @@ public class CoinSystem extends IteratingSystem {
 
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        MovementComponent movementComponent = mm.get(entity);
-        TransformComponent transformComponent = tm.get(entity);
+        TransformComponent transformComponent = transformMapper.get(entity);
         TextureComponent textureComponent = textureMapper.get(entity);
 
         transformComponent.pos.y += 4.0f;
 
+        //reposition if the coin has left the screen
         if (transformComponent.pos.y > Gdx.graphics.getHeight()){
             transformComponent.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
             transformComponent.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());

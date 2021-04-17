@@ -1,6 +1,8 @@
 package com.fallingangel.model;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,28 +10,20 @@ import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
-
     //BACKGROUNDS:
 
     //play-view background
     public static TextureRegion backgroundTextureRegion;
 
-
     //PIG
-    //Animation for pig:
     public static Animation<TextureRegion> pigAnimation;
-    //Pig-frames:
-    public static String pigFrame1 = "characters/pig/pig_animation_1.PNG";
-    public static String pigFrame2 = "characters/pig/pig_animation_2.PNG";
-    public static String pigFrame3 = "characters/pig/pig_animation_3.PNG";
-    public static String pigFrame4 = "characters/pig/pig_animation_4.PNG";
-    public static String pigFrame5 = "characters/pig/pig_animation_5.PNG";
-    public static String pigFrame6 = "characters/pig/pig_animation_6.PNG";
-    //public static String pigSpriteSheet = "characters/pig/pig_animation.png";
     public static Texture pigSpriteSheet;
 
+    //BUNNY
+    public static Animation<TextureRegion> bunnyAnimation;
+    public static Texture bunnySpriteSheet;
 
-    //COIN
+    //POWER-UPS and COIN
     //Animation for coin:
     public static Animation<TextureRegion> coinAnimation;
     public static Texture coinTexture;
@@ -42,14 +36,24 @@ public class Asset {
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
     public static Array<TextureRegion> balloons = new Array<TextureRegion>();
+    //Drone
+    public static String drone = "obstacles/drone.png";
+    public static TextureRegion droneTexture;
 
-    //Plane
-    public static String plane = "obstacles/plane.png";
-    public static TextureRegion planeTexture;
+
+    //MUSIC AND SOUNDS
+    public static Music backgroundMusic;
+    public static Sound clickSound;
+
+
+    public static Texture singlePlayerTexture;
+    public static Texture multiPlayerTexture;
+    public static Texture achievementsTexture;
+    public static Texture highscoreListTexture;
+    public static Texture settingsTexture;
+    public static Texture backTexture;
 /*
-
-
-    //PNGs for select character siden:
+    //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
 
     //Devil obstacles:
@@ -61,29 +65,12 @@ public class Asset {
     //Cloud-obstacle:
     public static String cloud = "obstacles/cloud.png";
 
-
-
-
     //power-ups and benefits:
     public static String coin = "coin.png";
     //public static String powerUp = "[path]";
 
-
-    //importerer assetManager for å håndtere innlasting av filer.
-    private static AssetManager assetManager = new AssetManager();
-
-
-
-
-    public Asset(){
-        //this.assetManager = new AssetManager();
-    }
-
-
-    public static void dispose(){
-        assetManager.dispose();
-    }
     */
+
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
 
@@ -91,28 +78,21 @@ public class Asset {
         Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
         backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, backgroundTexture.getWidth(), backgroundTexture.getHeight());
 
-
         //PIG
-        /*
-        TextureRegion pigFrame1Tex = new TextureRegion(new Texture(pigFrame1), 0, 0, new Texture(pigFrame1).getWidth() / 3, new Texture(pigFrame1).getHeight() / 3);
-        TextureRegion pigFrame2Tex = new TextureRegion(new Texture(pigFrame2), 0, 0, new Texture(pigFrame2).getWidth() / 3, new Texture(pigFrame2).getHeight() / 3);
-        TextureRegion pigFrame3Tex = new TextureRegion(new Texture(pigFrame3), 0, 0, new Texture(pigFrame3).getWidth() / 3, new Texture(pigFrame3).getHeight() / 3);
-        TextureRegion pigFrame4Tex = new TextureRegion(new Texture(pigFrame4), 0, 0, new Texture(pigFrame4).getWidth() / 3, new Texture(pigFrame4).getHeight() / 3);
-        TextureRegion pigFrame5Tex = new TextureRegion(new Texture(pigFrame5), 0, 0, new Texture(pigFrame5).getWidth() / 3, new Texture(pigFrame5).getHeight() / 3);
-        TextureRegion pigFrame6Tex = new TextureRegion(new Texture(pigFrame6), 0, 0, new Texture(pigFrame6).getWidth() / 3, new Texture(pigFrame6).getHeight() / 3);
-        pigAnimation = new Animation<TextureRegion>(0.2f, pigFrame1Tex, pigFrame2Tex, pigFrame3Tex, pigFrame4Tex, pigFrame5Tex, pigFrame6Tex, pigFrame5Tex, pigFrame4Tex, pigFrame3Tex, pigFrame2Tex);
-*/
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
         Array<TextureRegion> pigFrames = makeFrames(pigSpriteSheet, 3, 2);
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
+        //BUNNY
+        bunnySpriteSheet = new Texture("characters/bunny/bunny_animation.png");
+        Array<TextureRegion> bunnyFrames = makeFrames(bunnySpriteSheet, 3, 2);
+        bunnyAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
+
 
         //COIN
-        //coinTextureRegion = new TextureRegion(new Texture("coin.png"), 0, 0, Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/3);
         coinTexture = new Texture("powerups/coin.png");
         Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
-        //coinAnimation.setPlayMode(Animation.PlayMode.LOOP);
 
 
         //OBSTACLES
@@ -123,8 +103,24 @@ public class Asset {
         TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, new Texture(yellowBalloon).getWidth(), new Texture(yellowBalloon).getHeight());
         balloons.add(blueBalloonReg, greenBalloonReg, redBalloonReg, yellowBalloonReg);
 
-        //Plane
-        planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
+        //Drone
+        droneTexture = new TextureRegion(new Texture(drone), 0, 0, new Texture(drone).getWidth(), new Texture(drone).getHeight());
+
+        //Buttons
+        singlePlayerTexture= new Texture("buttons/singleplayer_button.PNG");
+        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
+        achievementsTexture = new Texture("buttons/achievements_button.PNG");
+        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
+        settingsTexture = new Texture("buttons/settings_button.PNG");
+        backTexture = new Texture("buttons/back_button.png");
+
+        //Music and sounds
+        // Sound from Zapsplat.com
+        clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
+        // Music from Zapsplat.com
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
+        backgroundMusic.setVolume(0.02f); //sets the volume of the background music
+        backgroundMusic.setLooping(true); //the backgrounds music will continuously loop
 
     }
 
@@ -145,15 +141,11 @@ public class Asset {
     }
 
 
-/*
-    public static Texture getTexture(String textureName){
-        //return assetManager.get(textureName, Texture.class);
-        return
-    }*/
 
     public void update(){
 
     }
+
 
 
     /*

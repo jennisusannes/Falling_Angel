@@ -6,9 +6,13 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 import com.fallingangel.view.AchievementsView;
 import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
+import com.fallingangel.view.HelpView1;
+import com.fallingangel.view.HelpView2;
+import com.fallingangel.view.HelpView3;
 import com.fallingangel.view.HighScoreListView;
 import com.fallingangel.view.MenuView;
 import com.fallingangel.view.SettingsView;
@@ -19,16 +23,21 @@ public class MainController extends ClickListener {
     //initializing the different views
     public GameView gameView = new GameView();
     public GameOverView gameOverView = new GameOverView();
+    public HelpView1 helpView1 = new HelpView1();
+    public HelpView2 helpView2 = new HelpView2();
+    public HelpView3 helpView3 = new HelpView3();
     public AchievementsView achievementsView = new AchievementsView();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public MenuView menuView;
-    // Sound from Zapsplat.com
-    private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
+    public Asset asset;
+    private Sound clickSound;
+    //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 
 
     public MainController() {
         this.game = FallingAngel.getInstance();
+        clickSound = asset.clickSound;
     }
 
     public void setStartScreen(){ //setStartScreen method is called in the game class.
@@ -55,7 +64,10 @@ public class MainController extends ClickListener {
     @Override
     public boolean handle(Event event) { //the Main controller listenens to the buttons on the different views and changes bewteen the different views
         if (event.getListenerActor().equals(menuView.getSinglePlayerButton())) {
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             //long id = clickSound.play(0.2f);
             //clickSound.setPitch(id,2);
             //clickSound.setLooping(id,false);
@@ -63,42 +75,77 @@ public class MainController extends ClickListener {
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(gameView);
             return true;
         }
+        else if (event.getListenerActor().equals(menuView.getQuestionButton())){ //fjerne denne
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(helpView1);
+            return true;
+        }
+
         else if (event.getListenerActor().equals(menuView.getAchievementsButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(achievementsView);
             return true;
         }
+
+
         else if (event.getListenerActor().equals(menuView.getHighscoreListButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(highscorelistView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getSettingsButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(settingsView);
             return true;
         }
         else if (event.getListenerActor().equals(achievementsView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(highscorelistView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(gameOverView.getBackButton())){
-            clickSound.play(0.2f);
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
             game.setScreen(menuView);
             return true;
         }
@@ -107,8 +154,33 @@ public class MainController extends ClickListener {
             game.setScreen(gameOverView);
             return true;
         }*/
+        else if (event.getListenerActor().equals(helpView1.getNextButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(helpView2);
+            return true;
+        }
+        else if (event.getListenerActor().equals(helpView2.getNextButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(helpView3);
+            return true;
+        }
+        else if (event.getListenerActor().equals(helpView3.getNextButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(menuView);
+            return true;
+        }
+
         else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
-            clickSound.play(0.2f);
+            clickSound.play(0.0f);
             game.music.pause();
             //settingsView.stage.clear();
             //settingsView.stage.addActor(settingsView.getMusicOffButton());

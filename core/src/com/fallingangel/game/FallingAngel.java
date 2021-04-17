@@ -53,7 +53,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	}
 
 	public boolean soundOn(){
-		if (music.getVolume() > 0){
+		if (music.isPlaying()){
 			return true;
 		}
 		else{
@@ -68,11 +68,12 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		batch = new SpriteBatch(); //creates a new spritebatch
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller
-		// Music from Zapsplat.com
 		assets.load();
-		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3")); //sets the music
+
+
+		music = assets.backgroundMusic;
 		music.setVolume(0.02f); //sets the volume of the background music
-		music.setLooping(true); //the backgrouns music will continuously loop
+		music.setLooping(true); //the backgrounds music will continuously loop
 		music.play(); //plays the music
 		mc.setStartScreen(); //the main controller sets the start screen as the menuscreen
 	}
