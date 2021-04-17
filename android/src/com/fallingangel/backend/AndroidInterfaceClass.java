@@ -130,22 +130,22 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public void setOnValueChangedListener() {
-        rooms.addValueEventListener((new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //This method is called once with the initial value and again
-                        // whenever data at this location is updated
-                        String value = snapshot.getValue(String.class);
-                        Log.d(TAG, "Value is: " + value);
-                    }
+        highScoreList.addValueEventListener((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //This method is called once with the initial value and again
+                // whenever data at this location is updated
+                String value = snapshot.getValue(String.class);
+                Log.d(TAG, "Value is: " + value);
+            }
 
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-        });
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        }));
     }
     /*
     @Override

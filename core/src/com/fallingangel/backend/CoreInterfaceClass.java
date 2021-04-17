@@ -31,4 +31,9 @@ public class CoreInterfaceClass implements FireBaseInterface{
 
     }
 
+    @Override
+    public void setOnValueChangedListener() {
+        
+    }
+
 }

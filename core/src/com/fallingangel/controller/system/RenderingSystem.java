@@ -112,6 +112,8 @@ public class RenderingSystem extends IteratingSystem{
         BitmapFont font = new BitmapFont();
         int scoreInt = (int) score;
         this.game.FBI.setHighScore("Jy48548u9", "Jenni", "09.18.20", (int)AngelComponent.SCORE);
+        this.game.FBI.setOnValueChangedListener();
+
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
         font.draw(sb, scoreString, 40,Gdx.graphics.getHeight() - 40);
