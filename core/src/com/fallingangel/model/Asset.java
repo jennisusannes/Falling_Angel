@@ -10,10 +10,20 @@ import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
-    //BACKGROUNDS:
+    //BACKGROUNDS
+    public static Texture menuBackgroundTexture;
+    public static Texture settingsBackgroundTexture;
+    public static Texture highscorelistBackgroundTexture;
+    public static Texture help1BackgroundTexture;
+    public static Texture help2BackgroundTexture;
+    public static Texture help3BackgroundTexture;
+    public static Texture heavenBackgroundTexture;
+    public static Texture sunsetBackgroundTexture;
+    public static Texture hellBackgroundTexture;
+    public static Texture winner1BackgroundTexture;
+    public static Texture winner2BackgroundTexture;
 
-    //play-view background
-    public static TextureRegion backgroundTextureRegion;
+
 
     //PIG
     public static Animation<TextureRegion> pigAnimation;
@@ -77,11 +87,29 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
 
         //BACKGROUND
-        Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
-        backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         Texture menuBackgroundTexture = new Texture("backgrounds/mainmenu_background.png");
-        backgroundTextureRegion = new TextureRegion(menuBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //menuBackgroundTextureRegion = new TextureRegion(menuBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        Texture settingsBackgroundTexture = new Texture("backgrounds/settings_background.png");
+        //settingsBackgroundTextureRegion = new TextureRegion(settingsBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        Texture highscorelistBackgroundTexture = new Texture("backgrounds/highscorelist_score_background.png");
+
+        Texture help1BackgroundTexture = new Texture("helpViews/helpView1.png");
+
+        Texture help2BackgroundTexture = new Texture("helpViews/helpView2.png");
+
+        Texture help3BackgroundTexture = new Texture("helpViews/helpView3.png");
+
+        Texture heavenBackgroundTexture = new Texture("backgrounds/level_heaven_score_background.png");
+        Texture sunsetBackgroundTexture = new Texture("backgrounds/level_sunset_score_background.png");
+        Texture hellBackgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
+        Texture winner1BackgroundTexture = new Texture("backgrounds/winner_player1_background.PNG");
+        Texture winner2BackgroundTexture = new Texture("backgrounds/winner_player2_background.png");
+
+        //Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
+        //backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 
         //PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
