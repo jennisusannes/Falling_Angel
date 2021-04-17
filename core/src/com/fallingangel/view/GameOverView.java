@@ -17,9 +17,10 @@ import com.fallingangel.model.Asset;
 public class GameOverView extends ScreenAdapter {
 
     private FallingAngel game;
-    private Button backButton;
     private MainController controller;
     private Stage stage;
+    private Button backButton;
+    private Texture background;
 
     public GameOverView(){
         super();
@@ -54,14 +55,26 @@ public class GameOverView extends ScreenAdapter {
         });
         return button;
     }
+    // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
+    public void setWinner(int winner) {
+        if (winner == 1) {
+            background = Asset.winner1BackgroundTexture;
+        }
+        else if (winner == 2) {
+            background = Asset.winner2BackgroundTexture;
+        }
+        else {
+            background = Asset.highscorelistBackgroundTexture;
+        }
+    }
 
     public void draw(){
 
-        Gdx.input.setInputProcessor(stage);//sets input processor
+        Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.winner1BackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//draws the sprite batch
+        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         game.batch.end();
-        stage.draw();//draws the stage
+        stage.draw(); // Draws the stage
     }
 
     public void update(float dt) {

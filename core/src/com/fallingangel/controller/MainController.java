@@ -20,7 +20,7 @@ public class MainController extends ClickListener {
     public FallingAngel game;
     // Initializing the different views
     public GameActionsController gameActionsController;
-    public GameOverView gameOverView = new GameOverView();
+    public GameOverView gameOverView;
     public HelpView1 helpView1 = new HelpView1();
     public HelpView2 helpView2 = new HelpView2();
     public HelpView3 helpView3 = new HelpView3();
@@ -39,6 +39,12 @@ public class MainController extends ClickListener {
     public void setStartScreen(){
         this.menuView = new MenuView();
         game.setScreen(menuView);
+    }
+
+    public void setGameOverScreen(int winner) {
+        this.gameOverView = new GameOverView();
+        gameOverView.setWinner(0);
+        game.setScreen(gameOverView);
     }
 
     // Main controller listens to buttons in the different views and changes between views

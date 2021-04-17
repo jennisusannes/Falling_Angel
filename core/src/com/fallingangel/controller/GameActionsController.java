@@ -116,7 +116,8 @@ public class GameActionsController extends ClickListener {
                 pause();
                 break;
             case GAME_OVER:
-                gameOver();
+                // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
+                gameOver(0);
                 break;
         }
     }
@@ -205,8 +206,9 @@ public class GameActionsController extends ClickListener {
     }
 
     // When the player dies and the game is over, the player is sent to GameOverView
-    public void gameOver() {
-        game.setScreen(gameOverView);
+    public void gameOver(int winner) {
+        // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
+        game.mc.setGameOverScreen(winner);
         //TODO: må sende spilleren til gameover-view
     }
 
@@ -231,9 +233,8 @@ public class GameActionsController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            //exit();
-            //game.mc.setStartScreen();
-            gameOver();
+            exit();
+            game.mc.setStartScreen();
             return true;
         }
         else {
