@@ -57,7 +57,7 @@ public class World {
             int low = Gdx.graphics.getWidth()/4;
             int high = Gdx.graphics.getWidth() - Asset.droneTexture.getRegionWidth();
             int randomX  = rand.nextInt(high-low) + low;
-            drones.add(createDrone(randomX , -i * Gdx.graphics.getHeight()));
+            drones.add(createDrone(randomX , -i * Gdx.graphics.getHeight() * 2));
         }
 
         //creating the coins that will be used
@@ -69,7 +69,7 @@ public class World {
         //creating the obstacles that will be used
         Array<Entity> obstacles = new Array<Entity>();
         for (int i = 1; i <= 5; i++){
-            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 3));
+            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
         }
 
     }
