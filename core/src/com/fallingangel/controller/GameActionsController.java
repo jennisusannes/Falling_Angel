@@ -37,6 +37,7 @@ public class GameActionsController extends ClickListener {
     public GameView gameView;
     public PauseView pauseView = new PauseView();
     public GameOverView gameOverView = new GameOverView();
+    public MainController mainController;
 
     private Sound clickSound;
 
@@ -47,7 +48,7 @@ public class GameActionsController extends ClickListener {
 
     private int state;
 
-    private World world;
+    protected World world;
     private Rectangle pauseBounds;
     private Rectangle resumeBounds;
     private Rectangle quitBounds;
@@ -60,12 +61,16 @@ public class GameActionsController extends ClickListener {
 
     public GameActionsController() {
         this.game = FallingAngel.getInstance();
+        this.mainController = game.mc;
+
         clickSound = Asset.clickSound;
         //coinSound = Asset.coinSound;
 
         // Initializes new engine and world
-        this.engine = new Engine();
-        this.world = new World(engine);
+        //this.engine = new Engine();
+        //this.world = new World(engine);
+        this.engine = mainController.engine;
+        this.world = mainController.world;
 
         // Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
@@ -180,6 +185,10 @@ public class GameActionsController extends ClickListener {
         engine.getSystem(AnimationSystem.class).setProcessing(true);
         engine.getSystem(CollisionSystem.class).setProcessing(true);
     }
+    // This method removes all systems
+    public void removeSystem() {
+
+    }
 
     // Method for pausing game
     public void pause() {
@@ -202,17 +211,24 @@ public class GameActionsController extends ClickListener {
         if (state == GAME_PAUSED) { //checks if game is paused
             state = GAME_OVER; //sets the state to game over
             pauseSystem();
+            removeSystem();
         }
     }
 
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver(int winner) {
         // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
-        game.mc.setGameOverScreen(winner);
-        //TODO: må sende spilleren til gameover-view
+        removeSystem();
+        setGameOverScreen(winner);
     }
 
-    public boolean handle(Event event) { //the controller listen to the buttons on the different views and changes between the different views
+    public void setGameOverScreen(int winner) {
+        gameOverView.setWinner(winner);
+        game.setScreen(gameOverView);
+    }
+
+    // Game controller listens to buttons in the different views and changes between views
+    public boolean handle(Event event) {
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
@@ -234,6 +250,13 @@ public class GameActionsController extends ClickListener {
                 clickSound.play(0.2f);
             }
             exit();
+            game.mc.setStartScreen();
+            return true;
+        }
+        else if (event.getListenerActor().equals(gameOverView.getBackButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
             game.mc.setStartScreen();
             return true;
         }

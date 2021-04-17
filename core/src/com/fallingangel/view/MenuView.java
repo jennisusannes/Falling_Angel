@@ -38,25 +38,25 @@ public class MenuView extends ScreenAdapter {
         // Create buttons and adds them to the stage as actors
 
         setSinglePlayerButton();
-        stage.addActor(getSinglePlayerButton());
+        stage.addActor(singlePlayerButton);
 
         setMultiPlayerButton();
-        stage.addActor(getMultiPlayerButton());
+        stage.addActor(multiPlayerButton);
 
         // Removed achievements
         /*
         setAchievementsButton();
-        stage.addActor(getAchievementsButton());
+        stage.addActor(achievementsButton);
          */
 
         setHighscoreListButton();
-        stage.addActor(getHighscoreListButton());
+        stage.addActor(highscoreListButton);
 
         setSettingsButton();
-        stage.addActor(getSettingsButton());
+        stage.addActor(settingsButton);
 
         setHelpButton();
-        stage.addActor(getHelpButton());
+        stage.addActor(helpButton);
 
     }
 

@@ -1,4 +1,5 @@
 package com.fallingangel.view;
-public class GameOverMultiPlayerView{
+
+public class GameOverMultiPlayerView {
 
 }

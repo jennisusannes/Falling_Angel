@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
@@ -17,7 +18,7 @@ import com.fallingangel.model.Asset;
 public class GameOverView extends ScreenAdapter {
 
     private FallingAngel game;
-    private MainController controller;
+    private GameActionsController gameController;
     private Stage stage;
     private Button backButton;
     private Texture background;
@@ -25,11 +26,11 @@ public class GameOverView extends ScreenAdapter {
     public GameOverView(){
         super();
         this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
-        this.controller = game.mc; // Sets the controller as the main controller
+        this.gameController = game.mc.gameActionsController; // Sets the controller as the main controller
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); // Sets input processor
         setBackButton(); // Creates a button
-        stage.addActor(getBackButton()); // Adds the button as an actor to the stage
+        stage.addActor(backButton); // Adds the button as an actor to the stage
     }
 
     // Getter and setter for the back button
@@ -49,8 +50,8 @@ public class GameOverView extends ScreenAdapter {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                controller = game.mc;
-                controller.handle(inputEvent);
+                gameController = game.mc.gameActionsController;
+                gameController.handle(inputEvent);
             }
         });
         return button;

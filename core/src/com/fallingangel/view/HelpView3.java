@@ -29,7 +29,7 @@ public class HelpView3 extends ScreenAdapter {
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); // Sets input processor
         setNextButton(); // Creates a button
-        stage.addActor(getNextButton()); // Adds the button as an actor to the stage
+        stage.addActor(nextButton); // Adds the button as an actor to the stage
     }
 
 

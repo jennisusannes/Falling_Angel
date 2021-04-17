@@ -28,7 +28,7 @@ public class HighScoreListView extends ScreenAdapter {
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor
         setBackButton(); //creates a button
-        stage.addActor(getBackButton()); //adds the button as an actor to the stage
+        stage.addActor(backButton); //adds the button as an actor to the stage
     }
 
     //setter and getter for the back button

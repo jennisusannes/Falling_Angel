@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.fallingangel.model.Asset;
@@ -35,6 +36,7 @@ public class RenderingSystem extends IteratingSystem{
 
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
+    protected TextureRegion gameBackground;
 
 
     //Instanciate a RenderingSystem
@@ -65,6 +67,11 @@ public class RenderingSystem extends IteratingSystem{
         cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
     }
 
+    // Sets chosen level
+    public void setLevel(TextureRegion chosenLevel){
+        this.gameBackground = chosenLevel;
+    }
+
     //This method updates and draws
     @Override
     public void update(float deltaTime) {
@@ -79,6 +86,7 @@ public class RenderingSystem extends IteratingSystem{
         //denne zoomer inn kameraet, vet ikke om den skal brukes enda
         //sb.setProjectionMatrix(cam.combined);
         sb.begin();
+        // TODO: ta inn gamebackground istedenfor Asset.hellbackground her
         sb.draw(Asset.hellBackgroundTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //iterates through all entities and gets the component.

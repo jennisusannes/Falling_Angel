@@ -1,5 +1,6 @@
 package com.fallingangel.controller;
 
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -8,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
+import com.fallingangel.model.World;
 import com.fallingangel.view.AchievementsView;
-import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.HelpView1;
 import com.fallingangel.view.HelpView2;
 import com.fallingangel.view.HelpView3;
@@ -21,21 +22,28 @@ public class MainController extends ClickListener {
 
     public FallingAngel game;
     // Initializing the different views
-    public GameActionsController gameActionsController;
-    public GameOverView gameOverView;
+    public MenuView menuView;
     public HelpView1 helpView1 = new HelpView1();
     public HelpView2 helpView2 = new HelpView2();
     public HelpView3 helpView3 = new HelpView3();
     public AchievementsView achievementsView = new AchievementsView();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
-    public MenuView menuView;
+    public GameActionsController gameActionsController;
+    protected World world;
+    protected Engine engine;
+    //public GameOverView gameOverView;
+
     private Sound clickSound;
     //private Animation<TextureRegion> chosenCharacter;
 
     public MainController() {
         this.game = FallingAngel.getInstance();
         clickSound = Asset.clickSound;
+
+        // Initializes engine and world
+        this.engine = new Engine();
+        this.world = new World(engine);
     }
 
     // setStartScreen method is called in the game class
@@ -43,29 +51,28 @@ public class MainController extends ClickListener {
         this.menuView = new MenuView();
         game.setScreen(menuView);
     }
+
+    public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
+        //this.world = new World(engine);
+        world.setChosenCharacter(chosenCharacter);
+        //this.gameActionsController = new GameActionsController();
+        //this.gameActionsController.world.setChosenCharacter(chosenCharacter);
+    }
+
+    public Animation<TextureRegion> getChosenCharacter() {
+        return world.getChosenCharacter();
+        //this.gameActionsController = new GameActionsController();
+        //return gameActionsController.world.getChosenCharacter();
+    }
  /*
-    public void setChosenCharacter(String string){ //setStartScreen method is called in the game class.
-        if (string.equals("pig")){
-            this.chosenCharacter = asset.pigAnimation;
-        }
-        else if (string.equals("bunny")){
-            this.chosenCharacter = asset.bunnyAnimation;
-        }
-        //else;
-    }
 
-    public Animation<TextureRegion> getChosenCharacter(){
-        return chosenCharacter;
-    }
-
-  */
-
+    //winner = 0 -> singleplayer, winner = 1 / 2 -> multiplayer
     public void setGameOverScreen(int winner) {
         this.gameOverView = new GameOverView();
-        gameOverView.setWinner(0);
+        gameOverView.setWinner(winner);
         game.setScreen(gameOverView);
     }
-
+*/
     // Main controller listens to buttons in the different views and changes between views
     @Override
     public boolean handle(Event event) {
@@ -83,13 +90,6 @@ public class MainController extends ClickListener {
             }
             this.gameActionsController = new GameActionsController();
             gameActionsController.setGameScreen();
-            return true;
-        }
-        else if (event.getListenerActor().equals(menuView.getHelpButton())){ //fjerne denne
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            game.setScreen(helpView1);
             return true;
         }
         // Removed achievementsView
@@ -137,11 +137,11 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
-        else if (event.getListenerActor().equals(gameOverView.getBackButton())){
+        else if (event.getListenerActor().equals(menuView.getHelpButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            game.setScreen(menuView);
+            game.setScreen(helpView1);
             return true;
         }
         else if (event.getListenerActor().equals(helpView1.getNextButton())){
@@ -185,36 +185,16 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
-            settingsView.getPigButton().setPosition(-1000,-1000);
-            settingsView.getBunnyButton().setPosition(Gdx.graphics.getWidth()*0.8f-200, Gdx.graphics.getHeight() * 0.42f);
-            game.setChosenCharacter(Asset.bunnyAnimation);
+            //this.gameActionsController = new GameActionsController();
+            setChosenCharacter(Asset.pigAnimation);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getBunnyButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
-            settingsView.getBunnyButton().setPosition(-1000,-1000);
-            settingsView.getPigButton().setPosition(Gdx.graphics.getWidth()*0.8f-200, Gdx.graphics.getHeight() * 0.42f);
-            game.setChosenCharacter(Asset.pigAnimation);
-            return true;
-        }
-        else if (event.getListenerActor().equals(menuView.getSinglePlayerButton())) {
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            else;
-            game.setScreen(gameView);
-            return true;
-        }
-        else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            else;
-            game.setScreen(gameView);
+            //this.gameActionsController = new GameActionsController();
+            setChosenCharacter(Asset.bunnyAnimation);
             return true;
         }
         else{

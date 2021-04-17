@@ -28,7 +28,7 @@ public class HelpView2 extends ScreenAdapter {
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor
         setNextButton(); //creates a button
-        stage.addActor(getNextButton()); //adds the button as an actor to the stage
+        stage.addActor(nextButton); //adds the button as an actor to the stage
     }
 
     // Method for creating a button, this will add the MainController as a listener

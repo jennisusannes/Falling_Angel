@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.model.Asset;
 
@@ -15,7 +16,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public MainController mc;
 	public SpriteBatch batch;
 	public Music music;
-	private Animation<TextureRegion> chosenCharacter;
+	//private Animation<TextureRegion> chosenCharacter;
 
 	private FallingAngel(){ // Private constructor for the game
 		//setChosenCharacter(Asset.pigAnimation);
@@ -31,7 +32,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		return music.isPlaying();
 	}
 
-
+/*
 	public void setChosenCharacter(Animation<TextureRegion> animation){ //setStartScreen method is called in the game class.
 		this.chosenCharacter = animation;
 		/*
@@ -43,13 +44,13 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		}
 		else;
 
-		 */
+
 	}
 
 	public Animation<TextureRegion> getChosenCharacter(){
 		return chosenCharacter;
 	}
-
+*/
 
 
 	@Override

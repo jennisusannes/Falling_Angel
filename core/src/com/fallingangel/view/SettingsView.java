@@ -2,7 +2,6 @@ package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -33,7 +32,7 @@ public class SettingsView extends ScreenAdapter {
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); // Sets input processor
         setBackButton(); // Creates a button
-        stage.addActor(getBackButton()); // Adds the button as an actor to the stage
+        stage.addActor(backButton); // Adds the button as an actor to the stage
         setMusicOnButton();
         setMusicOffButton();
         stage.addActor(musicOnButton);
@@ -42,7 +41,6 @@ public class SettingsView extends ScreenAdapter {
         setPigButton();
         stage.addActor(bunnyButton);
         stage.addActor(pigButton);
-        game.setChosenCharacter(Asset.pigAnimation);
     }
 
     // Getters and setters for the buttons
@@ -114,9 +112,6 @@ public class SettingsView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
         game.batch.draw(Asset.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
-        //game.font.draw(game.batch, "Music: ", Gdx.graphics.getWidth() * .1f, Gdx.graphics.getHeight() * .68f);
-        //game.font.getData().setScale(8, 8);
-        //game.font.setColor(Color.BLACK);
         game.batch.end();
         stage.draw();// Draws the stage
     }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
@@ -34,7 +33,6 @@ public class World {
     public static final int VP_WIDTH  = 1714;
     public static final int VP_HEIGHT = 4096;
 
-
     public int score;
     public Entity angel;
     public int state;
@@ -43,11 +41,7 @@ public class World {
     public Entity plane;
     public Entity obstacle;
     private FallingAngel game;
-    private Animation<TextureRegion> character;
-    //private MainController controller;
-    //private Asset asset;
-
-
+    private Animation<TextureRegion> character = Asset.pigAnimation;
 
     public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -61,7 +55,6 @@ public class World {
     public World(Engine engine){
         this.engine = engine;
         this.game = FallingAngel.getInstance();
-        this.character = game.getChosenCharacter();
     }
     //Mulig å bruke pooled engine også
 
@@ -77,6 +70,13 @@ public class World {
         }
     }
  */
+    public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
+        this.character = chosenCharacter;
+    }
+
+    public Animation<TextureRegion> getChosenCharacter() {
+        return character;
+    }
 
     public void create(){
         this.angel = createAngel();
@@ -166,7 +166,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
 
         //connect the animation from Assets to the an.comp. IntMap
-        animationComponent.animations.put(AngelComponent.STATE_FALL, character) ; //game.getChosenCharacter()
+        animationComponent.animations.put(AngelComponent.STATE_FALL, character);
         //animations for when a collision occurs and when the pig is dead
 
         //put the bounds as the angels width and height

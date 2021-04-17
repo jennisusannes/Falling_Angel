@@ -30,8 +30,8 @@ public class PauseView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage); // Sets input processor
         setExitButton(); // Creates a button
         setResumeButton();
-        stage.addActor(getExitButton()); // Adds the button as an actor to the stage
-        stage.addActor(getResumeButton());
+        stage.addActor(exitButton); // Adds the button as an actor to the stage
+        stage.addActor(resumeButton);
     }
 
     // Getters and setters for the buttons

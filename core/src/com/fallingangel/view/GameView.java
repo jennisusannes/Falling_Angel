@@ -56,7 +56,7 @@ public class GameView extends ScreenAdapter {
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         setPauseButton();
-        stage.addActor(getPauseButton());
+        stage.addActor(pauseButton);
         stage.draw();
     }
 
