@@ -21,7 +21,7 @@ public class MainController extends ClickListener {
 
     public FallingAngel game;
     //initializing the different views
-    //public GameView gameView = new GameView();
+    public GameView gameView = new GameView();
     public GameActionsController gameActionsController;
     public GameOverView gameOverView = new GameOverView();
     public HelpView1 helpView1 = new HelpView1();
@@ -31,6 +31,7 @@ public class MainController extends ClickListener {
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public MenuView menuView;
+    public Asset asset;
     private Sound clickSound;
     //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 
@@ -71,8 +72,7 @@ public class MainController extends ClickListener {
             //long id = clickSound.play(0.2f);
             //clickSound.setPitch(id,2);
             //clickSound.setLooping(id,false);
-            gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
+            game.setScreen(gameView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
@@ -80,8 +80,7 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             else;
-            gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
+            game.setScreen(gameView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getQuestionButton())){ //fjerne denne
