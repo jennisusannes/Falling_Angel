@@ -10,43 +10,45 @@ import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
-    //BACKGROUNDS
-    public static TextureRegion menuBackgroundTexture;
-    public static TextureRegion settingsBackgroundTexture;
-    public static TextureRegion highscorelistBackgroundTexture;
-    public static TextureRegion help1BackgroundTexture;
-    public static TextureRegion help2BackgroundTexture;
-    public static TextureRegion help3BackgroundTexture;
-    public static TextureRegion heavenBackgroundTexture;
-    public static TextureRegion sunsetBackgroundTexture;
-    public static TextureRegion hellBackgroundTextureRegion;
+    // BACKGROUNDS
+    public static Texture menuBackgroundTexture;
+    public static Texture settingsBackgroundTexture;
+    public static Texture highscorelistBackgroundTexture;
+    public static Texture achievementsBackgroundTexture;
+    public static Texture help1BackgroundTexture;
+    public static Texture help2BackgroundTexture;
+    public static Texture help3BackgroundTexture;
     public static Texture winner1BackgroundTexture;
     public static Texture winner2BackgroundTexture;
+    // Game backgrounds
+    public static TextureRegion heavenBackgroundTextureRegion;
+    public static TextureRegion sunsetBackgroundTextureRegion;
+    public static TextureRegion hellBackgroundTextureRegion;
 
 
-
-    //PIG
+    // PIG
     public static Animation<TextureRegion> pigAnimation;
     public static Texture pigSpriteSheet;
 
-    //BUNNY
+
+    // BUNNY
     public static Animation<TextureRegion> bunnyAnimation;
     public static Texture bunnySpriteSheet;
 
-    //POWER-UPS and COIN
-    //Animation for coin:
+
+    // COIN AND POWERUPS
     public static Animation<TextureRegion> coinAnimation;
     public static Texture coinTexture;
 
 
     //OBSTACLES
-    //Balloons
+    // Balloons
     public static String blueBalloon = "obstacles/balloons/blue_balloon.png";
     public static String greenBalloon = "obstacles/balloons/green_balloon.png";
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
     public static Array<TextureRegion> balloons = new Array<TextureRegion>();
-    //Plane
+    // Plane
     public static String plane = "obstacles/plane.png";
     public static TextureRegion planeTexture;
 
@@ -55,15 +57,26 @@ public class Asset {
     public static Music backgroundMusic;
     public static Sound clickSound;
 
+
     // BUTTONS
-    public static Texture singlePlayerTexture;
-    public static Texture multiPlayerTexture;
-    public static Texture achievementsTexture;
-    public static Texture highscoreListTexture;
-    public static Texture settingsTexture;
-    public static Texture backTexture;
-    public static Texture exitTexture;
-    public static Texture resumeTexture;
+    public static Texture singlePlayerButton;
+    public static Texture multiPlayerButton;
+    public static Texture achievementsButton;
+    public static Texture highscorelistButton;
+    public static Texture settingsButton;
+    public static Texture helpButton;
+    public static Texture backButton;
+    public static Texture pauseButton;
+    public static Texture exitButton;
+    public static Texture resumeButton;
+    public static Texture musicOnButton;
+    public static Texture musicOffButton;
+    public static Texture heavenButton;
+    public static Texture sunsetButton;
+    public static Texture hellButton;
+    public static Texture bunnyButton;
+    public static Texture pigButton;
+
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -86,75 +99,82 @@ public class Asset {
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
 
-        //BACKGROUND
-        Texture menuBackgroundTexture = new Texture("backgrounds/mainmenu_background.png");
-        //menuBackgroundTextureRegion = new TextureRegion(menuBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // BACKGROUNDS
+        menuBackgroundTexture = new Texture("backgrounds/mainmenu_background.png");
+        settingsBackgroundTexture = new Texture("backgrounds/settings_background.png");
+        highscorelistBackgroundTexture = new Texture("backgrounds/highscorelist_score_background.png");
+        achievementsBackgroundTexture = new Texture("backgrounds/achievements_background.png");
+        help1BackgroundTexture = new Texture("backgrounds/help1_background.png");
+        help2BackgroundTexture = new Texture("backgrounds/help2_background.png");
+        help3BackgroundTexture = new Texture("backgrounds/help3_background.png");
+        winner1BackgroundTexture = new Texture("backgrounds/winner_player1_background.PNG");
+        winner2BackgroundTexture = new Texture("backgrounds/winner_player2_background.png");
 
-        Texture settingsBackgroundTexture = new Texture("backgrounds/settings_background.png");
-        //settingsBackgroundTextureRegion = new TextureRegion(settingsBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
-        Texture highscorelistBackgroundTexture = new Texture("backgrounds/highscorelist_score_background.png");
-
-        Texture help1BackgroundTexture = new Texture("helpViews/helpView1.png");
-
-        Texture help2BackgroundTexture = new Texture("helpViews/helpView2.png");
-
-        Texture help3BackgroundTexture = new Texture("helpViews/helpView3.png");
-
+        // Game backgrounds
         Texture heavenBackgroundTexture = new Texture("backgrounds/level_heaven_score_background.png");
+        heavenBackgroundTextureRegion = new TextureRegion(heavenBackgroundTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
         Texture sunsetBackgroundTexture = new Texture("backgrounds/level_sunset_score_background.png");
+        sunsetBackgroundTextureRegion = new TextureRegion(sunsetBackgroundTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
         Texture hellBackgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
         hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
-        Texture winner1BackgroundTexture = new Texture("backgrounds/winner_player1_background.PNG");
-        Texture winner2BackgroundTexture = new Texture("backgrounds/winner_player2_background.png");
-
-        //Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
-        //backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 
-        //PIG
+        // PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
         Array<TextureRegion> pigFrames = makeFrames(pigSpriteSheet, 3, 2);
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
-        //BUNNY
+
+        // BUNNY
         bunnySpriteSheet = new Texture("characters/bunny/bunny_animation.png");
         Array<TextureRegion> bunnyFrames = makeFrames(bunnySpriteSheet, 3, 2);
         bunnyAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
 
-        //COIN
+        // COIN
         coinTexture = new Texture("powerups/coin.png");
         Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
 
 
-        //OBSTACLES
-        //Balloons
+        // OBSTACLES
+        // Balloons
         TextureRegion blueBalloonReg = new TextureRegion(new Texture(blueBalloon), 0, 0, new Texture(blueBalloon).getWidth(), new Texture(blueBalloon).getHeight());
         TextureRegion greenBalloonReg = new TextureRegion(new Texture(greenBalloon), 0, 0, new Texture(greenBalloon).getWidth(), new Texture(greenBalloon).getHeight());
         TextureRegion redBalloonReg = new TextureRegion(new Texture(redBalloon), 0, 0, new Texture(redBalloon).getWidth(), new Texture(redBalloon).getHeight());
         TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, new Texture(yellowBalloon).getWidth(), new Texture(yellowBalloon).getHeight());
         balloons.add(blueBalloonReg, greenBalloonReg, redBalloonReg, yellowBalloonReg);
 
-        //Plane
+        // Plane
         planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
 
-        //Buttons
-        singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
-        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
-        achievementsTexture = new Texture("buttons/achievements_button.PNG");
-        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
-        settingsTexture = new Texture("buttons/settings_button.PNG");
-        backTexture = new Texture("buttons/back_button.png");
 
-        //Music and sounds
+        // BUTTONS
+        singlePlayerButton = new Texture("buttons/singleplayer_button.PNG");
+        multiPlayerButton = new Texture("buttons/multiplayer_button.PNG");
+        achievementsButton = new Texture("buttons/achievements_button.PNG");
+        highscorelistButton = new Texture("buttons/highscorelist_button.PNG");
+        settingsButton = new Texture("buttons/settings_button.PNG");
+        helpButton = new Texture("buttons/help_button.PNG");
+        backButton = new Texture("buttons/back_button.png");
+        pauseButton = new Texture("buttons/pause_button.PNG");
+        exitButton = new Texture("buttons/exit_button.PNG");
+        resumeButton = new Texture("buttons/resume_button.PNG");
+        musicOnButton = new Texture("buttons/music_on_button.png");
+        musicOffButton = new Texture("buttons/music_off_button.png");
+        heavenButton = new Texture("buttons/level_heaven_button.png");
+        sunsetButton = new Texture("buttons/level_sunset_button.png");
+        hellButton = new Texture("buttons/level_hell_button.png");
+        bunnyButton = new Texture("buttons/select_bunny_button.PNG");
+        pigButton = new Texture("buttons/select_pig_button.PNG");
+
+        // MUSIC AND SOUNDS
         // Sound from Zapsplat.com
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
         // Music from Zapsplat.com
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
-        backgroundMusic.setVolume(0.02f); //sets the volume of the background music
-        backgroundMusic.setLooping(true); //the backgrounds music will continuously loop
+        backgroundMusic.setVolume(0.02f); // Sets volume of music
+        backgroundMusic.setLooping(true); // Music will continuously loop
 
     }
 
@@ -174,12 +194,9 @@ public class Asset {
 
     }
 
-
-
     public void update(){
 
     }
-
 
 
     /*
@@ -206,8 +223,4 @@ public class Asset {
 		coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.wav"));
 		clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.wav"));
      */
-
-
-
-
 }
