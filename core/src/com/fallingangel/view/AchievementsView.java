@@ -33,7 +33,7 @@ public class AchievementsView extends ScreenAdapter {
 
     //setter and getter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){

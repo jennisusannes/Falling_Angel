@@ -100,22 +100,22 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
 
         // BACKGROUNDS
-        menuBackgroundTexture = new Texture("backgrounds/mainmenu_background.png");
-        settingsBackgroundTexture = new Texture("backgrounds/settings_background.png");
-        highscorelistBackgroundTexture = new Texture("backgrounds/highscorelist_score_background.png");
-        achievementsBackgroundTexture = new Texture("backgrounds/achievements_background.png");
-        help1BackgroundTexture = new Texture("backgrounds/help1_background.png");
-        help2BackgroundTexture = new Texture("backgrounds/help2_background.png");
-        help3BackgroundTexture = new Texture("backgrounds/help3_background.png");
-        winner1BackgroundTexture = new Texture("backgrounds/winner_player1_background.PNG");
-        winner2BackgroundTexture = new Texture("backgrounds/winner_player2_background.png");
+        menuBackgroundTexture = new Texture("backgrounds/menu/mainmenu_background.png");
+        settingsBackgroundTexture = new Texture("backgrounds/settings/settings_text_background.png");
+        highscorelistBackgroundTexture = new Texture("backgrounds/highscorelist/highscorelist_score_background.png");
+        achievementsBackgroundTexture = new Texture("backgrounds/achievements/achievements_background.png");
+        help1BackgroundTexture = new Texture("backgrounds/help/help1_background.png");
+        help2BackgroundTexture = new Texture("backgrounds/help/help2_background.png");
+        help3BackgroundTexture = new Texture("backgrounds/help/help3_background.png");
+        winner1BackgroundTexture = new Texture("backgrounds/winner/winner_player1_background.png");
+        winner2BackgroundTexture = new Texture("backgrounds/winner/winner_player2_background.png");
 
         // Game backgrounds
-        Texture heavenBackgroundTexture = new Texture("backgrounds/level_heaven_score_background.png");
+        Texture heavenBackgroundTexture = new Texture("backgrounds/level/level_heaven_score_background.png");
         heavenBackgroundTextureRegion = new TextureRegion(heavenBackgroundTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
-        Texture sunsetBackgroundTexture = new Texture("backgrounds/level_sunset_score_background.png");
+        Texture sunsetBackgroundTexture = new Texture("backgrounds/level/level_sunset_score_background.png");
         sunsetBackgroundTextureRegion = new TextureRegion(sunsetBackgroundTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
-        Texture hellBackgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
+        Texture hellBackgroundTexture = new Texture("backgrounds/level/level_hell_score_background.png");
         hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
 
 
@@ -150,23 +150,23 @@ public class Asset {
 
 
         // BUTTONS
-        singlePlayerButton = new Texture("buttons/singleplayer_button.PNG");
-        multiPlayerButton = new Texture("buttons/multiplayer_button.PNG");
-        achievementsButton = new Texture("buttons/achievements_button.PNG");
-        highscorelistButton = new Texture("buttons/highscorelist_button.PNG");
-        settingsButton = new Texture("buttons/settings_button.PNG");
-        helpButton = new Texture("buttons/help_button.PNG");
-        backButton = new Texture("buttons/back_button.png");
-        pauseButton = new Texture("buttons/pause_button.PNG");
-        exitButton = new Texture("buttons/exit_button.PNG");
-        resumeButton = new Texture("buttons/resume_button.PNG");
-        musicOnButton = new Texture("buttons/music_on_button.png");
-        musicOffButton = new Texture("buttons/music_off_button.png");
-        heavenButton = new Texture("buttons/level_heaven_button.png");
-        sunsetButton = new Texture("buttons/level_sunset_button.png");
-        hellButton = new Texture("buttons/level_hell_button.png");
-        bunnyButton = new Texture("buttons/select_bunny_button.PNG");
-        pigButton = new Texture("buttons/select_pig_button.PNG");
+        singlePlayerButton = new Texture("buttons/menu/singleplayer_button.PNG");
+        multiPlayerButton = new Texture("buttons/menu/multiplayer_button.PNG");
+        achievementsButton = new Texture("buttons/menu/achievements_button.PNG");
+        highscorelistButton = new Texture("buttons/menu/highscorelist_button.PNG");
+        settingsButton = new Texture("buttons/menu/settings_button.PNG");
+        helpButton = new Texture("buttons/menu/help_button.PNG");
+        backButton = new Texture("buttons/actions/back_button.png");
+        pauseButton = new Texture("buttons/actions/pause_button.PNG");
+        exitButton = new Texture("buttons/actions/exit_button.PNG");
+        resumeButton = new Texture("buttons/actions/resume_button.PNG");
+        musicOnButton = new Texture("buttons/actions/music_on_button.png");
+        musicOffButton = new Texture("buttons/actions/music_off_button.png");
+        heavenButton = new Texture("buttons/level/level_heaven_button.png");
+        sunsetButton = new Texture("buttons/level/level_sunset_button.png");
+        hellButton = new Texture("buttons/level/level_hell_button.png");
+        bunnyButton = new Texture("buttons/character/select_bunny_button.PNG");
+        pigButton = new Texture("buttons/character/select_pig_button.PNG");
 
         // MUSIC AND SOUNDS
         // Sound from Zapsplat.com

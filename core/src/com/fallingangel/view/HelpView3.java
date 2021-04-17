@@ -26,7 +26,6 @@ public class HelpView3 extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc;  // Sets the controller as the main controller
-        help3 = new Texture("helpViews/helpView3.png");
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); // Sets input processor
         setNextButton(); // Creates a button

@@ -156,12 +156,6 @@ public class GameActionsController extends ClickListener {
         }
     }
 
-    // When the player dies and the game is over, the player is sent to GameOverView
-    public void gameOver() {
-        game.setScreen(gameOverView);
-        //TODO: må sende spilleren til gameover-view
-    }
-
     // This method sets all systems updating on pause
     public void pauseSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(false);
@@ -210,6 +204,12 @@ public class GameActionsController extends ClickListener {
         }
     }
 
+    // When the player dies and the game is over, the player is sent to GameOverView
+    public void gameOver() {
+        game.setScreen(gameOverView);
+        //TODO: må sende spilleren til gameover-view
+    }
+
     public boolean handle(Event event) { //the controller listen to the buttons on the different views and changes between the different views
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
             if (game.soundOn()) {
@@ -231,8 +231,9 @@ public class GameActionsController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            exit();
-            game.mc.setStartScreen();
+            //exit();
+            //game.mc.setStartScreen();
+            gameOver();
             return true;
         }
         else {

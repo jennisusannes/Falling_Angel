@@ -18,11 +18,13 @@ import com.fallingangel.model.Asset;
 public class SettingsView extends ScreenAdapter {
 
     private FallingAngel game;
+    private MainController controller;
+    public Stage stage;
     private Button backButton;
     private Button musicOnButton;
     private Button musicOffButton;
-    private MainController controller;
-    public Stage stage;
+    private Button bunnyButton;
+    private Button pigButton;
 
     public SettingsView(){
         super();
@@ -36,11 +38,15 @@ public class SettingsView extends ScreenAdapter {
         setMusicOffButton();
         stage.addActor(musicOnButton);
         stage.addActor(musicOffButton);
+        setBunnyButton();
+        setPigButton();
+        stage.addActor(bunnyButton);
+        stage.addActor(pigButton);
     }
 
     // Getters and setters for the buttons
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -61,6 +67,22 @@ public class SettingsView extends ScreenAdapter {
 
     public Button getMusicOffButton(){
         return musicOffButton;
+    }
+
+    public void setBunnyButton() {
+        this.bunnyButton = makeButton(Asset.bunnyButton,600,500, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.3f);
+    }
+
+    public Button getBunnyButton() {
+        return bunnyButton;
+    }
+
+    public void setPigButton() {
+        this.pigButton = makeButton(Asset.pigButton,600,500, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.3f);
+    }
+
+    public Button getPigButton() {
+        return pigButton;
     }
 
     public Button rightSoundButton(){
