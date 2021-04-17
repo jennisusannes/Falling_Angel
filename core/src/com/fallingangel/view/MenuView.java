@@ -51,7 +51,7 @@ public class MenuView extends ScreenAdapter {
         achievementsTexture = new Texture("buttons/achievements_button.PNG");
         highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
         settingsTexture = new Texture("buttons/settings_button.PNG");
-        questionTexture = new Texture("buttons/question.png");
+        questionTexture = new Texture("buttons/help_button.PNG");
         stage = new Stage(new ScreenViewport()); //crates a new stage and a viewport
 
         //created buttons and adds them to the stage as actors

@@ -16,12 +16,19 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Input.Keys;
 
+import com.fallingangel.controller.GameActionsController;
+import com.fallingangel.controller.MainController;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BackgroundSystem;
 import com.fallingangel.controller.system.BoundsSystem;
@@ -44,100 +51,119 @@ import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
 public class GameView extends ScreenAdapter {
-    //This view presents playing mode
 
+    private FallingAngel game;
+    private Texture background;
+    private Texture pauseTexture;
+    private Button pauseButton;
+    private GameActionsController gameController;
+    public Stage stage;
+    //private int state;
+
+    //static final int GAME_READY = 0;
+    //static final int GAME_RUNNING = 1;
+    //static final int GAME_PAUSED = 2;
+    //static final int GAME_OVER = 3;
+    //This view presents playing mode
+    /*
     static final int GAME_READY = 0;
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
+    */
 
+    //public OrthographicCamera gameCam;
+    //private Viewport viewPort;
 
-    public OrthographicCamera gameCam;
-    private Viewport viewPort;
     //Viewport manages a Camera's viewportWidth and viewportHeight, ensures that the game will fit to *all* devices
 
 
-    public FallingAngel game = FallingAngel.getInstance();
-    private World world;
+    //public FallingAngel game = FallingAngel.getInstance();
+    /*private World world;
     private Vector3 touchPoint;
     private Rectangle pauseBounds;
     private Rectangle resumeBounds;
     private Rectangle quitBounds;
-
-
+    */
+    /*
     private int lastScore = 0;
     private String scoreString;
-
+    */
 
     //Might be used for pause button or other buttons
-    private Stage stage;
-    private Stage settingsStage;
 
     //ASHLEY
-    public Engine engine;
+    //public Engine engine;
 
     //Might need this for multiplayer
-    private ImmutableArray angels;
+    //private ImmutableArray angels;
 
     //TODO: This is going to be used if we implement sound-effects and music
     //CollisionListener collisionListener;
-    private int state;
+    //private int state;
 
 
     public GameView() {
         super();
-        //this.game  = FallingAngel.getInstance();
-        Asset.load();
-        state = GAME_READY;
+        this.game = FallingAngel.getInstance();
+        this.gameController = game.mc.gameActionsController;
+        background = new Texture("backgrounds/level_hell_score_background.png");
+        pauseTexture = new Texture("buttons/pause_button.PNG");
 
+        gameController.setState(1);//state = GAME_RUNNING;
 
-        //La stå:
-        //Camera (and viewport of the screen)
+    }
+    //setter and getter for the back button
+    public void setPauseButton() {
+        this.pauseButton = makeButton(pauseTexture,150,150, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
+    }
 
-        this.gameCam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        this.viewPort = new StretchViewport(World.VP_WIDTH, World.VP_HEIGHT);
-        viewPort.apply();
-        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
-        gameCam.update();
+    public Button getPauseButton(){
+        return pauseButton;
+    }
 
-        this.touchPoint = new Vector3();
+    //method for creating a button and adding the main controller as a listener
+    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        button.setSize(width, height);
+        button.setPosition(xPos, yPos);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
+                gameController = game.mc.gameActionsController;
+                gameController.handle(inputEvent);
+            }
+        });
+        return button;
+    }
+    /*
+    //Calls on different functions depending on which state the game is in
+    public void update(float dt) {
+        if (dt > 0.1f) dt = 0.1f;
 
+        //delta-time is the time difference between the frames and controls the speed of changing frames. (60*dt = 60fps)
+        //Updates all systems.
+        gameController.engine.update(dt);
 
-
-        //Initializes new world, engine, stage and settingsStage.
-        //Uncertain whether we are going to use stage.
-        this.engine = new Engine();
-        this.world = new World(engine);
-        this.stage = new Stage();
-        this.settingsStage = new Stage();
-
-
-        //Gets all the entities for the angel and puts in an array.
-        //Might use this later.
-        this.angels = engine.getEntities();
-
-        //Adds all the systems to the engine
-        engine.addSystem(new AngelSystem(world));
-        engine.addSystem(new ObstacleSystem());
-        engine.addSystem(new PlaneSystem());
-        engine.addSystem(new MovementSystem());
-        engine.addSystem(new BackgroundSystem());
-        engine.addSystem(new AnimationSystem());
-        engine.addSystem(new CollisionSystem(world));
-        engine.addSystem(new RenderingSystem(game.batch));
-        engine.addSystem(new StateSystem());
-        engine.addSystem(new BoundsSystem());
-        engine.addSystem(new CoinSystem());
-
-
-        //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.
-        engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
-
-        //Creates world
-        world.create();
+        switch (state) {
+            case GAME_READY:
+                gameController.updateReady();
+                break;
+            case GAME_RUNNING:
+                gameController.updateRunning(dt);
+                break;
+            case GAME_PAUSED:
+                gameController.updatePaused();
+                break;
+            case GAME_OVER:
+                gameController.updateGameOver();
+                break;
+        }
 
     }
 
+     */
+    /*
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -165,12 +191,14 @@ public class GameView extends ScreenAdapter {
         }
 
     //Ready to start a new game
-    private void updateReady () {
+    private void updateReady() {
         if (Gdx.input.justTouched()) {
             state = GAME_RUNNING;
             resumeSystem();
         }
     }
+
+
 
     //Updates on what state the game is in
     //TODO: må legge inn metoder for hva som skjer mens spillet kjører
@@ -227,8 +255,8 @@ public class GameView extends ScreenAdapter {
     private void updateGameOver() {
         //TODO: må sende spilleren til gameover-view
     }
-
-    public void drawUI () {
+    */
+    public void draw() {
         //Uncertain if we'll use cam.
         /*
         gameCam.update();
@@ -236,7 +264,9 @@ public class GameView extends ScreenAdapter {
         */
 
         game.batch.begin();
-
+        //game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
+        //TODO: hent ut riktig state fra gameActionsController
+        /*
         switch (state) {
             case GAME_READY:
                 presentReady();
@@ -251,10 +281,19 @@ public class GameView extends ScreenAdapter {
                 presentGameOver();
                 break;
         }
+
+         */
         game.batch.end();
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        setPauseButton();
+        stage.addActor(getPauseButton());
+        stage.draw();
 
     }
+    /*
     //In the present-methods, all the GUI will be drawn/ shown for the game-view
+
     public void presentReady() {
         //TODO: create buttons and connect to bounds, and add text for "Ready". See superjumper for inspo .
         //TODO: if we have enough time: countdown from 3 before start
@@ -300,13 +339,18 @@ public class GameView extends ScreenAdapter {
     }
 
 
+
+     */
+
+
     @Override
     public void render(float delta) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        update(delta);
-        drawUI();
+        gameController.update(delta);
+        gameController.updateRunning(delta);
+        draw();
+        //stage.act();
     }
-
+    /*
     //buildt-in method for pausing game.
     @Override
     public void pause() {
@@ -315,4 +359,5 @@ public class GameView extends ScreenAdapter {
             pauseSystem();
         }
     }
+     */
 }

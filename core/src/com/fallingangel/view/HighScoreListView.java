@@ -21,7 +21,6 @@ public class HighScoreListView extends ScreenAdapter {
     private Button backButton;
     private MainController controller;
     private Stage stage;
-    private Asset asset;
 
     public HighScoreListView(){
         super();

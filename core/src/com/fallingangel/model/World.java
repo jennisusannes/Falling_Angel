@@ -81,7 +81,7 @@ public class World {
     public void create(){
         this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
-        this.background = createBackground();
+        //this.background = createBackground();
         //generateObjects();
 
         //creating the planes that will be used
@@ -271,7 +271,7 @@ public class World {
         return powerup;
     }
 
-    public Entity createBackground(){
+   /* public Entity createBackground(){
         Entity backgroundEntity = new Entity();
         //BackgroundComponent backgroundComponent = new BackgroundComponent();
         TextureComponent textureComponent = new TextureComponent();
@@ -288,6 +288,8 @@ public class World {
 
         return backgroundEntity;
     }
+
+    */
 
     public Entity createCoin(float x, float y){
         Entity coinEntity = new Entity();
