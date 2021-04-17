@@ -13,13 +13,14 @@ public class BoundsSystem extends IteratingSystem {
     //introduce mappers to that it gets easier to get the component from the object
     private ComponentMapper<TransformComponent> transform_mapper;
     private ComponentMapper<BoundsComponent> bounds_mapper;
-
     private ComponentMapper<TextureComponent> texture_mapper;
+
 
     public BoundsSystem() {
         super(Family.all(BoundsComponent.class, TransformComponent.class).get()); //calls constructor of IteratingSystem
 
-        transform_mapper = ComponentMapper.getFor(TransformComponent.class); //connect comp to mappers
+        //connect comp to mappers
+        transform_mapper = ComponentMapper.getFor(TransformComponent.class);
         bounds_mapper = ComponentMapper.getFor(BoundsComponent.class);
         texture_mapper = ComponentMapper.getFor(TextureComponent.class);
     }
@@ -33,8 +34,6 @@ public class BoundsSystem extends IteratingSystem {
         TextureComponent textureComponent = texture_mapper.get(entity);
 
         //the x- and y-coordinates are the bottom left corner of the rectangle
-        /*boundsComponent.rectangle.x = transformComponent.pos.x - boundsComponent.rectangle.width * 0.5f;
-        boundsComponent.rectangle.y = transformComponent.pos.y - boundsComponent.rectangle.height * 0.5f;*/
         boundsComponent.rectangle.x = transformComponent.pos.x;
         boundsComponent.rectangle.y = transformComponent.pos.y;
         boundsComponent.rectangle.width = textureComponent.textureRegion.getRegionWidth();
