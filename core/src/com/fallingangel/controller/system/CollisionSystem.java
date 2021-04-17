@@ -132,6 +132,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             TextureComponent textureComponent = textureMapper.get(coin);
 
             if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                angel.getComponent(AngelComponent.class).COINS_HIT += coin.getComponent(CoinComponent.class).SCORE;
                 coinPos.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
                 coinPos.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
             }
