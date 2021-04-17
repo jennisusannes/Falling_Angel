@@ -25,7 +25,6 @@ public class AngelSystem extends IteratingSystem {
     private static final Family family = Family.all(AngelComponent.class, MovementComponent.class, StateComponent.class, TransformComponent.class).get();
     //Family is an ashley class and represents a group of components.
     //used to describe what entity objects an entitysystem should process
-    //the angel, movement, state and trans comp are now in the system
 
     private World world;
 
