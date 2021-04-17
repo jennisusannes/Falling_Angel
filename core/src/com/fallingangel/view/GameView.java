@@ -1,23 +1,14 @@
 package com.fallingangel.view;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Input.Keys;
@@ -28,7 +19,7 @@ import com.fallingangel.controller.system.BoundsSystem;
 import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
 import com.fallingangel.controller.system.MovementSystem;
-import com.fallingangel.controller.system.PlaneSystem;
+import com.fallingangel.controller.system.DroneSystem;
 import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
@@ -36,12 +27,6 @@ import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
-import com.fallingangel.model.component.AnimationComponent;
-import com.fallingangel.model.component.BackgroundComponent;
-import com.fallingangel.model.component.MovementComponent;
-import com.fallingangel.model.component.StateComponent;
-import com.fallingangel.model.component.TextureComponent;
-import com.fallingangel.model.component.TransformComponent;
 
 public class GameView extends ScreenAdapter {
     //This view presents playing mode
@@ -119,7 +104,7 @@ public class GameView extends ScreenAdapter {
         //Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
         engine.addSystem(new ObstacleSystem());
-        engine.addSystem(new PlaneSystem());
+        engine.addSystem(new DroneSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new BackgroundSystem());
         engine.addSystem(new AnimationSystem());
@@ -279,7 +264,7 @@ public class GameView extends ScreenAdapter {
     private void pauseSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(false);
         engine.getSystem(ObstacleSystem.class).setProcessing(false);
-        engine.getSystem(PlaneSystem.class).setProcessing(false);
+        engine.getSystem(DroneSystem.class).setProcessing(false);
         engine.getSystem(MovementSystem.class).setProcessing(false);
         engine.getSystem(BoundsSystem.class).setProcessing(false);
         engine.getSystem(StateSystem.class).setProcessing(false);
@@ -292,7 +277,7 @@ public class GameView extends ScreenAdapter {
     private void resumeSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(true);
         engine.getSystem(ObstacleSystem.class).setProcessing(true);
-        engine.getSystem(PlaneSystem.class).setProcessing(true);
+        engine.getSystem(DroneSystem.class).setProcessing(true);
         engine.getSystem(MovementSystem.class).setProcessing(true);
         engine.getSystem(BoundsSystem.class).setProcessing(true);
         engine.getSystem(StateSystem.class).setProcessing(true);

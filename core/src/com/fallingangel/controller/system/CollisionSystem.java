@@ -17,12 +17,10 @@ import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
-import com.fallingangel.model.component.PlaneComponent;
+import com.fallingangel.model.component.DroneComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.PowerUpComponent;
-
-import sun.corba.EncapsInputStreamFactory;
 
 public class CollisionSystem extends EntitySystem { //EntitySystem: abstact class for processing sets of Entity objects
     //component mappers to get components
@@ -72,7 +70,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         //gets all entities with a CoinComponent and BoundsComponent
         coins = engine.getEntitiesFor(Family.all(CoinComponent.class, BoundsComponent.class).get());
         //gets all entities with a PlaneComponent and BoundsComponent
-        planes = engine.getEntitiesFor(Family.all(PlaneComponent.class, BoundsComponent.class).get());
+        planes = engine.getEntitiesFor(Family.all(DroneComponent.class, BoundsComponent.class).get());
         //gets all entities with a ObstacleComponent, BoundsComponent and TransformComponent
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
         //gets all entities with a PowerUpComponent and BoundsComponent
