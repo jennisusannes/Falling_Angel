@@ -36,9 +36,9 @@ public class Asset {
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
     public static Array<TextureRegion> balloons = new Array<TextureRegion>();
-    //Plane
-    public static String plane = "obstacles/plane.png";
-    public static TextureRegion planeTexture;
+    //Drone
+    public static String drone = "obstacles/drone.png";
+    public static TextureRegion droneTexture;
 
 
     //MUSIC AND SOUNDS
@@ -103,8 +103,8 @@ public class Asset {
         TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, new Texture(yellowBalloon).getWidth(), new Texture(yellowBalloon).getHeight());
         balloons.add(blueBalloonReg, greenBalloonReg, redBalloonReg, yellowBalloonReg);
 
-        //Plane
-        planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
+        //Drone
+        droneTexture = new TextureRegion(new Texture(drone), 0, 0, new Texture(drone).getWidth(), new Texture(drone).getHeight());
 
         //Buttons
         singlePlayerTexture= new Texture("buttons/singleplayer_button.PNG");

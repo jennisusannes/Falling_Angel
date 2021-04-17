@@ -55,7 +55,7 @@ public class World {
         Array<Entity> drones = new Array<Entity>();
         for (int i = 1; i <= 3; i++) {
             int low = Gdx.graphics.getWidth()/4;
-            int high = Gdx.graphics.getWidth() - Asset.planeTexture.getRegionWidth();
+            int high = Gdx.graphics.getWidth() - Asset.droneTexture.getRegionWidth();
             int randomX  = rand.nextInt(high-low) + low;
             drones.add(createDrone(randomX , -i * Gdx.graphics.getHeight()));
         }
@@ -169,7 +169,7 @@ public class World {
         planeEntity.add(textureComponent);
 
         //add texture to the obstacle.
-        textureComponent.textureRegion = Asset.planeTexture;
+        textureComponent.textureRegion = Asset.droneTexture;
 
         //add the position of the plane
         transformComponent.pos.set(x, y, 4.0f);
