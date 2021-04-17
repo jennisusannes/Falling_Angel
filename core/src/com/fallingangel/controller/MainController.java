@@ -1,7 +1,6 @@
 package com.fallingangel.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,7 +10,6 @@ import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 import com.fallingangel.view.AchievementsView;
 import com.fallingangel.view.GameOverView;
-import com.fallingangel.view.GameView;
 import com.fallingangel.view.HelpView1;
 import com.fallingangel.view.HelpView2;
 import com.fallingangel.view.HelpView3;
@@ -22,9 +20,9 @@ import com.fallingangel.view.SettingsView;
 public class MainController extends ClickListener {
 
     public FallingAngel game;
-    //initializing the different views
-    public GameView gameView = new GameView();
-    public GameOverView gameOverView = new GameOverView();
+    // Initializing the different views
+    public GameActionsController gameActionsController;
+    public GameOverView gameOverView;
     public HelpView1 helpView1 = new HelpView1();
     public HelpView2 helpView2 = new HelpView2();
     public HelpView3 helpView3 = new HelpView3();
@@ -32,18 +30,16 @@ public class MainController extends ClickListener {
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public MenuView menuView;
-    public Asset asset;
     private Sound clickSound;
     //private Animation<TextureRegion> chosenCharacter;
-    //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 
     public MainController() {
         this.game = FallingAngel.getInstance();
-        Asset.load();
         clickSound = Asset.clickSound;
     }
 
-    public void setStartScreen(){ //setStartScreen method is called in the game class.
+    // setStartScreen method is called in the game class
+    public void setStartScreen(){
         this.menuView = new MenuView();
         game.setScreen(menuView);
     }
@@ -64,49 +60,52 @@ public class MainController extends ClickListener {
 
   */
 
-    /* fjerne disse?
-
-    public void changeView(Screen nextScreen){
-        game.setScreen(nextScreen);
+    public void setGameOverScreen(int winner) {
+        this.gameOverView = new GameOverView();
+        gameOverView.setWinner(0);
+        game.setScreen(gameOverView);
     }
 
-  public MenuView getMenuView(){
-      return menuView;
-    }
-
-    public GameView getGameView(){
-        return gameView;
-    }
-
-     */
-
+    // Main controller listens to buttons in the different views and changes between views
     @Override
-    public boolean handle(Event event) { //the Main controller listenens to the buttons on the different views and changes bewteen the different views
-
-        if (event.getListenerActor().equals(menuView.getQuestionButton())){
+    public boolean handle(Event event) {
+        if (event.getListenerActor().equals(menuView.getSinglePlayerButton())) {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
+            return true;
+        }
+        else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
+            return true;
+        }
+        else if (event.getListenerActor().equals(menuView.getHelpButton())){ //fjerne denne
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
             game.setScreen(helpView1);
             return true;
         }
-
+        // Removed achievementsView
+        /*
         else if (event.getListenerActor().equals(menuView.getAchievementsButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(achievementsView);
             return true;
         }
-
-
+        */
         else if (event.getListenerActor().equals(menuView.getHighscoreListButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(highscorelistView);
             return true;
         }
@@ -114,7 +113,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(settingsView);
             return true;
         }
@@ -122,7 +120,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(menuView);
             return true;
         }
@@ -130,7 +127,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(menuView);
             return true;
         }
@@ -138,7 +134,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(menuView);
             return true;
         }
@@ -146,20 +141,13 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(menuView);
             return true;
         }
-        /*else if (event.getListenerActor().equals(gameView.getGameOverButton())){
-            clickSound.play(0.2f);
-            game.setScreen(gameOverView);
-            return true;
-        }*/
         else if (event.getListenerActor().equals(helpView1.getNextButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(helpView2);
             return true;
         }
@@ -167,7 +155,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(helpView3);
             return true;
         }
@@ -175,7 +162,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.setScreen(menuView);
             return true;
         }
