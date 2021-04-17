@@ -11,15 +11,15 @@ import com.badlogic.gdx.utils.Array;
 public class Asset {
 
     //BACKGROUNDS
-    public static Texture menuBackgroundTexture;
-    public static Texture settingsBackgroundTexture;
-    public static Texture highscorelistBackgroundTexture;
-    public static Texture help1BackgroundTexture;
-    public static Texture help2BackgroundTexture;
-    public static Texture help3BackgroundTexture;
-    public static Texture heavenBackgroundTexture;
-    public static Texture sunsetBackgroundTexture;
-    public static Texture hellBackgroundTexture;
+    public static TextureRegion menuBackgroundTexture;
+    public static TextureRegion settingsBackgroundTexture;
+    public static TextureRegion highscorelistBackgroundTexture;
+    public static TextureRegion help1BackgroundTexture;
+    public static TextureRegion help2BackgroundTexture;
+    public static TextureRegion help3BackgroundTexture;
+    public static TextureRegion heavenBackgroundTexture;
+    public static TextureRegion sunsetBackgroundTexture;
+    public static TextureRegion hellBackgroundTextureRegion;
     public static Texture winner1BackgroundTexture;
     public static Texture winner2BackgroundTexture;
 
@@ -104,6 +104,7 @@ public class Asset {
         Texture heavenBackgroundTexture = new Texture("backgrounds/level_heaven_score_background.png");
         Texture sunsetBackgroundTexture = new Texture("backgrounds/level_sunset_score_background.png");
         Texture hellBackgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
+        hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Texture winner1BackgroundTexture = new Texture("backgrounds/winner_player1_background.PNG");
         Texture winner2BackgroundTexture = new Texture("backgrounds/winner_player2_background.png");
 
