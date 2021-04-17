@@ -5,21 +5,21 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-
 import com.badlogic.gdx.Gdx;
+import com.fallingangel.model.component.AnimationComponent;
+import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
+import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
 import java.util.Random;
 
-public class ObstacleSystem extends IteratingSystem {
+public class CoinSystem extends IteratingSystem {
 
-    //should process all entities in Obstacle-, Transform- and MovementComponent
-    private static final Family family = Family.all(ObstacleComponent.class,
-            TransformComponent.class,
-            MovementComponent.class).get();
+    //should process all entities that contains CoinComponent
+    private static final Family family = Family.all(CoinComponent.class, TextureComponent.class, TransformComponent.class, AnimationComponent.class, StateComponent.class).get();
 
     private Engine engine;
     private ComponentMapper<TransformComponent> tm;
@@ -29,7 +29,7 @@ public class ObstacleSystem extends IteratingSystem {
 
     public static Random rand = new Random();
 
-    public ObstacleSystem () {
+    public CoinSystem () {
         super(family);
 
         tm = ComponentMapper.getFor(TransformComponent.class);
@@ -45,12 +45,8 @@ public class ObstacleSystem extends IteratingSystem {
         this.engine = engine;
     }
 
-    //litt usikker på om vi trenger denne og hva den evt gjør.
-    //svar: den bare sørger for at obstaclen er oppdatert til enhver tid, denne metoden kjøres hver gang systemet oppdateres
-    //metoden er felles for mange av system-klassene, kommer fra IteratingSystem
     @Override
     public void processEntity(Entity entity, float deltaTime) {
-        ObstacleComponent obstacle = om.get(entity);
         MovementComponent movementComponent = mm.get(entity);
         TransformComponent transformComponent = tm.get(entity);
         TextureComponent textureComponent = textureMapper.get(entity);
@@ -63,50 +59,4 @@ public class ObstacleSystem extends IteratingSystem {
         }
 
     }
-
-    /*
-    public void decreaseSpeed() { //trenger denne i angelsystem sin hitpowerUp-metode, men må fikses
-        mm.move.set(0, om.VELOCITY / 2);
-    }
-
-     */
-
-
-
-
-
-
-    /* TODO: implementere logikk ala flappy
-    public void update(float dt) {
-            handleInput();
-            updateGround();
-            bird.update(dt);
-            cam.position.set(bird.getX() + 80, cam.viewportHeight / 2, 0);
-            for(Tube tube : tubes){
-                if(cam.position.x - cam.viewportWidth / 2 > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
-                    tube.reposition(tube.getPosTopTube().x +((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
-                }
-
-                if(tube.collides(bird.getBounds())){
-                    bird.colliding = true;
-                    gameover = true;
-                }
-            }
-            if(bird.getY() <= ground.getHeight() + GROUND_Y_OFFSET){
-                gameover = true;
-                bird.colliding = true;
-            }
-            cam.update();
-        }
-
- */
-
-
-
-
-
-
-
-
-
 }

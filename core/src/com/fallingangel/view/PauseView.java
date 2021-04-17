@@ -2,7 +2,6 @@ package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -14,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 
-public class AchievementsView extends ScreenAdapter {
+public class PauseView extends ScreenAdapter {
 
     private FallingAngel game;
     private Texture background;
@@ -23,11 +22,11 @@ public class AchievementsView extends ScreenAdapter {
     private MainController controller;
     private Stage stage;
 
-    public AchievementsView(){
+    public PauseView(){
         super();
         this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc;  //sets the controller as the main controller
-        background = new Texture("backgrounds/achievements_blurred_background.png");
+        background = new Texture("backgrounds/level_hell_background.png");
         backTexture = new Texture("buttons/back_button.png");
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor

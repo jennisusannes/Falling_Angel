@@ -6,9 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 import com.fallingangel.controller.MainController;
-
-
+import com.fallingangel.model.Asset;
 
 public final class FallingAngel extends Game implements ApplicationListener {
 
@@ -17,9 +17,10 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	//private FirebaseAuth mAuth;
 	public SpriteBatch batch;
 	public BitmapFont font;
-	private Music music;
+	public Music music;
 	public MainController mc;
 	private static FallingAngel INSTANCE;
+	public Asset assets;
 
 	private FallingAngel(FireBaseInterface fireBaseInterface){
 		FBI = fireBaseInterface;
@@ -49,32 +50,37 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public static FallingAngel getInstance() {
 		return INSTANCE;
 	}
+
+	public boolean soundOn(){
+		if (music.getVolume() > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	@Override
 	public void create () {
-		/*FBI.SomeFunction();
-		FBI.FirstFireBaseTest();
-		FBI.SetOnValueChangedListener();
-		FBI.SetValueInDb("message", "this is new text");
-		FBI.SetValueInDb("message2", "this is some other text");*/
 		FBI.createUser("TestUserID", "test@user.no", "usernametest", "user123");
 		FBI.addFriend("id","usernametest" );
-		batch = new SpriteBatch();
-		font = new BitmapFont();
-
-		this.mc = new MainController();
-		//Music from Zapsplat.com
-		//music = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
-		//music.setVolume(0.02f);
-		//music.setLooping(true);
-		//music.play();
-		mc.setStartScreen();
-
+		batch = new SpriteBatch(); //creates a new spritebatch
+		font = new BitmapFont(); //kan denne fjernes?
+		this.mc = new MainController(); //sets the controller as the main controller
+		// Music from Zapsplat.com
+		assets.load();
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3")); //sets the music
+		music.setVolume(0.02f); //sets the volume of the background music
+		music.setLooping(true); //the backgrouns music will continuously loop
+		music.play(); //plays the music
+		mc.setStartScreen(); //the main controller sets the start screen as the menuscreen
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		font.dispose();
+		font.dispose(); //kan denne fjernes?
 		music.dispose();
 	}
+
 }

@@ -16,6 +16,7 @@ import com.fallingangel.view.SettingsView;
 public class MainController extends ClickListener {
 
     public FallingAngel game;
+    //initializing the different views
     public GameView gameView = new GameView();
     public GameOverView gameOverView = new GameOverView();
     public AchievementsView achievementsView = new AchievementsView();
@@ -30,10 +31,12 @@ public class MainController extends ClickListener {
         this.game = FallingAngel.getInstance();
     }
 
-    public void setStartScreen(){
+    public void setStartScreen(){ //setStartScreen method is called in the game class.
         this.menuView = new MenuView();
         game.setScreen(menuView);
     }
+
+    /* fjerne disse?
 
     public void changeView(Screen nextScreen){
         game.setScreen(nextScreen);
@@ -47,8 +50,10 @@ public class MainController extends ClickListener {
         return gameView;
     }
 
+     */
+
     @Override
-    public boolean handle(Event event) {
+    public boolean handle(Event event) { //the Main controller listenens to the buttons on the different views and changes bewteen the different views
         if (event.getListenerActor().equals(menuView.getSinglePlayerButton())) {
             clickSound.play(0.2f);
             //long id = clickSound.play(0.2f);
@@ -97,9 +102,38 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
-        else if (event.getListenerActor().equals(gameView.getGameOverButton())){
+        /*else if (event.getListenerActor().equals(gameView.getGameOverButton())){
             clickSound.play(0.2f);
             game.setScreen(gameOverView);
+            return true;
+        }*/
+        else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
+            clickSound.play(0.2f);
+            game.music.pause();
+            //settingsView.stage.clear();
+            //settingsView.stage.addActor(settingsView.getMusicOffButton());
+            //game.setScreen(settingsView);
+            //settingsView.getMusicOnButton().remove();
+            //settingsView.getMusicOnButton().setVisible(false);
+            //settingsView.getMusicOffButton().setVisible(true);
+            settingsView.getMusicOnButton().setPosition(-1000,-1000);
+            settingsView.getMusicOffButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
+            //settingsView.stage.addActor(settingsView.rightSoundButton());
+            //settingsView.getMusicOnButton().remove();
+            //settingsView.stage.draw();
+            return true;
+        }
+        else if (event.getListenerActor().equals(settingsView.getMusicOffButton())){
+            clickSound.play(0.2f);
+            game.music.setVolume(0.02f);
+            game.music.play();
+            settingsView.getMusicOffButton().setPosition(-1000,-1000);
+            settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
+            //settingsView.stage.clear();
+            //settingsView.stage.addActor(settingsView.getMusicOnButton());
+            //game.setScreen(settingsView);
+            //settingsView.getMusicOffButton().remove();
+            //settingsView.stage.draw();
             return true;
         }
         else{
