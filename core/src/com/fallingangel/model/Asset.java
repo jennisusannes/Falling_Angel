@@ -76,7 +76,10 @@ public class Asset {
 
         //BACKGROUND
         Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
-        backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, backgroundTexture.getWidth(), backgroundTexture.getHeight());
+        backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        Texture menuBackgroundTexture = new Texture("backgrounds/mainmenu_background.png");
+        backgroundTextureRegion = new TextureRegion(menuBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
@@ -107,7 +110,7 @@ public class Asset {
         planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
 
         //Buttons
-        singlePlayerTexture= new Texture("buttons/singleplayer_button.PNG");
+        singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
         multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
         achievementsTexture = new Texture("buttons/achievements_button.PNG");
         highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");

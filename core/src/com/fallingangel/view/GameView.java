@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.badlogic.gdx.Input.Keys;
@@ -95,7 +96,8 @@ public class GameView extends ScreenAdapter {
         //Camera (and viewport of the screen)
 
         this.gameCam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        this.viewPort = new StretchViewport(World.VP_WIDTH, World.VP_HEIGHT);
+        //this.viewPort = new StretchViewport(World.VP_WIDTH, World.VP_HEIGHT);
+        this.viewPort = new ScreenViewport();
         viewPort.apply();
         gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
         gameCam.update();
