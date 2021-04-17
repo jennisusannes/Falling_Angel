@@ -15,14 +15,19 @@ public class CoreInterfaceClass implements FireBaseInterface{
     public void setHighScore(String UID, String username, String date, int score) {
 
     }
-
+/*
     @Override
     public void addFriend(String UID, String friendUsername) {
+
+    }*/
+
+    @Override
+    public void connectToRoom(String roomName) {
 
     }
 
     @Override
-    public void connectToRoom(String roomName) {
+    public void updateMultiplayer(String UID) {
 
     }
 

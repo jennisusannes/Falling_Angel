@@ -1,6 +1,8 @@
 package com.fallingangel.backend;
 
 
+import android.util.Log;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -9,7 +11,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
+
+
+import java.util.ArrayList;
 
 public class AndroidInterfaceClass implements FireBaseInterface {
 
@@ -17,12 +24,19 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     DatabaseReference highScoreList;
     DatabaseReference users;
     DatabaseReference friends;
+    DatabaseReference rooms;
+
+    private String roomName;
+    private User user;
+    private HighScore highScore;
+    private ArrayList<User> userList;
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
         highScoreList = database.getReference("high-score-list");
         users = database.getReference("users");
         friends = database.getReference("friends");
+        rooms = database.getReference("games");
 
     }
 
@@ -34,7 +48,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public void createUser(String UID, String mail, String username, String password) {
-        User user = new User(username, mail, password);
+        user = new User(UID, username, mail, password);
         // [BEGIN rtdb_write_new_user_task]
         users.child(UID).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -54,6 +68,86 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             // [END rtdb_write_new_user_task]
     }
 
+
+    @Override
+    public void connectToRoom(String roomName) {
+
+
+        this.roomName = roomName;
+        // [BEGIN rtdb_write_new_user_task]
+        rooms.child(roomName).child(user.UID).setValue(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        // ...
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
+        // [END rtdb_write_new_user_task]
+
+
+    }
+
+
+    @Override
+    public void setHighScore(String UID, String username, String date, int score) {
+
+        highScore = new HighScore(username, date, score);
+        // [BEGIN rtdb_write_new_user_task]
+        highScoreList.child(UID).setValue(highScore)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        // ...
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
+        // [END rtdb_write_new_user_task]
+
+    }
+
+
+    @Override
+    public void updateMultiplayer(String UID) {
+
+
+    }
+
+
+    @Override
+    public void setOnValueChangedListener() {
+        rooms.addValueEventListener((new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //This method is called once with the initial value and again
+                        // whenever data at this location is updated
+                        String value = snapshot.getValue(String.class);
+                        Log.d(TAG, "Value is: " + value);
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+        });
+    }
+    /*
     @Override
     public void addFriend(String UID, String friendUsername){
         final String[] friendUserIDArray = new String[1];
@@ -95,38 +189,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         // [END rtdb_write_new_user_task]
 
     }
-
-    @Override
-    public void connectToRoom(String roomName) {
-
-    }
-
-    @Override
-    public void setHighScore(String UID, String username, String date, int score) {
-
-        HighScore highScore = new HighScore(username, date, score);
-        // [BEGIN rtdb_write_new_user_task]
-        highScoreList.child(UID).setValue(highScore)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
-                    }
-                });
-        // [END rtdb_write_new_user_task]
-
-    }
-
-
-
+*/
 
 
    /* @Override
@@ -172,3 +235,4 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         myRef.setValue(value);
     }*/
 }
+
