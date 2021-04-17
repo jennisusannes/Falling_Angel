@@ -42,13 +42,12 @@ public class GameActionsController extends ClickListener {
 
     private Sound clickSound;
 
-    /*
     static final int GAME_READY = 0;
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
 
-     */
+    private int state;
 
     private World world;
     private Vector3 touchPoint;
@@ -106,7 +105,14 @@ public class GameActionsController extends ClickListener {
         game.setScreen(gameView);
     }
 
-/*
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getState(){
+        return state;
+    }
+
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -132,12 +138,12 @@ public class GameActionsController extends ClickListener {
 
     }
 
- */
+
 
     //Ready to start a new game
     public void updateReady() {
         if (Gdx.input.justTouched()) {
-            gameView.setState(1); //setter state som GAME_RUNNING
+            state = GAME_RUNNING; //setState(1); //setter state som GAME_RUNNING
             resumeSystem();
         }
     }
@@ -163,7 +169,7 @@ public class GameActionsController extends ClickListener {
 
         //If player dies then :
         if (world.state == World.WORLD_STATE_GAME_OVER) {
-            gameView.setState(3); //setter state som GAME OVER
+            state = GAME_OVER; //gameView.setState(3); //setter state som GAME OVER
             //legg til en if-setning om denne scoren er høyere enn highscore -> si ny highscore, ellers bare vise scoren
             //oppdatere ny highscore i highscorelist
             pauseSystem();
@@ -262,15 +268,15 @@ public class GameActionsController extends ClickListener {
 
     //buildt-in method for pausing game.
     public void pause() {
-        if (gameView.getState() == 1) { //checks if the state is GAME_RUNNING
-            gameView.setState(2); //sets the state to GAME_PAUSED
+        if (state == GAME_RUNNING) { //gameView.getState() == 1) { //checks if the state is GAME_RUNNING
+            state = GAME_PAUSED; //gameView.setState(2); //sets the state to GAME_PAUSED
             pauseSystem();
         }
     }
 
     public void resume() {
-        if (gameView.getState() == 2) { //chacks if game is paused
-            gameView.setState(2); //sets the state to running
+        if (state == GAME_PAUSED) { //gameView.getState() == 2) { //chacks if game is paused
+            state = GAME_PAUSED; //gameView.setState(2); //sets the state to running
             resumeSystem();
         }
     }
@@ -287,8 +293,9 @@ public class GameActionsController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             } else ;
-            resume();
             game.setScreen(gameView);
+            resume();
+
             return true;
         } else {
             return false;

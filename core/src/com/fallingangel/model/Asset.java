@@ -104,7 +104,7 @@ public class Asset {
         Texture heavenBackgroundTexture = new Texture("backgrounds/level_heaven_score_background.png");
         Texture sunsetBackgroundTexture = new Texture("backgrounds/level_sunset_score_background.png");
         Texture hellBackgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
-        hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
         Texture winner1BackgroundTexture = new Texture("backgrounds/winner_player1_background.PNG");
         Texture winner2BackgroundTexture = new Texture("backgrounds/winner_player2_background.png");
 

@@ -57,13 +57,13 @@ public class GameView extends ScreenAdapter {
     private Texture pauseTexture;
     private Button pauseButton;
     private GameActionsController gameController;
-    private Stage stage;
-    private int state;
+    public Stage stage;
+    //private int state;
 
-    static final int GAME_READY = 0;
-    static final int GAME_RUNNING = 1;
-    static final int GAME_PAUSED = 2;
-    static final int GAME_OVER = 3;
+    //static final int GAME_READY = 0;
+    //static final int GAME_RUNNING = 1;
+    //static final int GAME_PAUSED = 2;
+    //static final int GAME_OVER = 3;
     //This view presents playing mode
     /*
     static final int GAME_READY = 0;
@@ -109,66 +109,8 @@ public class GameView extends ScreenAdapter {
         this.gameController = game.mc.gameActionsController;
         background = new Texture("backgrounds/level_hell_score_background.png");
         pauseTexture = new Texture("buttons/pause_button.PNG");
-        this.stage = new Stage();
-        Gdx.input.setInputProcessor(stage);
-        setPauseButton();
-        stage.addActor(getPauseButton());
-        state = GAME_RUNNING;
 
-
-        //La stå:
-        //Camera (and viewport of the screen)
-
-        /*
-        this.gameCam = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        //this.viewPort = new StretchViewport(World.VP_WIDTH, World.VP_HEIGHT);
-        this.viewPort = new ScreenViewport();
-        viewPort.apply();
-        gameCam.position.set(viewPort.getWorldWidth() / 2, viewPort.getWorldHeight() / 2, 0);
-        gameCam.update();
-
-         */
-
-        //this.touchPoint = new Vector3();
-
-
-
-        //Initializes new world, engine, stage and settingsStage.
-        //Uncertain whether we are going to use stage.
-        //this.engine = new Engine();
-        //this.world = new World(engine);
-
-
-        //Gets all the entities for the angel and puts in an array.
-        //Might use this later.
-        /*
-        this.angels = engine.getEntities();
-
-        //Adds all the systems to the engine
-        engine.addSystem(new AngelSystem(world));
-        engine.addSystem(new ObstacleSystem());
-        engine.addSystem(new PlaneSystem());
-        engine.addSystem(new MovementSystem());
-        engine.addSystem(new BackgroundSystem());
-        engine.addSystem(new AnimationSystem());
-        engine.addSystem(new CollisionSystem(world));
-        engine.addSystem(new RenderingSystem(game.batch));
-        engine.addSystem(new StateSystem());
-        engine.addSystem(new BoundsSystem());
-        engine.addSystem(new CoinSystem());
-
-         */
-
-
-        //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.
-
-        // Denne fikser bakgrunnen feil? fikse som de andre
-        //TODO: fikse bakgrunn
-
-        //engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());
-
-        //Creates world
-        //world.create();
+        gameController.setState(1);//state = GAME_RUNNING;
 
     }
     //setter and getter for the back button
@@ -178,14 +120,6 @@ public class GameView extends ScreenAdapter {
 
     public Button getPauseButton(){
         return pauseButton;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public int getState(){
-        return state;
     }
 
     //method for creating a button and adding the main controller as a listener
@@ -202,7 +136,7 @@ public class GameView extends ScreenAdapter {
         });
         return button;
     }
-
+    /*
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -227,6 +161,8 @@ public class GameView extends ScreenAdapter {
         }
 
     }
+
+     */
     /*
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
@@ -348,6 +284,10 @@ public class GameView extends ScreenAdapter {
 
          */
         game.batch.end();
+        this.stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        setPauseButton();
+        stage.addActor(getPauseButton());
         stage.draw();
 
     }
@@ -405,9 +345,10 @@ public class GameView extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        update(delta);
+        gameController.update(delta);
+        gameController.updateRunning(delta);
         draw();
-        stage.act(delta);
+        //stage.act();
     }
     /*
     //buildt-in method for pausing game.
