@@ -42,10 +42,13 @@ public class GameActionsController extends ClickListener {
 
     private Sound clickSound;
 
+    /*
     static final int GAME_READY = 0;
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
+
+     */
 
     private World world;
     private Vector3 touchPoint;
@@ -62,13 +65,13 @@ public class GameActionsController extends ClickListener {
     //Might need this for multiplayer
     private ImmutableArray angels;
 
-    private int state;
+    //private int state;
 
     public GameActionsController() {
         this.game = FallingAngel.getInstance();
         clickSound = Asset.clickSound;
         // coinSound = Asset.coinSound;
-        state = GAME_READY;
+        //state = GAME_READY;
 
         this.touchPoint = new Vector3();
         //Initializes new world, engine, stage and settingsStage.
@@ -103,7 +106,7 @@ public class GameActionsController extends ClickListener {
         game.setScreen(gameView);
     }
 
-
+/*
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -129,10 +132,12 @@ public class GameActionsController extends ClickListener {
 
     }
 
+ */
+
     //Ready to start a new game
-    private void updateReady() {
+    public void updateReady() {
         if (Gdx.input.justTouched()) {
-            state = GAME_RUNNING;
+            gameView.setState(1); //setter state som GAME_RUNNING
             resumeSystem();
         }
     }
@@ -158,7 +163,7 @@ public class GameActionsController extends ClickListener {
 
         //If player dies then :
         if (world.state == World.WORLD_STATE_GAME_OVER) {
-            state = GAME_OVER;
+            gameView.setState(3); //setter state som GAME OVER
             //legg til en if-setning om denne scoren er høyere enn highscore -> si ny highscore, ellers bare vise scoren
             //oppdatere ny highscore i highscorelist
             pauseSystem();
@@ -166,7 +171,7 @@ public class GameActionsController extends ClickListener {
         }
     }
 
-    private void updatePaused() {
+    public void updatePaused() {
         /*//These are "buttons" for pause-menu. Can either resume or quit
         if (Gdx.input.justTouched()) {
             gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
@@ -186,10 +191,11 @@ public class GameActionsController extends ClickListener {
     }
 
     //When the player dies and the game is over, the player is sent to GameOverView
-    private void updateGameOver() {
+    public void updateGameOver() {
         //TODO: må sende spilleren til gameover-view
     }
 
+    /*
     public void switchState() {
 
         switch (state) {
@@ -207,6 +213,8 @@ public class GameActionsController extends ClickListener {
                 break;
         }
     }
+
+     */
 
     //In the present-methods, all the GUI will be drawn/ shown for the game-view
     public void presentReady() {
@@ -229,7 +237,7 @@ public class GameActionsController extends ClickListener {
     }
 
     //This method sets all systems updating on pause.
-    private void pauseSystem() {
+    public void pauseSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(false);
         engine.getSystem(ObstacleSystem.class).setProcessing(false);
         engine.getSystem(PlaneSystem.class).setProcessing(false);
@@ -241,7 +249,7 @@ public class GameActionsController extends ClickListener {
 
     }
 
-    private void resumeSystem() {
+    public void resumeSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(true);
         engine.getSystem(ObstacleSystem.class).setProcessing(true);
         engine.getSystem(PlaneSystem.class).setProcessing(true);
@@ -254,15 +262,15 @@ public class GameActionsController extends ClickListener {
 
     //buildt-in method for pausing game.
     public void pause() {
-        if (state == GAME_RUNNING) {
-            state = GAME_PAUSED;
+        if (gameView.getState() == 1) { //checks if the state is GAME_RUNNING
+            gameView.setState(2); //sets the state to GAME_PAUSED
             pauseSystem();
         }
     }
 
     public void resume() {
-        if (state == GAME_PAUSED) {
-            state = GAME_RUNNING;
+        if (gameView.getState() == 2) { //chacks if game is paused
+            gameView.setState(2); //sets the state to running
             resumeSystem();
         }
     }

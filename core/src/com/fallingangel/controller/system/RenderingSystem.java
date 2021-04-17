@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.model.Asset;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
@@ -23,8 +24,6 @@ public class RenderingSystem extends IteratingSystem{
 
     static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
-
-
 
 
     static final float PIXELS_TO_METRES = 1.0f / 32.0f;
@@ -80,6 +79,7 @@ public class RenderingSystem extends IteratingSystem{
         //denne zoomer inn kameraet, vet ikke om den skal brukes enda
         //sb.setProjectionMatrix(cam.combined);
         sb.begin();
+        sb.draw(Asset.hellBackgroundTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //iterates through all entities and gets the component.
         for (Entity entity : renderQueue) {

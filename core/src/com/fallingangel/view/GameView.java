@@ -58,7 +58,12 @@ public class GameView extends ScreenAdapter {
     private Button pauseButton;
     private GameActionsController gameController;
     private Stage stage;
+    private int state;
 
+    static final int GAME_READY = 0;
+    static final int GAME_RUNNING = 1;
+    static final int GAME_PAUSED = 2;
+    static final int GAME_OVER = 3;
     //This view presents playing mode
     /*
     static final int GAME_READY = 0;
@@ -108,7 +113,7 @@ public class GameView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
         setPauseButton();
         stage.addActor(getPauseButton());
-        //state = GAME_READY;
+        state = GAME_RUNNING;
 
 
         //La stå:
@@ -168,11 +173,19 @@ public class GameView extends ScreenAdapter {
     }
     //setter and getter for the back button
     public void setPauseButton() {
-        this.pauseButton = makeButton(pauseTexture,150,150, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight() * 0.9f);
+        this.pauseButton = makeButton(pauseTexture,150,150, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
     }
 
     public Button getPauseButton(){
         return pauseButton;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getState(){
+        return state;
     }
 
     //method for creating a button and adding the main controller as a listener
@@ -188,6 +201,31 @@ public class GameView extends ScreenAdapter {
             }
         });
         return button;
+    }
+
+    //Calls on different functions depending on which state the game is in
+    public void update(float dt) {
+        if (dt > 0.1f) dt = 0.1f;
+
+        //delta-time is the time difference between the frames and controls the speed of changing frames. (60*dt = 60fps)
+        //Updates all systems.
+        gameController.engine.update(dt);
+
+        switch (state) {
+            case GAME_READY:
+                gameController.updateReady();
+                break;
+            case GAME_RUNNING:
+                gameController.updateRunning(dt);
+                break;
+            case GAME_PAUSED:
+                gameController.updatePaused();
+                break;
+            case GAME_OVER:
+                gameController.updateGameOver();
+                break;
+        }
+
     }
     /*
     //Calls on different functions depending on which state the game is in
@@ -290,7 +328,7 @@ public class GameView extends ScreenAdapter {
         */
 
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
+        //game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         //TODO: hent ut riktig state fra gameActionsController
         /*
         switch (state) {
@@ -359,15 +397,14 @@ public class GameView extends ScreenAdapter {
         engine.getSystem(AnimationSystem.class).setProcessing(true);
         engine.getSystem(CollisionSystem.class).setProcessing(true);
     }
-    */
-    public void update(float dt) {
-        gameController.updateRunning(dt);
-    }
+
+
+
+     */
+
 
     @Override
     public void render(float delta) {
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //TODO: henger sammen med å fikse bakgrunnen
         update(delta);
         draw();
         stage.act(delta);
