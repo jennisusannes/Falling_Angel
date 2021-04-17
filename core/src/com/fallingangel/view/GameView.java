@@ -57,10 +57,7 @@ public class GameView extends ScreenAdapter {
     private Texture pauseTexture;
     private Button pauseButton;
     private GameActionsController gameController;
-    private MainController mainController;
     private Stage stage;
-    private Stage settingsStage;
-
 
     //This view presents playing mode
     /*
@@ -103,15 +100,14 @@ public class GameView extends ScreenAdapter {
 
     public GameView() {
         super();
-        //this.game  = FallingAngel.getInstance();
-        Asset.load();
         this.game = FallingAngel.getInstance();
-        this.gameController = mainController.gameActionsController;
+        this.gameController = game.mc.gameActionsController;
         background = new Texture("backgrounds/level_hell_score_background.png");
         pauseTexture = new Texture("buttons/pause_button.PNG");
-        Gdx.input.setInputProcessor(stage);
         this.stage = new Stage();
-        this.settingsStage = new Stage(); //hva gjør denne??
+        Gdx.input.setInputProcessor(stage);
+        setPauseButton();
+        stage.addActor(getPauseButton());
         //state = GAME_READY;
 
 
@@ -171,7 +167,7 @@ public class GameView extends ScreenAdapter {
 
     }
     //setter and getter for the back button
-    public void setBackButton() {
+    public void setPauseButton() {
         this.pauseButton = makeButton(pauseTexture,300,300, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight() * 0.9f);
     }
 
@@ -187,7 +183,7 @@ public class GameView extends ScreenAdapter {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                gameController = mainController.gameActionsController;
+                gameController = game.mc.gameActionsController;
                 gameController.handle(inputEvent);
             }
         });
@@ -286,7 +282,7 @@ public class GameView extends ScreenAdapter {
         //TODO: må sende spilleren til gameover-view
     }
     */
-    public void draw () {
+    public void draw() {
         //Uncertain if we'll use cam.
         /*
         gameCam.update();
@@ -314,6 +310,7 @@ public class GameView extends ScreenAdapter {
 
          */
         game.batch.end();
+        stage.draw();
 
     }
     /*
@@ -364,7 +361,7 @@ public class GameView extends ScreenAdapter {
     }
     */
     public void update(float dt) {
-
+        gameController.updateRunning(dt);
     }
 
     @Override

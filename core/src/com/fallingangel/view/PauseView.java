@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 
@@ -17,31 +18,45 @@ public class PauseView extends ScreenAdapter {
 
     private FallingAngel game;
     private Texture background;
-    private Texture backTexture;
-    private Button backButton;
-    private MainController controller;
+    private Texture exitTexture;
+    private Texture resumeTexture;
+    private Button exitButton;
+    private Button resumeButton;
+    private GameActionsController gameController;
     private Stage stage;
 
     public PauseView(){
         super();
         this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
-        this.controller = game.mc;  //sets the controller as the main controller
+        this.gameController = game.mc.gameActionsController;  //sets the controller as the main controller
         background = new Texture("backgrounds/level_hell_background.png");
-        backTexture = new Texture("buttons/back_button.png");
+        exitTexture = new Texture("buttons/exit_button.PNG");
+        resumeTexture = new Texture("buttons/resume_button.PNG");
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor
-        setBackButton(); //creates a button
-        stage.addActor(getBackButton()); //adds the button as an actor to the stage
+        setExitButton(); //creates a button
+        setResumeButton();
+        stage.addActor(getExitButton()); //adds the button as an actor to the stage
+        stage.addActor(getResumeButton());
     }
 
-    //setter and getter for the back button
-    public void setBackButton() {
-        this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+    //setter and getter for the buttons
+    public void setExitButton() {
+        this.exitButton = makeButton(exitTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
 
-    public Button getBackButton(){
-        return backButton;
+    public Button getExitButton(){
+        return exitButton;
     }
+
+    public void setResumeButton() {
+        this.resumeButton = makeButton(resumeTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.7f);
+    }
+
+    public Button getResumeButton(){
+        return resumeButton;
+    }
+
 
     //method for creating a button and adding the main controller as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
@@ -51,8 +66,8 @@ public class PauseView extends ScreenAdapter {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                controller = game.mc;
-                controller.handle(inputEvent);
+                gameController = game.mc.gameActionsController;
+                gameController.handle(inputEvent);
             }
         });
         return button;

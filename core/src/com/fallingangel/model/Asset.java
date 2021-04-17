@@ -45,13 +45,15 @@ public class Asset {
     public static Music backgroundMusic;
     public static Sound clickSound;
 
-
+    // BUTTONS
     public static Texture singlePlayerTexture;
     public static Texture multiPlayerTexture;
     public static Texture achievementsTexture;
     public static Texture highscoreListTexture;
     public static Texture settingsTexture;
     public static Texture backTexture;
+    public static Texture exitTexture;
+    public static Texture resumeTexture;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";

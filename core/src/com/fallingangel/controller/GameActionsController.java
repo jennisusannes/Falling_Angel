@@ -24,6 +24,7 @@ import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 import com.fallingangel.view.GameView;
+import com.fallingangel.view.PauseView;
 
 public class GameActionsController extends ClickListener {
 
@@ -37,6 +38,7 @@ public class GameActionsController extends ClickListener {
      */
     public FallingAngel game;
     public GameView gameView;
+    public PauseView pauseView = new PauseView();
 
     private Sound clickSound;
 
@@ -101,6 +103,7 @@ public class GameActionsController extends ClickListener {
         game.setScreen(gameView);
     }
 
+
     //Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -108,7 +111,6 @@ public class GameActionsController extends ClickListener {
         //delta-time is the time difference between the frames and controls the speed of changing frames. (60*dt = 60fps)
         //Updates all systems.
         engine.update(dt);
-
 
         switch (state) {
             case GAME_READY:
@@ -138,7 +140,7 @@ public class GameActionsController extends ClickListener {
     //Updates on what state the game is in
     //TODO: må legge inn metoder for hva som skjer mens spillet kjører
     //Koble denne opp mot PlayerActionsController, angelSystem og renderingSystem på et vis :))
-    private void updateRunning (float dt) {
+    public void updateRunning(float dt) {
         //Handle input. AccelX is changed here and being set in AngelSystem
 
         float accelX = 0.0f;
@@ -147,11 +149,8 @@ public class GameActionsController extends ClickListener {
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
 
 
-
-
-
         //Updates the players score and presents as a string
-        if(world.score != lastScore) {
+        if (world.score != lastScore) {
             lastScore = world.score;
             //This will be shown on the screen at all times. Should be used at drawUI()
             scoreString = "SCORE: " + lastScore;
@@ -168,7 +167,7 @@ public class GameActionsController extends ClickListener {
     }
 
     private void updatePaused() {
-        //These are "buttons" for pause-menu. Can either resume or quit
+        /*//These are "buttons" for pause-menu. Can either resume or quit
         if (Gdx.input.justTouched()) {
             gameCam.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
@@ -183,7 +182,7 @@ public class GameActionsController extends ClickListener {
                 //TODO: implement a method so player is sent to menu
                 return;
             }
-        }
+        }*/
     }
 
     //When the player dies and the game is over, the player is sent to GameOverView
@@ -254,7 +253,6 @@ public class GameActionsController extends ClickListener {
     }
 
     //buildt-in method for pausing game.
-    @Override
     public void pause() {
         if (state == GAME_RUNNING) {
             state = GAME_PAUSED;
@@ -262,17 +260,31 @@ public class GameActionsController extends ClickListener {
         }
     }
 
+    public void resume() {
+        if (state == GAME_PAUSED) {
+            state = GAME_RUNNING;
+            resumeSystem();
+        }
+    }
+
     public boolean handle(Event event) { //the Main controller listenens to the buttons on the different views and changes bewteen the different views
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
-            if (game.soundOn()){
+            if (game.soundOn()) {
                 clickSound.play(0.2f);
-            }
-            else;
-
-            game.setScreen(pauseView); //må lege et pauseView
+            } else ;
+            pause();
+            game.setScreen(pauseView);
             return true;
-        }
-        else {
+        } else if (event.getListenerActor().equals(pauseView.getResumeButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            } else ;
+            resume();
+            game.setScreen(gameView);
+            return true;
+        } else {
             return false;
         }
+    }
+
 }

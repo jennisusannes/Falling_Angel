@@ -22,7 +22,6 @@ public class MainController extends ClickListener {
 
     public FallingAngel game;
     //initializing the different views
-    //public GameView gameView = new GameView();
     public GameActionsController gameActionsController;
     public GameOverView gameOverView = new GameOverView();
     public HelpView1 helpView1 = new HelpView1();
@@ -32,7 +31,6 @@ public class MainController extends ClickListener {
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public MenuView menuView;
-    public Asset asset;
     private Sound clickSound;
     //private Sound clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
 

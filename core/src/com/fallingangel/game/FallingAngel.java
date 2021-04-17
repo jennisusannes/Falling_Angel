@@ -16,7 +16,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public BitmapFont font;
 	public Music music;
 	public MainController mc;
-	public Asset assets;
 	private static final FallingAngel INSTANCE = new FallingAngel(); //initializing the game as INSTANCE
 
 	private FallingAngel(){ //private constructor for the game
@@ -38,13 +37,12 @@ public final class FallingAngel extends Game implements ApplicationListener {
 
 	@Override
 	public void create () {
+		Asset.load();
 		batch = new SpriteBatch(); //creates a new spritebatch
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller
-		assets.load();
 
-
-		music = assets.backgroundMusic;
+		music = Asset.backgroundMusic;
 		music.setVolume(0.02f); //sets the volume of the background music
 		music.setLooping(true); //the backgrounds music will continuously loop
 		music.play(); //plays the music
