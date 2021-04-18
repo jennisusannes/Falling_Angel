@@ -2,42 +2,22 @@ package com.fallingangel.backend;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
-import com.fallingangel.model.World;
 
 public class CoreInterfaceClass implements FireBaseInterface{
+
     @Override
-    public void connect() {
+    public void createUser(String mail, String username, String password) {
 
     }
 
     @Override
-    public void createUser(String UID, String mail, String username, String password) {
+    public void updateScore(int score) {
 
     }
-
-    @Override
-    public void setHighScore(String UID, String username, String date, int score) {
-
-    }
-/*
-    @Override
-    public void addFriend(String UID, String friendUsername) {
-
-    }*/
 
     @Override
     public void connectToRoom(String roomName) {
 
-    }
-
-    @Override
-    public void updateMultiplayer(String UID) {
-
-    }
-
-    @Override
-    public void setOnValueChangedListener() {
-        
     }
 
     @Override
