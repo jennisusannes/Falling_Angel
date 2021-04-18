@@ -61,10 +61,9 @@ public class MultiplayerSystem extends IntervalSystem {
 
             MultiPlayerData multiPlayerData = new MultiPlayerData();
             multiPlayerData.score = (int) (angelComponent.AIRTIME + angelComponent.COINS_HIT);
-            multiPlayerData.roomNumber = roomNumber;
             //multiPlayerData.position.x = transformComponent.pos.x;
             //multiPlayerData.position.y = transformComponent.pos.y;
-            FallingAngel.getInstance().FBI.updateMultiplayer(multiPlayerData);
+            FallingAngel.getInstance().FBI.connectToRoom(roomNumber, multiPlayerData);
         }
     }
 }

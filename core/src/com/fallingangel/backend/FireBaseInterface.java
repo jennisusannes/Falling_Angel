@@ -6,7 +6,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 public interface FireBaseInterface {
     public void createUser(String mail, String username, String password);
     public void updateScore(int score);
-    public void connectToRoom(String roomName);
+    public void connectToRoom(String roomName, MultiPlayerData mpd);
   //  public void createWorldInDB(ImmutableArray<Entity> entities);
     public int opponentScore();
  }

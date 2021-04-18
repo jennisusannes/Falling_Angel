@@ -1,7 +1,4 @@
 package com.fallingangel.backend;
-
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -98,11 +95,11 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
 
     @Override
-    public void connectToRoom(String roomName) {
+    public void connectToRoom(String roomName, MultiPlayerData mpd) {
 
         this.roomName = roomName;
         // [BEGIN rtdb_write_new_user_task]
-        rooms.child(roomName).child(user.getUID()).setValue(user)
+        rooms.child(roomName).child(user.getUID()).setValue(mpd)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

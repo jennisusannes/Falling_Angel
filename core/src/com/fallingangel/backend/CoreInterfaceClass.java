@@ -16,7 +16,7 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void connectToRoom(String roomName) {
+    public void connectToRoom(String roomName, MultiPlayerData mpd) {
 
     }
 

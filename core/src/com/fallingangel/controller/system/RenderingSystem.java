@@ -111,8 +111,8 @@ public class RenderingSystem extends IteratingSystem{
         //prints the updated score
         BitmapFont font = new BitmapFont();
         int scoreInt = (int) score;
-        // TODO create an ID for every player
-        this.game.FBI.updateScore((int)AngelComponent.SCORE);
+        // TODO do it
+        //this.game.FBI.updateScore((int)AngelComponent.SCORE);
 
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
