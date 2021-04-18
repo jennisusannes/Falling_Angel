@@ -11,15 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
-import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class PauseView extends ScreenAdapter {
 
     private FallingAngel game;
-    private Texture background;
-    private Texture exitTexture;
-    private Texture resumeTexture;
     private Button exitButton;
     private Button resumeButton;
     private GameActionsController gameController;
@@ -27,22 +24,19 @@ public class PauseView extends ScreenAdapter {
 
     public PauseView(){
         super();
-        this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
-        this.gameController = game.mc.gameActionsController;  //sets the controller as the main controller
-        background = new Texture("backgrounds/level_hell_background.png");
-        exitTexture = new Texture("buttons/exit_button.PNG");
-        resumeTexture = new Texture("buttons/resume_button.PNG");
-        stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
-        Gdx.input.setInputProcessor(stage); //sets input processor
-        setExitButton(); //creates a button
+        this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
+        this.gameController = game.mc.gameActionsController;  // Sets the controller as the main controller
+        stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
+        Gdx.input.setInputProcessor(stage); // Sets input processor
+        setExitButton(); // Creates a button
         setResumeButton();
-        stage.addActor(getExitButton()); //adds the button as an actor to the stage
-        stage.addActor(getResumeButton());
+        stage.addActor(exitButton); // Adds the button as an actor to the stage
+        stage.addActor(resumeButton);
     }
 
-    //setter and getter for the buttons
+    // Getters and setters for the buttons
     public void setExitButton() {
-        this.exitButton = makeButton(exitTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.exitButton = makeButton(Asset.exitButton,600,300, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getExitButton(){
@@ -50,7 +44,7 @@ public class PauseView extends ScreenAdapter {
     }
 
     public void setResumeButton() {
-        this.resumeButton = makeButton(resumeTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.7f);
+        this.resumeButton = makeButton(Asset.resumeButton,900,300, Gdx.graphics.getWidth()*0.20f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getResumeButton(){
@@ -58,8 +52,8 @@ public class PauseView extends ScreenAdapter {
     }
 
 
-    //method for creating a button and adding the main controller as a listener
-    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+    // Method for creating a button, this will add the GameActionsController as a listener
+    private Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);
         button.setPosition(xPos, yPos);
@@ -74,15 +68,12 @@ public class PauseView extends ScreenAdapter {
     }
 
     public void draw(){
-
-        Gdx.input.setInputProcessor(stage); //sets input processor
+        Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
+        game.batch.draw(Asset.hellBackgroundTextureRegion, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         game.batch.end();
-        stage.draw(); //draws the stage
+        stage.draw(); // Draws the stage
     }
-
-
 
     public void update(float dt) {
 
@@ -92,6 +83,5 @@ public class PauseView extends ScreenAdapter {
         update(dt);
         draw();
         stage.act();
-
     }
 }

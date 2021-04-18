@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class HelpView3 extends ScreenAdapter {
 
@@ -23,18 +24,17 @@ public class HelpView3 extends ScreenAdapter {
 
     public HelpView3(){
         super();
-        this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
-        this.controller = game.mc;  //sets the controller as the main controller
-        help3 = new Texture("helpViews/helpView3.png");
-        stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
-        Gdx.input.setInputProcessor(stage); //sets input processor
-        setNextButton(); //creates a button
-        stage.addActor(getNextButton()); //adds the button as an actor to the stage
+        this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
+        this.controller = game.mc;  // Sets the controller as the main controller
+        stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
+        Gdx.input.setInputProcessor(stage); // Sets input processor
+        setNextButton(); // Creates a button
+        stage.addActor(nextButton); // Adds the button as an actor to the stage
     }
 
 
 
-    //method for creating a button and adding the main controller as a listener
+    // Method for creating a button, this will add the MainController as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);
@@ -48,19 +48,10 @@ public class HelpView3 extends ScreenAdapter {
         });
         return button;
     }
-    /*
-    public void handleInput() {
-        if(Gdx.input.justTouched()) {
-            game.setScreen(controller.menuView);
-            dispose();
-        }
-    }
-
-     */
 
     //setter and getter for the back button
     public void setNextButton() {
-        this.nextButton = makeButton(help3, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
+        this.nextButton = makeButton(Asset.help3BackgroundTexture, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
     }
 
     public Button getNextButton(){
@@ -68,11 +59,8 @@ public class HelpView3 extends ScreenAdapter {
     }
 
 
-
-
     public void draw(){
-
-        Gdx.input.setInputProcessor(stage); //sets input processor
+        Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
         //game.batch.draw(help2, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         game.batch.end();

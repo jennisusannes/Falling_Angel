@@ -10,62 +10,72 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class GameOverView extends ScreenAdapter {
 
     private FallingAngel game;
-    private Texture background;
-    private Texture backTexture;
-    private Button backButton;
-    private MainController controller;
+    private GameActionsController gameController;
     private Stage stage;
+    private Button backButton;
+    private Texture background;
 
     public GameOverView(){
         super();
-        this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
-        this.controller = game.mc;//sets the controller as the main controller
-        background = new Texture("backgrounds/winner_player1_background.PNG");
-        backTexture = new Texture("buttons/back_button.png");
-
-        stage = new Stage(new ScreenViewport());//sets the stage as a new stage and a new viewport
-        Gdx.input.setInputProcessor(stage);//sets input processor
-        setBackButton();//creates a button
-        stage.addActor(getBackButton());//adds the button as an actor to the stage
+        this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
+        this.gameController = game.mc.gameActionsController; // Sets the controller as the main controller
+        stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
+        Gdx.input.setInputProcessor(stage); // Sets input processor
+        setBackButton(); // Creates a button
+        stage.addActor(backButton); // Adds the button as an actor to the stage
     }
 
-    //setter and getter for the back button
+    // Getter and setter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
         return backButton;
     }
 
-    //method for creating a button and adding the main controller as a listener
-    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+    // Method for creating a button, this will add the MainController as a listener
+    private Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);
         button.setPosition(xPos, yPos);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                controller = game.mc;
-                controller.handle(inputEvent);
+                gameController = game.mc.gameActionsController;
+                gameController.handle(inputEvent);
             }
         });
         return button;
     }
+    // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
+    public void setWinner(int winner) {
+        if (winner == 1) {
+            background = Asset.winner1BackgroundTexture;
+        }
+        else if (winner == 2) {
+            background = Asset.winner2BackgroundTexture;
+        }
+        else {
+            background = Asset.highscorelistBackgroundTexture;
+        }
+    }
 
     public void draw(){
 
-        Gdx.input.setInputProcessor(stage);//sets input processor
+        Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//draws the sprite batch
+        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         game.batch.end();
-        stage.draw();//draws the stage
+        stage.draw(); // Draws the stage
     }
 
     public void update(float dt) {

@@ -17,7 +17,6 @@ import com.fallingangel.model.Asset;
 public class HighScoreListView extends ScreenAdapter {
 
     private FallingAngel game;
-    private Texture background;
     private Button backButton;
     private MainController controller;
     private Stage stage;
@@ -26,16 +25,15 @@ public class HighScoreListView extends ScreenAdapter {
         super();
         this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc; //sets the controller as the main controller
-        background = new Texture("backgrounds/highscorelist_blurred_background.png");
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor
         setBackButton(); //creates a button
-        stage.addActor(getBackButton()); //adds the button as an actor to the stage
+        stage.addActor(backButton); //adds the button as an actor to the stage
     }
 
     //setter and getter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backTexture,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -60,7 +58,7 @@ public class HighScoreListView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage); //sets input processor
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
+        game.batch.draw(Asset.highscorelistBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         game.batch.end();
         stage.draw(); //draws the stage
     }

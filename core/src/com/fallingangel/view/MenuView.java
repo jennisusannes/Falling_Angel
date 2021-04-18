@@ -17,104 +17,81 @@ import com.fallingangel.model.Asset;
 
 public class MenuView extends ScreenAdapter {
 
-    private Texture background;
-
-    // textures for buttons
-    private Texture singlePlayerTexture;
-    private Texture multiPlayerTexture;
-    private Texture achievementsTexture;
-    private Texture highscoreListTexture;
-    private Texture settingsTexture;
-    private Texture questionTexture;
     private FallingAngel game;
     private Stage stage;
-    private Asset asset;
     private MainController controller;
 
     // buttons
     private Button singlePlayerButton;
     private Button multiPlayerButton;
-    private Button achievementsButton;
+    //private Button achievementsButton;
     private Button highscoreListButton;
     private Button settingsButton;
-    private Button questionButton;
+    private Button helpButton;
 
     public MenuView(){
         super();
         this.game = FallingAngel.getInstance();
         this.controller = game.mc;
-        background = new Texture("backgrounds/mainmenu_background.png");
-        Asset asset = new Asset();
-        // button textures
-        singlePlayerTexture = new Texture("buttons/singleplayer_button.PNG");
-        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
-        achievementsTexture = new Texture("buttons/achievements_button.PNG");
-        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
-        settingsTexture = new Texture("buttons/settings_button.PNG");
-        questionTexture = new Texture("buttons/help_button.PNG");
         stage = new Stage(new ScreenViewport()); //crates a new stage and a viewport
 
-        //created buttons and adds them to the stage as actors
+        // Create buttons and adds them to the stage as actors
 
         setSinglePlayerButton();
-        stage.addActor(getSinglePlayerButton());
+        stage.addActor(singlePlayerButton);
 
         setMultiPlayerButton();
-        stage.addActor(getMultiPlayerButton());
+        stage.addActor(multiPlayerButton);
 
+        // Removed achievements
+        /*
         setAchievementsButton();
-        stage.addActor(getAchievementsButton());
+        stage.addActor(achievementsButton);
+         */
 
         setHighscoreListButton();
-        stage.addActor(getHighscoreListButton());
+        stage.addActor(highscoreListButton);
 
         setSettingsButton();
-        stage.addActor(getSettingsButton());
+        stage.addActor(settingsButton);
 
-        setQuestionButton();
-        stage.addActor(getQuestionButton());
+        setHelpButton();
+        stage.addActor(helpButton);
 
     }
 
-    // getters and setters for buttons
+    // Getters and setters for buttons
 
     public void setSinglePlayerButton() {
-        this.singlePlayerButton = makeButton(asset.singlePlayerTexture,600, 400, Gdx.graphics.getWidth()*0.33f - 600*0.67f, Gdx.graphics.getHeight() * 0.4f);
+        this.singlePlayerButton = makeButton(Asset.singlePlayerButton,600, 400, Gdx.graphics.getWidth()*0.33f - 600*0.67f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getSinglePlayerButton(){
         return singlePlayerButton;
     }
 
-    public void setQuestionButton() {
-        this.questionButton = makeButton(questionTexture,200, 200, Gdx.graphics.getWidth()*0.5f - 100, Gdx.graphics.getHeight() * 0.05f);
-    }
-
-    public Button getQuestionButton(){
-        return questionButton;
-    }
-
-
     public void setMultiPlayerButton() {
-        this.multiPlayerButton = makeButton(asset.multiPlayerTexture,600, 400, Gdx.graphics.getWidth()*0.67f - 600*0.33f, Gdx.graphics.getHeight() * 0.4f);
+        this.multiPlayerButton = makeButton(Asset.multiPlayerButton,600, 400, Gdx.graphics.getWidth()*0.67f - 600*0.33f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getMultiPlayerButton(){
         return multiPlayerButton;
     }
 
-
+    // Removed achievements
+    /*
     public void setAchievementsButton() {
-        this.achievementsButton = makeButton(asset.achievementsTexture, 200,200, Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
+        this.achievementsButton = makeButton(Asset.achievementsButton, 200,200, Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getAchievementsButton(){
         return achievementsButton;
     }
+     */
 
 
     public void setHighscoreListButton() {
-        this.highscoreListButton = makeButton(asset.highscoreListTexture,200, 200,Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
+        this.highscoreListButton = makeButton(Asset.highscorelistButton,200, 200,Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getHighscoreListButton(){
@@ -123,11 +100,20 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setSettingsButton() {
-        this.settingsButton = makeButton(asset.settingsTexture,200,200,Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight() * 0.89f);
+        this.settingsButton = makeButton(Asset.settingsButton,200,200,Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight() * 0.89f);
     }
 
     public Button getSettingsButton(){
         return settingsButton;
+    }
+
+
+    public void setHelpButton() {
+        this.helpButton = makeButton(Asset.helpButton,200, 200, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
+    }
+
+    public Button getHelpButton(){
+        return helpButton;
     }
 
 
@@ -137,16 +123,16 @@ public class MenuView extends ScreenAdapter {
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
-        Gdx.input.setInputProcessor(stage); //sets the input processor
+        Gdx.input.setInputProcessor(stage); // Sets the input processor
 
         game.batch.begin(); // Draw elements to Sprite Batch
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
+        game.batch.draw(Asset.menuBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         game.batch.end();
-        stage.draw(); //draws the stage
+        stage.draw(); // Draws the stage
     }
 
-    //method for creating a button. This will set the MainController as a listener
-    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+    // Method for creating a button, this will add the MainController as a listener
+    private Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);
         button.setPosition(xPos, yPos);
@@ -170,5 +156,4 @@ public class MenuView extends ScreenAdapter {
         draw();
         stage.act(dt);
     }
-
 }

@@ -2,10 +2,8 @@ package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
@@ -19,48 +17,35 @@ import com.fallingangel.model.Asset;
 public class SettingsView extends ScreenAdapter {
 
     private FallingAngel game;
-    private Texture background;
-    private Texture backTexture;
-    private Texture musicOnTexture;
-    private Texture musicOffTexture;
-    private Texture bunnyTexture;
-    private Texture pigTexture;
+    private MainController controller;
+    public Stage stage;
     private Button backButton;
     private Button musicOnButton;
     private Button musicOffButton;
     private Button bunnyButton;
     private Button pigButton;
-    private MainController controller;
-    public Stage stage;
 
     public SettingsView(){
         super();
-        this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
-        this.controller = game.mc;//sets the controller as the main controller
-        background = new Texture("backgrounds/settings_background.png");
-        backTexture = new Texture("buttons/back_button.png");
-        musicOnTexture = new Texture("buttons/on_button.png");
-        musicOffTexture = new Texture("buttons/off_button.png");
-        bunnyTexture = new Texture("characters/bunny/bunny_select_character.png");
-        pigTexture = new Texture("characters/pig/pig_select_character.PNG");
-        stage = new Stage(new ScreenViewport());//sets the stage as a new stage and a new viewport
-        Gdx.input.setInputProcessor(stage);//sets input processor
-        setBackButton();//creates a button
+        this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
+        this.controller = game.mc; // Sets the controller as the main controller
+        stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
+        Gdx.input.setInputProcessor(stage); // Sets input processor
+        setBackButton(); // Creates a button
+        stage.addActor(backButton); // Adds the button as an actor to the stage
         setMusicOnButton();
         setMusicOffButton();
-        setBunnyButton();
-        setPigButton();
-        stage.addActor(getBackButton());//adds the button as an actor to the stage
         stage.addActor(musicOnButton);
         stage.addActor(musicOffButton);
+        setBunnyButton();
+        setPigButton();
         stage.addActor(bunnyButton);
         stage.addActor(pigButton);
-        game.setChosenCharacter(Asset.pigAnimation);
     }
 
-    //setter and getter for the buttons
+    // Getters and setters for the buttons
     public void setBackButton() {
-        this.backButton = makeButton(backTexture,600,400, Gdx.graphics.getWidth()*0.5f-300, Gdx.graphics.getHeight() * 0.2f);
+        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -68,7 +53,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOnButton() {
-        this.musicOnButton = makeButton(musicOnTexture,400,300, Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
+        this.musicOnButton = makeButton(Asset.musicOnButton,500,300, Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
     }
 
     public Button getMusicOnButton(){
@@ -76,32 +61,39 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOffButton() {
-        this.musicOffButton = makeButton(musicOffTexture,400,300, -1000,-1000);
+        this.musicOffButton = makeButton(Asset.musicOffButton,500,300, -1000,-1000);
     }
 
     public Button getMusicOffButton(){
         return musicOffButton;
     }
 
-    //buttons for choosing character
     public void setBunnyButton() {
-        this.bunnyButton = makeButton(bunnyTexture,200,400, -1000, -1000);
+        this.bunnyButton = makeButton(Asset.bunnyButton,600,500, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.3f);
     }
 
-    public Button getBunnyButton(){
+    public Button getBunnyButton() {
         return bunnyButton;
     }
 
     public void setPigButton() {
-        this.pigButton = makeButton(pigTexture,200,300, Gdx.graphics.getWidth()*0.8f-200, Gdx.graphics.getHeight() * 0.42f);
+        this.pigButton = makeButton(Asset.pigButton,600,500, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.3f);
     }
 
-    public Button getPigButton(){
+    public Button getPigButton() {
         return pigButton;
     }
 
+    public Button rightSoundButton(){
+        if (game.music.isPlaying()) {
+            return musicOnButton;
+        }
+        else {
+            return musicOffButton;
+        }
+    }
 
-    //method for creating a button and adding the main controller as a listener
+    // Method for creating a button, this will add the MainController as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);
@@ -117,15 +109,11 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void draw(){
-        Gdx.input.setInputProcessor(stage);//sets input processor
+        Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());//draws the sprite batch
-        game.font.draw(game.batch, "Music: ", Gdx.graphics.getWidth() * .1f, Gdx.graphics.getHeight() * .68f);
-        game.font.draw(game.batch, "Character: ", Gdx.graphics.getWidth() * .1f, Gdx.graphics.getHeight() * .5f);
-        game.font.getData().setScale(8, 8);
-        game.font.setColor(Color.BLACK);
+        game.batch.draw(Asset.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         game.batch.end();
-        stage.draw();//draws the stage
+        stage.draw();// Draws the stage
     }
 
     public void update(float dt) {
