@@ -76,6 +76,7 @@ public class Asset {
     public static Texture hellButton;
     public static Texture bunnyButton;
     public static Texture pigButton;
+    public static Texture selected;
 
 /*
     //Select Character
@@ -167,6 +168,7 @@ public class Asset {
         hellButton = new Texture("buttons/level/level_hell_button.png");
         bunnyButton = new Texture("buttons/character/select_bunny_button.PNG");
         pigButton = new Texture("buttons/character/select_pig_button.PNG");
+        selected = new Texture("buttons/character/selected.png");
 
         // MUSIC AND SOUNDS
         // Sound from Zapsplat.com
