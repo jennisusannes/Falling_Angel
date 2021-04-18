@@ -24,6 +24,7 @@ public class SettingsView extends ScreenAdapter {
     private Button musicOffButton;
     private Button bunnyButton;
     private Button pigButton;
+    public String angel;
 
     public SettingsView(){
         super();
@@ -41,6 +42,8 @@ public class SettingsView extends ScreenAdapter {
         setPigButton();
         stage.addActor(bunnyButton);
         stage.addActor(pigButton);
+        this.angel = "pig";
+
     }
 
     // Getters and setters for the buttons
@@ -112,7 +115,12 @@ public class SettingsView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
         game.batch.draw(Asset.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
-        game.batch.draw(Asset.selected, Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.3f, 600, 500);
+        if (angel == "pig") {
+            game.batch.draw(new Texture("buttons/character/selected.png"), Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.3f,600,500 );
+        }
+        else {
+            game.batch.draw(new Texture("buttons/character/selected.png"), Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.3f,600,500 );
+        }
         game.batch.end();
         stage.draw();// Draws the stage
     }

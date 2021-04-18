@@ -187,6 +187,7 @@ public class MainController extends ClickListener {
             }
             //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.pigAnimation);
+            settingsView.angel = "pig";
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getBunnyButton())){
@@ -195,6 +196,7 @@ public class MainController extends ClickListener {
             }
             //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.bunnyAnimation);
+            settingsView.angel = "bunny";
             return true;
         }
         else{

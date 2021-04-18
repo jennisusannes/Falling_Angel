@@ -16,6 +16,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public MainController mc;
 	public SpriteBatch batch;
 	public Music music;
+	public BitmapFont font;
 	//private Animation<TextureRegion> chosenCharacter;
 
 	private FallingAngel(){ // Private constructor for the game
@@ -58,7 +59,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		Asset.load();
 		batch = new SpriteBatch(); // Creates a new spritebatch
 		this.mc = new MainController(); // Sets the controller as the main controller
-
 		music = Asset.backgroundMusic;
 		music.setVolume(0.02f); // Sets the volume of the background music
 		music.setLooping(true); // The backgrounds music will continuously loop
@@ -70,5 +70,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public void dispose () {
 		batch.dispose();
 		music.dispose();
+		font.dispose();
 	}
 }

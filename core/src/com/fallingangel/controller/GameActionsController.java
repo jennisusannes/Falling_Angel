@@ -187,7 +187,7 @@ public class GameActionsController extends ClickListener {
     }
     // This method removes all systems
     public void removeSystem() {
-
+       engine.removeAllEntities();
     }
 
     // Method for pausing game
