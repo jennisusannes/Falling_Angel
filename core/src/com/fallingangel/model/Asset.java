@@ -48,9 +48,9 @@ public class Asset {
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
     public static Array<TextureRegion> balloons = new Array<TextureRegion>();
-    // Plane
-    public static String plane = "obstacles/plane.png";
-    public static TextureRegion planeTexture;
+    //Drone
+    public static String drone = "obstacles/drone.png";
+    public static TextureRegion droneTexture;
 
 
     //MUSIC AND SOUNDS
@@ -120,34 +120,33 @@ public class Asset {
         hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
 
 
-        // PIG
+        //PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
         Array<TextureRegion> pigFrames = makeFrames(pigSpriteSheet, 3, 2);
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
-
-        // BUNNY
+        //BUNNY
         bunnySpriteSheet = new Texture("characters/bunny/bunny_animation.png");
         Array<TextureRegion> bunnyFrames = makeFrames(bunnySpriteSheet, 3, 2);
-        bunnyAnimation = new Animation<TextureRegion>(0.2f, bunnyFrames.get(0), bunnyFrames.get(1), bunnyFrames.get(2), bunnyFrames.get(3), bunnyFrames.get(4), bunnyFrames.get(5), bunnyFrames.get(4), bunnyFrames.get(3), bunnyFrames.get(2), bunnyFrames.get(1));
+        bunnyAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
 
-        // COIN
+        //COIN
         coinTexture = new Texture("powerups/coin.png");
         Array<TextureRegion> coinFrames = makeFrames(coinTexture, 6, 1);
         coinAnimation = new Animation<TextureRegion>(0.2f, coinFrames.get(0), coinFrames.get(1), coinFrames.get(2), coinFrames.get(3), coinFrames.get(4), coinFrames.get(5));
 
 
-        // OBSTACLES
-        // Balloons
+        //OBSTACLES
+        //Balloons
         TextureRegion blueBalloonReg = new TextureRegion(new Texture(blueBalloon), 0, 0, new Texture(blueBalloon).getWidth(), new Texture(blueBalloon).getHeight());
         TextureRegion greenBalloonReg = new TextureRegion(new Texture(greenBalloon), 0, 0, new Texture(greenBalloon).getWidth(), new Texture(greenBalloon).getHeight());
         TextureRegion redBalloonReg = new TextureRegion(new Texture(redBalloon), 0, 0, new Texture(redBalloon).getWidth(), new Texture(redBalloon).getHeight());
         TextureRegion yellowBalloonReg = new TextureRegion(new Texture(yellowBalloon), 0, 0, new Texture(yellowBalloon).getWidth(), new Texture(yellowBalloon).getHeight());
         balloons.add(blueBalloonReg, greenBalloonReg, redBalloonReg, yellowBalloonReg);
 
-        // Plane
-        planeTexture = new TextureRegion(new Texture(plane), 0, 0, new Texture(plane).getWidth(), new Texture(plane).getHeight());
+        //Drone
+        droneTexture = new TextureRegion(new Texture(drone), 0, 0, new Texture(drone).getWidth(), new Texture(drone).getHeight());
 
 
         // BUTTONS
@@ -196,9 +195,12 @@ public class Asset {
 
     }
 
+
+
     public void update(){
 
     }
+
 
 
     /*

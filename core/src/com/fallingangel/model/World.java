@@ -14,7 +14,7 @@ import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
-import com.fallingangel.model.component.PlaneComponent;
+import com.fallingangel.model.component.DroneComponent;
 import com.fallingangel.model.component.PowerUpComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
@@ -25,10 +25,6 @@ import java.util.Random;
 public class World {
 
     public static Random rand = new Random();
-
-    //Might have some other values here.
-    public static final float WORLD_HEIGHT = 15*20;
-    public static final float WORLD_WIDTH = 10;
 
     public static final int VP_WIDTH  = 1714;
     public static final int VP_HEIGHT = 4096;
@@ -48,7 +44,6 @@ public class World {
 	public static final int WORLD_STATE_GAME_OVER = 2;
 	public static final Vector2 gravity = new Vector2(0, -12);
 
-
     private Engine engine;
 
 
@@ -56,7 +51,6 @@ public class World {
         this.engine = engine;
         this.game = FallingAngel.getInstance();
     }
-    //Mulig å bruke pooled engine også
 
 /*
 
@@ -78,79 +72,36 @@ public class World {
         return character;
     }
 
+    //main method that creates the world
     public void create(){
-        this.angel = createAngel();
         this.state = WORLD_STATE_RUNNING;
+        this.angel = createAngel();
         //this.background = createBackground();
         //generateObjects();
 
-        //creating the planes that will be used
-        /*
-        Array<Entity> planes = new Array<Entity>();
-        for (int i = 1; i<= 3; i++){
-            int a = 0;
-            int b = Gdx.graphics.getWidth();
-            int randomOfTwoInts = rand.nextBoolean() ? a : b;
-            planes.add(createPlane(randomOfTwoInts, Gdx.graphics.getHeight()/2));
+
+        //creating the drones
+        Array<Entity> drones = new Array<Entity>();
+        for (int i = 1; i <= 3; i++) {
+            int low = Gdx.graphics.getWidth()/4;
+            int high = Gdx.graphics.getWidth() - Asset.droneTexture.getRegionWidth();
+            int randomX  = rand.nextInt(high-low) + low;
+            drones.add(createDrone(randomX , -i * Gdx.graphics.getHeight() * 2));
         }
-
-         */
-
-        //The plane should only come out at the top of the screen, so this generates a random number between screen-height/2 and screen-height
-        int low = Gdx.graphics.getHeight()*2/3;
-        int high = Gdx.graphics.getHeight();
-        int result = rand.nextInt(high-low) + low;
-
-        Array<Entity> planes = new Array<Entity>();
-        for (int i = 1; i <= 5; i++) {
-            planes.add(createPlane(0,result));
-        }
-
-        /*
-        //making an Array with planes that fly from the right
-        //TODO: flip the plane
-        Array<Entity> planesFlipped = new Array<Entity>();
-        for (int i = 1; i <= 5; i++) {
-            planesFlipped.add(createPlane(Gdx.graphics.getWidth(),result));
-        }*/
-
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
         for (int i = 1; i <= 8; i++) {
-            coins.add(createCoin(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
+            coins.add(createCoin(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 3));
         }
 
         //creating the obstacles that will be used
         Array<Entity> obstacles = new Array<Entity>();
         for (int i = 1; i <= 5; i++){
-            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 3));
+            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
         }
 
     }
-
-    /*
-    public void generateObjects(){
-
-        float y = ObstacleComponent.HEIGHT / 2; //0.15f
-        while (y < WORLD_HEIGHT -WORLD_WIDTH / 2) { //300-5
-
-            //creating an obstacle
-            float x = rand.nextFloat() * (WORLD_WIDTH - ObstacleComponent.WIDTH) + ObstacleComponent.WIDTH / 2;
-            createObstacle(x, y);
-            //createObstacle(rand.nextInt(Gdx.graphics.getWidth()), Gdx.graphics.getHeight()/ 3);
-
-            //creating a plane
-            if (y > WORLD_HEIGHT / 3 && rand.nextFloat() > 0.8f) {
-                createPlane(x + rand.nextFloat(), y + PlaneComponent.HEIGHT + rand.nextFloat() * 2);
-            }
-
-            if (rand.nextFloat() > 0.6f) {
-                createCoin(x + MathUtils.random(-0.5f, 0.5f), y + CoinComponent.HEIGHT + rand.nextFloat() * 3);
-            }
-        }
-
-    }*/
 
 
     public Entity createAngel(){
@@ -166,12 +117,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
 
         //connect the animation from Assets to the an.comp. IntMap
-        animationComponent.animations.put(AngelComponent.STATE_FALL, character);
-        //animations for when a collision occurs and when the pig is dead
-
-        //put the bounds as the angels width and height
-        boundsComponent.rectangle.width = AngelComponent.WIDTH;
-        boundsComponent.rectangle.height = AngelComponent.HEIGHT;
+        animationComponent.animations.put(AngelComponent.STATE_FALL, Asset.pigAnimation);
 
         //connect the comp. to the entity
         angelEntity.add(angelComponent);
@@ -184,6 +130,7 @@ public class World {
 
         //set the state as falling
         stateComponent.set(AngelComponent.STATE_FALL);
+
         //set the position of the angel
         transformComponent.pos.set(Gdx.graphics.getWidth()/2 - AngelComponent.WIDTH/2, Gdx.graphics.getHeight()* 5/6, 0.5f); //
 
@@ -194,7 +141,6 @@ public class World {
     }
 
 
-    //Random whether the obstacle is a devil or balloon, random colour on the balloon.
     public Entity createObstacle(float x, float y){
         Entity obstacleEntity = new Entity();
 
@@ -219,9 +165,9 @@ public class World {
         //add texture to the obstacle. At this point a random balloon is chosen.
         Random rand = new Random();
         textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
+
+        //set the position
         transformComponent.pos.set(x, y, 1.0f);
-        boundsComponent.rectangle.width = obstacleComponent.WIDTH;
-        boundsComponent.rectangle.height = obstacleComponent.HEIGHT;
 
         //add the entity to the engine
         engine.addEntity(obstacleEntity);
@@ -229,18 +175,18 @@ public class World {
         return obstacleEntity;
     }
 
-    public Entity createPlane(float x, float y){
+
+    public Entity createDrone(float x, float y){
         Entity planeEntity = new Entity();
 
         //create new components
-        PlaneComponent planeComponent = new PlaneComponent();
+        DroneComponent planeComponent = new DroneComponent();
         AnimationComponent animationComponent = new AnimationComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
         MovementComponent movementComponent = new MovementComponent();
         TransformComponent transformComponent = new TransformComponent();
         StateComponent stateComponent = new StateComponent();
         TextureComponent textureComponent = new TextureComponent();
-
 
         //add the comp. to the entity
         planeEntity.add(planeComponent);
@@ -252,10 +198,16 @@ public class World {
         planeEntity.add(textureComponent);
 
         //add texture to the obstacle.
-        textureComponent.textureRegion = Asset.planeTexture;
+        textureComponent.textureRegion = Asset.droneTexture;
 
         //add the position of the plane
         transformComponent.pos.set(x, y, 4.0f);
+
+        //random which way the drone starts to go (x-direction)
+        int a = 1;
+        int b = -1;
+        int randomPick = rand.nextBoolean() ? a : b;
+        planeComponent.SPEED = randomPick * planeComponent.VELOCITY;
 
         //add the entity to the engine
         engine.addEntity(planeEntity);
@@ -263,6 +215,8 @@ public class World {
         return planeEntity;
     }
 
+
+    //will implement if there is time
     public Entity powerUp(){
         Entity powerup = new Entity();
         PowerUpComponent puc = new PowerUpComponent();
@@ -271,7 +225,9 @@ public class World {
         return powerup;
     }
 
-   /* public Entity createBackground(){
+
+
+    /*public Entity createBackground(){
         Entity backgroundEntity = new Entity();
         //BackgroundComponent backgroundComponent = new BackgroundComponent();
         TextureComponent textureComponent = new TextureComponent();
@@ -312,14 +268,11 @@ public class World {
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
-        boundsComponent.rectangle.width = coinComponent.WIDTH;
-        boundsComponent.rectangle.height = coinComponent.HEIGHT;
 
         engine.addEntity(coinEntity);
 
         return coinEntity;
     }
-
 
 
 

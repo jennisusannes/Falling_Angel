@@ -15,7 +15,7 @@ public class AngelComponent implements Component {
     public static final float HEIGHT = Asset.pigSpriteSheet.getHeight()/2;
 
     //THese are used to render the score and airtime
-    public static int SCORE = 0;
-    public static float AIRTIME = 0;
-    //public static final float SCORE = 0;
+    public float AIRTIME = 0;
+    public float COINS_HIT = 0;
+    public float SCORE = 0;
 }

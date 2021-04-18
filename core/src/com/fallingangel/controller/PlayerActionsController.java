@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.InputProcessor;
 import com.fallingangel.controller.system.AngelSystem;
 
-public class PlayerActionsController implements InputProcessor { //this class deals with the input
+public class PlayerActionsController { //this class deals with the input
 
     //The controller responds to the user input and performs interactions on the data model objects
     //An InputProcessor is used to receive input events from the keyboard and the touch screen (mouse on the desktop).
@@ -22,51 +22,5 @@ public class PlayerActionsController implements InputProcessor { //this class de
 
     //methods that receive input and calls other methods in systems. These methods are from InputProcessor
     //tells whether the input has been processed, false if not
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button){ //Called when the screen was touched or a mouse button was pressed.
-        angelSystem.press(angelEntity, screenX, 0);
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) { //Called when a finger or the mouse was dragged.
-        angelSystem.drag(angelEntity, screenX, screenY);
-        return false;
-    }
-    
-
-    //skal ikke bruke disse, men må implementeres pga interfacet
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) { //Called when a finger was lifted or a mouse button was released.
-        angelSystem.unpress(angelEntity);
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
 
 }

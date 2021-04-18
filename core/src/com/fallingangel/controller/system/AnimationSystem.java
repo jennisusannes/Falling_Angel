@@ -41,10 +41,12 @@ public class AnimationSystem extends IteratingSystem {
         AnimationComponent animation = animation_mapper.get(entity);
         StateComponent state = state_mapper.get(entity);
 
-        Animation<TextureRegion> anim = animation.animations.get(state.get()); //gets the animation that fits the current state (HIT or FALL)
+        //gets the animation that fits the current state (at the moment, we only have an animation for FALL)
+        Animation<TextureRegion> anim = animation.animations.get(state.get());
 
+        //sets the texture to a part of that animation
         if (anim != null) {
-            texture.textureRegion = anim.getKeyFrame(state.time, true); //sets the texture to a part of that animation
+            texture.textureRegion = anim.getKeyFrame(state.time, true);
         }
 
         state.time += deltaTime; //updates the time
