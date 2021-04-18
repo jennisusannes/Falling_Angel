@@ -5,7 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -32,7 +31,7 @@ public class RenderingSystem extends IteratingSystem{
     private SpriteBatch sb;
     private Array<Entity> renderQueue;
     private Comparator<Entity> comparator;
-    private OrthographicCamera cam;
+    //private OrthographicCamera cam;
 
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
@@ -65,15 +64,16 @@ public class RenderingSystem extends IteratingSystem{
 
         this.sb = sb;
 
-        //creates a camera
-        cam = new OrthographicCamera(FRUSTUM_WIDTH, FRUSTUM_HEIGHT);
-        cam.position.set(FRUSTUM_WIDTH / 2, FRUSTUM_HEIGHT / 2, 0);
     }
+
+
+    /*
 
     // Sets chosen level
     public void setLevel(TextureRegion chosenLevel){
         this.gameBackground = chosenLevel;
     }
+     */
 
     //This method updates and draws
     @Override
@@ -85,7 +85,7 @@ public class RenderingSystem extends IteratingSystem{
         renderQueue.sort(comparator); //the entities are being sorted based on z-value
 
 
-        cam.update();
+        //cam.update();
         sb.begin();
         // TODO: ta inn gamebackground istedenfor Asset.hellbackground her
         sb.draw(Asset.hellBackgroundTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -134,10 +134,6 @@ public class RenderingSystem extends IteratingSystem{
     }
 
 
-    //getter for camera
-    public OrthographicCamera getCamera() {
-        return cam;
-    }
 
 
 

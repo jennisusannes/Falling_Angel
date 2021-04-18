@@ -13,9 +13,9 @@ import com.fallingangel.controller.system.BackgroundSystem;
 import com.fallingangel.controller.system.BoundsSystem;
 import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
+import com.fallingangel.controller.system.DroneSystem;
 import com.fallingangel.controller.system.MovementSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
-import com.fallingangel.controller.system.PlaneSystem;
 import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
@@ -75,7 +75,7 @@ public class GameActionsController extends ClickListener {
         // Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
         engine.addSystem(new ObstacleSystem());
-        engine.addSystem(new PlaneSystem());
+        engine.addSystem(new DroneSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new BackgroundSystem());
         engine.addSystem(new AnimationSystem());
@@ -166,7 +166,7 @@ public class GameActionsController extends ClickListener {
     public void pauseSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(false);
         engine.getSystem(ObstacleSystem.class).setProcessing(false);
-        engine.getSystem(PlaneSystem.class).setProcessing(false);
+        engine.getSystem(DroneSystem.class).setProcessing(false);
         engine.getSystem(MovementSystem.class).setProcessing(false);
         engine.getSystem(BoundsSystem.class).setProcessing(false);
         engine.getSystem(StateSystem.class).setProcessing(false);
@@ -178,7 +178,7 @@ public class GameActionsController extends ClickListener {
     public void resumeSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(true);
         engine.getSystem(ObstacleSystem.class).setProcessing(true);
-        engine.getSystem(PlaneSystem.class).setProcessing(true);
+        engine.getSystem(DroneSystem.class).setProcessing(true);
         engine.getSystem(MovementSystem.class).setProcessing(true);
         engine.getSystem(BoundsSystem.class).setProcessing(true);
         engine.getSystem(StateSystem.class).setProcessing(true);
