@@ -13,5 +13,11 @@ public class MultiPlayerData {
 
     public MultiPlayerData(){}
 
+    public MultiPlayerData(boolean isGameOver,  int score, String username){
+        this.isGameOver = isGameOver;
+        this.score = score;
+        this.username = username;
+    }
+
     //TODO: retrieve the data from Firebase and use it to update the multiplayer
 }

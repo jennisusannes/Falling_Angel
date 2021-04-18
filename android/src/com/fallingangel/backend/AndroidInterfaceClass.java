@@ -23,7 +23,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private String roomName;
     private User user;
     private int score;
-    public int opponentScore;
+    private int opponentScore;
 
 
     public AndroidInterfaceClass(){
@@ -123,8 +123,14 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren())
-                    if(ds.child(roomName).getKey() != user.getUID())
-                        opponentScore = (int) ds.child(roomName).child(user.getUID()).getValue();
+                    if(ds.getKey() == roomName) {
+                        if (ds.child(roomName).getKey() != user.getUID()) {
+                            String opponentKey = ds.child(roomName).getKey();
+                            MultiPlayerData opponentData = ds.child(roomName).child(opponentKey).child("score").getValue(MultiPlayerData.class);
+                            int opponentScore = opponentData.score;
+                            Log.i("opponentscore", Integer.toString(opponentScore));
+                        }
+                    }
             }
 
             @Override
