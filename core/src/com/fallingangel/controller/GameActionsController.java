@@ -6,7 +6,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BackgroundSystem;
@@ -26,7 +28,7 @@ import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
 import com.fallingangel.view.PauseView;
 
-public class GameActionsController extends ClickListener {
+public class GameActionsController implements EventListener {
     /*TODO:
     setter hvilken character som er valgt i settings og setter den characteren i world
     denne her opprettes kun etter at spillet er trykket på play
