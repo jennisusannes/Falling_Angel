@@ -3,6 +3,9 @@ package com.fallingangel.backend;
 
 import android.util.Log;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
+import com.fallingangel.model.World;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -29,7 +32,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private String roomName;
     private User user;
     private HighScore highScore;
-    private ArrayList<User> userList;
+    //private ArrayList<User> userList;
+   // private World world;
+    private ImmutableArray<Entity> entities;
+
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -44,7 +50,17 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     public void connect() {
 
     }
+    @Override
+    public void createWorldInDB(ImmutableArray<com.badlogic.ashley.core.Entity> entities) {
 
+        this.entities = entities;
+        for (Entity entity : entities
+             ) {
+            rooms.child("Entiteter").setValue(entity);
+
+        }
+
+    }
 
     @Override
     public void createUser(String UID, String mail, String username, String password) {
@@ -147,6 +163,8 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             }
         }));
     }
+
+
     /*
     @Override
     public void addFriend(String UID, String friendUsername){

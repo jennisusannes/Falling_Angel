@@ -1,5 +1,9 @@
 package com.fallingangel.backend;
 
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.utils.ImmutableArray;
+import com.fallingangel.model.World;
+
 public class CoreInterfaceClass implements FireBaseInterface{
     @Override
     public void connect() {
@@ -34,6 +38,11 @@ public class CoreInterfaceClass implements FireBaseInterface{
     @Override
     public void setOnValueChangedListener() {
         
+    }
+
+    @Override
+    public void createWorldInDB(ImmutableArray<Entity> entities) {
+
     }
 
 }

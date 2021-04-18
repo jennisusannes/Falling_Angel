@@ -93,6 +93,7 @@ public class GameView extends ScreenAdapter {
         //Uncertain whether we are going to use stage.
         this.engine = new Engine();
         this.world = new World(engine);
+        this.game.FBI.createWorldInDB(engine.getEntities());
         this.stage = new Stage();
         this.settingsStage = new Stage();
 
