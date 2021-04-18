@@ -117,7 +117,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
 
         //connect the animation from Assets to the an.comp. IntMap
-        animationComponent.animations.put(AngelComponent.STATE_FALL, Asset.pigAnimation);
+        animationComponent.animations.put(AngelComponent.STATE_FALL, character);
 
         //connect the comp. to the entity
         angelEntity.add(angelComponent);
