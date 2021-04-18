@@ -32,6 +32,7 @@ public class MainController extends ClickListener {
     public GameActionsController gameActionsController;
     protected World world;
     protected Engine engine;
+    public String angel;
     //public GameOverView gameOverView;
 
     private Sound clickSound;
@@ -44,6 +45,7 @@ public class MainController extends ClickListener {
         // Initializes engine and world
         this.engine = new Engine();
         this.world = new World(engine);
+        this.angel = "pig";
     }
 
     // setStartScreen method is called in the game class
@@ -51,6 +53,12 @@ public class MainController extends ClickListener {
         this.menuView = new MenuView();
         game.setScreen(menuView);
     }
+    /*
+    public boolean isPig(){
+        return angel.equals("pig");
+    }
+
+     */
 
     public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
         //this.world = new World(engine);
@@ -187,7 +195,7 @@ public class MainController extends ClickListener {
             }
             //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.pigAnimation);
-            settingsView.angel = "pig";
+            angel = "pig";
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getBunnyButton())){
@@ -196,7 +204,7 @@ public class MainController extends ClickListener {
             }
             //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.bunnyAnimation);
-            settingsView.angel = "bunny";
+            angel = "bunny";
             return true;
         }
         else{
