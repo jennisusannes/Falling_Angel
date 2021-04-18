@@ -13,7 +13,7 @@ public class MyTextInputListener implements Input.TextInputListener {
     public void input(String text) {
         room = text;
         MultiplayerSystem.roomNumber = text;
-        this.game.FBI.connectToRoom(MultiplayerSystem.roomNumber);
+        //this.game.FBI.connectToRoom(MultiplayerSystem.roomNumber);
     }
 
     @Override

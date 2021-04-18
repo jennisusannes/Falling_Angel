@@ -20,6 +20,7 @@ import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
 import com.fallingangel.controller.system.MovementSystem;
 import com.fallingangel.controller.system.DroneSystem;
+import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
@@ -69,7 +70,7 @@ public class GameView extends ScreenAdapter {
     private int state;
 
 
-    public GameView() {
+    public GameView(boolean isMultiplayer) {
         super();
         //this.game  = FallingAngel.getInstance();
         Asset.load();
@@ -115,6 +116,9 @@ public class GameView extends ScreenAdapter {
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new CoinSystem());
 
+        if (isMultiplayer){
+            engine.addSystem(new MultiplayerSystem(1));
+        }
 
         //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.
         engine.getSystem(BackgroundSystem.class).setCamera(engine.getSystem(RenderingSystem.class).getCamera());

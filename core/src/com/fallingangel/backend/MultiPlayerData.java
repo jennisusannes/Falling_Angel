@@ -3,6 +3,7 @@ package com.fallingangel.backend;
 import com.badlogic.gdx.math.Vector3;
 
 public class MultiPlayerData {
+
     public boolean connected = false;
     public boolean isGameOver = false;
     public Vector3 position;

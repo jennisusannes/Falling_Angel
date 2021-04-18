@@ -31,7 +31,7 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void updateMultiplayer(String UID) {
+    public void updateMultiplayer(MultiPlayerData multiPlayerData) {
 
     }
 

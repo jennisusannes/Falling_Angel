@@ -21,7 +21,7 @@ public class MainController extends ClickListener {
 
     public FallingAngel game;
     //initializing the different views
-    public GameView gameView = new GameView();
+    public GameView gameView = new GameView(false);
     public GameOverView gameOverView = new GameOverView();
     public HelpView1 helpView1 = new HelpView1();
     public HelpView2 helpView2 = new HelpView2();
@@ -208,6 +208,14 @@ public class MainController extends ClickListener {
             //game.setScreen(settingsView);
             //settingsView.getMusicOffButton().remove();
             //settingsView.stage.draw();
+            return true;
+        }
+        else if (event.getListenerActor().equals(multiPlayerView.readyButton)){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(new GameView(true));
             return true;
         }
         else{

@@ -10,7 +10,7 @@ public interface FireBaseInterface {
     public void setHighScore(String UID, String username, String date, int score);
     //public void addFriend(String UID, String friendUsername);
     public void connectToRoom(String roomName);
-    public void updateMultiplayer(String UID);
+    public void updateMultiplayer(MultiPlayerData multiPlayerData);
     public void setOnValueChangedListener();
     public void createWorldInDB(ImmutableArray<Entity> entities);
  }
