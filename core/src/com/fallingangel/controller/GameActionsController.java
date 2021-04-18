@@ -145,8 +145,12 @@ public class GameActionsController implements EventListener {
         // Handle input, accelX is changed here and being set in AngelSystem
 
         float accelX = 0.0f;
+
+
+        /*
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) accelX = 10f;
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) accelX = -10f;
+         */
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
 
         // Updates the players score
