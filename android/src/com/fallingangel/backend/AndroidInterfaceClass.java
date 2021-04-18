@@ -4,41 +4,41 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import java.util.Random;
 
+import static android.content.ContentValues.TAG;
+
 public class AndroidInterfaceClass implements FireBaseInterface {
 
     FirebaseDatabase database;
-    DatabaseReference highScoreList;
     DatabaseReference users;
-    DatabaseReference friends;
     DatabaseReference rooms;
 
     private String roomName;
     private User user;
-    private HighScore highScore;
-    //private ArrayList<User> userList;
-   // private World world;
-    private ImmutableArray<Entity> entities;
+    private int score;
+    public int opponentScore;
 
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
-        highScoreList = database.getReference("high-score-list");
         users = database.getReference("users");
-        friends = database.getReference("friends");
         rooms = database.getReference("games");
 
-    }
 
+    }
+/*
     @Override
     public void createWorldInDB(ImmutableArray<com.badlogic.ashley.core.Entity> entities) {
-
         this.entities = entities;
         for (Entity entity : entities
              ) {
@@ -46,12 +46,14 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         }
 
-    }
+    }*/
 
     @Override
     public void createUser(String mail, String username, String password) {
-        String UID = createID(30);
+        String UID =  createID(30);
+
         this.user = new User(UID, username, mail, password);
+     //   userInfoListener(users);
         // [BEGIN rtdb_write_new_user_task]
         users.child(UID).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -69,16 +71,38 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         }
                     });
             // [END rtdb_write_new_user_task]
+
+
+    }
+
+    // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
+    private void userInfoListener(DatabaseReference mPostReference) {
+        // [START post_value_event_listener]
+        ValueEventListener userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user.setHighScore(dataSnapshot.child(user.getUID()).getValue(User.class).getHighScore());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadHighscore:onCancelled", error.toException());
+
+            }
+
+        };
+        mPostReference.addValueEventListener(userListener);
+        // [END post_value_event_listener]
     }
 
 
     @Override
     public void connectToRoom(String roomName) {
 
-
         this.roomName = roomName;
         // [BEGIN rtdb_write_new_user_task]
-        rooms.child(roomName).child(user.UID).setValue(user)
+        rooms.child(roomName).child(user.getUID()).setValue(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -94,17 +118,37 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     }
                 });
         // [END rtdb_write_new_user_task]
+    }
 
+    @Override
+    public int opponentScore() {
+        ValueEventListener scoreListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot ds : dataSnapshot.getChildren())
+                    if(ds.child(roomName).getKey() != user.getUID())
+                        opponentScore = (int) ds.child(roomName).child(user.getUID()).getValue();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadHighscore:onCancelled", error.toException());
+
+            }
+
+        };
+        rooms.addValueEventListener(scoreListener);
+        return 0;
     }
 
 
     @Override
     public void updateScore(int score) {
 
-        highScore = new HighScore(score);
+        this.score = score;
         // [BEGIN rtdb_write_new_user_task]
-        rooms.child(roomName).child(this.user.UID).setValue(highScore)
+        rooms.child(roomName).child(this.user.getUID()).child("score").setValue(this.score)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -120,15 +164,24 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     }
                 });
         // [END rtdb_write_new_user_task]
+        if (this.score > this.user.getHighScore()){
+            users.child(this.user.getUID()).child("highScore").setValue(this.score);
+        }
 
     }
 
 
-    public String createID(int stringlength) {
+
+
+
+    // Found at: https://www.baeldung.com/java-random-string
+
+
+    public String createID(int IDLength) {
 
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
-        int targetStringLength = stringlength;
+        int targetStringLength = IDLength;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(targetStringLength);
         for (int i = 0; i < targetStringLength; i++) {
@@ -140,6 +193,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         return generatedString;
     }
+
 
 }
 

@@ -64,9 +64,8 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	@Override
 	public void create () {
 		//TODO finne rett plass å calle databasefunksjonene
-		FBI.createUser( "test@user.no", "usernametest", "user123");
+		FBI.createUser( "test@user.no", "JenniBug", "user123");
 		FBI.connectToRoom("Testrom2");
-		//FBI.addFriend("id","usernametest" );
 		batch = new SpriteBatch(); //creates a new spritebatch
 		font = new BitmapFont(); //kan denne fjernes?
 		this.mc = new MainController(); //sets the controller as the main controller

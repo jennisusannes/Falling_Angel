@@ -21,8 +21,13 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
+    public int opponentScore() {
+        return 0;
+    }
+/*
+    @Override
     public void createWorldInDB(ImmutableArray<Entity> entities) {
 
     }
-
+*/
 }
