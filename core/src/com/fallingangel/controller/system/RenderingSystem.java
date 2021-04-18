@@ -38,14 +38,17 @@ public class RenderingSystem extends IteratingSystem{
 
 
     public static float score = 0;
+    boolean isMultiplayer;
 
 
     public FallingAngel game = FallingAngel.getInstance();
 
     //Instanciate a RenderingSystem
-    public RenderingSystem(SpriteBatch sb) {
+    public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
         //creates a new iteratingSystem for the entities with following components
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
+
+        this.isMultiplayer = isMultiplayer;
 
         //gets the components through a mapper
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
@@ -117,6 +120,12 @@ public class RenderingSystem extends IteratingSystem{
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
         font.draw(sb, scoreString, 40,Gdx.graphics.getHeight() - 40);
+
+        if (isMultiplayer){
+            String opponentScoreString = "51";
+            font.getData().setScale(5, 5);
+            font.draw(sb, opponentScoreString, Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 40);
+        }
 
         sb.end();
         renderQueue.clear();
