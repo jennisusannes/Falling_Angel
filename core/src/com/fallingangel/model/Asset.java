@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.Array;
 public class Asset {
 
     //BACKGROUNDS:
+    public static Texture backgroundHellTexture;
+    public static Texture backgroundHeavenTexture;
 
     //play-view background
     public static TextureRegion backgroundTextureRegion;
@@ -52,6 +54,7 @@ public class Asset {
     public static Texture highscoreListTexture;
     public static Texture settingsTexture;
     public static Texture backTexture;
+    public static Texture playTexture;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -75,8 +78,10 @@ public class Asset {
         //assetManager.load(gameBackground, Texture.class);
 
         //BACKGROUND
-        Texture backgroundTexture = new Texture("backgrounds/level_hell_score_background.png");
-        backgroundTextureRegion = new TextureRegion(backgroundTexture, 0, 0, backgroundTexture.getWidth(), backgroundTexture.getHeight());
+        backgroundHellTexture = new Texture("backgrounds/level_hell_score_background.png");
+        backgroundTextureRegion = new TextureRegion(backgroundHellTexture, 0, 0, backgroundHellTexture.getWidth(), backgroundHellTexture.getHeight());
+
+        backgroundHeavenTexture = new Texture("backgrounds/level_heaven_background.png");
 
         //PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
@@ -113,6 +118,7 @@ public class Asset {
         highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
         settingsTexture = new Texture("buttons/settings_button.PNG");
         backTexture = new Texture("buttons/back_button.png");
+        playTexture = new Texture("buttons/play.png");
 
         //Music and sounds
         // Sound from Zapsplat.com

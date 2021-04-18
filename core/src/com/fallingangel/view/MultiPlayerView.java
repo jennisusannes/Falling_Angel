@@ -37,9 +37,9 @@ public class MultiPlayerView extends ScreenAdapter {
     public MultiPlayerView() {
         this.controller = FallingAngel.getInstance().mc;
         stage = new Stage(new ScreenViewport());
-        readyTexture = Asset.coinTexture;
+        readyTexture = Asset.playTexture;
         readyButton = new Button(new TextureRegionDrawable(new TextureRegion(readyTexture)));
-        readyButton.setPosition(0,0);
+        readyButton.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/5);
         readyButton.setSize(200,200);
         stage.addActor(readyButton);
         readyButton.addListener(new ClickListener() {
@@ -56,6 +56,10 @@ public class MultiPlayerView extends ScreenAdapter {
         GL20 gl = Gdx.gl;
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
+        FallingAngel game = FallingAngel.getInstance();
+        game.batch.begin();
+        game.batch.draw(Asset.backgroundHeavenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.end();
         stage.draw();
     }
 
@@ -76,6 +80,7 @@ public class MultiPlayerView extends ScreenAdapter {
 
 
 
-        };
+    };
+
 
 }

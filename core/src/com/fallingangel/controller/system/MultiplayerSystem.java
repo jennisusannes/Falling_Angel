@@ -60,7 +60,7 @@ public class MultiplayerSystem extends IntervalSystem {
             TransformComponent transformComponent = transformMapper.get(entity);
 
             MultiPlayerData multiPlayerData = new MultiPlayerData();
-            multiPlayerData.score = (int) (angelComponent.AIRTIME + angelComponent.COINS_HIT);
+            multiPlayerData.score = (int) (angelComponent.SCORE);
             //multiPlayerData.position.x = transformComponent.pos.x;
             //multiPlayerData.position.y = transformComponent.pos.y;
             FallingAngel.getInstance().FBI.connectToRoom(roomNumber, multiPlayerData);

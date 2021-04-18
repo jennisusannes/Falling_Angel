@@ -111,13 +111,16 @@ public class GameView extends ScreenAdapter {
         engine.addSystem(new BackgroundSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new CollisionSystem(world));
-        engine.addSystem(new RenderingSystem(game.batch));
         engine.addSystem(new StateSystem());
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new CoinSystem());
 
         if (isMultiplayer){
             engine.addSystem(new MultiplayerSystem(1));
+            engine.addSystem(new RenderingSystem(game.batch, true));
+        }
+        else{
+            engine.addSystem(new RenderingSystem(game.batch, false));
         }
 
         //This imports a camera from renderingSystem and sets backgroundsystem's camera as this.
