@@ -122,10 +122,10 @@ public class SettingsView extends ScreenAdapter {
         game.batch.begin();
         game.batch.draw(Asset.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         if (isPig()) {
-            game.batch.draw(new Texture("buttons/character/selected.png"), Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.3f,600,500 );
+            game.batch.draw(Asset.selected, Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.3f,600,500 );
         }
         else {
-            game.batch.draw(new Texture("buttons/character/selected.png"), Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.3f,600,500 );
+            game.batch.draw(Asset.selected, Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.3f,600,500 );
         }
         game.batch.end();
         stage.draw();// Draws the stage
