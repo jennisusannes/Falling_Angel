@@ -123,9 +123,9 @@ public class Asset {
         hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
 
         // Game backgrounds without score
-        Texture heavenBackgroundPauseTexture = new Texture("backgrounds/level/level_heaven_score_background.png");
+        Texture heavenBackgroundPauseTexture = new Texture("backgrounds/level/level_heaven_background.png");
         heavenBackgroundPauseTextureRegion = new TextureRegion(heavenBackgroundPauseTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
-        Texture sunsetBackgroundPauseTexture = new Texture("backgrounds/level/level_sunset_score_background.png");
+        Texture sunsetBackgroundPauseTexture = new Texture("backgrounds/level/level_sunset_background.png");
         sunsetBackgroundPauseTextureRegion = new TextureRegion(sunsetBackgroundPauseTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
         Texture hellBackgroundPauseTexture = new Texture("backgrounds/level/level_hell_background.png");
         hellBackgroundPauseTextureRegion = new TextureRegion(hellBackgroundPauseTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());

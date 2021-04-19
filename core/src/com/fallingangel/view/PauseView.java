@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
+import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 
@@ -19,13 +20,15 @@ public class PauseView extends ScreenAdapter {
     private FallingAngel game;
     private Button exitButton;
     private Button resumeButton;
+    private MainController controller;
     private GameActionsController gameController;
     private Stage stage;
 
     public PauseView(){
         super();
         this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
-        this.gameController = game.mc.gameActionsController;  // Sets the controller as the main controller
+        this.gameController = game.mc.gameActionsController;
+        this.controller = game.mc; // Sets the controller as the main controller
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); // Sets input processor
         setExitButton(); // Creates a button
@@ -70,7 +73,7 @@ public class PauseView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.hellBackgroundPauseTextureRegion, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
+        game.batch.draw(controller.getPauseBackground(), 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         game.batch.end();
         stage.draw(); // Draws the stage
     }

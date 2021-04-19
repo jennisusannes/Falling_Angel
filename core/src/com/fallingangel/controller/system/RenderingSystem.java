@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.controller.MainController;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.Asset;
 import com.fallingangel.model.component.TextureComponent;
@@ -35,6 +37,8 @@ public class RenderingSystem extends IteratingSystem{
 
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
+    private MainController controller;
+    private FallingAngel game;
     protected TextureRegion gameBackground;
 
 
@@ -63,7 +67,9 @@ public class RenderingSystem extends IteratingSystem{
         };
 
         this.sb = sb;
-
+        this.game = FallingAngel.getInstance();
+        this.controller = game.mc;
+        this.gameBackground = controller.getGameBackground();
     }
 
 
@@ -86,8 +92,7 @@ public class RenderingSystem extends IteratingSystem{
 
         //cam.update();
         sb.begin();
-        // TODO: ta inn gamebackground istedenfor Asset.hellbackground her
-        sb.draw(Asset.hellBackgroundTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.draw(gameBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         //iterates through all entities and gets the component.
         for (Entity entity : renderQueue) {

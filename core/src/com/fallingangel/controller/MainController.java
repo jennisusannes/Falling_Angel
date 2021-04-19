@@ -15,6 +15,7 @@ import com.fallingangel.view.HelpView1;
 import com.fallingangel.view.HelpView2;
 import com.fallingangel.view.HelpView3;
 import com.fallingangel.view.HighScoreListView;
+import com.fallingangel.view.LevelView;
 import com.fallingangel.view.MenuView;
 import com.fallingangel.view.SettingsView;
 
@@ -29,11 +30,13 @@ public class MainController extends ClickListener {
     public AchievementsView achievementsView = new AchievementsView();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
+    public LevelView levelView = new LevelView();
     public GameActionsController gameActionsController;
     protected World world;
     protected Engine engine;
     public String angel;
-    //public GameOverView gameOverView;
+    public TextureRegion gameBackground;
+    public TextureRegion pauseBackground;
 
     private Sound clickSound;
     //private Animation<TextureRegion> chosenCharacter;
@@ -59,6 +62,21 @@ public class MainController extends ClickListener {
     }
 
      */
+    public TextureRegion getGameBackground(){
+        return gameBackground;
+    }
+
+    public void setGameBackground(TextureRegion background){
+        this.gameBackground = background;
+    }
+
+    public TextureRegion getPauseBackground(){
+        return pauseBackground;
+    }
+
+    public void setPauseBackground(TextureRegion background){
+        this.pauseBackground = background;
+    }
 
     public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
         //this.world = new World(engine);
@@ -72,6 +90,7 @@ public class MainController extends ClickListener {
         //this.gameActionsController = new GameActionsController();
         //return gameActionsController.world.getChosenCharacter();
     }
+
  /*
 
     //winner = 0 -> singleplayer, winner = 1 / 2 -> multiplayer
@@ -88,15 +107,15 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            this.gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
+            //this.gameActionsController = new GameActionsController();
+            game.setScreen(levelView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            this.gameActionsController = new GameActionsController();
+            //this.gameActionsController = new GameActionsController();
             gameActionsController.setGameScreen();
             return true;
         }
@@ -205,6 +224,36 @@ public class MainController extends ClickListener {
             //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.bunnyAnimation);
             angel = "bunny";
+            return true;
+        }
+        else if (event.getListenerActor().equals(game.mc.levelView.getHeavenButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
+            setGameBackground(Asset.heavenBackgroundTextureRegion);
+            setPauseBackground(Asset.heavenBackgroundPauseTextureRegion);
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
+            return true;
+        }
+        else if (event.getListenerActor().equals(game.mc.levelView.getSunsetButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
+            setGameBackground(Asset.sunsetBackgroundTextureRegion);
+            setPauseBackground(Asset.sunsetBackgroundPauseTextureRegion);
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
+            return true;
+        }
+        else if (event.getListenerActor().equals(game.mc.levelView.getHellButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
+            setGameBackground(Asset.hellBackgroundTextureRegion);
+            setPauseBackground(Asset.hellBackgroundPauseTextureRegion);
+            this.gameActionsController = new GameActionsController();
+            gameActionsController.setGameScreen();
             return true;
         }
         else{

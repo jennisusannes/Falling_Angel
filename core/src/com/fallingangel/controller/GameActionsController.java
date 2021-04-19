@@ -8,6 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -72,6 +73,7 @@ public class GameActionsController implements EventListener {
     private TransformComponent transformComponent;
     private ImmutableArray<Entity> angels;
     private TransformComponent angelPos;
+    private TextureRegion gamebackground;
 
     private int lastScore = 0;
     private String scoreString;
@@ -96,7 +98,7 @@ public class GameActionsController implements EventListener {
         //this.transformComponent = transform_mapper.get(entity);
         this.engine = mainController.engine;
         this.world = mainController.world;
-        transform_mapper = ComponentMapper.getFor(TransformComponent.class);
+        //transform_mapper = ComponentMapper.getFor(TransformComponent.class);
         //TransformComponent transformComponent = transform_mapper.get(entity);
 
         //this.getAngelPosY = transformComponent.pos.y;
@@ -326,6 +328,8 @@ public class GameActionsController implements EventListener {
             game.mc.gameActionsController.setGameScreen();
             return true;
         }
+
+
         else {
             return false;
         }

@@ -102,5 +102,6 @@ public class GameOverView extends ScreenAdapter {
     public void render(float dt) {
         update(dt);
         draw();
+        stage.act(dt);
     }
 }
