@@ -154,9 +154,6 @@ public class GameActionsController implements EventListener {
         engine.update(dt);
 
         switch (state) {
-            case GAME_READY:
-                updateReady();
-                break;
             case GAME_RUNNING:
                 updateRunning(dt);
                 break;
@@ -170,13 +167,6 @@ public class GameActionsController implements EventListener {
         }
     }
 
-    // Ready to start a new game
-    public void updateReady() {
-        if (Gdx.input.justTouched()) {
-            state = GAME_RUNNING; // Sets state as GAME_RUNNING
-            resumeSystem();
-        }
-    }
 
     //Updates on what state the game is in
     //TODO: må legge inn metoder for hva som skjer mens spillet kjører

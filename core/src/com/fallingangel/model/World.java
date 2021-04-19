@@ -92,14 +92,14 @@ public class World {
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 0; i <= 8; i++) {
             coins.add(createCoin(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 3));
         }
 
         //creating the obstacles that will be used
         Array<Entity> obstacles = new Array<Entity>();
-        for (int i = 1; i <= 5; i++){
-            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
+        for (int i = 0; i <= 10; i++){
+            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth() - Asset.balloons.size), - i * Gdx.graphics.getHeight()/4));
         }
 
     }
