@@ -4,16 +4,15 @@ import com.badlogic.gdx.Input;
 import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.game.FallingAngel;
 
-public class MyTextInputListener implements Input.TextInputListener {
+public class RoomInputListener implements Input.TextInputListener {
+    //Handles the input field for room number
 
     public String room;
-    FallingAngel game = FallingAngel.getInstance();
 
     @Override
     public void input(String text) {
         room = text;
         MultiplayerSystem.roomNumber = text;
-        //this.game.FBI.connectToRoom(MultiplayerSystem.roomNumber);
     }
 
     @Override

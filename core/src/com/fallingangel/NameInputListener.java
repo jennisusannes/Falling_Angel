@@ -2,7 +2,8 @@ package com.fallingangel;
 
 import com.badlogic.gdx.Input;
 
-public class MyTextInputListener2 implements Input.TextInputListener {
+public class NameInputListener implements Input.TextInputListener {
+    //Handles the input field for username
 
     public String name;
     @Override

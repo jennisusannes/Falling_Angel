@@ -1,32 +1,25 @@
 package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.fallingangel.MyTextInputListener;
-import com.fallingangel.MyTextInputListener2;
+import com.fallingangel.RoomInputListener;
+import com.fallingangel.NameInputListener;
 import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.controller.MainController;
-import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 
 public class MultiPlayerView extends ScreenAdapter {
+    //This view is the waiting room for the multiplayer game
 
     com.badlogic.gdx.scenes.scene2d.ui.TextField textField;
     Stage stage;
@@ -38,8 +31,8 @@ public class MultiPlayerView extends ScreenAdapter {
     public String roomNumber;
     public MultiPlayerData multiPlayerData;
 
-    MyTextInputListener roomListener;
-    MyTextInputListener2 nameListener;
+    RoomInputListener roomListener;
+    NameInputListener nameListener;
     boolean alreadyConnected = false;
 
     public MultiPlayerView() {
@@ -72,41 +65,48 @@ public class MultiPlayerView extends ScreenAdapter {
         stage.draw();
     }
 
+    public void update(float dt){
+        connectToDatabase();
+        checkIfReady();
+    }
+
 
     @Override
     public void render(float dt) {
-        //update(dt);
+        update(dt);
         draw();
-        //stage.draw();
         stage.act(dt);
-        connectToDatabase();
-        //System.out.println("The room number is " + roomNumber + "and the username is " + multiPlayerData.username);
     }
 
+
+    //method that creates the input fields for room number and name and saves them in MyTextInputListener classes
     public void connectToGameRoom() {
+        //new file which is going to be sent to the database
         multiPlayerData = new MultiPlayerData();
 
-        nameListener = new MyTextInputListener2();
+        nameListener = new NameInputListener();
         Gdx.input.getTextInput(nameListener, "Write in your name", "name", "name");
 
-        roomListener = new MyTextInputListener();
+        roomListener = new RoomInputListener();
         Gdx.input.getTextInput(roomListener,"Write in the room number","room number","write the number here");
-
-        //FallingAngel.getInstance().FBI.connectToRoom(roomListener.room, multiPlayerData);
-        //System.out.println("The room number is " + roomNumber + "and the username is " + multiPlayerData.username);
-
     };
 
+    //method used to create the room in the database
     public void connectToDatabase(){
+        //checks whether the user has committed room number and name and if it is already saved to the database
         if (roomListener.room != null && nameListener.name != null && alreadyConnected == false){
+
+            //save to the MultiPlayerData file that is sent to the database
             multiPlayerData.username = nameListener.name;
             roomNumber = roomListener.room;
-            //System.out.println("The room number is " + roomListener.room + " and the username is " + multiPlayerData.username);
+
+            //send to database
             FallingAngel.getInstance().FBI.connectToRoom(roomListener.room, multiPlayerData);
             alreadyConnected = true;
         }
     }
 
+    //method that starts a new game if both players are in the room
     public void checkIfReady(){
         //if there are two children in the same room
         //controller = FallingAngel.getInstance().mc;

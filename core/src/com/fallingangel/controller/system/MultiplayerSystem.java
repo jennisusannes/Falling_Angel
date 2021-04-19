@@ -15,6 +15,7 @@ import com.fallingangel.model.component.TransformComponent;
 import java.util.ArrayList;
 
 public class MultiplayerSystem extends IntervalSystem {
+    //System used to update the score in the database while playing a multiplayer game
 
     public static String roomNumber = "";
     public Engine engine;
@@ -58,10 +59,8 @@ public class MultiplayerSystem extends IntervalSystem {
             AngelComponent angelComponent = angelMapper.get(entity);
             TransformComponent transformComponent = transformMapper.get(entity);
 
-            //MultiPlayerData multiPlayerData = new MultiPlayerData();
             MultiPlayerData mpd = FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData;
             mpd.score = (int) (angelComponent.SCORE);
-            //FallingAngel.getInstance().FBI.connectToRoom(roomNumber, mpd);
             FallingAngel.getInstance().FBI.updateScore(mpd.score);
             FallingAngel.getInstance().FBI.setOpponentScore();
         }

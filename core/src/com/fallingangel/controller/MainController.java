@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 import com.fallingangel.view.AchievementsView;
+import com.fallingangel.view.GameOverMultiPlayerView;
 import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
 import com.fallingangel.view.HelpView1;
@@ -219,9 +220,18 @@ public class MainController extends ClickListener {
             game.setScreen(new GameView(true));
             return true;
         }
+        else if (event.getListenerActor().equals(GameOverMultiPlayerView.exitButton)){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.setScreen(new MenuView());
+            return true;
+        }
         else{
             return false;
         }
+
     }
 
     public void beginMultiplayerGame(){

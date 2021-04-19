@@ -58,6 +58,10 @@ public class Asset {
 
     //Waiting room
     public static Texture waitingRoomTexture;
+
+    //Game Over Multiplayer
+    public static Texture youLose;
+    public static Texture youWin;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -133,6 +137,10 @@ public class Asset {
 
         //Waiting room
         waitingRoomTexture = new Texture("waiting_room.png");
+
+        //Game Over Multiplayer
+        youLose = new Texture("lose_text.png");
+        youWin = new Texture("win_text.png");
 
     }
 
