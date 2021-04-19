@@ -2,6 +2,7 @@ package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -78,6 +79,7 @@ public class GameOverView extends ScreenAdapter {
         game.batch.begin();
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         font.getData().setScale(4, 4);
+        font.setColor(Color.BLACK);
         font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.47f, Gdx.graphics.getHeight()*0.26f);
         game.batch.end();
         stage.draw(); // Draws the stage

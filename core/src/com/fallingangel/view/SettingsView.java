@@ -118,7 +118,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void draw(){
-        Gdx.input.setInputProcessor(stage);// Sets input processor
+        Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
         game.batch.draw(Asset.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         if (isPig()) {
@@ -128,7 +128,7 @@ public class SettingsView extends ScreenAdapter {
             game.batch.draw(Asset.selected, Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.3f,600,500 );
         }
         game.batch.end();
-        stage.draw();// Draws the stage
+        stage.draw(); // Draws the stage
     }
 
     public void update(float dt) {

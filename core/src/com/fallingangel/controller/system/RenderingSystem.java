@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -119,6 +120,7 @@ public class RenderingSystem extends IteratingSystem{
         int scoreInt = (int) score;
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
+        font.setColor(Color.BLACK); //font.setColor(color.BLACK))
         font.draw(sb, scoreString, Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight() - 40);
 
         sb.end();
