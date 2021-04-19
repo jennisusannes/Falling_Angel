@@ -55,6 +55,9 @@ public class Asset {
     public static Texture settingsTexture;
     public static Texture backTexture;
     public static Texture playTexture;
+
+    //Waiting room
+    public static Texture waitingRoomTexture;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -127,6 +130,9 @@ public class Asset {
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
         backgroundMusic.setVolume(0.02f); //sets the volume of the background music
         backgroundMusic.setLooping(true); //the backgrounds music will continuously loop
+
+        //Waiting room
+        waitingRoomTexture = new Texture("waiting_room.png");
 
     }
 

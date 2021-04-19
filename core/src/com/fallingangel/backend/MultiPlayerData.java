@@ -9,7 +9,7 @@ public class MultiPlayerData {
     public Vector3 position;
 
     public int score = 0;
-    public String username;
+    public String username = "username not defined";
 
     public MultiPlayerData(){}
 

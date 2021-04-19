@@ -6,7 +6,7 @@ import com.fallingangel.game.FallingAngel;
 
 public class MyTextInputListener implements Input.TextInputListener {
 
-    String room;
+    public String room;
     FallingAngel game = FallingAngel.getInstance();
 
     @Override

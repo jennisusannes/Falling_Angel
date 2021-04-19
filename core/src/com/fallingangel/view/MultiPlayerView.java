@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.MyTextInputListener;
+import com.fallingangel.MyTextInputListener2;
+import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.game.FallingAngel;
@@ -28,11 +30,17 @@ public class MultiPlayerView extends ScreenAdapter {
 
     com.badlogic.gdx.scenes.scene2d.ui.TextField textField;
     Stage stage;
-    SpriteBatch sb = new SpriteBatch();
     MainController controller;
 
     Texture readyTexture;
     public Button readyButton;
+
+    public String roomNumber;
+    public MultiPlayerData multiPlayerData;
+
+    MyTextInputListener roomListener;
+    MyTextInputListener2 nameListener;
+    boolean alreadyConnected = false;
 
     public MultiPlayerView() {
         this.controller = FallingAngel.getInstance().mc;
@@ -59,6 +67,7 @@ public class MultiPlayerView extends ScreenAdapter {
         FallingAngel game = FallingAngel.getInstance();
         game.batch.begin();
         game.batch.draw(Asset.backgroundHeavenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(Asset.waitingRoomTexture, 0, Gdx.graphics.getHeight()*9/14, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/10 );
         game.batch.end();
         stage.draw();
     }
@@ -70,17 +79,39 @@ public class MultiPlayerView extends ScreenAdapter {
         draw();
         //stage.draw();
         stage.act(dt);
+        connectToDatabase();
+        //System.out.println("The room number is " + roomNumber + "and the username is " + multiPlayerData.username);
     }
 
     public void connectToGameRoom() {
-        MyTextInputListener roomListener = new MyTextInputListener();
+        multiPlayerData = new MultiPlayerData();
+
+        nameListener = new MyTextInputListener2();
+        Gdx.input.getTextInput(nameListener, "Write in your name", "name", "name");
+
+        roomListener = new MyTextInputListener();
         Gdx.input.getTextInput(roomListener,"Write in the room number","room number","write the number here");
-        /*MyTextInputListener nameListener = new MyTextInputListener();
-        Gdx.input.getTextInput(nameListener,"Write in the name","name","write the name here");*/
 
-
+        //FallingAngel.getInstance().FBI.connectToRoom(roomListener.room, multiPlayerData);
+        //System.out.println("The room number is " + roomNumber + "and the username is " + multiPlayerData.username);
 
     };
+
+    public void connectToDatabase(){
+        if (roomListener.room != null && nameListener.name != null && alreadyConnected == false){
+            multiPlayerData.username = nameListener.name;
+            roomNumber = roomListener.room;
+            //System.out.println("The room number is " + roomListener.room + " and the username is " + multiPlayerData.username);
+            FallingAngel.getInstance().FBI.connectToRoom(roomListener.room, multiPlayerData);
+            alreadyConnected = true;
+        }
+    }
+
+    public void checkIfReady(){
+        //if there are two children in the same room
+        //controller = FallingAngel.getInstance().mc;
+        //controller.beginMultiplayerGame();
+    }
 
 
 }

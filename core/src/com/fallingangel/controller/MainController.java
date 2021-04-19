@@ -210,6 +210,7 @@ public class MainController extends ClickListener {
             //settingsView.stage.draw();
             return true;
         }
+        //will remove button when waiting room is fixed
         else if (event.getListenerActor().equals(multiPlayerView.readyButton)){
             if (game.soundOn()){
                 clickSound.play(0.2f);
@@ -221,5 +222,9 @@ public class MainController extends ClickListener {
         else{
             return false;
         }
+    }
+
+    public void beginMultiplayerGame(){
+        game.setScreen(new GameView(true));
     }
 }
