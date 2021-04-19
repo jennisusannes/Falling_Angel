@@ -87,7 +87,7 @@ public class AngelSystem extends IteratingSystem {
         //updates the score
         angelComponent.AIRTIME += deltaTime;
         angelComponent.SCORE = angelComponent.AIRTIME + angelComponent.COINS_HIT;
-
+        world.score = (int) angelComponent.SCORE;
     }
 
 

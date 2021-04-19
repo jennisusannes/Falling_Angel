@@ -202,29 +202,4 @@ public class Asset {
     }
 
 
-
-    /*
-    //TODO: metoder fra tubby for laste-state. Legger metodene her dersom vi skulle få bruk for det.
-    public static float getProgress(){
-        return assetManager.getProgress();
-    }
-
-    public static Texture getTexture(String tex){
-        return assetManager.get(tex, Texture.class);
-    }
-     */
-
-
-    /*
-    //TODO: metode fra tubby for musikk og lyd, dersom vi skulle implementert det senere:
-    music = Gdx.audio.newMusic(Gdx.files.internal("data/music.mp3"));
-		music.setLooping(true);
-		music.setVolume(0.5f);
-		if (Settings.soundEnabled) music.play();
-		jumpSound = Gdx.audio.newSound(Gdx.files.internal("data/jump.wav"));
-		highJumpSound = Gdx.audio.newSound(Gdx.files.internal("data/highjump.wav"));
-		hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.wav"));
-		coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.wav"));
-		clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.wav"));
-     */
 }

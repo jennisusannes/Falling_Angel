@@ -29,9 +29,10 @@ public class World {
     public static final int VP_WIDTH  = 1714;
     public static final int VP_HEIGHT = 4096;
 
-    public int score;
-    public Entity angel;
+    public static int score;
     public int state;
+
+    public Entity angel;
     public Entity background;
     public Entity coin;
     public Entity plane;

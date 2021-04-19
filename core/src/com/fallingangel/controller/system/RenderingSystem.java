@@ -84,7 +84,6 @@ public class RenderingSystem extends IteratingSystem{
         //sorts the renderQueue based on comparator (z-axis)
         renderQueue.sort(comparator); //the entities are being sorted based on z-value
 
-
         //cam.update();
         sb.begin();
         // TODO: ta inn gamebackground istedenfor Asset.hellbackground her
@@ -120,7 +119,7 @@ public class RenderingSystem extends IteratingSystem{
         int scoreInt = (int) score;
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(5, 5);
-        font.draw(sb, scoreString, 40,Gdx.graphics.getHeight() - 40);
+        font.draw(sb, scoreString, Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight() - 40);
 
         sb.end();
         renderQueue.clear();
