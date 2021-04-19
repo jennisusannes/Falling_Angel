@@ -69,6 +69,7 @@ public class Asset {
     public static Texture pauseButton;
     public static Texture exitButton;
     public static Texture resumeButton;
+    public static Texture playAgainButton;
     public static Texture musicOnButton;
     public static Texture musicOffButton;
     public static Texture heavenButton;
@@ -160,6 +161,7 @@ public class Asset {
         pauseButton = new Texture("buttons/actions/pause_button.PNG");
         exitButton = new Texture("buttons/actions/exit_button.PNG");
         resumeButton = new Texture("buttons/actions/resume_button.PNG");
+        playAgainButton = new Texture("buttons/actions/play_again_button.png");
         musicOnButton = new Texture("buttons/actions/music_on_button.png");
         musicOffButton = new Texture("buttons/actions/music_off_button.png");
         heavenButton = new Texture("buttons/level/level_heaven_button.png");
