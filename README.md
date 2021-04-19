@@ -20,10 +20,12 @@ This game is built with
 
 
 ### Developed by:
-* Ingeborg Wilsher - @ingebwi   
-* Ingrid Renolen Borkenhagen -
-* Sofie Sunde - @Sofiesunde
-* Jenni Sveen Olsen -  
+* Ingeborg Wilsher - [Ingebwi](https://github.com/Ingebwi)   
+* Ingrid Renolen Borkenhagen - [Ingrirbo](https://github.com/ingrirbo)
+* Sofie Sunde - [Sofiesunde](https://github.com/sofiesunde)
+* Jenni Sveen Olsen -  [Jenniolsen](https://github.com/jenniolsen)
+* Jenni Susanne Skaara - [JenniSusanneSkaara](https://github.com/JenniSusanneSkaara)
+* Josefine Stiff Aamlid - [Jeaamlid](https://github.com/Jeaamlid)
 
 
 ###License
