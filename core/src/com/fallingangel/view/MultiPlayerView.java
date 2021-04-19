@@ -109,8 +109,10 @@ public class MultiPlayerView extends ScreenAdapter {
     //method that starts a new game if both players are in the room
     public void checkIfReady(){
         //if there are two children in the same room
-        //controller = FallingAngel.getInstance().mc;
-        //controller.beginMultiplayerGame();
+        if (multiPlayerData.getNumberOfUsersInRoom() == 2){
+            controller = FallingAngel.getInstance().mc;
+            controller.beginMultiplayerGame();
+        }
     }
 
 
