@@ -13,7 +13,31 @@ public class MultiPlayerData {
 
     public MultiPlayerData(){}
 
-    public MultiPlayerData(boolean isGameOver,  int score, String username){
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public MultiPlayerData(boolean isGameOver, int score, String username){
         this.isGameOver = isGameOver;
         this.score = score;
         this.username = username;
