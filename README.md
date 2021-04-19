@@ -13,6 +13,11 @@ This game is built with:
 
 
 # Installation
+* In order to run the game, you will need Android Studio, or an other similar IDE. Intellij is also possible to use.  
+You will need an android device or an emulator. Desktop will not work, as this project use Firebase DB. 
+The android device or emulator will need API level 21 or higher. Android Studio has the possibility to run the game on an emulator. 
+When you have downloaded your chosen IDE and have a device ready, you can clone the project on github or download the zip.file. Open Android studios, choose 
+"Open exisiting project". Navigate and choose the project file. When the Gradle Build has finished, before running the application.
 
 
 ### Getting started
