@@ -10,6 +10,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static android.content.ContentValues.TAG;
@@ -33,17 +34,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
 
     }
-/*
-    @Override
-    public void createWorldInDB(ImmutableArray<com.badlogic.ashley.core.Entity> entities) {
-        this.entities = entities;
-        for (Entity entity : entities
-             ) {
-            rooms.child("Entiteter").setValue(entity);
 
-        }
-
-    }*/
 
     @Override
     public void createUser(String mail, String username, String password) {
@@ -118,30 +109,32 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     @Override
-    public int opponentScore() {
+    public void setOpponentScore() {
         ValueEventListener scoreListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren())
-                    if(ds.getKey() == roomName) {
-                        if (ds.child(roomName).getKey() != user.getUID()) {
-                            String opponentKey = ds.child(roomName).getKey();
-                            MultiPlayerData opponentData = ds.child(roomName).child(opponentKey).child("score").getValue(MultiPlayerData.class);
-                            int opponentScore = opponentData.score;
-                            Log.i("opponentscore", Integer.toString(opponentScore));
-                        }
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String key = ds.getKey();
+                    if (!key.equals(user.getUID())) {
+                       MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
+                       opponentScore = opponent.getScore();
                     }
+                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled( DatabaseError error) {
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadHighscore:onCancelled", error.toException());
 
             }
 
         };
-        rooms.addValueEventListener(scoreListener);
+        rooms.child(roomName).addValueEventListener(scoreListener);
+    }
+
+    @Override
+    public int numberOfUsersInRoom() {
         return 0;
     }
 
@@ -197,6 +190,11 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return generatedString;
     }
 
+
+    @Override
+    public int getOpponentScore(){
+        return opponentScore;
+    }
 
 }
 

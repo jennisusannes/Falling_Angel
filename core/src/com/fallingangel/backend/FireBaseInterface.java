@@ -7,6 +7,7 @@ public interface FireBaseInterface {
     public void createUser(String mail, String username, String password);
     public void updateScore(int score);
     public void connectToRoom(String roomName, MultiPlayerData mpd);
-  //  public void createWorldInDB(ImmutableArray<Entity> entities);
-    public int opponentScore();
+    public void setOpponentScore();
+    public int numberOfUsersInRoom();
+    public int getOpponentScore();
  }

@@ -63,7 +63,7 @@ public class MultiplayerSystem extends IntervalSystem {
             mpd.score = (int) (angelComponent.SCORE);
             //FallingAngel.getInstance().FBI.connectToRoom(roomNumber, mpd);
             FallingAngel.getInstance().FBI.updateScore(mpd.score);
-            FallingAngel.getInstance().FBI.opponentScore();
+            FallingAngel.getInstance().FBI.setOpponentScore();
         }
     }
 }
