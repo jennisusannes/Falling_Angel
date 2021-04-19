@@ -103,6 +103,7 @@ public class MultiPlayerView extends ScreenAdapter {
             //send to database
             FallingAngel.getInstance().FBI.connectToRoom(roomListener.room, multiPlayerData);
             alreadyConnected = true;
+            FallingAngel.getInstance().FBI.numberOfUsersInRoom();
         }
     }
 
