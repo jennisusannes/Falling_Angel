@@ -3,6 +3,8 @@ package com.fallingangel.backend;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import java.util.HashMap;
+
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
@@ -33,6 +35,16 @@ public class CoreInterfaceClass implements FireBaseInterface{
     @Override
     public int getOpponentScore() {
         return 0;
+    }
+
+    @Override
+    public boolean currentPlayerIsWinner() {
+        return false;
+    }
+
+    @Override
+    public HashMap<String, Integer> highScoreListTopTen() {
+        return null;
     }
 
 }

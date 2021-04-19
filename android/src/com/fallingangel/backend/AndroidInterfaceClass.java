@@ -13,7 +13,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,6 +33,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int score;
     private int opponentScore;
     private int numUsersInRoom = 0;
+    private boolean currentPlayerIsWinner;
 
 
     public AndroidInterfaceClass(){
@@ -83,7 +89,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = ds.getKey();
-                    if (!key.equals(user.getUID()) && !key.equals("Usernum")) {
+                    if (!key.equals(user.getUID())){//TODO Check if this line of code is needed: && !key.equals("Usernum")) {
                        MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
                        opponentScore = opponent.getScore();
                     }
@@ -152,7 +158,57 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
 
+    @Override
+    public int getOpponentScore(){
+        return opponentScore;
+    }
 
+    @Override
+    public boolean currentPlayerIsWinner() {
+        ValueEventListener gameWonListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    String key = ds.getKey();
+                    if (!key.equals(user.getUID())) {
+                        MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
+                        boolean opponentLost = opponent.isGameOver();
+                        if(opponentLost){
+                            currentPlayerIsWinner = true;
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+        rooms.child(roomName).addValueEventListener(gameWonListener);
+        return currentPlayerIsWinner;
+    }
+
+    @Override
+    public HashMap<String, Integer> highScoreListTopTen() {
+        HashMap<String, Integer> highScoreListTopten = new HashMap<String, Integer>();
+        ValueEventListener highScoreListListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                HashMap<String, Integer> highScoreList = new HashMap<String, Integer>();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    User userdata = ds.getValue(User.class);
+                    highScoreList.put(userdata.getUsername(), userdata.getHighScore());
+                }
+                //TODO Sort hashmap and put the first ten entries into highscorelisttopten
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+        users.addValueEventListener(highScoreListListener);
+        return highScoreListTopten;
+    }
+
+    // Helpfunctions:
     public int getHighscoreFromDB(){
         ValueEventListener highScoreListener = new ValueEventListener() {
             @Override
@@ -199,11 +255,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return generatedString;
     }
 
-
-    @Override
-    public int getOpponentScore(){
-        return opponentScore;
-    }
 
 }
 

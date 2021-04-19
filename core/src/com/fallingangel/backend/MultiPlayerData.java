@@ -50,6 +50,5 @@ public class MultiPlayerData {
         this.score = score;
         this.username = username;
     }
-
     //TODO: retrieve the data from Firebase and use it to update the multiplayer
 }
