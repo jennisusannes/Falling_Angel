@@ -1,4 +1,6 @@
 package com.fallingangel.backend;
+import com.fallingangel.game.FallingAngel;
+import com.fallingangel.view.HighScoreListView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,87 +27,53 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private User user;
     private int score;
     private int opponentScore;
+    private int numUsersInRoom = 0;
 
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
         users = database.getReference("users");
         rooms = database.getReference("games");
-
-
     }
 
 
     @Override
     public void createUser(String mail, String username, String password) {
         String UID =  createID(30);
-
         this.user = new User(UID, username, mail, password);
-     //   userInfoListener(users);
-        // [BEGIN rtdb_write_new_user_task]
         users.child(UID).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    // Write was successful!
-                    // ...
+                    System.out.println("User created in db");
                 }
             })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            // ...
+                            Log.e("Error", e.toString());
                         }
                     });
-            // [END rtdb_write_new_user_task]
-
-
     }
 
-    // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
-    private void userInfoListener(DatabaseReference mPostReference) {
-        // [START post_value_event_listener]
-        ValueEventListener userListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                user.setHighScore(dataSnapshot.child(user.getUID()).getValue(User.class).getHighScore());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadHighscore:onCancelled", error.toException());
-
-            }
-
-        };
-        mPostReference.addValueEventListener(userListener);
-        // [END post_value_event_listener]
-    }
 
 
     @Override
     public void connectToRoom(String roomName, MultiPlayerData mpd) {
-
         this.roomName = roomName;
-        // [BEGIN rtdb_write_new_user_task]
         rooms.child(roomName).child(user.getUID()).setValue(mpd)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
+                        System.out.println("Connected to room");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
+                        Log.e("Error", e.toString());
                     }
                 });
-        // [END rtdb_write_new_user_task]
     }
 
     @Override
@@ -115,7 +83,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = ds.getKey();
-                    if (!key.equals(user.getUID())) {
+                    if (!key.equals(user.getUID()) && !key.equals("Usernum")) {
                        MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
                        opponentScore = opponent.getScore();
                     }
@@ -134,11 +102,28 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     @Override
-    public int numberOfUsersInRoom() {
-        return 0;
+    public void numberOfUsersInRoom() {
+        ValueEventListener roomListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                numUsersInRoom = (int)dataSnapshot.getChildrenCount();
+                rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
+
+                FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
+            }
+
+            @Override
+            public void onCancelled( DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadHighscore:onCancelled", error.toException());
+
+            }
+
+        };
+        rooms.child(roomName).addValueEventListener(roomListener);
     }
 
-
+    // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
     @Override
     public void updateScore(int score) {
 
@@ -160,7 +145,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     }
                 });
         // [END rtdb_write_new_user_task]
-        if (this.score > this.user.getHighScore()){
+        if (this.score > getHighscoreFromDB()){
             users.child(this.user.getUID()).child("highScore").setValue(this.score);
         }
 
@@ -168,6 +153,30 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
 
 
+    public int getHighscoreFromDB(){
+        ValueEventListener highScoreListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    String key = ds.getKey();
+                    if (key.equals(user.getUID())) {
+                        User userdata = ds.getValue(User.class);
+                        user.setHighScore(userdata.getHighScore());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadHighscore:onCancelled", error.toException());
+
+            }
+
+        };
+        users.addValueEventListener(highScoreListener);
+        return user.getHighScore();
+
+    }
 
 
     // Found at: https://www.baeldung.com/java-random-string

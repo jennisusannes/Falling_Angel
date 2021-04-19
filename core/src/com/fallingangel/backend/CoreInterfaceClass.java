@@ -27,8 +27,7 @@ public class CoreInterfaceClass implements FireBaseInterface{
 
 
     @Override
-    public int numberOfUsersInRoom() {
-        return 0;
+    public void numberOfUsersInRoom() {
     }
 
     @Override
