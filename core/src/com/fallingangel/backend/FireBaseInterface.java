@@ -8,6 +8,6 @@ public interface FireBaseInterface {
     public void updateScore(int score);
     public void connectToRoom(String roomName, MultiPlayerData mpd);
     public void setOpponentScore();
-    public int numberOfUsersInRoom();
+    public void numberOfUsersInRoom();
     public int getOpponentScore();
  }
