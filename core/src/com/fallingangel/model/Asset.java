@@ -81,6 +81,7 @@ public class Asset {
     // MUSIC AND SOUNDS
     public static Music backgroundMusic;
     public static Sound clickSound;
+    public static Sound coinSound;
 
     // FONT
     public static BitmapFont font;
@@ -187,6 +188,7 @@ public class Asset {
 
 
         // MUSIC AND SOUNDS
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin_sound.wav"));
         // Sound from Zapsplat.com
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
         // Music from Zapsplat.com
