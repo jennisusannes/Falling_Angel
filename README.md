@@ -1,23 +1,22 @@
-# Falling_Angel
-Project in TDT4240
+# TDT4240 Project: Falling_Angel
+This is a project for TDT4240 - Software architecture. The aim of this project is to develop a game with different software architectures. 
 
 # Demo / user manual
 
 
-
 # Technology and frameworks 
-This game is built with 
+This game is built with: 
 * Android Studio
-* Ashely ECS
-* LibGDX
+* [LibGDX](https://github.com/libgdx/libgdx/wiki)
+* [Ashely ECS](https://github.com/libgdx/ashley/wiki) 
+* [Firebase Realtime Database](https://firebase.google.com/)
 
 
 # Installation
 
 
 ### Getting started
-
-
+To run the game 
 
 ### Developed by:
 * Ingeborg Wilsher - [Ingebwi](https://github.com/Ingebwi)   
@@ -28,7 +27,9 @@ This game is built with
 * Josefine Stiff Aamlid - [Jeaamlid](https://github.com/Jeaamlid)
 
 
-###License
+### License
 
-###Project Status
+
+### Project Status
+This project is under development.
 
