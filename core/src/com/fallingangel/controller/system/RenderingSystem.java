@@ -121,15 +121,11 @@ public class RenderingSystem extends IteratingSystem{
         }
 
         //prints the updated score
-        BitmapFont font = new BitmapFont();
+        BitmapFont font = Asset.font;
         int scoreInt = (int) score;
         String scoreString = String.valueOf(scoreInt);
-        font.getData().setScale(5, 5);
-        font.setColor(Color.BLACK);
-        font.draw(sb, scoreString, Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.975f);
-
-
-
+        font.getData().setScale(8, 8);
+        font.draw(sb, scoreString, Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.981f);
         sb.end();
         renderQueue.clear();
     }

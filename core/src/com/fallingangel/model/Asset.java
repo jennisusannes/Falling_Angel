@@ -82,6 +82,8 @@ public class Asset {
     public static Music backgroundMusic;
     public static Sound clickSound;
     public static Sound coinSound;
+    public static Sound collisionSound;
+    //public static Sound tixSound;
 
     // FONT
     public static BitmapFont font;
@@ -188,9 +190,12 @@ public class Asset {
 
 
         // MUSIC AND SOUNDS
-        coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin_sound.wav"));
+        //tixSound = Gdx.audio.newSound(Gdx.files.internal("sounds/tix_sound.wav"));
+        //tixSound.setPitch(tixSound.play(),0.6f);
         // Sound from Zapsplat.com
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin_sound.wav"));
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
+        collisionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/game_over_sound.wav"));
         // Music from Zapsplat.com
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
         backgroundMusic.setVolume(0.02f); // Sets volume of music
@@ -198,7 +203,7 @@ public class Asset {
 
 
         // FONT
-        //font = new BitmapFont(Gdx.files.internal("font/retro_game_font.png"), Gdx.files.internal("font/retro_game_font.png"), false);
+        font = new BitmapFont(Gdx.files.internal("font/retro_game_font.fnt"),Gdx.files.internal("font/retro_game_font.png"), false);
     }
 
 

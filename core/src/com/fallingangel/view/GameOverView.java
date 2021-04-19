@@ -9,8 +9,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
@@ -85,14 +87,12 @@ public class GameOverView extends ScreenAdapter {
     }
 
     public void draw(){
-
-        BitmapFont font = new BitmapFont();
+        BitmapFont font = Asset.font;
         Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
-        font.getData().setScale(4, 4);
-        font.setColor(Color.BLACK);
-        font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.258f);
+        font.getData().setScale(8, 8);
+        font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.265f);
         game.batch.end();
         stage.draw(); // Draws the stage
     }
