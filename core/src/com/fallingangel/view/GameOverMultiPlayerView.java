@@ -28,8 +28,14 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     public GameOverMultiPlayerView(){
         this.controller = FallingAngel.getInstance().mc;
         stage = new Stage(new ScreenViewport());
-        isWinner = true;
         exitButton = makeButton(Asset.backTexture);
+        //if your score is the best
+        if (){
+            isWinner = true;
+        }
+        else {
+            isWinner = false;
+        }
     }
 
     public void draw(){

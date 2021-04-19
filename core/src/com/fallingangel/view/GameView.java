@@ -198,6 +198,13 @@ public class GameView extends ScreenAdapter {
             pauseSystem();
 
         }
+
+        if (isMultiplayer && state == GAME_OVER){
+            FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData.setGameOver(true);
+        }
+
+        //if one of the gameOver fields from database are true
+        //state = GAME_OVER;
     }
 
     private void updatePaused() {
