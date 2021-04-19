@@ -131,6 +131,20 @@ public class GameActionsController implements EventListener {
         return state;
     }
 
+    public TransformComponent getAngelPos(){
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
+        angels = engine.getEntitiesFor(Family.all(AngelComponent.class,TransformComponent.class, BoundsComponent.class, StateComponent.class).get());
+        if (!(angels.size() == 0)){
+            Entity angel = angels.get(0);
+            TransformComponent angelPosVector = transformMapper.get(angel);
+            return angelPosVector;
+        }
+        else{
+            TransformComponent emptyTransformcomponent = new TransformComponent();
+            return emptyTransformcomponent;
+        }
+    }
+
     // Calls on different functions depending on which state the game is in
     public void update(float dt) {
         if (dt > 0.1f) dt = 0.1f;
@@ -170,13 +184,14 @@ public class GameActionsController implements EventListener {
     public void updateRunning(float dt) {
         // Handle input, accelX is changed here and being set in AngelSystem
         //TransformComponent transformComponent = transform_mapper.get(entity);
-        transformMapper = ComponentMapper.getFor(TransformComponent.class);
+
+        //transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
         float accelX = 0.0f;
-        angels = engine.getEntitiesFor(Family.all(AngelComponent.class,TransformComponent.class, BoundsComponent.class, StateComponent.class).get());
-        Entity angel = angels.get(0);
-        TransformComponent angelPosVector = transformMapper.get(angel);
-        this.angelPosX = angelPosVector.pos.x;
+        //angels = engine.getEntitiesFor(Family.all(AngelComponent.class,TransformComponent.class, BoundsComponent.class, StateComponent.class).get());
+        //Entity angel = angels.get(0);
+        //TransformComponent angelPosVector = transformMapper.get(angel);
+        this.angelPosX = getAngelPos().pos.x;
                 //angelSystem.xPos;
         //if (playerActionsController.touchDragged(angelEntity.ge,))
 
