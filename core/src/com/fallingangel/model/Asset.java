@@ -3,8 +3,10 @@ package com.fallingangel.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
@@ -55,11 +57,6 @@ public class Asset {
     public static TextureRegion droneTexture;
 
 
-    //MUSIC AND SOUNDS
-    public static Music backgroundMusic;
-    public static Sound clickSound;
-
-
     // BUTTONS
     public static Texture singlePlayerButton;
     public static Texture multiPlayerButton;
@@ -80,6 +77,13 @@ public class Asset {
     public static Texture bunnyButton;
     public static Texture pigButton;
     public static Texture selected;
+
+    // MUSIC AND SOUNDS
+    public static Music backgroundMusic;
+    public static Sound clickSound;
+
+    // FONT
+    public static BitmapFont font;
 
 /*
     //Select Character
@@ -181,6 +185,7 @@ public class Asset {
         pigButton = new Texture("buttons/character/select_pig_button.PNG");
         selected = new Texture("buttons/character/selected.png");
 
+
         // MUSIC AND SOUNDS
         // Sound from Zapsplat.com
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
@@ -189,6 +194,9 @@ public class Asset {
         backgroundMusic.setVolume(0.02f); // Sets volume of music
         backgroundMusic.setLooping(true); // Music will continuously loop
 
+
+        // FONT
+        //font = new BitmapFont(Gdx.files.internal("font/retro_game_font.png"), Gdx.files.internal("font/retro_game_font.png"), false);
     }
 
 
