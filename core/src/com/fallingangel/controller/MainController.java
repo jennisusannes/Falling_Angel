@@ -178,7 +178,7 @@ public class MainController extends ClickListener {
             clickSound.play(0.0f);
             game.music.pause();
             settingsView.getMusicOnButton().setPosition(-1000,-1000);
-            settingsView.getMusicOffButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
+            settingsView.getMusicOffButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.62f);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getMusicOffButton())){
@@ -186,7 +186,7 @@ public class MainController extends ClickListener {
             game.music.setVolume(0.02f);
             game.music.play();
             settingsView.getMusicOffButton().setPosition(-1000,-1000);
-            settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.6f);
+            settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.62f);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getPigButton())){

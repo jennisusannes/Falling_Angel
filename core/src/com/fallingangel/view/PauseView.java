@@ -36,7 +36,7 @@ public class PauseView extends ScreenAdapter {
 
     // Getters and setters for the buttons
     public void setExitButton() {
-        this.exitButton = makeButton(Asset.exitButton,600,300, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.exitButton = makeButton(Asset.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getExitButton(){
@@ -44,7 +44,7 @@ public class PauseView extends ScreenAdapter {
     }
 
     public void setResumeButton() {
-        this.resumeButton = makeButton(Asset.resumeButton,900,300, Gdx.graphics.getWidth()*0.20f, Gdx.graphics.getHeight() * 0.4f);
+        this.resumeButton = makeButton(Asset.resumeButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.20f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getResumeButton(){

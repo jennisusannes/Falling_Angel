@@ -63,7 +63,7 @@ public class MenuView extends ScreenAdapter {
     // Getters and setters for buttons
 
     public void setSinglePlayerButton() {
-        this.singlePlayerButton = makeButton(Asset.singlePlayerButton,600, 400, Gdx.graphics.getWidth()*0.33f - 600*0.67f, Gdx.graphics.getHeight() * 0.4f);
+        this.singlePlayerButton = makeButton(Asset.singlePlayerButton,Gdx.graphics.getWidth()*0.4f, Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.33f - 600*0.67f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getSinglePlayerButton(){
@@ -71,7 +71,7 @@ public class MenuView extends ScreenAdapter {
     }
 
     public void setMultiPlayerButton() {
-        this.multiPlayerButton = makeButton(Asset.multiPlayerButton,600, 400, Gdx.graphics.getWidth()*0.67f - 600*0.33f, Gdx.graphics.getHeight() * 0.4f);
+        this.multiPlayerButton = makeButton(Asset.multiPlayerButton,Gdx.graphics.getWidth()*0.4f, Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.67f - 600*0.33f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getMultiPlayerButton(){
@@ -91,7 +91,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setHighscoreListButton() {
-        this.highscoreListButton = makeButton(Asset.highscorelistButton,200, 200,Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
+        this.highscoreListButton = makeButton(Asset.highscorelistButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f,Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getHighscoreListButton(){
@@ -100,7 +100,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setSettingsButton() {
-        this.settingsButton = makeButton(Asset.settingsButton,200,200,Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight() * 0.89f);
+        this.settingsButton = makeButton(Asset.settingsButton,Gdx.graphics.getWidth()*0.1f,Gdx.graphics.getWidth()*0.1f,Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight() * 0.89f);
     }
 
     public Button getSettingsButton(){
@@ -109,7 +109,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setHelpButton() {
-        this.helpButton = makeButton(Asset.helpButton,200, 200, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
+        this.helpButton = makeButton(Asset.helpButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getHelpButton(){

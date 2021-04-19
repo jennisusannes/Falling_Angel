@@ -32,7 +32,7 @@ public class GameView extends ScreenAdapter {
 
     //getter and setter for the pause button
     public void setPauseButton() {
-        this.pauseButton = makeButton(Asset.pauseButton,150,150, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
+        this.pauseButton = makeButton(Asset.pauseButton,Gdx.graphics.getWidth()*0.10f,Gdx.graphics.getWidth()*0.10f, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
     }
 
     public Button getPauseButton(){

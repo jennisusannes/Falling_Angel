@@ -37,7 +37,7 @@ public class GameOverView extends ScreenAdapter {
 
     // Getter and setter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,600,400, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
