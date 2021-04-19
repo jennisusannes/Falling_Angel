@@ -1,10 +1,15 @@
 package com.fallingangel.controller;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -23,7 +28,11 @@ import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
+import com.fallingangel.model.component.AngelComponent;
+import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.DroneComponent;
+import com.fallingangel.model.component.StateComponent;
+import com.fallingangel.model.component.TransformComponent;
 import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
 import com.fallingangel.view.PauseView;
@@ -37,10 +46,13 @@ public class GameActionsController implements EventListener {
     håndterer skiftet til gameoverview når man dør
      */
     public FallingAngel game;
+    private AngelSystem angelSystem;
+    private Entity entity;
     public GameView gameView;
     public PauseView pauseView = new PauseView();
     public GameOverView gameOverView = new GameOverView();
     public MainController mainController;
+    public PlayerActionsController playerActionsController= new PlayerActionsController();
 
     private Sound clickSound;
 
@@ -55,9 +67,17 @@ public class GameActionsController implements EventListener {
     private Rectangle pauseBounds;
     private Rectangle resumeBounds;
     private Rectangle quitBounds;
+    private ComponentMapper<TransformComponent> transform_mapper;
+    private ComponentMapper<TransformComponent> transformMapper;
+    private TransformComponent transformComponent;
+    private ImmutableArray<Entity> angels;
+    private TransformComponent angelPos;
 
     private int lastScore = 0;
     private String scoreString;
+
+    private float angelPosX;
+    private float getAngelPosY; //trengs kanskje ikke
 
     //ASHLEY
     public Engine engine;
@@ -72,8 +92,14 @@ public class GameActionsController implements EventListener {
         // Initializes new engine and world
         //this.engine = new Engine();
         //this.world = new World(engine);
+        //transform_mapper = ComponentMapper.getFor(TransformComponent.class);
+        //this.transformComponent = transform_mapper.get(entity);
         this.engine = mainController.engine;
         this.world = mainController.world;
+        transform_mapper = ComponentMapper.getFor(TransformComponent.class);
+        //TransformComponent transformComponent = transform_mapper.get(entity);
+
+        //this.getAngelPosY = transformComponent.pos.y;
 
         // Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
@@ -143,22 +169,42 @@ public class GameActionsController implements EventListener {
     //Koble denne opp mot PlayerActionsController, angelSystem og renderingSystem på et vis :))
     public void updateRunning(float dt) {
         // Handle input, accelX is changed here and being set in AngelSystem
+        //TransformComponent transformComponent = transform_mapper.get(entity);
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
         float accelX = 0.0f;
-
+        angels = engine.getEntitiesFor(Family.all(AngelComponent.class,TransformComponent.class, BoundsComponent.class, StateComponent.class).get());
+        Entity angel = angels.get(0);
+        TransformComponent angelPosVector = transformMapper.get(angel);
+        this.angelPosX = angelPosVector.pos.x;
+                //angelSystem.xPos;
+        //if (playerActionsController.touchDragged(angelEntity.ge,))
 
         /*
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) accelX = 10f;
         if (Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) accelX = -10f;
+
          */
+
+        if (Gdx.input.isTouched()) {
+            if (Gdx.input.getX() > angelPosX){
+                accelX = -10f;
+            }
+            if (Gdx.input.getX() < angelPosX){
+                accelX = 10f;
+            }
+            //spritePosition.set(Gdx.input.getX(), 0, 0));
+        }
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
 
         // Updates the players score
-        if (world.score != lastScore) {
+        /*if (world.score != lastScore) {
             lastScore = world.score;
             // Present the score
             scoreString = "SCORE: " + lastScore;
         }
+
+         */
 
         // Player dies
         if (world.state == World.WORLD_STATE_GAME_OVER) {

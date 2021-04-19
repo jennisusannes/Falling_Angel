@@ -1,10 +1,13 @@
 package com.fallingangel.controller;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.fallingangel.controller.system.AngelSystem;
 
-public class PlayerActionsController implements InputProcessor{ //this class deals with the input
+public class PlayerActionsController extends DragListener { //this class deals with the input
 
     //The controller responds to the user input and performs interactions on the data model objects
     //An InputProcessor is used to receive input events from the keyboard and the touch screen (mouse on the desktop).
@@ -15,51 +18,34 @@ public class PlayerActionsController implements InputProcessor{ //this class dea
     private AngelSystem angelSystem;
     private Entity angelEntity;
 
-    public PlayerActionsController(AngelSystem angelSystem) {
-        this.angelSystem = angelSystem;
-        this.angelEntity = angelSystem.getEntities().get(0);
+    public PlayerActionsController() { //fjerner at konstruktøren tar inn et Angelsystem
+        //this.angelSystem = angelSystem;
+        //this.angelEntity = angelSystem.getEntities().get(0);
+    }
+
+
+    boolean dragging=false;
+
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        return true;
     }
 
     @Override
-    public boolean keyDown(int keycode) {
-        return false;
+    public void touchDragged(InputEvent event, float x, float y, int pointer) {
+        if(!dragging)dragging=true;
+            //my game logic*
+
     }
 
     @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+        //Gdx.app.log("touch up",""); trengs kanskje ikke
+        if (dragging) {
+            //my game logic*
+        }
 
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
     }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
-    }
-
     //methods that receive input and calls other methods in systems. These methods are from InputProcessor
     //tells whether the input has been processed, false if not
 
