@@ -70,7 +70,7 @@ public class PauseView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.hellBackgroundTextureRegion, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
+        game.batch.draw(Asset.hellBackgroundPauseTextureRegion, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         game.batch.end();
         stage.draw(); // Draws the stage
     }

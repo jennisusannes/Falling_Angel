@@ -24,7 +24,9 @@ public class Asset {
     public static TextureRegion heavenBackgroundTextureRegion;
     public static TextureRegion sunsetBackgroundTextureRegion;
     public static TextureRegion hellBackgroundTextureRegion;
-
+    public static TextureRegion heavenBackgroundPauseTextureRegion;
+    public static TextureRegion sunsetBackgroundPauseTextureRegion;
+    public static TextureRegion hellBackgroundPauseTextureRegion;
 
     // PIG
     public static Animation<TextureRegion> pigAnimation;
@@ -119,6 +121,14 @@ public class Asset {
         sunsetBackgroundTextureRegion = new TextureRegion(sunsetBackgroundTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
         Texture hellBackgroundTexture = new Texture("backgrounds/level/level_hell_score_background.png");
         hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
+
+        // Game backgrounds without score
+        Texture heavenBackgroundPauseTexture = new Texture("backgrounds/level/level_heaven_score_background.png");
+        heavenBackgroundPauseTextureRegion = new TextureRegion(heavenBackgroundPauseTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
+        Texture sunsetBackgroundPauseTexture = new Texture("backgrounds/level/level_sunset_score_background.png");
+        sunsetBackgroundPauseTextureRegion = new TextureRegion(sunsetBackgroundPauseTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
+        Texture hellBackgroundPauseTexture = new Texture("backgrounds/level/level_hell_background.png");
+        hellBackgroundPauseTextureRegion = new TextureRegion(hellBackgroundPauseTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
 
 
         //PIG

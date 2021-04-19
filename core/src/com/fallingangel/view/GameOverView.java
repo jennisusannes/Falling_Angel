@@ -90,7 +90,7 @@ public class GameOverView extends ScreenAdapter {
         game.batch.begin();
         game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         font.getData().setScale(4, 4);
-        font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.47f, Gdx.graphics.getHeight()*0.26f);
+        font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.258f);
         game.batch.end();
         stage.draw(); // Draws the stage
     }
