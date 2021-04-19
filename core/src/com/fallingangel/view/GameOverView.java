@@ -23,6 +23,7 @@ public class GameOverView extends ScreenAdapter {
     private GameActionsController gameController;
     private Stage stage;
     private Button backButton;
+    private Button playAgainButton;
     private Texture background;
 
     public GameOverView(){
@@ -31,17 +32,28 @@ public class GameOverView extends ScreenAdapter {
         this.gameController = game.mc.gameActionsController; // Sets the controller as the main controller
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); // Sets input processor
-        setBackButton(); // Creates a button
+        setBackButton(); // Creates a back button
+        setPlayAgainButton(); //Creates a play again button
         stage.addActor(backButton); // Adds the button as an actor to the stage
+        stage.addActor(playAgainButton);
     }
 
     // Getter and setter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
         return backButton;
+    }
+
+    // Getter and setter for the play again button
+    public void setPlayAgainButton() {
+        this.playAgainButton = makeButton(Asset.playAgainButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.05f);
+    }
+
+    public Button getPlayAgainButton(){
+        return playAgainButton;
     }
 
     // Method for creating a button, this will add the MainController as a listener

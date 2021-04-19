@@ -318,6 +318,14 @@ public class GameActionsController implements EventListener {
             game.mc.setStartScreen();
             return true;
         }
+        else if (event.getListenerActor().equals(gameOverView.getPlayAgainButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
+            game.mc.gameActionsController = new GameActionsController();
+            game.mc.gameActionsController.setGameScreen();
+            return true;
+        }
         else {
             return false;
         }
