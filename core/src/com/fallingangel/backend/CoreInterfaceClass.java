@@ -13,7 +13,7 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void updateScore(int score) {
+    public void updateScore(MultiPlayerData mpd) {
 
     }
 

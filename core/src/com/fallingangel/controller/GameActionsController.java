@@ -245,6 +245,10 @@ public class GameActionsController implements EventListener {
             game.mc.multiPlayerView.multiPlayerData.setGameOver(true);
         }
 
+        if(game.FBI.gameIsOver()){
+            state = GAME_OVER;
+        }
+
     }
 
     // This method sets all systems updating on pause

@@ -30,15 +30,14 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         stage = new Stage(new ScreenViewport());
         exitButton = makeButton(Asset.backButton);
         //if your score is the best
-        /*
-        if (){
+      /*  if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
             isWinner = true;
         }
         else {
             isWinner = false;
-        }
+        }*/
+       // FallingAngel.getInstance().FBI.destroyRoom();
 
-         */
     }
 
     public void draw(){

@@ -10,6 +10,7 @@ import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;
+import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TransformComponent;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class MultiplayerSystem extends IntervalSystem {
 
     private ComponentMapper<AngelComponent> angelMapper = ComponentMapper.getFor(AngelComponent.class);
     private ComponentMapper<TransformComponent> transformMapper = ComponentMapper.getFor(TransformComponent.class);
+    private ComponentMapper<StateComponent> stateMapper = ComponentMapper.getFor(StateComponent.class);
 
     public MultiplayerSystem(int priority){
         super(0.5f, priority);
@@ -58,10 +60,14 @@ public class MultiplayerSystem extends IntervalSystem {
         for (Entity entity : playerEntities){
             AngelComponent angelComponent = angelMapper.get(entity);
             TransformComponent transformComponent = transformMapper.get(entity);
+            StateComponent stateComponent = stateMapper.get(entity);
 
             MultiPlayerData mpd = FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData;
             mpd.score = (int) (angelComponent.SCORE);
-            FallingAngel.getInstance().FBI.updateScore(mpd.score);
+            if (stateComponent.state == angelComponent.STATE_HIT){
+                mpd.setGameOver(true);
+            }
+            FallingAngel.getInstance().FBI.updateScore(mpd);
             FallingAngel.getInstance().FBI.setOpponentScore();
         }
     }

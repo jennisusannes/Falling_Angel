@@ -17,8 +17,9 @@ public class MultiPlayerData {
         return isGameOver;
     }
 
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
+    public void setGameOver(boolean isGameOver) {
+
+        this.isGameOver = isGameOver;
     }
 
     public int getScore() {

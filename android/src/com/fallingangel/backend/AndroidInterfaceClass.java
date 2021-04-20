@@ -46,7 +46,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public void createUser() {
-        String UID =  "jennitest";//createID(30);
+        String UID =  createID(30);
         this.user = new User(UID);
         users.child(UID).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -131,14 +131,13 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
     @Override
-    public void updateScore(final int score) {
+    public void updateScore(MultiPlayerData mpd) {
         this.getHighscoreFromDB();
-        this.score = score;
-        rooms.child(roomName).child(this.user.getUID()).child("score").setValue(this.score)
+        rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.i("Score was updated", Integer.toString(score));
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

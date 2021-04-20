@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public interface FireBaseInterface {
     public void createUser();
-    public void updateScore(int score);
+    public void updateScore(MultiPlayerData mpd );
     public void connectToRoom(String roomName, MultiPlayerData mpd);
     public void setOpponentScore();
     public void numberOfUsersInRoom();
