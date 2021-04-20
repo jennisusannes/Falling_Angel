@@ -77,7 +77,8 @@ public class RenderingSystem extends IteratingSystem{
         this.game = FallingAngel.getInstance();
         if (!isMultiplayer){
             this.controller = game.mc;
-        }   this.gameBackground = controller.getGameBackground();
+            this.gameBackground = controller.getGameBackground();
+        }
 
 
     }
