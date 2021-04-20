@@ -13,3 +13,5 @@ public class TransformComponent implements Component {
 
 }
 
+//entity.transformComp.pos.x
+//world.angel1.getComponent(TransformComponent.class).pos.x

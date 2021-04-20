@@ -39,8 +39,8 @@ public class Asset {
     public static Animation<TextureRegion> bunnyAnimation;
     public static Texture bunnySpriteSheet;
 
-
-    // COIN AND POWERUPS
+    //POWER-UPS and COIN
+    //Animation for coin:
     public static Animation<TextureRegion> coinAnimation;
     public static Texture coinTexture;
 
@@ -88,6 +88,21 @@ public class Asset {
     // FONT
     public static BitmapFont font;
 
+    //might delete later
+    public static Texture singlePlayerTexture;
+    public static Texture multiPlayerTexture;
+    public static Texture achievementsTexture;
+    public static Texture highscoreListTexture;
+    public static Texture settingsTexture;
+    public static Texture backTexture;
+    public static Texture playTexture;
+
+    //Waiting room
+    public static Texture waitingRoomTexture;
+
+    //Game Over Multiplayer
+    public static Texture youLose;
+    public static Texture youWin;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -201,6 +216,12 @@ public class Asset {
         backgroundMusic.setVolume(0.02f); // Sets volume of music
         backgroundMusic.setLooping(true); // Music will continuously loop
 
+        //Waiting room
+        waitingRoomTexture = new Texture("waiting_room.png");
+
+        //Game Over Multiplayer
+        youLose = new Texture("lose_text.png");
+        youWin = new Texture("win_text.png");
 
         // FONT
         font = new BitmapFont(Gdx.files.internal("font/retro_game_font.fnt"),Gdx.files.internal("font/retro_game_font.png"), false);

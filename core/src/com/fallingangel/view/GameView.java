@@ -8,6 +8,20 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.Input.Keys;
+
+import com.fallingangel.controller.system.AnimationSystem;
+import com.fallingangel.controller.system.BackgroundSystem;
+import com.fallingangel.controller.system.BoundsSystem;
+import com.fallingangel.controller.system.CoinSystem;
+import com.fallingangel.controller.system.CollisionSystem;
+import com.fallingangel.controller.system.MovementSystem;
+import com.fallingangel.controller.system.DroneSystem;
+import com.fallingangel.controller.system.MultiplayerSystem;
+import com.fallingangel.controller.system.RenderingSystem;
+import com.fallingangel.controller.system.StateSystem;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -21,12 +35,25 @@ public class GameView extends ScreenAdapter {
     private Button pauseButton;
     private GameActionsController gameController;
     public Stage stage;
+    public boolean isMultiplayer;
 
-    public GameView() {
+
+    public GameView(boolean isMultiplayer) {
         super();
         this.game = FallingAngel.getInstance();
         this.gameController = game.mc.gameActionsController;
         gameController.setState(1);
+        //this.game  = FallingAngel.getInstance();
+        this.isMultiplayer = isMultiplayer;
+
+        //TODO må  flyttes til GameActionsController
+        if (isMultiplayer){
+            engine.addSystem(new MultiplayerSystem(1));
+            engine.addSystem(new RenderingSystem(game.batch, true));
+        }
+        else{
+            engine.addSystem(new RenderingSystem(game.batch, false));
+        }
 
     }
 
@@ -63,6 +90,23 @@ public class GameView extends ScreenAdapter {
         stage.addActor(pauseButton);
         stage.draw();
     }
+
+    //TODO flyttes til updateRunning
+        if (isMultiplayer && state == GAME_OVER){
+        FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData.setGameOver(true);
+    }
+
+        //TODO flyttes til updateGameOver
+          if (isMultiplayer){
+        game.setScreen(new GameOverMultiPlayerView());
+    }
+        else {
+        game.setScreen(new GameOverView());
+    }
+
+
+    //if one of the gameOver fields from database are true
+    //state = GAME_OVER;
 
     @Override
     public void render(float delta) {

@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
@@ -34,7 +35,6 @@ public class RenderingSystem extends IteratingSystem{
     private SpriteBatch sb;
     private Array<Entity> renderQueue;
     private Comparator<Entity> comparator;
-    //private OrthographicCamera cam;
 
     private ComponentMapper<TextureComponent> textureMapper;
     private ComponentMapper<TransformComponent> transformMapper;
@@ -44,12 +44,17 @@ public class RenderingSystem extends IteratingSystem{
 
 
     public static float score = 0;
+    boolean isMultiplayer;
 
+
+    public FallingAngel game = FallingAngel.getInstance();
 
     //Instanciate a RenderingSystem
-    public RenderingSystem(SpriteBatch sb) {
+    public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
         //creates a new iteratingSystem for the entities with following components
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
+
+        this.isMultiplayer = isMultiplayer;
 
         //gets the components through a mapper
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
@@ -123,9 +128,19 @@ public class RenderingSystem extends IteratingSystem{
         //prints the updated score
         BitmapFont font = Asset.font;
         int scoreInt = (int) score;
+        // TODO do it
+        //this.game.FBI.updateScore((int)AngelComponent.SCORE);
+
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(8, 8);
         font.draw(sb, scoreString, Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.981f);
+
+        if (isMultiplayer){
+            String opponentScoreString = Integer.toString(this.game.FBI.getOpponentScore());
+            font.getData().setScale(5, 5);
+            font.draw(sb, opponentScoreString, Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 40);
+        }
+
         sb.end();
         renderQueue.clear();
     }
