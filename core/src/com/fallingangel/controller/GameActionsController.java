@@ -318,8 +318,7 @@ public class GameActionsController implements EventListener {
 
 
 
-    public void setGameOverScreen(int winner) {
-        gameOverView.setWinner(winner);
+    public void setGameOverScreen() {
         game.setScreen(gameOverView);
     }
 

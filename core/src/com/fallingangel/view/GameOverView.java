@@ -28,6 +28,7 @@ public class GameOverView extends ScreenAdapter {
     private Button backButton;
     private Button playAgainButton;
     private Texture background;
+    private BitmapFont font = new BitmapFont();
 
     public GameOverView(){
         super();
@@ -73,6 +74,7 @@ public class GameOverView extends ScreenAdapter {
         });
         return button;
     }
+    /*
     // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
     public void setWinner(int winner) {
         if (winner == 1) {
@@ -86,11 +88,13 @@ public class GameOverView extends ScreenAdapter {
         }
     }
 
+     */
+
     public void draw(){
-        BitmapFont font = Asset.font;
+        this.font = Asset.font;
         Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
-        game.batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
+        game.batch.draw(Asset.highscorelistBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         font.getData().setScale(8, 8);
         font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.265f);
         game.batch.end();
