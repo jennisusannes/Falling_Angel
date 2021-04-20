@@ -28,15 +28,24 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     public GameOverMultiPlayerView(){
         this.controller = FallingAngel.getInstance().mc;
         stage = new Stage(new ScreenViewport());
-        isWinner = true;
-        exitButton = makeButton(Asset.backTexture);
+        exitButton = makeButton(Asset.backButton);
+        //if your score is the best
+        /*
+        if (){
+            isWinner = true;
+        }
+        else {
+            isWinner = false;
+        }
+
+         */
     }
 
     public void draw(){
         Gdx.input.setInputProcessor(stage);
         FallingAngel game = FallingAngel.getInstance();
         game.batch.begin();
-        game.batch.draw(Asset.backgroundHeavenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         if (isWinner){
             game.batch.draw(Asset.youWin, Gdx.graphics.getWidth()/2 - Asset.youWin.getWidth()/2, Gdx.graphics.getHeight()*3/4);
         }

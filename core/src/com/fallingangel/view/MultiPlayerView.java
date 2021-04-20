@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.RoomInputListener;
 import com.fallingangel.NameInputListener;
 import com.fallingangel.backend.MultiPlayerData;
+import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
@@ -23,33 +24,23 @@ public class MultiPlayerView extends ScreenAdapter {
 
     com.badlogic.gdx.scenes.scene2d.ui.TextField textField;
     Stage stage;
-    MainController controller;
+    //MainController controller;
+    GameActionsController gameActionsController;
 
     Texture readyTexture;
     public Button readyButton;
 
     public String roomNumber;
     public MultiPlayerData multiPlayerData;
+    public FallingAngel game = FallingAngel.getInstance();
 
     RoomInputListener roomListener;
     NameInputListener nameListener;
     boolean alreadyConnected = false;
 
     public MultiPlayerView() {
-        this.controller = FallingAngel.getInstance().mc;
+        this.gameActionsController = game.mc.gameActionsController;
         stage = new Stage(new ScreenViewport());
-        readyTexture = Asset.playTexture;
-        readyButton = new Button(new TextureRegionDrawable(new TextureRegion(readyTexture)));
-        readyButton.setPosition(Gdx.graphics.getWidth()/2,Gdx.graphics.getHeight()/5);
-        readyButton.setSize(200,200);
-        stage.addActor(readyButton);
-        readyButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                controller = FallingAngel.getInstance().mc;
-                controller.handle(inputEvent);
-            }
-        });
 
     }
 
@@ -57,9 +48,8 @@ public class MultiPlayerView extends ScreenAdapter {
         GL20 gl = Gdx.gl;
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
-        FallingAngel game = FallingAngel.getInstance();
         game.batch.begin();
-        game.batch.draw(Asset.backgroundHeavenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.draw(Asset.waitingRoomTexture, 0, Gdx.graphics.getHeight()*9/14, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/10 );
         game.batch.end();
         stage.draw();
@@ -112,8 +102,8 @@ public class MultiPlayerView extends ScreenAdapter {
     public void checkIfReady(){
         //if there are two children in the same room
         if (multiPlayerData.getNumberOfUsersInRoom() == 2){
-            controller = FallingAngel.getInstance().mc;
-            controller.beginMultiplayerGame();
+            this.gameActionsController = game.mc.gameActionsController;
+            gameActionsController.setGameScreen(true);
         }
     }
 

@@ -3,8 +3,11 @@ package com.fallingangel.model;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -26,10 +29,16 @@ public class World {
     public static final int VP_WIDTH  = 1714;
     public static final int VP_HEIGHT = 4096;
 
-    public int score;
-    public Entity angel;
+    public static int score;
     public int state;
+
+    public Entity angel;
     public Entity background;
+    public Entity coin;
+    public Entity plane;
+    public Entity obstacle;
+    private FallingAngel game;
+    private Animation<TextureRegion> character = Asset.pigAnimation;
 
     public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -41,14 +50,35 @@ public class World {
 
     public World(Engine engine){
         this.engine = engine;
+        this.game = FallingAngel.getInstance();
     }
 
+/*
+
+
+    public Animation<TextureRegion> getCharacter(){
+        if (game.getChosenCharacter().equals(Asset.bunnyAnimation)){
+            return Asset.bunnyAnimation;
+        }
+        else {
+            return Asset.pigAnimation;
+        }
+    }
+ */
+    public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
+        this.character = chosenCharacter;
+    }
+
+    public Animation<TextureRegion> getChosenCharacter() {
+        return character;
+    }
 
     //main method that creates the world
     public void create(){
         this.state = WORLD_STATE_RUNNING;
         this.angel = createAngel();
-        this.background = createBackground();
+        //this.background = createBackground();
+        //generateObjects();
 
 
         //creating the drones
@@ -62,14 +92,14 @@ public class World {
 
         //creating the coins that will be used
         Array<Entity> coins = new Array<Entity>();
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 0; i <= 8; i++) {
             coins.add(createCoin(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 3));
         }
 
         //creating the obstacles that will be used
         Array<Entity> obstacles = new Array<Entity>();
-        for (int i = 1; i <= 5; i++){
-            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth()), - i * Gdx.graphics.getHeight()/ 2));
+        for (int i = 0; i <= 10; i++){
+            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth() - Asset.balloons.size), - i * Gdx.graphics.getHeight()/4));
         }
 
     }
@@ -88,7 +118,7 @@ public class World {
         TextureComponent textureComponent = new TextureComponent();
 
         //connect the animation from Assets to the an.comp. IntMap
-        animationComponent.animations.put(AngelComponent.STATE_FALL, Asset.pigAnimation);
+        animationComponent.animations.put(AngelComponent.STATE_FALL, character);
 
         //connect the comp. to the entity
         angelEntity.add(angelComponent);
@@ -197,7 +227,8 @@ public class World {
     }
 
 
-    public Entity createBackground(){
+
+    /*public Entity createBackground(){
         Entity backgroundEntity = new Entity();
         //BackgroundComponent backgroundComponent = new BackgroundComponent();
         TextureComponent textureComponent = new TextureComponent();
@@ -214,6 +245,8 @@ public class World {
 
         return backgroundEntity;
     }
+
+    */
 
     public Entity createCoin(float x, float y){
         Entity coinEntity = new Entity();

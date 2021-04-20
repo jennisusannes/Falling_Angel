@@ -33,6 +33,7 @@ public class AngelSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transform_mapper;
 
     private float accelX = 0.0f;
+    public float xPos;
 
 
     public AngelSystem(com.fallingangel.model.World world){
@@ -74,6 +75,7 @@ public class AngelSystem extends IteratingSystem {
         //the move vector is changed to what comes from the input, and will be used to change the position of the angel
         movementComponent.move.x = - accelX;
 
+        this.xPos = transformComponent.pos.x;
         //makes sure the angel does not leave the screen in the x-direction
         if (transformComponent.pos.x < 0){
             transformComponent.pos.x = 0;
@@ -86,7 +88,7 @@ public class AngelSystem extends IteratingSystem {
         //updates the score
         angelComponent.AIRTIME += deltaTime;
         angelComponent.SCORE = angelComponent.AIRTIME + angelComponent.COINS_HIT;
-
+        world.score = (int) angelComponent.SCORE;
     }
 
 

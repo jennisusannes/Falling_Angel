@@ -12,24 +12,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.Asset;
 
 public class HelpView1 extends ScreenAdapter {
 
     private FallingAngel game;
-    private Texture help1;
     private MainController controller;
     private Stage stage;
     private Button nextButton;
 
-    public HelpView1(){
+    public HelpView1() {
         super();
         this.game = FallingAngel.getInstance(); //sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc;  //sets the controller as the main controller
-        help1 = new Texture("helpViews/helpView1.png");
         stage = new Stage(new ScreenViewport()); //sets the stage as a new stage and a new viewport
         Gdx.input.setInputProcessor(stage); //sets input processor
         setNextButton(); //creates a button
-        stage.addActor(getNextButton()); //adds the button as an actor to the stage
+        stage.addActor(nextButton); //adds the button as an actor to the stage
     }
 
 
@@ -60,7 +59,7 @@ public class HelpView1 extends ScreenAdapter {
 
     //setter and getter for the back button
     public void setNextButton() {
-        this.nextButton = makeButton(help1, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
+        this.nextButton = makeButton(Asset.help1BackgroundTexture, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
     }
 
     public Button getNextButton(){
@@ -74,7 +73,7 @@ public class HelpView1 extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(stage); //sets input processor
         game.batch.begin();
-        game.batch.draw(help1, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
+        game.batch.draw(Asset.help1BackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         game.batch.end();
         stage.draw(); //draws the stage
     }

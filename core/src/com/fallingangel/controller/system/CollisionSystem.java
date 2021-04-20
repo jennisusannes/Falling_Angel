@@ -9,7 +9,9 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
+import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
 
@@ -39,7 +41,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         public void hitPU (); //hits a power up
 
     } */
-
+    private FallingAngel game;
     private Engine engine;
     private World world;
     //private CollisionListener listener;
@@ -50,11 +52,15 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ImmutableArray<Entity> obstacles;
     private ImmutableArray<Entity> powerups;
 
+    private Sound coinSound = Asset.coinSound;
+    private Sound collisionSound = Asset.collisionSound;
+
+
     // om vi skal ha listener (lyd): public CollisionSystem(World world, CollisionListener listener)
     public CollisionSystem(World world) {
         this.world = world;
         //   this.listener = listener;
-
+        game = FallingAngel.getInstance();
         //creates our componentMappers
         boundsMapper = ComponentMapper.getFor(BoundsComponent.class);
         movementMapper = ComponentMapper.getFor(MovementComponent.class);
@@ -104,6 +110,9 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
 
                if (rec.overlaps(angelBounds.rectangle)) {
+                   if (game.soundOn()){
+                       collisionSound.play(0.05f);
+                   }
                    angelSystem.hitObstacle(angel);
                     //listener.hitObs();
                 }
@@ -118,6 +127,9 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             BoundsComponent planeBounds = boundsMapper.get(plane);
 
             if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                if (game.soundOn()){
+                    collisionSound.play(0.05f);
+                }
                 angelSystem.hitPlane(angel);
                 // listener.hitObs();
             }
@@ -132,6 +144,9 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             TextureComponent textureComponent = textureMapper.get(coin);
 
             if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                if (game.soundOn()){
+                    coinSound.play(0.2f);
+                }
                 angel.getComponent(AngelComponent.class).COINS_HIT += coin.getComponent(CoinComponent.class).SCORE;
                 coinPos.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
                 coinPos.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());

@@ -3,25 +3,39 @@ package com.fallingangel.model;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
 public class Asset {
 
-    //BACKGROUNDS:
-    public static Texture backgroundHellTexture;
-    public static Texture backgroundHeavenTexture;
+    // BACKGROUNDS
+    public static Texture menuBackgroundTexture;
+    public static Texture settingsBackgroundTexture;
+    public static Texture highscorelistBackgroundTexture;
+    public static Texture achievementsBackgroundTexture;
+    public static Texture help1BackgroundTexture;
+    public static Texture help2BackgroundTexture;
+    public static Texture help3BackgroundTexture;
+    public static Texture winner1BackgroundTexture;
+    public static Texture winner2BackgroundTexture;
+    // Game backgrounds
+    public static TextureRegion heavenBackgroundTextureRegion;
+    public static TextureRegion sunsetBackgroundTextureRegion;
+    public static TextureRegion hellBackgroundTextureRegion;
+    public static TextureRegion heavenBackgroundPauseTextureRegion;
+    public static TextureRegion sunsetBackgroundPauseTextureRegion;
+    public static TextureRegion hellBackgroundPauseTextureRegion;
 
-    //play-view background
-    public static TextureRegion backgroundTextureRegion;
-
-    //PIG
+    // PIG
     public static Animation<TextureRegion> pigAnimation;
     public static Texture pigSpriteSheet;
 
-    //BUNNY
+
+    // BUNNY
     public static Animation<TextureRegion> bunnyAnimation;
     public static Texture bunnySpriteSheet;
 
@@ -32,7 +46,7 @@ public class Asset {
 
 
     //OBSTACLES
-    //Balloons
+    // Balloons
     public static String blueBalloon = "obstacles/balloons/blue_balloon.png";
     public static String greenBalloon = "obstacles/balloons/green_balloon.png";
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
@@ -43,11 +57,38 @@ public class Asset {
     public static TextureRegion droneTexture;
 
 
-    //MUSIC AND SOUNDS
+    // BUTTONS
+    public static Texture singlePlayerButton;
+    public static Texture multiPlayerButton;
+    public static Texture achievementsButton;
+    public static Texture highscorelistButton;
+    public static Texture settingsButton;
+    public static Texture helpButton;
+    public static Texture backButton;
+    public static Texture pauseButton;
+    public static Texture exitButton;
+    public static Texture resumeButton;
+    public static Texture playAgainButton;
+    public static Texture musicOnButton;
+    public static Texture musicOffButton;
+    public static Texture heavenButton;
+    public static Texture sunsetButton;
+    public static Texture hellButton;
+    public static Texture bunnyButton;
+    public static Texture pigButton;
+    public static Texture selected;
+
+    // MUSIC AND SOUNDS
     public static Music backgroundMusic;
     public static Sound clickSound;
+    public static Sound coinSound;
+    public static Sound collisionSound;
+    //public static Sound tixSound;
 
+    // FONT
+    public static BitmapFont font;
 
+    //might delete later
     public static Texture singlePlayerTexture;
     public static Texture multiPlayerTexture;
     public static Texture achievementsTexture;
@@ -84,11 +125,33 @@ public class Asset {
     public static void load(){
         //assetManager.load(gameBackground, Texture.class);
 
-        //BACKGROUND
-        backgroundHellTexture = new Texture("backgrounds/level_hell_score_background.png");
-        backgroundTextureRegion = new TextureRegion(backgroundHellTexture, 0, 0, backgroundHellTexture.getWidth(), backgroundHellTexture.getHeight());
+        // BACKGROUNDS
+        menuBackgroundTexture = new Texture("backgrounds/menu/mainmenu_background.png");
+        settingsBackgroundTexture = new Texture("backgrounds/settings/settings_text_background.png");
+        highscorelistBackgroundTexture = new Texture("backgrounds/highscorelist/highscorelist_score_background.png");
+        achievementsBackgroundTexture = new Texture("backgrounds/achievements/achievements_background.png");
+        help1BackgroundTexture = new Texture("backgrounds/help/help1_background.png");
+        help2BackgroundTexture = new Texture("backgrounds/help/help2_background.png");
+        help3BackgroundTexture = new Texture("backgrounds/help/help3_background.png");
+        winner1BackgroundTexture = new Texture("backgrounds/winner/winner_player1_background.png");
+        winner2BackgroundTexture = new Texture("backgrounds/winner/winner_player2_background.png");
 
-        backgroundHeavenTexture = new Texture("backgrounds/level_heaven_background.png");
+        // Game backgrounds
+        Texture heavenBackgroundTexture = new Texture("backgrounds/level/level_heaven_score_background.png");
+        heavenBackgroundTextureRegion = new TextureRegion(heavenBackgroundTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
+        Texture sunsetBackgroundTexture = new Texture("backgrounds/level/level_sunset_score_background.png");
+        sunsetBackgroundTextureRegion = new TextureRegion(sunsetBackgroundTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
+        Texture hellBackgroundTexture = new Texture("backgrounds/level/level_hell_score_background.png");
+        hellBackgroundTextureRegion = new TextureRegion(hellBackgroundTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
+
+        // Game backgrounds without score
+        Texture heavenBackgroundPauseTexture = new Texture("backgrounds/level/level_heaven_background.png");
+        heavenBackgroundPauseTextureRegion = new TextureRegion(heavenBackgroundPauseTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
+        Texture sunsetBackgroundPauseTexture = new Texture("backgrounds/level/level_sunset_background.png");
+        sunsetBackgroundPauseTextureRegion = new TextureRegion(sunsetBackgroundPauseTexture, 0, 0, sunsetBackgroundTexture.getWidth(), sunsetBackgroundTexture.getHeight());
+        Texture hellBackgroundPauseTexture = new Texture("backgrounds/level/level_hell_background.png");
+        hellBackgroundPauseTextureRegion = new TextureRegion(hellBackgroundPauseTexture, 0, 0, hellBackgroundTexture.getWidth(), hellBackgroundTexture.getHeight());
+
 
         //PIG
         pigSpriteSheet = new Texture("characters/pig/pig_animation.png");
@@ -96,9 +159,9 @@ public class Asset {
         pigAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
 
         //BUNNY
-        bunnySpriteSheet = new Texture("characters/bunny/bunny_animation.png");
+        bunnySpriteSheet = new Texture("characters/bunny/bunny_resize2.png");
         Array<TextureRegion> bunnyFrames = makeFrames(bunnySpriteSheet, 3, 2);
-        bunnyAnimation = new Animation<TextureRegion>(0.2f, pigFrames.get(0), pigFrames.get(1), pigFrames.get(2), pigFrames.get(3), pigFrames.get(4), pigFrames.get(5), pigFrames.get(4), pigFrames.get(3), pigFrames.get(2), pigFrames.get(1));
+        bunnyAnimation = new Animation<TextureRegion>(0.2f, bunnyFrames.get(0), bunnyFrames.get(1), bunnyFrames.get(2), bunnyFrames.get(3), bunnyFrames.get(4), bunnyFrames.get(5), bunnyFrames.get(4), bunnyFrames.get(3), bunnyFrames.get(2), bunnyFrames.get(1));
 
 
         //COIN
@@ -118,22 +181,40 @@ public class Asset {
         //Drone
         droneTexture = new TextureRegion(new Texture(drone), 0, 0, new Texture(drone).getWidth(), new Texture(drone).getHeight());
 
-        //Buttons
-        singlePlayerTexture= new Texture("buttons/singleplayer_button.PNG");
-        multiPlayerTexture = new Texture("buttons/multiplayer_button.PNG");
-        achievementsTexture = new Texture("buttons/achievements_button.PNG");
-        highscoreListTexture = new Texture("buttons/highscorelist_button.PNG");
-        settingsTexture = new Texture("buttons/settings_button.PNG");
-        backTexture = new Texture("buttons/back_button.png");
-        playTexture = new Texture("buttons/play.png");
 
-        //Music and sounds
+        // BUTTONS
+        singlePlayerButton = new Texture("buttons/menu/singleplayer_button.PNG");
+        multiPlayerButton = new Texture("buttons/menu/multiplayer_button.PNG");
+        achievementsButton = new Texture("buttons/menu/achievements_button.PNG");
+        highscorelistButton = new Texture("buttons/menu/highscorelist_button.PNG");
+        settingsButton = new Texture("buttons/menu/settings_button.PNG");
+        helpButton = new Texture("buttons/menu/help_button.PNG");
+        backButton = new Texture("buttons/actions/back_button.png");
+        pauseButton = new Texture("buttons/actions/pause_button.PNG");
+        exitButton = new Texture("buttons/actions/exit_button.PNG");
+        resumeButton = new Texture("buttons/actions/resume_button.PNG");
+        playAgainButton = new Texture("buttons/actions/play_again_button.png");
+        musicOnButton = new Texture("buttons/actions/music_on_button.png");
+        musicOffButton = new Texture("buttons/actions/music_off_button.png");
+        heavenButton = new Texture("buttons/level/level_heaven_button.png");
+        sunsetButton = new Texture("buttons/level/level_sunset_button.png");
+        hellButton = new Texture("buttons/level/level_hell_button.png");
+        bunnyButton = new Texture("buttons/character/select_bunny_button.PNG");
+        pigButton = new Texture("buttons/character/select_pig_button.PNG");
+        selected = new Texture("buttons/character/selected.png");
+
+
+        // MUSIC AND SOUNDS
+        //tixSound = Gdx.audio.newSound(Gdx.files.internal("sounds/tix_sound.wav"));
+        //tixSound.setPitch(tixSound.play(),0.6f);
         // Sound from Zapsplat.com
+        coinSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin_sound.wav"));
         clickSound = Gdx.audio.newSound(Gdx.files.internal("sounds/button_click_sound.wav"));
+        collisionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/game_over_sound.wav"));
         // Music from Zapsplat.com
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
-        backgroundMusic.setVolume(0.02f); //sets the volume of the background music
-        backgroundMusic.setLooping(true); //the backgrounds music will continuously loop
+        backgroundMusic.setVolume(0.02f); // Sets volume of music
+        backgroundMusic.setLooping(true); // Music will continuously loop
 
         //Waiting room
         waitingRoomTexture = new Texture("waiting_room.png");
@@ -142,6 +223,8 @@ public class Asset {
         youLose = new Texture("lose_text.png");
         youWin = new Texture("win_text.png");
 
+        // FONT
+        font = new BitmapFont(Gdx.files.internal("font/retro_game_font.fnt"),Gdx.files.internal("font/retro_game_font.png"), false);
     }
 
 
@@ -165,35 +248,6 @@ public class Asset {
     public void update(){
 
     }
-
-
-
-    /*
-    //TODO: metoder fra tubby for laste-state. Legger metodene her dersom vi skulle få bruk for det.
-    public static float getProgress(){
-        return assetManager.getProgress();
-    }
-
-    public static Texture getTexture(String tex){
-        return assetManager.get(tex, Texture.class);
-    }
-     */
-
-
-    /*
-    //TODO: metode fra tubby for musikk og lyd, dersom vi skulle implementert det senere:
-    music = Gdx.audio.newMusic(Gdx.files.internal("data/music.mp3"));
-		music.setLooping(true);
-		music.setVolume(0.5f);
-		if (Settings.soundEnabled) music.play();
-		jumpSound = Gdx.audio.newSound(Gdx.files.internal("data/jump.wav"));
-		highJumpSound = Gdx.audio.newSound(Gdx.files.internal("data/highjump.wav"));
-		hitSound = Gdx.audio.newSound(Gdx.files.internal("data/hit.wav"));
-		coinSound = Gdx.audio.newSound(Gdx.files.internal("data/coin.wav"));
-		clickSound = Gdx.audio.newSound(Gdx.files.internal("data/click.wav"));
-     */
-
-
 
 
 }
