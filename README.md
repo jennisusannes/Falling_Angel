@@ -1,5 +1,6 @@
 # TDT4240 Project: Falling_Angel
-This is a project for TDT4240 - Software architecture by group 11. The aim of this project is to develop a game using methods and patterns from the course. 
+This is a project for TDT4240 - Software architecture by group 11. The objective of this project is to develop a game, designed using methods and patterns from the course. 
+
 
 # Demo / user manual
 
@@ -8,7 +9,7 @@ This is a project for TDT4240 - Software architecture by group 11. The aim of th
 
 # Technology and frameworks 
 This game is built with: 
-* Android Studio
+* Android Studio (Android SDK)
 * [LibGDX](https://github.com/libgdx/libgdx/wiki)
 * [Ashely ECS](https://github.com/libgdx/ashley/wiki) 
 * [Firebase Realtime Database](https://firebase.google.com/)
@@ -24,7 +25,7 @@ When you have downloaded your chosen IDE and have a device ready, you can clone 
 
 ### Getting started
 To run the game you will need to connect to an Android device, og create an android emulator. 
-For further instructions, see [User guide](https://developer.android.com/studio/run/managing-avds)
+For further instructions, see following [User guide](https://developer.android.com/studio/run/managing-avds) from android. 
 
 
 ### Developed by:
