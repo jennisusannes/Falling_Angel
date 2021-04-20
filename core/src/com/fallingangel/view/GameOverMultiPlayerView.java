@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
@@ -18,7 +19,8 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     //View for when the multiplayer game is over
 
     //TODO: change texture on exit button
-    MainController controller;
+    FallingAngel game = FallingAngel.getInstance();
+    GameActionsController gameActionsController;
     Stage stage;
 
     public static Button exitButton;
@@ -26,9 +28,9 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     public boolean isWinner;
 
     public GameOverMultiPlayerView(){
-        this.controller = FallingAngel.getInstance().mc;
+        this.gameActionsController = game.mc.gameActionsController;
         stage = new Stage(new ScreenViewport());
-        exitButton = makeButton(Asset.backButton);
+        exitButton = makeButton(Asset.exitButton);
         //if your score is the best
         /*
         if (){
@@ -43,7 +45,6 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
 
     public void draw(){
         Gdx.input.setInputProcessor(stage);
-        FallingAngel game = FallingAngel.getInstance();
         game.batch.begin();
         game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         if (isWinner){
@@ -75,8 +76,8 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                controller = FallingAngel.getInstance().mc;
-                controller.handle(inputEvent);
+                gameActionsController = game.mc.gameActionsController;
+                gameActionsController.handle(inputEvent);
             }
         });
         return button;

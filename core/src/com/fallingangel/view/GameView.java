@@ -78,8 +78,10 @@ public class GameView extends ScreenAdapter {
     public void draw() {
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);
-        setPauseButton();
-        stage.addActor(pauseButton);
+        if (!isMultiplayer){
+            setPauseButton();
+            stage.addActor(pauseButton);
+        }
         stage.draw();
     }
 

@@ -40,7 +40,7 @@ public class RenderingSystem extends IteratingSystem{
     private ComponentMapper<TransformComponent> transformMapper;
     private MainController controller;
     private FallingAngel game;
-    protected TextureRegion gameBackground = new TextureRegion();
+    protected TextureRegion gameBackground;
 
 
     public static float score = 0;
@@ -77,7 +77,8 @@ public class RenderingSystem extends IteratingSystem{
         this.game = FallingAngel.getInstance();
         if (!isMultiplayer){
             this.controller = game.mc;
-        }   this.gameBackground = controller.getGameBackground();
+            this.gameBackground = controller.getGameBackground(); 
+        }
 
 
     }
@@ -139,8 +140,8 @@ public class RenderingSystem extends IteratingSystem{
 
         if (isMultiplayer){
             String opponentScoreString = Integer.toString(this.game.FBI.getOpponentScore());
-            font.getData().setScale(5, 5);
-            font.draw(sb, opponentScoreString, Gdx.graphics.getWidth() - 40, Gdx.graphics.getHeight() - 40);
+            font.getData().setScale(8, 8);
+            font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight()*0.981f);
         }
 
         sb.end();
