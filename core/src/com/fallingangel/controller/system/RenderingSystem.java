@@ -40,7 +40,7 @@ public class RenderingSystem extends IteratingSystem{
     private ComponentMapper<TransformComponent> transformMapper;
     private MainController controller;
     private FallingAngel game;
-    protected TextureRegion gameBackground;
+    protected TextureRegion gameBackground = new TextureRegion();
 
 
     public static float score = 0;
@@ -53,6 +53,7 @@ public class RenderingSystem extends IteratingSystem{
     public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
         //creates a new iteratingSystem for the entities with following components
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
+        this.gameBackground = Asset.heavenBackgroundTextureRegion;
 
         this.isMultiplayer = isMultiplayer;
 
