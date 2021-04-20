@@ -47,11 +47,18 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         game.batch.begin();
         game.batch.draw(Asset.gameOverMultiBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
-            game.batch.draw(Asset.youWin, Gdx.graphics.getWidth()/2 - Asset.youWin.getWidth()/2, Gdx.graphics.getHeight()*3/4);
+            game.batch.draw(Asset.youWin, Gdx.graphics.getWidth()*0.5f - Asset.youWin.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
         else {
-            game.batch.draw(Asset.youLose, Gdx.graphics.getWidth()/2 - Asset.youLose.getWidth()/2, Gdx.graphics.getHeight()*3/4);
+            game.batch.draw(Asset.youLose, Gdx.graphics.getWidth()*0.5f - Asset.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
+        // her er riktig str på tie text:)
+        /*
+        else {
+            game.batch.draw(Asset.tie, Gdx.graphics.getWidth()*0.5f - Asset.tie.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
+        }
+
+         */
         game.batch.end();
         stage.addActor(exitButton);
         stage.draw();
