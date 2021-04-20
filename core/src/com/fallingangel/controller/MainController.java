@@ -106,7 +106,6 @@ public class MainController extends ClickListener {
             this.multiPlayerView = new MultiPlayerView();
             multiPlayerView.connectToGameRoom();
             game.setScreen(multiPlayerView);
-            //gameActionsController.setGameScreen();
             return true;
         }
         /*
@@ -263,7 +262,6 @@ public class MainController extends ClickListener {
         else{
             return false;
         }
-
     }
 
 }

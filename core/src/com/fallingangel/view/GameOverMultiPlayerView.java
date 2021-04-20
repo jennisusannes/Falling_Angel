@@ -72,6 +72,22 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         stage.act(dt);
     }
 
+    // Method for creating a button with
+    public Button makeButton(Texture texture){
+        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        button.setSize(200,200);
+        button.setPosition(Gdx.graphics.getWidth()/2 - 100,Gdx.graphics.getHeight()/5);
+        stage.addActor(button);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
+                gameActionsController = game.mc.gameActionsController;
+                gameActionsController.handle(inputEvent);
+            }
+        });
+        return button;
+    }
+
     // Getter and setter for the exit button
     public void setExitButton() {
         this.exitButton = makeButton(Asset.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
@@ -81,7 +97,7 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         return exitButton;
     }
 
-    // Method for creating a button, this will add the MainController as a listener
+    // Method for creating a button, this will add the GameActionsController as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
         button.setSize(width, height);

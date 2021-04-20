@@ -6,22 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
-import com.badlogic.gdx.Input.Keys;
-
-import com.fallingangel.controller.system.AnimationSystem;
-import com.fallingangel.controller.system.BackgroundSystem;
-import com.fallingangel.controller.system.BoundsSystem;
-import com.fallingangel.controller.system.CoinSystem;
-import com.fallingangel.controller.system.CollisionSystem;
-import com.fallingangel.controller.system.MovementSystem;
-import com.fallingangel.controller.system.DroneSystem;
-import com.fallingangel.controller.system.MultiplayerSystem;
-import com.fallingangel.controller.system.RenderingSystem;
-import com.fallingangel.controller.system.StateSystem;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -43,7 +28,6 @@ public class GameView extends ScreenAdapter {
         this.game = FallingAngel.getInstance();
         this.gameController = game.mc.gameActionsController;
         gameController.setState(1);
-        //this.game  = FallingAngel.getInstance();
         this.isMultiplayer = isMultiplayer;
 
 
