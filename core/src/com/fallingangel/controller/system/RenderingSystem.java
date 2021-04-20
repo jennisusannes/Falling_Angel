@@ -75,18 +75,19 @@ public class RenderingSystem extends IteratingSystem{
 
         this.sb = sb;
         this.game = FallingAngel.getInstance();
-        this.controller = game.mc;
-        this.gameBackground = controller.getGameBackground();
+        if (!isMultiplayer){
+            this.controller = game.mc;
+        }   this.gameBackground = controller.getGameBackground();
+
+
     }
 
 
-    /*
 
     // Sets chosen level
     public void setLevel(TextureRegion chosenLevel){
         this.gameBackground = chosenLevel;
     }
-     */
 
     //This method updates and draws
     @Override
