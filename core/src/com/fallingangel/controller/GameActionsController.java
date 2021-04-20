@@ -214,11 +214,13 @@ public class GameActionsController implements EventListener {
          */
 
         if (Gdx.input.isTouched()) {
-            if (Gdx.input.getX() > angelPosX){
-                accelX = -10f;
-            }
-            if (Gdx.input.getX() < angelPosX){
-                accelX = 10f;
+            if (Gdx.input.getY() < Gdx.graphics.getHeight()*0.9f) {
+                if (Gdx.input.getX() > angelPosX) {
+                    accelX = -10f;
+                }
+                if (Gdx.input.getX() < angelPosX) {
+                    accelX = 10f;
+                }
             }
             //spritePosition.set(Gdx.input.getX(), 0, 0));
         }
@@ -367,10 +369,10 @@ public class GameActionsController implements EventListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            else;
             game.mc.setStartScreen();
             return true;
         }
+
         else {
             return false;
         }

@@ -100,7 +100,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setSettingsButton() {
-        this.settingsButton = makeButton(Asset.settingsButton,Gdx.graphics.getWidth()*0.1f,Gdx.graphics.getWidth()*0.1f,Gdx.graphics.getWidth()*0.89f, Gdx.graphics.getHeight() * 0.93f);
+        this.settingsButton = makeButton(Asset.settingsButton,Gdx.graphics.getWidth()*0.12f,Gdx.graphics.getWidth()*0.12f,Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
     }
 
     public Button getSettingsButton(){

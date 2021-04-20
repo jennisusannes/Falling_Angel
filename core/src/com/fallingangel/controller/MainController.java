@@ -40,14 +40,11 @@ public class MainController extends ClickListener {
     public GameActionsController gameActionsController;
     protected World world;
     protected Engine engine;
-    //protected RenderingSystem renderingSystem;
     public String angel;
     public TextureRegion gameBackground;
     public TextureRegion pauseBackground;
 
-
     private Sound clickSound;
-    //private Animation<TextureRegion> chosenCharacter;
 
     public MainController() {
         this.game = FallingAngel.getInstance();
@@ -65,7 +62,7 @@ public class MainController extends ClickListener {
         game.setScreen(menuView);
     }
 
-
+    // Getters and setters for chosen level
     public TextureRegion getGameBackground(){
         return gameBackground;
     }
@@ -82,17 +79,13 @@ public class MainController extends ClickListener {
         this.pauseBackground = background;
     }
 
+    // Getter and setter for chosen character
     public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
-        //this.world = new World(engine);
         world.setChosenCharacter(chosenCharacter);
-        //this.gameActionsController = new GameActionsController();
-        //this.gameActionsController.world.setChosenCharacter(chosenCharacter);
     }
 
     public Animation<TextureRegion> getChosenCharacter() {
         return world.getChosenCharacter();
-        //this.gameActionsController = new GameActionsController();
-        //return gameActionsController.world.getChosenCharacter();
     }
 
     // Main controller listens to buttons in the different views and changes between views
@@ -196,7 +189,7 @@ public class MainController extends ClickListener {
             clickSound.play(0.0f);
             game.music.pause();
             settingsView.getMusicOnButton().setPosition(-1000,-1000);
-            settingsView.getMusicOffButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.62f);
+            settingsView.getMusicOffButton().setPosition(Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.62f);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getMusicOffButton())){
@@ -204,7 +197,7 @@ public class MainController extends ClickListener {
             game.music.setVolume(0.02f);
             game.music.play();
             settingsView.getMusicOffButton().setPosition(-1000,-1000);
-            settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.62f);
+            settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.62f);
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getPigButton())){
@@ -229,9 +222,8 @@ public class MainController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            //setGameBackground(Asset.heavenBackgroundTextureRegion);
+            setGameBackground(Asset.heavenBackgroundTextureRegion);
             setPauseBackground(Asset.heavenBackgroundPauseTextureRegion);
-            //renderingSystem.setLevel(Asset.heavenBackgroundTextureRegion);
             this.gameActionsController = new GameActionsController(false);
             gameActionsController.setGameScreen(false);
             return true;
@@ -242,7 +234,6 @@ public class MainController extends ClickListener {
             }
             setGameBackground(Asset.sunsetBackgroundTextureRegion);
             setPauseBackground(Asset.sunsetBackgroundPauseTextureRegion);
-            //renderingSystem.setLevel(Asset.sunsetBackgroundTextureRegion);
             this.gameActionsController = new GameActionsController(false);
             gameActionsController.setGameScreen(false);
             return true;
@@ -253,9 +244,22 @@ public class MainController extends ClickListener {
             }
             setGameBackground(Asset.hellBackgroundTextureRegion);
             setPauseBackground(Asset.hellBackgroundPauseTextureRegion);
-            //renderingSystem.setLevel(Asset.hellBackgroundTextureRegion);
             this.gameActionsController = new GameActionsController(false);
             gameActionsController.setGameScreen(false);
+            return true;
+        }
+        else if (event.getListenerActor().equals(levelView.getBackButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
+            game.setScreen(menuView);
+            return true;
+        }
+        else if (event.getListenerActor().equals(multiPlayerView.getBackButton())) {
+            if (game.soundOn()) {
+                clickSound.play(0.2f);
+            }
+            game.setScreen(menuView);
             return true;
         }
         else{

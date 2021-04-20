@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -22,13 +23,15 @@ import com.fallingangel.model.Asset;
 public class MultiPlayerView extends ScreenAdapter {
     //This view is the waiting room for the multiplayer game
 
-    com.badlogic.gdx.scenes.scene2d.ui.TextField textField;
+    TextField textField;
     Stage stage;
     //MainController controller;
     GameActionsController gameActionsController;
+    MainController mainController;
 
-    Texture readyTexture;
-    public Button readyButton;
+    //Texture readyTexture;
+    //public Button readyButton;
+    private Button backButton;
 
     public String roomNumber;
     public MultiPlayerData multiPlayerData;
@@ -40,7 +43,9 @@ public class MultiPlayerView extends ScreenAdapter {
 
     public MultiPlayerView() {
         this.gameActionsController = game.mc.gameActionsController;
+        this.mainController = game.mc;
         stage = new Stage(new ScreenViewport());
+        setBackButton(); // Creates a back button
 
     }
 
@@ -52,6 +57,7 @@ public class MultiPlayerView extends ScreenAdapter {
         game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.draw(Asset.waitingRoomTexture, 0, Gdx.graphics.getHeight()*9/14, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/10 );
         game.batch.end();
+        stage.addActor(backButton); // Adds the button as an actor to the stage
         stage.draw();
     }
 
@@ -68,6 +74,29 @@ public class MultiPlayerView extends ScreenAdapter {
         stage.act(dt);
     }
 
+    // Getter and setter for the back button
+    public void setBackButton() {
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight() * 0.05f);
+    }
+
+    public Button getBackButton(){
+        return backButton;
+    }
+
+    // Method for creating a button, this will add the MainController as a listener
+    private Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        button.setSize(width, height);
+        button.setPosition(xPos, yPos);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
+                mainController = game.mc;
+                mainController.handle(inputEvent);
+            }
+        });
+        return button;
+    }
 
     //method that creates the input fields for room number and name and saves them in MyTextInputListener classes
     public void connectToGameRoom() {

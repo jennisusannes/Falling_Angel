@@ -44,7 +44,7 @@ public class GameOverView extends ScreenAdapter {
 
     // Getter and setter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -53,7 +53,7 @@ public class GameOverView extends ScreenAdapter {
 
     // Getter and setter for the play again button
     public void setPlayAgainButton() {
-        this.playAgainButton = makeButton(Asset.playAgainButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.05f);
+        this.playAgainButton = makeButton(Asset.playAgainButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.18f, Gdx.graphics.getHeight() * 0.16f);
     }
 
     public Button getPlayAgainButton(){

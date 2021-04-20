@@ -22,6 +22,7 @@ public class Asset {
     public static Texture help3BackgroundTexture;
     public static Texture winner1BackgroundTexture;
     public static Texture winner2BackgroundTexture;
+    public static Texture levelBackgroundTexture;
     // Game backgrounds
     public static TextureRegion heavenBackgroundTextureRegion;
     public static TextureRegion sunsetBackgroundTextureRegion;
@@ -135,6 +136,7 @@ public class Asset {
         help3BackgroundTexture = new Texture("backgrounds/help/help3_background.png");
         winner1BackgroundTexture = new Texture("backgrounds/winner/winner_player1_background.png");
         winner2BackgroundTexture = new Texture("backgrounds/winner/winner_player2_background.png");
+        levelBackgroundTexture = new Texture("backgrounds/level/level_select_background.png");
 
         // Game backgrounds
         Texture heavenBackgroundTexture = new Texture("backgrounds/level/level_heaven_score_background.png");

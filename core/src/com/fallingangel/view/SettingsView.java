@@ -46,7 +46,7 @@ public class SettingsView extends ScreenAdapter {
 
     // Getters and setters for the buttons
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -54,7 +54,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOnButton() {
-        this.musicOnButton = makeButton(Asset.musicOnButton,Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.6f, Gdx.graphics.getHeight() * 0.62f);
+        this.musicOnButton = makeButton(Asset.musicOnButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.62f);
     }
 
     public Button getMusicOnButton(){
@@ -62,7 +62,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOffButton() {
-        this.musicOffButton = makeButton(Asset.musicOffButton,Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.1f, -1000,-1000);
+        this.musicOffButton = makeButton(Asset.musicOffButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, -1000,-1000);
     }
 
     public Button getMusicOffButton(){

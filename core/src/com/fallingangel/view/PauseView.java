@@ -47,7 +47,7 @@ public class PauseView extends ScreenAdapter {
     }
 
     public void setResumeButton() {
-        this.resumeButton = makeButton(Asset.resumeButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.20f, Gdx.graphics.getHeight() * 0.4f);
+        this.resumeButton = makeButton(Asset.resumeButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.18f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getResumeButton(){

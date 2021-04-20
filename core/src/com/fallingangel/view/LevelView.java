@@ -20,6 +20,7 @@ public class LevelView extends ScreenAdapter {
     private Button heavenButton;
     private Button sunsetButton;
     private Button hellButton;
+    private Button backButton;
     private MainController controller;
     private Stage stage;
 
@@ -33,9 +34,11 @@ public class LevelView extends ScreenAdapter {
         setHeavenButton(); // Creates a button
         setSunsetButton();
         setHellButton();
+        setBackButton();
         stage.addActor(heavenButton); // Adds the button as an actor to the stage
         stage.addActor(sunsetButton);
         stage.addActor(hellButton);
+        stage.addActor(backButton);
     }
 
     // Method for creating a button, this will add the GameActionsController as a listener
@@ -55,7 +58,7 @@ public class LevelView extends ScreenAdapter {
 
     // Getters and setters for the buttons
     public void setHeavenButton() {
-        this.heavenButton = makeButton(Asset.heavenButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.6f);
+        this.heavenButton = makeButton(Asset.heavenButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.70f);
     }
 
     public Button getHeavenButton(){
@@ -63,7 +66,7 @@ public class LevelView extends ScreenAdapter {
     }
 
     public void setSunsetButton() {
-        this.sunsetButton = makeButton(Asset.sunsetButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.35f);
+        this.sunsetButton = makeButton(Asset.sunsetButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.45f);
     }
 
     public Button getSunsetButton(){
@@ -71,20 +74,30 @@ public class LevelView extends ScreenAdapter {
     }
 
     public void setHellButton() {
-        this.hellButton = makeButton(Asset.hellButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.1f);
+        this.hellButton = makeButton(Asset.hellButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getHellButton(){
         return hellButton;
     }
 
+    public void setBackButton() {
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+    }
+
+    public Button getBackButton(){
+        return backButton;
+    }
+
     public void draw(){
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
+        game.batch.draw(Asset.levelBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         game.batch.end();
         stage.draw(); // Draws the stage
     }
+
+
 
     public void update(float dt) {
 
