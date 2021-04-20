@@ -3,15 +3,17 @@ package com.fallingangel.backend;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import java.util.HashMap;
+
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
-    public void createUser(String mail, String username, String password) {
+    public void createUser() {
 
     }
 
     @Override
-    public void updateScore(int score) {
+    public void updateScore(MultiPlayerData mpd) {
 
     }
 
@@ -34,5 +36,26 @@ public class CoreInterfaceClass implements FireBaseInterface{
     public int getOpponentScore() {
         return 0;
     }
+
+    @Override
+    public String gameOverStatus() {
+        return null;
+    }
+
+    @Override
+    public boolean gameIsOver() {
+        return false;
+    }
+
+    @Override
+    public void getHighscoreFromDB() {
+
+    }
+
+    @Override
+    public void destroyRoom() {
+
+    }
+
 
 }

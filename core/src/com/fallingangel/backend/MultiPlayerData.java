@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector3;
 
 public class MultiPlayerData {
 
-    public boolean connected = false;
     public boolean isGameOver = false;
     public Vector3 position;
 
@@ -14,20 +13,13 @@ public class MultiPlayerData {
 
     public MultiPlayerData(){}
 
-    public boolean isConnected() {
-        return connected;
-    }
-
-    public void setConnected(boolean connected) {
-        this.connected = connected;
-    }
-
     public boolean isGameOver() {
         return isGameOver;
     }
 
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
+    public void setGameOver(boolean isGameOver) {
+
+        this.isGameOver = isGameOver;
     }
 
     public int getScore() {
@@ -50,6 +42,5 @@ public class MultiPlayerData {
         this.score = score;
         this.username = username;
     }
-
     //TODO: retrieve the data from Firebase and use it to update the multiplayer
 }

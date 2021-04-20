@@ -60,7 +60,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	@Override
 	public void create () {
 		Asset.load();
-		FBI.createUser( "test@user.no", "JenniBug", "user123");
+		FBI.createUser();
 		batch = new SpriteBatch(); // Creates a new spritebatch
 		this.mc = new MainController(); // Sets the controller as the main controller
 		music = Asset.backgroundMusic;

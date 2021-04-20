@@ -32,22 +32,21 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         stage = new Stage(new ScreenViewport());
         exitButton = makeButton(Asset.exitButton);
         //if your score is the best
-        /*
-        if (){
+      /*  if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
             isWinner = true;
         }
         else {
             isWinner = false;
-        }
+        }*/
+       // FallingAngel.getInstance().FBI.destroyRoom();
 
-         */
     }
 
     public void draw(){
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
         game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        if (isWinner){
+        if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
             game.batch.draw(Asset.youWin, Gdx.graphics.getWidth()/2 - Asset.youWin.getWidth()/2, Gdx.graphics.getHeight()*3/4);
         }
         else {

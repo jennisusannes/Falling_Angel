@@ -13,7 +13,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static android.content.ContentValues.TAG;
 
@@ -27,7 +32,9 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private User user;
     private int score;
     private int opponentScore;
-    private int numUsersInRoom = 0;
+    private int numUsersInRoom;
+    private boolean gameIsOver;
+    private String gameOverStatus = "";
 
 
     public AndroidInterfaceClass(){
@@ -38,9 +45,9 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
 
     @Override
-    public void createUser(String mail, String username, String password) {
+    public void createUser() {
         String UID =  createID(30);
-        this.user = new User(UID, username, mail, password);
+        this.user = new User(UID);
         users.child(UID).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -83,13 +90,12 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = ds.getKey();
-                    if (!key.equals(user.getUID()) && !key.equals("Usernum")) {
+                    if (!key.equals(user.getUID())){//TODO Check if this line of code is needed: && !key.equals("Usernum")) {
                        MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
                        opponentScore = opponent.getScore();
                     }
                 }
             }
-
             @Override
             public void onCancelled( DatabaseError error) {
                 // Getting Post failed, log a message
@@ -125,35 +131,93 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
     @Override
-    public void updateScore(int score) {
-
-        this.score = score;
-        // [BEGIN rtdb_write_new_user_task]
-        rooms.child(roomName).child(this.user.getUID()).child("score").setValue(this.score)
+    public void updateScore(MultiPlayerData mpd) {
+        this.getHighscoreFromDB();
+        rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
+                        Log.e("error", e.toString());
                     }
                 });
-        // [END rtdb_write_new_user_task]
-        if (this.score > getHighscoreFromDB()){
+        if (this.score > user.getHighScore()){
             users.child(this.user.getUID()).child("highScore").setValue(this.score);
         }
+    }
 
+
+    @Override
+    public int getOpponentScore(){
+        return opponentScore;
+    }
+
+    @Override
+    public String gameOverStatus() {
+        ValueEventListener gameOverStatusListener = new ValueEventListener(){
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int opponentFinalScore = 0;
+                int currentPlayerFinalScore = 0;
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    String key= ds.getKey();
+                    MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
+                    if(key.equals(user.getUID())){
+                        currentPlayerFinalScore = mpd.getScore();
+
+                    } else{
+                        opponentScore = mpd.getScore();
+                    }
+                    if(currentPlayerFinalScore > opponentFinalScore){
+                        gameOverStatus = "gameWon";
+                    }else if(currentPlayerFinalScore < opponentFinalScore){
+                        gameOverStatus = "gameLost";
+                    }else{
+                        gameOverStatus = "gameTied";
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        rooms.child(roomName).addValueEventListener(gameOverStatusListener);
+        return gameOverStatus;
+    }
+
+    @Override
+    public boolean gameIsOver(){
+        ValueEventListener gameIsOverListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
+                    if(mpd.isGameOver){
+                        gameIsOver = true;
+                    }
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        };
+        rooms.child(roomName).addValueEventListener(gameIsOverListener);
+        return gameIsOver;
     }
 
 
 
-    public int getHighscoreFromDB(){
+    @Override
+    public void getHighscoreFromDB(){
         ValueEventListener highScoreListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -174,10 +238,25 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         };
         users.addValueEventListener(highScoreListener);
-        return user.getHighScore();
-
     }
 
+    @Override
+    public void destroyRoom() {
+        rooms.child(roomName).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i("Room was destroyed", "nice");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("error", e.toString());
+                    }
+                });
+
+    }
 
     // Found at: https://www.baeldung.com/java-random-string
 
@@ -199,11 +278,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return generatedString;
     }
 
-
-    @Override
-    public int getOpponentScore(){
-        return opponentScore;
-    }
 
 }
 

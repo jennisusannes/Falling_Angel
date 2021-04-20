@@ -3,11 +3,18 @@ package com.fallingangel.backend;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public interface FireBaseInterface {
-    public void createUser(String mail, String username, String password);
-    public void updateScore(int score);
+    public void createUser();
+    public void updateScore(MultiPlayerData mpd );
     public void connectToRoom(String roomName, MultiPlayerData mpd);
     public void setOpponentScore();
     public void numberOfUsersInRoom();
     public int getOpponentScore();
+    public String gameOverStatus();
+    public boolean gameIsOver();
+    public void getHighscoreFromDB();
+    public void destroyRoom();
  }
