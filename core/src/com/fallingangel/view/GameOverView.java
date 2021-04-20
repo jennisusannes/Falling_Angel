@@ -94,9 +94,9 @@ public class GameOverView extends ScreenAdapter {
         this.font = Asset.font;
         Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.highscorelistBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
+        game.batch.draw(Asset.gameOverSingleBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         font.getData().setScale(8, 8);
-        font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.265f);
+        font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.4f);
         game.batch.end();
         stage.draw(); // Draws the stage
     }

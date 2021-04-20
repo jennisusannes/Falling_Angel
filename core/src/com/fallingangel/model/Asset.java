@@ -20,9 +20,12 @@ public class Asset {
     public static Texture help1BackgroundTexture;
     public static Texture help2BackgroundTexture;
     public static Texture help3BackgroundTexture;
+    public static Texture levelBackgroundTexture;
+    public static Texture gameOverSingleBackgroundTexture;
+    public static Texture gameOverMultiBackgroundTexture;
     public static Texture winner1BackgroundTexture;
     public static Texture winner2BackgroundTexture;
-    public static Texture levelBackgroundTexture;
+
     // Game backgrounds
     public static TextureRegion heavenBackgroundTextureRegion;
     public static TextureRegion sunsetBackgroundTextureRegion;
@@ -98,12 +101,14 @@ public class Asset {
     public static Texture backTexture;
     public static Texture playTexture;
 
-    //Waiting room
+    // TEXT
+    // Waiting room
     public static Texture waitingRoomTexture;
 
-    //Game Over Multiplayer
+    // Game Over Multiplayer
     public static Texture youLose;
     public static Texture youWin;
+    public static Texture tie;
 /*
     //Select Character
     public static String pig_select_character = "characters/pig/pig_select_character.PNG";
@@ -134,9 +139,12 @@ public class Asset {
         help1BackgroundTexture = new Texture("backgrounds/help/help1_background.png");
         help2BackgroundTexture = new Texture("backgrounds/help/help2_background.png");
         help3BackgroundTexture = new Texture("backgrounds/help/help3_background.png");
+        levelBackgroundTexture = new Texture("backgrounds/level/level_select_background.png");
+        gameOverSingleBackgroundTexture = new Texture("backgrounds/gameover/gameover_single_background.png");
+        gameOverMultiBackgroundTexture = new Texture("backgrounds/gameover/gameover_multi_background.png");;
         winner1BackgroundTexture = new Texture("backgrounds/winner/winner_player1_background.png");
         winner2BackgroundTexture = new Texture("backgrounds/winner/winner_player2_background.png");
-        levelBackgroundTexture = new Texture("backgrounds/level/level_select_background.png");
+
 
         // Game backgrounds
         Texture heavenBackgroundTexture = new Texture("backgrounds/level/level_heaven_score_background.png");
@@ -218,12 +226,15 @@ public class Asset {
         backgroundMusic.setVolume(0.02f); // Sets volume of music
         backgroundMusic.setLooping(true); // Music will continuously loop
 
-        //Waiting room
-        waitingRoomTexture = new Texture("waiting_room.png");
+        // TEXT
+        // Waiting room
+        waitingRoomTexture = new Texture("text/waiting_room_text.png");
 
-        //Game Over Multiplayer
-        youLose = new Texture("lose_text.png");
-        youWin = new Texture("win_text.png");
+        // Game Over Multiplayer
+        youLose = new Texture("text/lose_text.png");
+        youWin = new Texture("text/win_text.png");
+        tie = new Texture("text/tie_text.png");
+
 
         // FONT
         font = new BitmapFont(Gdx.files.internal("font/retro_game_font.fnt"),Gdx.files.internal("font/retro_game_font.png"), false);

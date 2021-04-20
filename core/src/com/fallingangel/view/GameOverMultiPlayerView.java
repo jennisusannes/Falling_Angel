@@ -45,7 +45,7 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
-        game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(Asset.gameOverMultiBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
             game.batch.draw(Asset.youWin, Gdx.graphics.getWidth()/2 - Asset.youWin.getWidth()/2, Gdx.graphics.getHeight()*3/4);
         }
@@ -66,21 +66,6 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         update(dt);
         draw();
         stage.act(dt);
-    }
-
-    public Button makeButton(Texture texture){
-        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
-        button.setSize(200,200);
-        button.setPosition(Gdx.graphics.getWidth()/2 - 100,Gdx.graphics.getHeight()/5);
-        stage.addActor(button);
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
-                gameActionsController = game.mc.gameActionsController;
-                gameActionsController.handle(inputEvent);
-            }
-        });
-        return button;
     }
 
     // Getter and setter for the exit button

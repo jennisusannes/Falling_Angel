@@ -23,7 +23,7 @@ import com.fallingangel.model.Asset;
 public class MultiPlayerView extends ScreenAdapter {
     //This view is the waiting room for the multiplayer game
 
-    TextField textField;
+    //TextField textField;
     Stage stage;
     //MainController controller;
     GameActionsController gameActionsController;
@@ -55,7 +55,7 @@ public class MultiPlayerView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
         game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.batch.draw(Asset.waitingRoomTexture, 0, Gdx.graphics.getHeight()*9/14, Gdx.graphics.getWidth(), Gdx.graphics.getWidth()/10 );
+        game.batch.draw(Asset.waitingRoomTexture, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight()*0.65f, Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight()*0.15f);
         game.batch.end();
         stage.addActor(backButton); // Adds the button as an actor to the stage
         stage.draw();
@@ -104,10 +104,10 @@ public class MultiPlayerView extends ScreenAdapter {
         multiPlayerData = new MultiPlayerData();
 
         nameListener = new NameInputListener();
-        Gdx.input.getTextInput(nameListener, "Select Your Name", "Name", "Write Name Here");
+        Gdx.input.getTextInput(nameListener, "SELECT YOUR NAME", "NAME", "WRITE NAME HERE");
 
         roomListener = new RoomInputListener();
-        Gdx.input.getTextInput(roomListener,"Select Room Number","Room Number","Write Room Number Here");
+        Gdx.input.getTextInput(roomListener,"SELECT ROOM NUMBER","ROOM NUMBER","WRITE ROOM NUMBER HERE");
     };
 
     //method used to create the room in the database
