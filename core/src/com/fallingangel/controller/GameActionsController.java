@@ -308,11 +308,11 @@ public class GameActionsController implements EventListener {
         // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
         if (isMultiplayer){
             removeSystem();
-            game.setScreen(new GameOverMultiPlayerView());
+            game.setScreen(gameOverMultiPlayerView);
         }
         else {
             removeSystem();
-            game.setScreen(new GameOverView());
+            game.setScreen(gameOverView);
         }
     }
 
