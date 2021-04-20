@@ -46,14 +46,6 @@ public class GameView extends ScreenAdapter {
         //this.game  = FallingAngel.getInstance();
         this.isMultiplayer = isMultiplayer;
 
-        //TODO må  flyttes til GameActionsController
-        if (isMultiplayer){
-            engine.addSystem(new MultiplayerSystem(1));
-            engine.addSystem(new RenderingSystem(game.batch, true));
-        }
-        else{
-            engine.addSystem(new RenderingSystem(game.batch, false));
-        }
 
     }
 
@@ -91,18 +83,6 @@ public class GameView extends ScreenAdapter {
         stage.draw();
     }
 
-    //TODO flyttes til updateRunning
-        if (isMultiplayer && state == GAME_OVER){
-        FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData.setGameOver(true);
-    }
-
-        //TODO flyttes til updateGameOver
-          if (isMultiplayer){
-        game.setScreen(new GameOverMultiPlayerView());
-    }
-        else {
-        game.setScreen(new GameOverView());
-    }
 
 
     //if one of the gameOver fields from database are true

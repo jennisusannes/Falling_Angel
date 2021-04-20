@@ -14,7 +14,7 @@ import com.fallingangel.model.Asset;
 
 public final class FallingAngel extends Game implements ApplicationListener {
 
-	private static final FallingAngel INSTANCE = new FallingAngel(); // Initializing the game as INSTANCE
+	private static FallingAngel INSTANCE; // Initializing the game as INSTANCE
 	public MainController mc;
 
 	public com.fallingangel.backend.FireBaseInterface FBI;

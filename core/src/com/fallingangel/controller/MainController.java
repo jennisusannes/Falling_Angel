@@ -34,7 +34,7 @@ public class MainController extends ClickListener {
     public AchievementsView achievementsView = new AchievementsView();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
-    public MultiPlayerView multiPlayerView = new MultiPlayerView();
+    public MultiPlayerView multiPlayerView;
     public LevelView levelView = new LevelView();
     public GameActionsController gameActionsController;
     protected World world;
@@ -62,7 +62,7 @@ public class MainController extends ClickListener {
         game.setScreen(menuView);
     }
 
-     */
+
     public TextureRegion getGameBackground(){
         return gameBackground;
     }
@@ -106,8 +106,11 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            this.gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
+            this.gameActionsController = new GameActionsController(true);
+            this.multiPlayerView = new MultiPlayerView();
+            multiPlayerView.connectToGameRoom();
+            game.setScreen(multiPlayerView);
+            //gameActionsController.setGameScreen();
             return true;
         }
         /*
@@ -220,43 +223,34 @@ public class MainController extends ClickListener {
             angel = "bunny";
             return true;
         }
-        else if (event.getListenerActor().equals(game.mc.levelView.getHeavenButton())) {
+        else if (event.getListenerActor().equals(levelView.getHeavenButton())) {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
             setGameBackground(Asset.heavenBackgroundTextureRegion);
             setPauseBackground(Asset.heavenBackgroundPauseTextureRegion);
-            this.gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
+            this.gameActionsController = new GameActionsController(false);
+            gameActionsController.setGameScreen(false);
             return true;
         }
-        else if (event.getListenerActor().equals(game.mc.levelView.getSunsetButton())) {
+        else if (event.getListenerActor().equals(levelView.getSunsetButton())) {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
             setGameBackground(Asset.sunsetBackgroundTextureRegion);
             setPauseBackground(Asset.sunsetBackgroundPauseTextureRegion);
-            this.gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
+            this.gameActionsController = new GameActionsController(false);
+            gameActionsController.setGameScreen(false);
             return true;
         }
-        else if (event.getListenerActor().equals(game.mc.levelView.getHellButton())) {
+        else if (event.getListenerActor().equals(levelView.getHellButton())) {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
             setGameBackground(Asset.hellBackgroundTextureRegion);
             setPauseBackground(Asset.hellBackgroundPauseTextureRegion);
-            this.gameActionsController = new GameActionsController();
-            gameActionsController.setGameScreen();
-            return true;
-        }
-      //TODO flytte til gameactionscontroller
-        else if (event.getListenerActor().equals(GameOverMultiPlayerView.exitButton)){
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            else;
-            game.setScreen(new MenuView());
+            this.gameActionsController = new GameActionsController(false);
+            gameActionsController.setGameScreen(false);
             return true;
         }
         else{
@@ -265,8 +259,4 @@ public class MainController extends ClickListener {
 
     }
 
-    //TODO flytte til gameActionsController
-    public void beginMultiplayerGame(){
-        game.setScreen(new GameView(true));
-    }
 }

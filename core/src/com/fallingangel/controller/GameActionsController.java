@@ -22,6 +22,7 @@ import com.fallingangel.controller.system.BoundsSystem;
 import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
 import com.fallingangel.controller.system.MovementSystem;
+import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
 import com.fallingangel.controller.system.DroneSystem;
 import com.fallingangel.controller.system.RenderingSystem;
@@ -34,8 +35,10 @@ import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.DroneComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TransformComponent;
+import com.fallingangel.view.GameOverMultiPlayerView;
 import com.fallingangel.view.GameOverView;
 import com.fallingangel.view.GameView;
+import com.fallingangel.view.MenuView;
 import com.fallingangel.view.PauseView;
 
 public class GameActionsController implements EventListener {
@@ -52,6 +55,7 @@ public class GameActionsController implements EventListener {
     public GameView gameView;
     public PauseView pauseView = new PauseView();
     public GameOverView gameOverView = new GameOverView();
+    public GameOverMultiPlayerView gameOverMultiPlayerView = new GameOverMultiPlayerView();
     public MainController mainController;
     public PlayerActionsController playerActionsController= new PlayerActionsController();
 
@@ -80,13 +84,15 @@ public class GameActionsController implements EventListener {
 
     private float angelPosX;
     private float getAngelPosY; //trengs kanskje ikke
+    public boolean isMultiplayer;
 
     //ASHLEY
     public Engine engine;
 
-    public GameActionsController() {
+    public GameActionsController(boolean isMultiplayer) {
         this.game = FallingAngel.getInstance();
         this.mainController = game.mc;
+        this.isMultiplayer = isMultiplayer;
 
         clickSound = Asset.clickSound;
         //coinSound = Asset.coinSound;
@@ -111,19 +117,33 @@ public class GameActionsController implements EventListener {
         engine.addSystem(new BackgroundSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new CollisionSystem(world));
-        engine.addSystem(new RenderingSystem(game.batch));
+        engine.addSystem(new RenderingSystem(game.batch,isMultiplayer));
         engine.addSystem(new StateSystem());
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new CoinSystem());
+
+        if (isMultiplayer){
+            engine.addSystem(new MultiplayerSystem(1));
+            engine.addSystem(new RenderingSystem(game.batch, true));
+        }
+        else{
+            engine.addSystem(new RenderingSystem(game.batch, false));
+        }
 
         // Creates world
         world.create();
     }
 
-    public void setGameScreen() {
-        this.gameView = new GameView();
+    public void setGameScreen(Boolean multi) {
+        this.gameView = new GameView(multi);
         game.setScreen(gameView);
     }
+    /*
+    public void beginMultiplayerGame(){
+        game.setScreen(new GameView(true));
+    }
+
+     */
 
     public void setState(int state) {
         this.state = state;
@@ -164,7 +184,7 @@ public class GameActionsController implements EventListener {
                 break;
             case GAME_OVER:
                 // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
-                gameOver(0);
+                gameOver();
                 break;
         }
     }
@@ -220,6 +240,11 @@ public class GameActionsController implements EventListener {
             //TODO: oppdatere ny highscore i highscorelist
             pauseSystem();
         }
+
+        if (isMultiplayer && state == GAME_OVER){
+            game.mc.multiPlayerView.multiPlayerData.setGameOver(true);
+        }
+
     }
 
     // This method sets all systems updating on pause
@@ -275,12 +300,23 @@ public class GameActionsController implements EventListener {
         }
     }
 
+
+
+
     // When the player dies and the game is over, the player is sent to GameOverView
-    public void gameOver(int winner) {
+    public void gameOver() {
         // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
-        removeSystem();
-        setGameOverScreen(winner);
+        if (isMultiplayer){
+            removeSystem();
+            game.setScreen(new GameOverMultiPlayerView());
+        }
+        else {
+            removeSystem();
+            game.setScreen(new GameOverView());
+        }
     }
+
+
 
     public void setGameOverScreen(int winner) {
         gameOverView.setWinner(winner);
@@ -324,12 +360,18 @@ public class GameActionsController implements EventListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            game.mc.gameActionsController = new GameActionsController();
-            game.mc.gameActionsController.setGameScreen();
+            game.mc.gameActionsController = new GameActionsController(false);
+            game.mc.gameActionsController.setGameScreen(false);
             return true;
         }
-
-
+        else if (event.getListenerActor().equals(gameOverMultiPlayerView.exitButton)){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            else;
+            game.mc.setStartScreen();
+            return true;
+        }
         else {
             return false;
         }

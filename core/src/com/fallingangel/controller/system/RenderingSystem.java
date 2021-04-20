@@ -47,7 +47,7 @@ public class RenderingSystem extends IteratingSystem{
     boolean isMultiplayer;
 
 
-    public FallingAngel game = FallingAngel.getInstance();
+    //public FallingAngel game = FallingAngel.getInstance();
 
     //Instanciate a RenderingSystem
     public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
