@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface FireBaseInterface {
-    public void createUser(String mail, String username, String password);
+    public void createUser();
     public void updateScore(int score);
     public void connectToRoom(String roomName, MultiPlayerData mpd);
     public void setOpponentScore();
     public void numberOfUsersInRoom();
     public int getOpponentScore();
-    public boolean currentPlayerIsWinner();
-    public HashMap<String, Integer> highScoreListTopTen();
+    public String gameOverStatus();
+    public boolean gameIsOver();
+    public void getHighscoreFromDB();
+    public void destroyRoom();
  }

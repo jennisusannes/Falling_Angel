@@ -32,8 +32,9 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private User user;
     private int score;
     private int opponentScore;
-    private int numUsersInRoom = 0;
-    private boolean currentPlayerIsWinner;
+    private int numUsersInRoom;
+    private boolean gameIsOver;
+    private String gameOverStatus = "";
 
 
     public AndroidInterfaceClass(){
@@ -44,9 +45,9 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
 
     @Override
-    public void createUser(String mail, String username, String password) {
-        String UID =  createID(30);
-        this.user = new User(UID, username, mail, password);
+    public void createUser() {
+        String UID =  "jennitest";//createID(30);
+        this.user = new User(UID);
         users.child(UID).setValue(user)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -95,7 +96,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     }
                 }
             }
-
             @Override
             public void onCancelled( DatabaseError error) {
                 // Getting Post failed, log a message
@@ -131,30 +131,25 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
     @Override
-    public void updateScore(int score) {
-
+    public void updateScore(final int score) {
+        this.getHighscoreFromDB();
         this.score = score;
-        // [BEGIN rtdb_write_new_user_task]
         rooms.child(roomName).child(this.user.getUID()).child("score").setValue(this.score)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
+                        Log.i("Score was updated", Integer.toString(score));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
+                        Log.e("error", e.toString());
                     }
                 });
-        // [END rtdb_write_new_user_task]
-        if (this.score > getHighscoreFromDB()){
+        if (this.score > user.getHighScore()){
             users.child(this.user.getUID()).child("highScore").setValue(this.score);
         }
-
     }
 
 
@@ -164,52 +159,66 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     @Override
-    public boolean currentPlayerIsWinner() {
-        ValueEventListener gameWonListener = new ValueEventListener() {
+    public String gameOverStatus() {
+        ValueEventListener gameOverStatusListener = new ValueEventListener(){
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds: snapshot.getChildren()){
-                    String key = ds.getKey();
-                    if (!key.equals(user.getUID())) {
-                        MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
-                        boolean opponentLost = opponent.isGameOver();
-                        if(opponentLost){
-                            currentPlayerIsWinner = true;
-                        }
+                int opponentFinalScore = 0;
+                int currentPlayerFinalScore = 0;
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    String key= ds.getKey();
+                    MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
+                    if(key.equals(user.getUID())){
+                        currentPlayerFinalScore = mpd.getScore();
+
+                    } else{
+                        opponentScore = mpd.getScore();
+                    }
+                    if(currentPlayerFinalScore > opponentFinalScore){
+                        gameOverStatus = "gameWon";
+                    }else if(currentPlayerFinalScore < opponentFinalScore){
+                        gameOverStatus = "gameLost";
+                    }else{
+                        gameOverStatus = "gameTied";
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+
             }
         };
-        rooms.child(roomName).addValueEventListener(gameWonListener);
-        return currentPlayerIsWinner;
+        rooms.child(roomName).addValueEventListener(gameOverStatusListener);
+        return gameOverStatus;
     }
 
     @Override
-    public HashMap<String, Integer> highScoreListTopTen() {
-        HashMap<String, Integer> highScoreListTopten = new HashMap<String, Integer>();
-        ValueEventListener highScoreListListener = new ValueEventListener() {
+    public boolean gameIsOver(){
+        ValueEventListener gameIsOverListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                HashMap<String, Integer> highScoreList = new HashMap<String, Integer>();
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    User userdata = ds.getValue(User.class);
-                    highScoreList.put(userdata.getUsername(), userdata.getHighScore());
+                    MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
+                    if(mpd.isGameOver){
+                        gameIsOver = true;
+                    }
+
                 }
-                //TODO Sort hashmap and put the first ten entries into highscorelisttopten
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         };
-        users.addValueEventListener(highScoreListListener);
-        return highScoreListTopten;
+        rooms.child(roomName).addValueEventListener(gameIsOverListener);
+        return gameIsOver;
     }
 
-    // Helpfunctions:
-    public int getHighscoreFromDB(){
+
+
+    @Override
+    public void getHighscoreFromDB(){
         ValueEventListener highScoreListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -230,10 +239,25 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         };
         users.addValueEventListener(highScoreListener);
-        return user.getHighScore();
-
     }
 
+    @Override
+    public void destroyRoom() {
+        rooms.child(roomName).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.i("Room was destroyed", "nice");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("error", e.toString());
+                    }
+                });
+
+    }
 
     // Found at: https://www.baeldung.com/java-random-string
 

@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector3;
 
 public class MultiPlayerData {
 
-    public boolean connected = false;
     public boolean isGameOver = false;
     public Vector3 position;
 
@@ -13,14 +12,6 @@ public class MultiPlayerData {
     public int numberOfUsersInRoom = 0;
 
     public MultiPlayerData(){}
-
-    public boolean isConnected() {
-        return connected;
-    }
-
-    public void setConnected(boolean connected) {
-        this.connected = connected;
-    }
 
     public boolean isGameOver() {
         return isGameOver;

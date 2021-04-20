@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
-    public void createUser(String mail, String username, String password) {
+    public void createUser() {
 
     }
 
@@ -38,13 +38,24 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public boolean currentPlayerIsWinner() {
+    public String gameOverStatus() {
+        return null;
+    }
+
+    @Override
+    public boolean gameIsOver() {
         return false;
     }
 
     @Override
-    public HashMap<String, Integer> highScoreListTopTen() {
-        return null;
+    public void getHighscoreFromDB() {
+
     }
+
+    @Override
+    public void destroyRoom() {
+
+    }
+
 
 }
