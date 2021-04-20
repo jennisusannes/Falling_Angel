@@ -247,7 +247,7 @@ public class GameActionsController implements EventListener {
             game.mc.multiPlayerView.multiPlayerData.setGameOver(true);
         }
 
-        if(game.FBI.gameIsOver()){
+        if(isMultiplayer && game.FBI.gameIsOver()){
             state = GAME_OVER;
         }
 
@@ -354,7 +354,7 @@ public class GameActionsController implements EventListener {
             game.mc.setStartScreen();
             return true;
         }
-        else if (event.getListenerActor().equals(gameOverView.getBackButton())) {
+        else if (event.getListenerActor().equals(gameOverView.getExitButton())) {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
@@ -369,7 +369,7 @@ public class GameActionsController implements EventListener {
             game.mc.gameActionsController.setGameScreen(false);
             return true;
         }
-        else if (event.getListenerActor().equals(gameOverMultiPlayerView.exitButton)){
+        else if (event.getListenerActor().equals(gameOverMultiPlayerView.getExitButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }

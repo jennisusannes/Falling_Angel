@@ -76,7 +76,7 @@ public class MultiPlayerView extends ScreenAdapter {
 
     // Getter and setter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.1f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -104,10 +104,10 @@ public class MultiPlayerView extends ScreenAdapter {
         multiPlayerData = new MultiPlayerData();
 
         nameListener = new NameInputListener();
-        Gdx.input.getTextInput(nameListener, "Write in your name", "name", "name");
+        Gdx.input.getTextInput(nameListener, "Select Your Name", "Name", "Write Name Here");
 
         roomListener = new RoomInputListener();
-        Gdx.input.getTextInput(roomListener,"Write in the room number","room number","write the number here");
+        Gdx.input.getTextInput(roomListener,"Select Room Number","Room Number","Write Room Number Here");
     };
 
     //method used to create the room in the database

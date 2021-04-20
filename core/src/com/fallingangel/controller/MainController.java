@@ -204,7 +204,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.pigAnimation);
             angel = "pig";
             return true;
@@ -213,7 +212,6 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            //this.gameActionsController = new GameActionsController();
             setChosenCharacter(Asset.bunnyAnimation);
             angel = "bunny";
             return true;

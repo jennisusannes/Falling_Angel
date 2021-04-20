@@ -23,14 +23,14 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     GameActionsController gameActionsController;
     Stage stage;
 
-    public static Button exitButton;
+    private Button exitButton;
 
     public boolean isWinner;
 
     public GameOverMultiPlayerView(){
         this.gameActionsController = game.mc.gameActionsController;
         stage = new Stage(new ScreenViewport());
-        exitButton = makeButton(Asset.exitButton);
+        setExitButton();
         //if your score is the best
       /*  if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
             isWinner = true;
@@ -53,6 +53,7 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
             game.batch.draw(Asset.youLose, Gdx.graphics.getWidth()/2 - Asset.youLose.getWidth()/2, Gdx.graphics.getHeight()*3/4);
         }
         game.batch.end();
+        stage.addActor(exitButton);
         stage.draw();
     }
 
@@ -72,6 +73,30 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         button.setSize(200,200);
         button.setPosition(Gdx.graphics.getWidth()/2 - 100,Gdx.graphics.getHeight()/5);
         stage.addActor(button);
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent inputEvent, float xpos, float ypos) {
+                gameActionsController = game.mc.gameActionsController;
+                gameActionsController.handle(inputEvent);
+            }
+        });
+        return button;
+    }
+
+    // Getter and setter for the exit button
+    public void setExitButton() {
+        this.exitButton = makeButton(Asset.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+    }
+
+    public Button getExitButton(){
+        return exitButton;
+    }
+
+    // Method for creating a button, this will add the MainController as a listener
+    public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
+        Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
+        button.setSize(width, height);
+        button.setPosition(xPos, yPos);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent inputEvent, float xpos, float ypos) {
