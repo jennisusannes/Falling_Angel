@@ -52,13 +52,10 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         else {
             game.batch.draw(Asset.youLose, Gdx.graphics.getWidth()*0.5f - Asset.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
-        // her er riktig str på tie text:)
-        /*
-        else {
-            game.batch.draw(Asset.tie, Gdx.graphics.getWidth()*0.5f - Asset.tie.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
-        }
+        // TODO: her er riktig str på tie text:) legge inn at det kaaaaaaaaaaaaaaaaaaaanskje kan bli uavgjort
+        //game.batch.draw(Asset.tie, Gdx.graphics.getWidth()*0.5f - Asset.tie.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
 
-         */
+
         game.batch.end();
         stage.addActor(exitButton);
         stage.draw();

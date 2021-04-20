@@ -12,6 +12,7 @@ import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.AnimationComponent;
 import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
+import com.fallingangel.model.component.DevilComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.DroneComponent;
@@ -88,6 +89,15 @@ public class World {
             int high = Gdx.graphics.getWidth() - Asset.droneTexture.getRegionWidth();
             int randomX  = rand.nextInt(high-low) + low;
             drones.add(createDrone(randomX , -i * Gdx.graphics.getHeight() * 2));
+        }
+
+        //creating the devils
+        Array<Entity> devils = new Array<Entity>();
+        for (int i = 1; i <= 3; i++) {
+            int low = Gdx.graphics.getWidth()/4;
+            int high = Gdx.graphics.getWidth() - Asset.devilTexture.getRegionWidth();
+            int randomX  = rand.nextInt(high-low) + low;
+            devils.add(createDevil(randomX , -i * Gdx.graphics.getHeight() * 5));
         }
 
         //creating the coins that will be used
@@ -216,6 +226,44 @@ public class World {
         return planeEntity;
     }
 
+    public Entity createDevil(float x, float y){
+        Entity devilEntity = new Entity();
+
+        //create new components
+        DevilComponent devilComponent = new DevilComponent();
+        AnimationComponent animationComponent = new AnimationComponent();
+        BoundsComponent boundsComponent = new BoundsComponent();
+        MovementComponent movementComponent = new MovementComponent();
+        TransformComponent transformComponent = new TransformComponent();
+        StateComponent stateComponent = new StateComponent();
+        TextureComponent textureComponent = new TextureComponent();
+
+        //add the comp. to the entity
+        devilEntity.add(devilComponent);
+        devilEntity.add(animationComponent);
+        devilEntity.add(boundsComponent);
+        devilEntity.add(movementComponent);
+        devilEntity.add(transformComponent);
+        devilEntity.add(stateComponent);
+        devilEntity.add(textureComponent);
+
+        //add texture to the obstacle.
+        textureComponent.textureRegion = Asset.devilTexture;
+
+        //add the position of the plane
+        transformComponent.pos.set(x, y, 4.0f);
+
+        //random which way the drone starts to go (x-direction)
+        int a = 1;
+        int b = -1;
+        int randomPick = rand.nextBoolean() ? a : b;
+        devilComponent.SPEED = randomPick * devilComponent.VELOCITY;
+
+        //add the entity to the engine
+        engine.addEntity(devilEntity);
+
+        return devilEntity;
+    }
 
     //will implement if there is time
     public Entity powerUp(){

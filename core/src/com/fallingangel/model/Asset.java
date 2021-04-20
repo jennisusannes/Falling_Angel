@@ -56,10 +56,14 @@ public class Asset {
     public static String redBalloon = "obstacles/balloons/red_balloon.png";
     public static String yellowBalloon = "obstacles/balloons/yellow_balloon.png";
     public static Array<TextureRegion> balloons = new Array<TextureRegion>();
-    //Drone
+    // Drone
     public static String drone = "obstacles/drone.png";
     public static TextureRegion droneTexture;
-
+    // Devil
+    public static String devil = "obstacles/devil/devil_2.png";
+    public static TextureRegion devilTexture;
+    public static Animation<TextureRegion> devilAnimation;
+    public static Texture devilSpriteSheet;
 
     // BUTTONS
     public static Texture singlePlayerButton;
@@ -191,6 +195,11 @@ public class Asset {
         //Drone
         droneTexture = new TextureRegion(new Texture(drone), 0, 0, new Texture(drone).getWidth(), new Texture(drone).getHeight());
 
+        // Devil
+        devilTexture = new TextureRegion(new Texture(devil),0,0, new Texture(devil).getWidth(), new Texture(devil).getHeight());
+        devilSpriteSheet = new Texture("obstacles/devil/devil_animation.png");
+        Array<TextureRegion> devilFrames = makeFrames(devilSpriteSheet, 2, 1);
+        devilAnimation = new Animation<TextureRegion>(0.2f, devilFrames.get(0), devilFrames.get(1), devilFrames.get(0));
 
         // BUTTONS
         singlePlayerButton = new Texture("buttons/menu/singleplayer_button.PNG");

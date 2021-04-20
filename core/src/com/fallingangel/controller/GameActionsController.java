@@ -21,6 +21,7 @@ import com.fallingangel.controller.system.BackgroundSystem;
 import com.fallingangel.controller.system.BoundsSystem;
 import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
+import com.fallingangel.controller.system.DevilSystem;
 import com.fallingangel.controller.system.MovementSystem;
 import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.controller.system.ObstacleSystem;
@@ -113,6 +114,7 @@ public class GameActionsController implements EventListener {
         engine.addSystem(new AngelSystem(world));
         engine.addSystem(new ObstacleSystem());
         engine.addSystem(new DroneSystem());
+        engine.addSystem(new DevilSystem());
         engine.addSystem(new MovementSystem());
         engine.addSystem(new BackgroundSystem());
         engine.addSystem(new AnimationSystem());
@@ -258,6 +260,7 @@ public class GameActionsController implements EventListener {
         engine.getSystem(AngelSystem.class).setProcessing(false);
         engine.getSystem(ObstacleSystem.class).setProcessing(false);
         engine.getSystem(DroneSystem.class).setProcessing(false);
+        engine.getSystem(DevilSystem.class).setProcessing(false);
         engine.getSystem(MovementSystem.class).setProcessing(false);
         engine.getSystem(BoundsSystem.class).setProcessing(false);
         engine.getSystem(StateSystem.class).setProcessing(false);
@@ -270,6 +273,7 @@ public class GameActionsController implements EventListener {
         engine.getSystem(AngelSystem.class).setProcessing(true);
         engine.getSystem(ObstacleSystem.class).setProcessing(true);
         engine.getSystem(DroneSystem.class).setProcessing(true);
+        engine.getSystem(DevilSystem.class).setProcessing(true);
         engine.getSystem(MovementSystem.class).setProcessing(true);
         engine.getSystem(BoundsSystem.class).setProcessing(true);
         engine.getSystem(StateSystem.class).setProcessing(true);

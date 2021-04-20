@@ -18,6 +18,7 @@ import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
+import com.fallingangel.model.component.DevilComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
@@ -49,6 +50,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ImmutableArray<Entity> angels;
     private ImmutableArray<Entity> coins;
     private ImmutableArray<Entity> planes;
+    private ImmutableArray<Entity> devils;
     private ImmutableArray<Entity> obstacles;
     private ImmutableArray<Entity> powerups;
 
@@ -77,6 +79,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         angels = engine.getEntitiesFor(Family.all(AngelComponent.class, BoundsComponent.class, TransformComponent.class, StateComponent.class).get());
         coins = engine.getEntitiesFor(Family.all(CoinComponent.class, BoundsComponent.class).get());
         planes = engine.getEntitiesFor(Family.all(DroneComponent.class, BoundsComponent.class).get());
+        devils = engine.getEntitiesFor(Family.all(DevilComponent.class, BoundsComponent.class).get());
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
         powerups = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());
 
@@ -127,6 +130,21 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             BoundsComponent planeBounds = boundsMapper.get(plane);
 
             if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
+                if (game.soundOn()){
+                    collisionSound.play(0.05f);
+                }
+                angelSystem.hitPlane(angel);
+                // listener.hitObs();
+            }
+        }
+
+        //if angel hits a devil, the player dies
+        for (int j = 0; j < devils.size(); ++j) {
+            Entity devil = devils.get(j);
+
+            BoundsComponent devilBounds = boundsMapper.get(devil);
+
+            if (devilBounds.rectangle.overlaps(angelBounds.rectangle)) {
                 if (game.soundOn()){
                     collisionSound.play(0.05f);
                 }
