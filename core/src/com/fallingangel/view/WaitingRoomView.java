@@ -20,7 +20,7 @@ import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 
 public class WaitingRoomView extends ScreenAdapter {
-    //This view is the waiting room for the multiplayer game
+    //This vigew is the waiting room for the multiplayer game
 
     //TextField textField;
     Stage stage;
