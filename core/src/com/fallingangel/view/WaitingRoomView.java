@@ -20,7 +20,7 @@ import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 
-public class MultiPlayerView extends ScreenAdapter {
+public class WaitingRoomView extends ScreenAdapter {
     //This view is the waiting room for the multiplayer game
 
     //TextField textField;
@@ -41,7 +41,7 @@ public class MultiPlayerView extends ScreenAdapter {
     NameInputListener nameListener;
     boolean alreadyConnected = false;
 
-    public MultiPlayerView() {
+    public WaitingRoomView() {
         this.gameActionsController = game.mc.gameActionsController;
         this.mainController = game.mc;
         stage = new Stage(new ScreenViewport());

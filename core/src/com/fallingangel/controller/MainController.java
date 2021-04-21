@@ -16,7 +16,7 @@ import com.fallingangel.view.HelpView3;
 import com.fallingangel.view.HighScoreListView;
 import com.fallingangel.view.LevelView;
 import com.fallingangel.view.MenuView;
-import com.fallingangel.view.MultiPlayerView;
+import com.fallingangel.view.WaitingRoomView;
 import com.fallingangel.view.SettingsView;
 
 public class MainController extends ClickListener {
@@ -29,7 +29,7 @@ public class MainController extends ClickListener {
     public HelpView3 helpView3 = new HelpView3();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
-    public MultiPlayerView multiPlayerView;
+    public WaitingRoomView waitingRoomView;
     public LevelView levelView = new LevelView();
     public GameActionsController gameActionsController;
     protected World world;
@@ -97,9 +97,9 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             this.gameActionsController = new GameActionsController(true);
-            this.multiPlayerView = new MultiPlayerView();
-            multiPlayerView.connectToGameRoom();
-            game.setScreen(multiPlayerView);
+            this.waitingRoomView = new WaitingRoomView();
+            waitingRoomView.connectToGameRoom();
+            game.setScreen(waitingRoomView);
             return true;
         }
         /*
@@ -239,7 +239,7 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
-        else if (event.getListenerActor().equals(multiPlayerView.getBackButton())) {
+        else if (event.getListenerActor().equals(waitingRoomView.getBackButton())) {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }

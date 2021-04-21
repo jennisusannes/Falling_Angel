@@ -191,7 +191,7 @@ public class GameActionsController implements EventListener {
 
         // A player dies in multi player
         if (isMultiplayer && state == GAME_OVER){
-            game.mc.multiPlayerView.multiPlayerData.setGameOver(true);
+            game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
         }
 
         // Sets the state to GAME OVER after a multi player game

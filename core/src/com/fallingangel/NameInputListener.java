@@ -3,7 +3,7 @@ package com.fallingangel;
 import com.badlogic.gdx.Input;
 
 public class NameInputListener implements Input.TextInputListener {
-    //Handles the input field for username
+    //Handles the input field for usernamegit pull
 
     public String name;
     @Override

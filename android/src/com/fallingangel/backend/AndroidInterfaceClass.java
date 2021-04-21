@@ -1,6 +1,5 @@
 package com.fallingangel.backend;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.view.HighScoreListView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -12,13 +11,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import static android.content.ContentValues.TAG;
 
@@ -115,7 +108,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                 numUsersInRoom = (int)dataSnapshot.getChildrenCount();
                 rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
 
-                FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
+                FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
             }
 
             @Override

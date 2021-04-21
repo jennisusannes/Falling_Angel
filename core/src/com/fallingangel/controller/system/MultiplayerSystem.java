@@ -9,7 +9,6 @@ import com.badlogic.ashley.systems.IntervalSystem;
 import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
-import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TransformComponent;
 
@@ -62,7 +61,7 @@ public class MultiplayerSystem extends IntervalSystem {
             TransformComponent transformComponent = transformMapper.get(entity);
             StateComponent stateComponent = stateMapper.get(entity);
 
-            MultiPlayerData mpd = FallingAngel.getInstance().mc.multiPlayerView.multiPlayerData;
+            MultiPlayerData mpd = FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData;
             mpd.score = (int) (angelComponent.SCORE);
             if (stateComponent.state == angelComponent.STATE_HIT){
                 mpd.setGameOver(true);
