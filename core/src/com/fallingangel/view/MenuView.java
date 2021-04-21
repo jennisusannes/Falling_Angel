@@ -36,7 +36,6 @@ public class MenuView extends ScreenAdapter {
         stage = new Stage(new ScreenViewport()); //crates a new stage and a viewport
 
         // Create buttons and adds them to the stage as actors
-
         setSinglePlayerButton();
         stage.addActor(singlePlayerButton);
 

@@ -54,18 +54,7 @@ public class World {
         this.game = FallingAngel.getInstance();
     }
 
-/*
 
-
-    public Animation<TextureRegion> getCharacter(){
-        if (game.getChosenCharacter().equals(Asset.bunnyAnimation)){
-            return Asset.bunnyAnimation;
-        }
-        else {
-            return Asset.pigAnimation;
-        }
-    }
- */
     public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
         this.character = chosenCharacter;
     }
@@ -275,26 +264,6 @@ public class World {
     }
 
 
-
-    /*public Entity createBackground(){
-        Entity backgroundEntity = new Entity();
-        //BackgroundComponent backgroundComponent = new BackgroundComponent();
-        TextureComponent textureComponent = new TextureComponent();
-        TransformComponent transformComponent = new TransformComponent();
-
-        textureComponent.textureRegion = Asset.backgroundTextureRegion;
-        transformComponent.pos.set(0,0, 5.0f);
-
-        //backgroundEntity.add(backgroundComponent);
-        backgroundEntity.add(textureComponent);
-        backgroundEntity.add(transformComponent);
-
-        engine.addEntity(backgroundEntity);
-
-        return backgroundEntity;
-    }
-
-    */
 
     public Entity createCoin(float x, float y){
         Entity coinEntity = new Entity();
