@@ -7,14 +7,9 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Asset;
 import com.fallingangel.model.World;
-import com.fallingangel.view.AchievementsView;
-import com.fallingangel.view.GameOverMultiPlayerView;
-import com.fallingangel.view.GameOverView;
-import com.fallingangel.view.GameView;
 import com.fallingangel.view.HelpView1;
 import com.fallingangel.view.HelpView2;
 import com.fallingangel.view.HelpView3;
@@ -32,7 +27,6 @@ public class MainController extends ClickListener {
     public HelpView1 helpView1 = new HelpView1();
     public HelpView2 helpView2 = new HelpView2();
     public HelpView3 helpView3 = new HelpView3();
-    public AchievementsView achievementsView = new AchievementsView();
     public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public MultiPlayerView multiPlayerView;
@@ -133,13 +127,6 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             game.setScreen(settingsView);
-            return true;
-        }
-        else if (event.getListenerActor().equals(achievementsView.getBackButton())){
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(highscorelistView.getBackButton())){

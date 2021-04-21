@@ -55,8 +55,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	}
 
 
-
-
 	@Override
 	public void create () {
 		Asset.load();
