@@ -16,7 +16,6 @@ import com.fallingangel.model.component.DevilComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.DroneComponent;
-import com.fallingangel.model.component.PowerUpComponent;
 import com.fallingangel.model.component.StateComponent;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
@@ -254,14 +253,6 @@ public class World {
         return devilEntity;
     }
 
-    //will implement if there is time
-    public Entity powerUp(){
-        Entity powerup = new Entity();
-        PowerUpComponent puc = new PowerUpComponent();
-        powerup.add(puc);
-        engine.addEntity(powerup);
-        return powerup;
-    }
 
 
 

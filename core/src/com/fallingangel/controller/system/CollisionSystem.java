@@ -25,7 +25,6 @@ import com.fallingangel.model.component.TransformComponent;
 import com.fallingangel.model.component.DroneComponent;
 import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
-import com.fallingangel.model.component.PowerUpComponent;
 
 public class CollisionSystem extends EntitySystem { //EntitySystem: abstact class for processing sets of Entity objects
     //component mappers to get components
@@ -81,7 +80,6 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         planes = engine.getEntitiesFor(Family.all(DroneComponent.class, BoundsComponent.class).get());
         devils = engine.getEntitiesFor(Family.all(DevilComponent.class, BoundsComponent.class).get());
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
-        powerups = engine.getEntitiesFor(Family.all(PowerUpComponent.class, BoundsComponent.class).get());
 
     }
 
@@ -97,7 +95,6 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         TransformComponent angelPos = transformMapper.get(angel);
 
 
-
         //if angel hits an obstacle, the player dies
         for (int j = 0; j < obstacles.size(); ++j) {
             Entity obstacle = obstacles.get(j);
@@ -107,18 +104,18 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             Rectangle rec = new Rectangle();
 
             rec.x = (int) obsBounds.rectangle.x;
-            rec.y = (int) (obsBounds.rectangle.y + Assets.balloons.first().getRegionHeight() * 1/2);
+            rec.y = (int) (obsBounds.rectangle.y + Assets.balloons.first().getRegionHeight() * 1 / 2);
             rec.width = (int) obsBounds.rectangle.width;
-            rec.height = (int) obsBounds.rectangle.height * 1/2;
+            rec.height = (int) obsBounds.rectangle.height * 1 / 2;
 
 
-               if (rec.overlaps(angelBounds.rectangle)) {
-                   if (game.soundOn()){
-                       collisionSound.play(0.05f);
-                   }
-                   angelSystem.hitObstacle(angel);
-                    //listener.hitObs();
+            if (rec.overlaps(angelBounds.rectangle)) {
+                if (game.soundOn()) {
+                    collisionSound.play(0.05f);
                 }
+                angelSystem.hitObstacle(angel);
+                //listener.hitObs();
+            }
 
         }
 
@@ -130,7 +127,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             BoundsComponent planeBounds = boundsMapper.get(plane);
 
             if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                if (game.soundOn()){
+                if (game.soundOn()) {
                     collisionSound.play(0.05f);
                 }
                 angelSystem.hitPlane(angel);
@@ -145,7 +142,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             BoundsComponent devilBounds = boundsMapper.get(devil);
 
             if (devilBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                if (game.soundOn()){
+                if (game.soundOn()) {
                     collisionSound.play(0.05f);
                 }
                 angelSystem.hitPlane(angel);
@@ -162,15 +159,15 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             TextureComponent textureComponent = textureMapper.get(coin);
 
             if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
-                if (game.soundOn()){
+                if (game.soundOn()) {
                     coinSound.play(0.2f);
                 }
                 angel.getComponent(AngelComponent.class).COINS_HIT += coin.getComponent(CoinComponent.class).SCORE;
-                coinPos.pos.y = - textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight()/2;
+                coinPos.pos.y = -textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight() / 2;
                 coinPos.pos.x = rand.nextInt(Gdx.graphics.getWidth() - textureComponent.textureRegion.getRegionWidth());
             }
         }
-
+/*
         //when player hits a powerup, the powerup disappears and the player gets an advantage
         for (int j = 0; j < powerups.size(); ++j) {
             Entity powerup = powerups.get(j);
@@ -183,7 +180,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 //listener.hitPU();
             }
         }
-        }
+        }*/
 
     }
-
+}
