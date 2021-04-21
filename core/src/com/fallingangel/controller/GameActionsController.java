@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.AnimationSystem;
-import com.fallingangel.controller.system.BackgroundSystem;
 import com.fallingangel.controller.system.BoundsSystem;
 import com.fallingangel.controller.system.CoinSystem;
 import com.fallingangel.controller.system.CollisionSystem;
@@ -23,7 +22,7 @@ import com.fallingangel.controller.system.DroneSystem;
 import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -77,7 +76,7 @@ public class GameActionsController implements EventListener {
         //Setts the game as either multi player or single player
         this.isMultiplayer = isMultiplayer;
 
-        clickSound = Asset.clickSound;
+        clickSound = Assets.clickSound;
 
         // Sets the engine and world
         this.engine = mainController.engine;
@@ -89,7 +88,6 @@ public class GameActionsController implements EventListener {
         engine.addSystem(new DroneSystem());
         engine.addSystem(new DevilSystem());
         engine.addSystem(new MovementSystem());
-        engine.addSystem(new BackgroundSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new CollisionSystem(world));
         engine.addSystem(new RenderingSystem(game.batch,isMultiplayer));

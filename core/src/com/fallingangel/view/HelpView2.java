@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class HelpView2 extends ScreenAdapter {
 
@@ -48,7 +48,7 @@ public class HelpView2 extends ScreenAdapter {
 
     // Getter and setter for the next button
     public void setNextButton() {
-        this.nextButton = makeButton(Asset.help2BackgroundTexture, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
+        this.nextButton = makeButton(Assets.help2BackgroundTexture, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
     }
 
     public Button getNextButton(){

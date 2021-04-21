@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class GameView extends ScreenAdapter {
 
@@ -35,7 +35,7 @@ public class GameView extends ScreenAdapter {
 
     //getter and setter for the pause button
     public void setPauseButton() {
-        this.pauseButton = makeButton(Asset.pauseButton,Gdx.graphics.getWidth()*0.10f,Gdx.graphics.getWidth()*0.10f, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.91f);
+        this.pauseButton = makeButton(Assets.pauseButton,Gdx.graphics.getWidth()*0.10f,Gdx.graphics.getWidth()*0.10f, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.91f);
     }
 
     public Button getPauseButton(){

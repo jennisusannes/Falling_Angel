@@ -2,22 +2,18 @@ package com.fallingangel.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
-import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 import com.fallingangel.model.World;
 
 public class GameOverView extends ScreenAdapter {
@@ -44,7 +40,7 @@ public class GameOverView extends ScreenAdapter {
 
     // Getter and setter for the exit button
     public void setExitButton() {
-        this.exitButton = makeButton(Asset.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.exitButton = makeButton(Assets.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getExitButton(){
@@ -53,7 +49,7 @@ public class GameOverView extends ScreenAdapter {
 
     // Getter and setter for the play again button
     public void setPlayAgainButton() {
-        this.playAgainButton = makeButton(Asset.playAgainButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.18f, Gdx.graphics.getHeight() * 0.16f);
+        this.playAgainButton = makeButton(Assets.playAgainButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.18f, Gdx.graphics.getHeight() * 0.16f);
     }
 
     public Button getPlayAgainButton(){
@@ -91,10 +87,10 @@ public class GameOverView extends ScreenAdapter {
      */
 
     public void draw(){
-        this.font = Asset.font;
+        this.font = Assets.font;
         Gdx.input.setInputProcessor(stage);// Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.gameOverSingleBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
+        game.batch.draw(Assets.gameOverSingleBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());// Draws the sprite batch
         font.getData().setScale(8, 8);
         font.draw(game.batch, String.valueOf(World.score), Gdx.graphics.getWidth()*0.45f, Gdx.graphics.getHeight()*0.4f);
         game.batch.end();

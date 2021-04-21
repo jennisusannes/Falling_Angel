@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 import com.fallingangel.model.World;
 import com.fallingangel.view.HelpView1;
 import com.fallingangel.view.HelpView2;
@@ -42,7 +42,7 @@ public class MainController extends ClickListener {
 
     public MainController() {
         this.game = FallingAngel.getInstance();
-        clickSound = Asset.clickSound;
+        clickSound = Assets.clickSound;
 
         // Initializes engine and world
         this.engine = new Engine();
@@ -190,7 +190,7 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            setChosenCharacter(Asset.pigAnimation);
+            setChosenCharacter(Assets.pigAnimation);
             angel = "pig";
             return true;
         }
@@ -198,7 +198,7 @@ public class MainController extends ClickListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
-            setChosenCharacter(Asset.bunnyAnimation);
+            setChosenCharacter(Assets.bunnyAnimation);
             angel = "bunny";
             return true;
         }
@@ -206,8 +206,8 @@ public class MainController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            setGameBackground(Asset.heavenBackgroundTextureRegion);
-            setPauseBackground(Asset.heavenBackgroundPauseTextureRegion);
+            setGameBackground(Assets.heavenBackgroundTextureRegion);
+            setPauseBackground(Assets.heavenBackgroundPauseTextureRegion);
             this.gameActionsController = new GameActionsController(false);
             gameActionsController.setGameScreen(false);
             return true;
@@ -216,8 +216,8 @@ public class MainController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            setGameBackground(Asset.sunsetBackgroundTextureRegion);
-            setPauseBackground(Asset.sunsetBackgroundPauseTextureRegion);
+            setGameBackground(Assets.sunsetBackgroundTextureRegion);
+            setPauseBackground(Assets.sunsetBackgroundPauseTextureRegion);
             this.gameActionsController = new GameActionsController(false);
             gameActionsController.setGameScreen(false);
             return true;
@@ -226,8 +226,8 @@ public class MainController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            setGameBackground(Asset.hellBackgroundTextureRegion);
-            setPauseBackground(Asset.hellBackgroundPauseTextureRegion);
+            setGameBackground(Assets.hellBackgroundTextureRegion);
+            setPauseBackground(Assets.hellBackgroundPauseTextureRegion);
             this.gameActionsController = new GameActionsController(false);
             gameActionsController.setGameScreen(false);
             return true;

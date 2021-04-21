@@ -11,9 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
-import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class GameOverMultiPlayerView extends ScreenAdapter {
     //View for when the multiplayer game is over
@@ -45,12 +44,12 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
-        game.batch.draw(Asset.gameOverMultiBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(Assets.gameOverMultiBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
-            game.batch.draw(Asset.youWin, Gdx.graphics.getWidth()*0.5f - Asset.youWin.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
+            game.batch.draw(Assets.youWin, Gdx.graphics.getWidth()*0.5f - Assets.youWin.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
         else {
-            game.batch.draw(Asset.youLose, Gdx.graphics.getWidth()*0.5f - Asset.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
+            game.batch.draw(Assets.youLose, Gdx.graphics.getWidth()*0.5f - Assets.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
         // TODO: her er riktig str på tie text:) legge inn at det kaaaaaaaaaaaaaaaaaaaanskje kan bli uavgjort
         //game.batch.draw(Asset.tie, Gdx.graphics.getWidth()*0.5f - Asset.tie.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
@@ -90,7 +89,7 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
 
     // Getter and setter for the exit button
     public void setExitButton() {
-        this.exitButton = makeButton(Asset.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.exitButton = makeButton(Assets.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getExitButton(){

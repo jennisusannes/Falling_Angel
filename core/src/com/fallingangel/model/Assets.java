@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 
-public class Asset {
+public class Assets {
 
     // BACKGROUNDS
     public static Texture menuBackgroundTexture;

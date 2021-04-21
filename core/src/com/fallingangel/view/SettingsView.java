@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class SettingsView extends ScreenAdapter {
 
@@ -46,7 +46,7 @@ public class SettingsView extends ScreenAdapter {
 
     // Getters and setters for the buttons
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Assets.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -54,7 +54,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOnButton() {
-        this.musicOnButton = makeButton(Asset.musicOnButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.62f);
+        this.musicOnButton = makeButton(Assets.musicOnButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.62f);
     }
 
     public Button getMusicOnButton(){
@@ -62,7 +62,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setMusicOffButton() {
-        this.musicOffButton = makeButton(Asset.musicOffButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, -1000,-1000);
+        this.musicOffButton = makeButton(Assets.musicOffButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, -1000,-1000);
     }
 
     public Button getMusicOffButton(){
@@ -70,7 +70,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setBunnyButton() {
-        this.bunnyButton = makeButton(Asset.bunnyButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.25f);
+        this.bunnyButton = makeButton(Assets.bunnyButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight() * 0.25f);
     }
 
     public Button getBunnyButton() {
@@ -78,7 +78,7 @@ public class SettingsView extends ScreenAdapter {
     }
 
     public void setPigButton() {
-        this.pigButton = makeButton(Asset.pigButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.25f);
+        this.pigButton = makeButton(Assets.pigButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f, Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.25f);
     }
 
     public Button getPigButton() {
@@ -120,12 +120,12 @@ public class SettingsView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
+        game.batch.draw(Assets.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         if (isPig()) {
-            game.batch.draw(Asset.selected, Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f );
+            game.batch.draw(Assets.selected, Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f );
         }
         else {
-            game.batch.draw(Asset.selected, Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f);
+            game.batch.draw(Assets.selected, Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f);
         }
         game.batch.end();
         stage.draw(); // Draws the stage

@@ -39,7 +39,7 @@ public class World {
     public Entity plane;
     public Entity obstacle;
     private FallingAngel game;
-    private Animation<TextureRegion> character = Asset.pigAnimation;
+    private Animation<TextureRegion> character = Assets.pigAnimation;
 
     public static final int WORLD_STATE_RUNNING = 0;
 	public static final int WORLD_STATE_NEXT_LEVEL = 1;
@@ -86,7 +86,7 @@ public class World {
         Array<Entity> drones = new Array<Entity>();
         for (int i = 1; i <= 3; i++) {
             int low = Gdx.graphics.getWidth()/4;
-            int high = Gdx.graphics.getWidth() - Asset.droneTexture.getRegionWidth();
+            int high = Gdx.graphics.getWidth() - Assets.droneTexture.getRegionWidth();
             int randomX  = rand.nextInt(high-low) + low;
             drones.add(createDrone(randomX , -i * Gdx.graphics.getHeight() * 2));
         }
@@ -95,7 +95,7 @@ public class World {
         Array<Entity> devils = new Array<Entity>();
         for (int i = 1; i <= 3; i++) {
             int low = Gdx.graphics.getWidth()/4;
-            int high = Gdx.graphics.getWidth() - Asset.devilTexture.getRegionWidth();
+            int high = Gdx.graphics.getWidth() - Assets.devilTexture.getRegionWidth();
             int randomX  = rand.nextInt(high-low) + low;
             devils.add(createDevil(randomX , -i * Gdx.graphics.getHeight() * 5));
         }
@@ -109,7 +109,7 @@ public class World {
         //creating the obstacles that will be used
         Array<Entity> obstacles = new Array<Entity>();
         for (int i = 0; i <= 10; i++){
-            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth() - Asset.balloons.size), - i * Gdx.graphics.getHeight()/4));
+            obstacles.add(createObstacle(rand.nextInt(Gdx.graphics.getWidth() - Assets.balloons.size), - i * Gdx.graphics.getHeight()/4));
         }
 
     }
@@ -175,7 +175,7 @@ public class World {
 
         //add texture to the obstacle. At this point a random balloon is chosen.
         Random rand = new Random();
-        textureComponent.textureRegion = Asset.balloons.get(rand.nextInt(Asset.balloons.size));
+        textureComponent.textureRegion = Assets.balloons.get(rand.nextInt(Assets.balloons.size));
 
         //set the position
         transformComponent.pos.set(x, y, 1.0f);
@@ -209,7 +209,7 @@ public class World {
         planeEntity.add(textureComponent);
 
         //add texture to the obstacle.
-        textureComponent.textureRegion = Asset.droneTexture;
+        textureComponent.textureRegion = Assets.droneTexture;
 
         //add the position of the plane
         transformComponent.pos.set(x, y, 4.0f);
@@ -248,7 +248,7 @@ public class World {
         devilEntity.add(textureComponent);
 
         //add texture to the obstacle.
-        textureComponent.textureRegion = Asset.devilTexture;
+        textureComponent.textureRegion = Assets.devilTexture;
 
         //add the position of the plane
         transformComponent.pos.set(x, y, 4.0f);
@@ -314,7 +314,7 @@ public class World {
         coinEntity.add(boundsComponent);
 
         transformComponent.pos.set(x, y, 0.0f);
-        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Asset.coinAnimation);
+        animationComponent.animations.put(CoinComponent.STATE_NORMAL, Assets.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
 

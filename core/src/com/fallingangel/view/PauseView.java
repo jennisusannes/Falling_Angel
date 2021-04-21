@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class PauseView extends ScreenAdapter {
 
@@ -39,7 +39,7 @@ public class PauseView extends ScreenAdapter {
 
     // Getters and setters for the buttons
     public void setExitButton() {
-        this.exitButton = makeButton(Asset.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
+        this.exitButton = makeButton(Assets.exitButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getExitButton(){
@@ -47,7 +47,7 @@ public class PauseView extends ScreenAdapter {
     }
 
     public void setResumeButton() {
-        this.resumeButton = makeButton(Asset.resumeButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.18f, Gdx.graphics.getHeight() * 0.4f);
+        this.resumeButton = makeButton(Assets.resumeButton,Gdx.graphics.getWidth()*0.65f,Gdx.graphics.getHeight() * 0.1f, Gdx.graphics.getWidth()*0.18f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getResumeButton(){

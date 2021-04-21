@@ -5,17 +5,14 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.controller.MainController;
-import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
 
@@ -53,7 +50,7 @@ public class RenderingSystem extends IteratingSystem{
     public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
         //creates a new iteratingSystem for the entities with following components
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
-        this.gameBackground = Asset.heavenBackgroundTextureRegion;
+        this.gameBackground = Assets.heavenBackgroundTextureRegion;
 
         this.isMultiplayer = isMultiplayer;
 
@@ -129,7 +126,7 @@ public class RenderingSystem extends IteratingSystem{
         }
 
         //prints the updated score
-        BitmapFont font = Asset.font;
+        BitmapFont font = Assets.font;
         int scoreInt = (int) score;
         // TODO do it
         //this.game.FBI.updateScore((int)AngelComponent.SCORE);

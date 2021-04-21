@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class HelpView1 extends ScreenAdapter {
 
@@ -59,7 +59,7 @@ public class HelpView1 extends ScreenAdapter {
 
     //setter and getter for the back button
     public void setNextButton() {
-        this.nextButton = makeButton(Asset.help1BackgroundTexture, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
+        this.nextButton = makeButton(Assets.help1BackgroundTexture, Gdx.graphics.getWidth(),Gdx.graphics.getHeight(), 0, 0);
     }
 
     public Button getNextButton(){
@@ -73,7 +73,7 @@ public class HelpView1 extends ScreenAdapter {
 
         Gdx.input.setInputProcessor(stage); //sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.help1BackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
+        game.batch.draw(Assets.help1BackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //draws the sprite batch
         game.batch.end();
         stage.draw(); //draws the stage
     }

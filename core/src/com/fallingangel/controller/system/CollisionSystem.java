@@ -12,7 +12,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Rectangle;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 import com.fallingangel.model.World;
 
 import com.fallingangel.model.component.AngelComponent;
@@ -54,8 +54,8 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ImmutableArray<Entity> obstacles;
     private ImmutableArray<Entity> powerups;
 
-    private Sound coinSound = Asset.coinSound;
-    private Sound collisionSound = Asset.collisionSound;
+    private Sound coinSound = Assets.coinSound;
+    private Sound collisionSound = Assets.collisionSound;
 
 
     // om vi skal ha listener (lyd): public CollisionSystem(World world, CollisionListener listener)
@@ -107,7 +107,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             Rectangle rec = new Rectangle();
 
             rec.x = (int) obsBounds.rectangle.x;
-            rec.y = (int) (obsBounds.rectangle.y + Asset.balloons.first().getRegionHeight() * 1/2);
+            rec.y = (int) (obsBounds.rectangle.y + Assets.balloons.first().getRegionHeight() * 1/2);
             rec.width = (int) obsBounds.rectangle.width;
             rec.height = (int) obsBounds.rectangle.height * 1/2;
 

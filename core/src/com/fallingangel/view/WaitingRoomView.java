@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -18,7 +17,7 @@ import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class WaitingRoomView extends ScreenAdapter {
     //This view is the waiting room for the multiplayer game
@@ -54,8 +53,8 @@ public class WaitingRoomView extends ScreenAdapter {
         gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
-        game.batch.draw(Asset.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        game.batch.draw(Asset.waitingRoomTexture, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight()*0.65f, Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight()*0.15f);
+        game.batch.draw(Assets.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(Assets.waitingRoomTexture, Gdx.graphics.getWidth()*0.05f, Gdx.graphics.getHeight()*0.65f, Gdx.graphics.getWidth()*0.8f, Gdx.graphics.getHeight()*0.15f);
         game.batch.end();
         stage.addActor(backButton); // Adds the button as an actor to the stage
         stage.draw();
@@ -76,7 +75,7 @@ public class WaitingRoomView extends ScreenAdapter {
 
     // Getter and setter for the back button
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Assets.backButton,Gdx.graphics.getWidth()*0.35f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){

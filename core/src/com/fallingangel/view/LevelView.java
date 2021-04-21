@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class LevelView extends ScreenAdapter {
 
@@ -58,7 +58,7 @@ public class LevelView extends ScreenAdapter {
 
     // Getters and setters for the buttons
     public void setHeavenButton() {
-        this.heavenButton = makeButton(Asset.heavenButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.70f);
+        this.heavenButton = makeButton(Assets.heavenButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.70f);
     }
 
     public Button getHeavenButton(){
@@ -66,7 +66,7 @@ public class LevelView extends ScreenAdapter {
     }
 
     public void setSunsetButton() {
-        this.sunsetButton = makeButton(Asset.sunsetButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.45f);
+        this.sunsetButton = makeButton(Assets.sunsetButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.45f);
     }
 
     public Button getSunsetButton(){
@@ -74,7 +74,7 @@ public class LevelView extends ScreenAdapter {
     }
 
     public void setHellButton() {
-        this.hellButton = makeButton(Asset.hellButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.2f);
+        this.hellButton = makeButton(Assets.hellButton,Gdx.graphics.getWidth()*0.5f,Gdx.graphics.getHeight() * 0.2f, Gdx.graphics.getWidth()*0.25f, Gdx.graphics.getHeight() * 0.2f);
     }
 
     public Button getHellButton(){
@@ -82,7 +82,7 @@ public class LevelView extends ScreenAdapter {
     }
 
     public void setBackButton() {
-        this.backButton = makeButton(Asset.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
+        this.backButton = makeButton(Assets.backButton,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.1f, Gdx.graphics.getWidth()*0.3f, Gdx.graphics.getHeight() * 0.05f);
     }
 
     public Button getBackButton(){
@@ -92,7 +92,7 @@ public class LevelView extends ScreenAdapter {
     public void draw(){
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
-        game.batch.draw(Asset.levelBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
+        game.batch.draw(Assets.levelBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
         game.batch.end();
         stage.draw(); // Draws the stage
     }

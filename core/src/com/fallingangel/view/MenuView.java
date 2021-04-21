@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;
-import com.fallingangel.model.Asset;
+import com.fallingangel.model.Assets;
 
 public class MenuView extends ScreenAdapter {
 
@@ -63,7 +63,7 @@ public class MenuView extends ScreenAdapter {
     // Getters and setters for buttons
 
     public void setSinglePlayerButton() {
-        this.singlePlayerButton = makeButton(Asset.singlePlayerButton,Gdx.graphics.getWidth()*0.38f, Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.09f, Gdx.graphics.getHeight() * 0.4f);
+        this.singlePlayerButton = makeButton(Assets.singlePlayerButton,Gdx.graphics.getWidth()*0.38f, Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.09f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getSinglePlayerButton(){
@@ -71,7 +71,7 @@ public class MenuView extends ScreenAdapter {
     }
 
     public void setMultiPlayerButton() {
-        this.multiPlayerButton = makeButton(Asset.multiPlayerButton,Gdx.graphics.getWidth()*0.38f, Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.53f, Gdx.graphics.getHeight() * 0.4f);
+        this.multiPlayerButton = makeButton(Assets.multiPlayerButton,Gdx.graphics.getWidth()*0.38f, Gdx.graphics.getHeight()*0.15f, Gdx.graphics.getWidth()*0.53f, Gdx.graphics.getHeight() * 0.4f);
     }
 
     public Button getMultiPlayerButton(){
@@ -91,7 +91,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setHighscoreListButton() {
-        this.highscoreListButton = makeButton(Asset.highscorelistButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f,Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
+        this.highscoreListButton = makeButton(Assets.highscorelistButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f,Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getHighscoreListButton(){
@@ -100,7 +100,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setSettingsButton() {
-        this.settingsButton = makeButton(Asset.settingsButton,Gdx.graphics.getWidth()*0.12f,Gdx.graphics.getWidth()*0.12f,Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
+        this.settingsButton = makeButton(Assets.settingsButton,Gdx.graphics.getWidth()*0.12f,Gdx.graphics.getWidth()*0.12f,Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.9f);
     }
 
     public Button getSettingsButton(){
@@ -109,7 +109,7 @@ public class MenuView extends ScreenAdapter {
 
 
     public void setHelpButton() {
-        this.helpButton = makeButton(Asset.helpButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
+        this.helpButton = makeButton(Assets.helpButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
     }
 
     public Button getHelpButton(){
@@ -126,7 +126,7 @@ public class MenuView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage); // Sets the input processor
 
         game.batch.begin(); // Draw elements to Sprite Batch
-        game.batch.draw(Asset.menuBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
+        game.batch.draw(Assets.menuBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //Draws background photo
         game.batch.end();
         stage.draw(); // Draws the stage
     }
