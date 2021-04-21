@@ -20,8 +20,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public SpriteBatch batch;
 	public Music music;
 	public BitmapFont font;
-	//private Animation<TextureRegion> chosenCharacter;
-	//public Asset assets;
+
 
 	private FallingAngel(com.fallingangel.backend.FireBaseInterface fireBaseInterface){
 		FBI = fireBaseInterface;

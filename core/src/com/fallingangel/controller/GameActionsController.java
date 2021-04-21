@@ -50,6 +50,7 @@ public class GameActionsController implements EventListener {
 
     private Sound clickSound;
 
+    // THe three states of the game are represented with an integer
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
@@ -66,6 +67,7 @@ public class GameActionsController implements EventListener {
     //ASHLEY
     public Engine engine;
 
+    // Costructs the GameActionsController depending on whether the game is single player or multi player
     public GameActionsController(boolean isMultiplayer) {
         //Setts the game as the Singleton object Falling Angel
         this.game = FallingAngel.getInstance();
