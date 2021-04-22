@@ -27,6 +27,7 @@ public class Assets {
     public static Texture winner2BackgroundTexture;
 
     // Game backgrounds
+    public static TextureRegion heavenMultiplayerBackgroundTextureRegion;
     public static TextureRegion heavenBackgroundTextureRegion;
     public static TextureRegion sunsetBackgroundTextureRegion;
     public static TextureRegion hellBackgroundTextureRegion;
@@ -151,6 +152,8 @@ public class Assets {
 
 
         // Game backgrounds
+        Texture heavenMultiplayerBackgroundTexture = new Texture("backgrounds/level/level_heaven_multiplayer_score_background.png");
+        heavenMultiplayerBackgroundTextureRegion = new TextureRegion(heavenMultiplayerBackgroundTexture, 0, 0, heavenMultiplayerBackgroundTexture.getWidth(), heavenMultiplayerBackgroundTexture.getHeight());
         Texture heavenBackgroundTexture = new Texture("backgrounds/level/level_heaven_score_background.png");
         heavenBackgroundTextureRegion = new TextureRegion(heavenBackgroundTexture, 0, 0, heavenBackgroundTexture.getWidth(), heavenBackgroundTexture.getHeight());
         Texture sunsetBackgroundTexture = new Texture("backgrounds/level/level_sunset_score_background.png");

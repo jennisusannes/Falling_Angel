@@ -38,6 +38,11 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
+    public int getGameTie() {
+        return 0;
+    }
+
+    @Override
     public boolean gameWon() {
         return false;
     }

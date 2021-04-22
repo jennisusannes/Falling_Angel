@@ -50,7 +50,7 @@ public class RenderingSystem extends IteratingSystem{
     public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
         //creates a new iteratingSystem for the entities with following components
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
-        this.gameBackground = Assets.heavenBackgroundTextureRegion;
+        this.gameBackground = Assets.heavenMultiplayerBackgroundTextureRegion;
 
         this.isMultiplayer = isMultiplayer;
 
@@ -137,8 +137,6 @@ public class RenderingSystem extends IteratingSystem{
 
         if (isMultiplayer){
             String opponentScoreString = Integer.toString(this.game.FBI.getOpponentScore());
-            font.getData().setScale(4,4);
-            font.draw(sb, "Opponent: ",Gdx.graphics.getWidth()*0.87f,Gdx.graphics.getHeight()*0.981f);
             font.getData().setScale(8, 8);
             font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight()*0.981f);
         }

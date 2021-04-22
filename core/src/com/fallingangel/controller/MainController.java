@@ -27,7 +27,8 @@ public class MainController extends ClickListener {
     public HelpView1 helpView1 = new HelpView1();
     public HelpView2 helpView2 = new HelpView2();
     public HelpView3 helpView3 = new HelpView3();
-    public HighScoreListView highscorelistView = new HighScoreListView();
+    // Not fully implementet highscorelist
+    //public HighScoreListView highscorelistView = new HighScoreListView();
     public SettingsView settingsView = new SettingsView();
     public WaitingRoomView waitingRoomView;
     public LevelView levelView = new LevelView();
@@ -102,19 +103,9 @@ public class MainController extends ClickListener {
             game.setScreen(waitingRoomView);
             return true;
         }
+
+        // Not fully implementet highscorelist
         /*
-           else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            else;
-            game.setScreen(multiPlayerView);
-            multiPlayerView.connectToGameRoom();
-            return true;
-        }
-         */
-
-
         else if (event.getListenerActor().equals(menuView.getHighscoreListButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
@@ -122,6 +113,8 @@ public class MainController extends ClickListener {
             game.setScreen(highscorelistView);
             return true;
         }
+         */
+
         else if (event.getListenerActor().equals(menuView.getSettingsButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
@@ -129,6 +122,9 @@ public class MainController extends ClickListener {
             game.setScreen(settingsView);
             return true;
         }
+
+        // Not fully implementet highscorelist
+        /*
         else if (event.getListenerActor().equals(highscorelistView.getBackButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);
@@ -136,6 +132,8 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
+         */
+
         else if (event.getListenerActor().equals(settingsView.getBackButton())){
             if (game.soundOn()){
                 clickSound.play(0.2f);

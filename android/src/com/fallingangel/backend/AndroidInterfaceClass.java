@@ -28,6 +28,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int numUsersInRoom;
     private boolean gameIsOver = false;
     private boolean gameWon;
+    public int gameTie = 0;
     private ValueEventListener roomListener;
     private ValueEventListener scoreListener;
     private ValueEventListener gameIsOverListener;
@@ -160,6 +161,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return opponentScore;
     }
 
+    public int getGameTie(){
+        return gameTie;
+    }
+
     @Override
     public boolean gameWon() {
         gameWonListener = new ValueEventListener(){
@@ -178,11 +183,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         opponentFinalScore = mpd.getScore();
                     }
                 }
-                if(currentPlayerFinalScore >= opponentFinalScore){
-                    gameWon = true;
-                }else
-                    gameWon = false;
-                }
+                gameWon = currentPlayerFinalScore > opponentFinalScore;
+                if (currentPlayerFinalScore == opponentFinalScore) gameTie = 1;
+            }
+
 
 
 
