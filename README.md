@@ -15,18 +15,17 @@ This game is built with:
 * [Firebase Realtime Database](https://firebase.google.com/)
 
 
-# Installation and downloading
+# Initializating: Cloning, compiling and running the project
 In order to run the game, you will need Android Studio, or an other similar IDE. Intellij is also possible to use.
 You will need an android device or an emulator. Desktop will not work, as this project use Firebase DB.
 The android device or emulator will need API level 16 or higher, although it is recommended to have a higher API level than this for a proper rendering.
 If you do not have an android device, Android Studio come with the possibility to run the game on an emulator.
-When you have downloaded your chosen IDE and have a device ready, you can clone the project on github or download the zip.file. Open Android studios, choose
-"Open existing project". Navigate and choose the project file. Make sure the Gradle Build has finished building before running the application.
 
-
-### Getting started
-To run the game you will need to connect to an Android device, og create an android emulator.
-For further instructions, see following [User guide](https://developer.android.com/studio/run/managing-avds) from android.
+* Clone the project down to your repo by using ' git clone https://github.com/jennisusannes/Falling_Angel.git '. Alternatively, you can download and unwrap a zipped file into your repo.
+* Open the project in Android Studio. 
+* Set up your device or emulator with Android Studio.
+ For further instructions, see following [User guide](https://developer.android.com/studio/run/managing-avds) from android.
+* Wait until the gradle.build has finished before running the app.
 
 
 ### Developed by:
@@ -43,9 +42,6 @@ The project was planned with the following future updates:
 * High Score List
 * Power-Ups in the game mode
 
-
-
-### License
 
 
 ### Project Status
