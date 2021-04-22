@@ -16,17 +16,16 @@ This game is built with:
 
 
 # Installation and downloading
-In order to run the game, you will need Android Studio, or an other similar IDE. Intellij is also possible to use.  
-You will need an android device or an emulator. Desktop will not work, as this project use Firebase DB. 
-The android device or emulator will need API level 16 or higher, although it is recommended to have a higher API level than this for a proper rendering.
-If you do not have an android device, Android Studio come with the possibility to run the game on an emulator. 
-When you have downloaded your chosen IDE and have a device ready, you can clone the project on github or download the zip.file. Open Android studios, choose 
-"Open existing project". Navigate and choose the project file. Make sure the Gradle Build has finished building before running the application.
+In order to run the game, you will need an android device or an emulator. Desktop will not work, as this project use Firebase DB.
+If you do not have an android device, you can download an [emulator](https://developer.android.com/studio/run/managing-avds) through Android Studio. 
+The android device or emulator will need API level 16 or higher.
 
+* Clone the project down to your repo by using ' git clone https://github.com/jennisusannes/Falling_Angel.git '. 
+Alternatively, you can download and unwrap a zipped file into your repo.
+* Open the project in Android Studio. 
+* Set up your device or emulator  
+* Wait until the gradle.build has finished before running the app.
 
-### Getting started
-To run the game you will need to connect to an Android device, og create an android emulator. 
-For further instructions, see following [User guide](https://developer.android.com/studio/run/managing-avds) from android. 
 
 
 ### Developed by:
