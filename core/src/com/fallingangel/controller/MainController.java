@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 import com.fallingangel.model.World;
@@ -241,8 +242,11 @@ public class MainController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
-            game.FBI.destroyRoom();
             game.setScreen(menuView);
+            MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
+            game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
+            game.FBI.destroyRoom();
+            game.mc.waitingRoomView.multiPlayerData.setGameOver(false);
             return true;
         }
         else{
