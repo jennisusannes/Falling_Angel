@@ -102,6 +102,8 @@ public class GameActionsController implements EventListener {
         if (isMultiplayer){
             engine.addSystem(new MultiplayerSystem(1));
             engine.addSystem(new RenderingSystem(game.batch, true));
+
+
         }
         else{
             engine.addSystem(new RenderingSystem(game.batch, false));
@@ -259,7 +261,7 @@ public class GameActionsController implements EventListener {
 
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
-        MultiPlayerData mpd = FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData;
+        MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
         // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
         if (isMultiplayer){
             removeSystem();
@@ -320,7 +322,10 @@ public class GameActionsController implements EventListener {
             if (game.soundOn()){
                 clickSound.play(0.2f);
             }
+            game.FBI.destroyRoom();
             game.mc.setStartScreen();
+            MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
+            game.mc.waitingRoomView.multiPlayerData.setGameOver(false);
             return true;
         }
         else {

@@ -243,6 +243,7 @@ public class MainController extends ClickListener {
             if (game.soundOn()) {
                 clickSound.play(0.2f);
             }
+            game.FBI.destroyRoom();
             game.setScreen(menuView);
             return true;
         }

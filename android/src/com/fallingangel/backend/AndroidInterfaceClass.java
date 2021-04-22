@@ -28,6 +28,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int numUsersInRoom;
     private boolean gameIsOver;
     private boolean gameWon;
+    private ValueEventListener roomListener;
 
 
     public AndroidInterfaceClass(){
@@ -100,15 +101,19 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         rooms.child(roomName).addValueEventListener(scoreListener);
     }
 
+
+
     @Override
     public void numberOfUsersInRoom() {
-        ValueEventListener roomListener = new ValueEventListener() {
+        roomListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                numUsersInRoom = (int)dataSnapshot.getChildrenCount();
-                rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
+                if(!gameIsOver()) {
+                    numUsersInRoom = (int) dataSnapshot.getChildrenCount();
+                    rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
 
-                FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
+                    FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
+                }
             }
 
             @Override
@@ -234,6 +239,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public void destroyRoom() {
+        rooms.removeEventListener(roomListener);
         rooms.child(roomName).removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
