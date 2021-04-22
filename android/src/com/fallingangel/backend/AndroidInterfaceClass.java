@@ -29,7 +29,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private boolean gameIsOver;
     private boolean gameWon;
     private ValueEventListener roomListener;
-
+    private ValueEventListener scoreListener;
+    private ValueEventListener gameIsOverListener;
+    private ValueEventListener highScoreListener;
+    private ValueEventListener gameWonListener;
 
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -79,7 +82,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public void setOpponentScore() {
-        ValueEventListener scoreListener = new ValueEventListener() {
+        scoreListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -131,21 +134,23 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void updateScore(MultiPlayerData mpd) {
         this.getHighscoreFromDB();
-        rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
+        if(FallingAngel.getInstance().mc.gameActionsController.isMultiplayer) {
+            rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("error", e.toString());
-                    }
-                });
-        if (this.score > user.getHighScore()){
-            users.child(this.user.getUID()).child("highScore").setValue(this.score);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("error", e.toString());
+                        }
+                    });
+        }
+        if (mpd.getScore() > user.getHighScore()){
+            users.child(user.getUID()).child("highScore").setValue(this.score);
         }
     }
 
@@ -157,7 +162,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public boolean gameWon() {
-        ValueEventListener gameOverStatusListener = new ValueEventListener(){
+        gameWonListener = new ValueEventListener(){
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -186,13 +191,13 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
             }
         };
-        rooms.child(roomName).addValueEventListener(gameOverStatusListener);
+        rooms.child(roomName).addValueEventListener(gameWonListener);
         return gameWon;
     }
 
     @Override
     public boolean gameIsOver(){
-        ValueEventListener gameIsOverListener = new ValueEventListener() {
+        gameIsOverListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
@@ -215,7 +220,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     @Override
     public void getHighscoreFromDB(){
-        ValueEventListener highScoreListener = new ValueEventListener() {
+        highScoreListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -240,6 +245,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void destroyRoom() {
         rooms.removeEventListener(roomListener);
+        rooms.removeEventListener(scoreListener);
         rooms.child(roomName).removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

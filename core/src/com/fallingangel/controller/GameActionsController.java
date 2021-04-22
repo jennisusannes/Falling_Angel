@@ -261,13 +261,14 @@ public class GameActionsController implements EventListener {
 
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
-        MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
         // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
         if (isMultiplayer){
+            MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
             removeSystem();
             game.setScreen(gameOverMultiPlayerView);
             game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
             FallingAngel.getInstance().FBI.updateScore(mpd);
+            isMultiplayer = false;
         }
         else {
             removeSystem();
