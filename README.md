@@ -36,6 +36,13 @@ For further instructions, see following [User guide](https://developer.android.c
 * Jenni Susanne Skaara - [JenniSusanneSkaara](https://github.com/JenniSusanneSkaara)
 * Josefine Stiff Aamlid - [Jeaamlid](https://github.com/Jeaamlid)
 
+### Roadmap
+The project was planned with the following future updates:
+* Achievements 
+* High Score List
+* Power-Ups in the game mode
+
+
 
 ### License
 
