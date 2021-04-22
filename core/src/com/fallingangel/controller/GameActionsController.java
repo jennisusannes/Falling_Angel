@@ -115,6 +115,10 @@ public class GameActionsController implements EventListener {
 
     // Method for creating a new game, either singleplayer or multiplayer
     public void setGameScreen(Boolean multi) {
+        if (multi) {
+            // sette isGameOver metoden til jenni til false slik at man kan starte et nytt multi game
+            // du lurer på hvordan man kan hente isgameover metoden slik at man her kan få satt den til false
+        }
         this.gameView = new GameView(multi);
         game.setScreen(gameView);
     }

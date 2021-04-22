@@ -21,11 +21,10 @@ public class MenuView extends ScreenAdapter {
     private Stage stage;
     private MainController controller;
 
-    // buttons
+    // Buttons
     private Button singlePlayerButton;
     private Button multiPlayerButton;
-    //private Button achievementsButton;
-    private Button highscoreListButton;
+    //private Button highscoreListButton;
     private Button settingsButton;
     private Button helpButton;
 
@@ -42,14 +41,11 @@ public class MenuView extends ScreenAdapter {
         setMultiPlayerButton();
         stage.addActor(multiPlayerButton);
 
-        // Removed achievements
+        // Not fully implementet highscorelist
         /*
-        setAchievementsButton();
-        stage.addActor(achievementsButton);
-         */
-
         setHighscoreListButton();
         stage.addActor(highscoreListButton);
+        */
 
         setSettingsButton();
         stage.addActor(settingsButton);
@@ -88,7 +84,8 @@ public class MenuView extends ScreenAdapter {
     }
      */
 
-
+    // Not fully implementet highscorelist
+    /*
     public void setHighscoreListButton() {
         this.highscoreListButton = makeButton(Assets.highscorelistButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f,Gdx.graphics.getWidth()*0.33f - 200*0.67f, Gdx.graphics.getHeight() * 0.15f);
     }
@@ -96,6 +93,8 @@ public class MenuView extends ScreenAdapter {
     public Button getHighscoreListButton(){
         return highscoreListButton;
     }
+
+     */
 
 
     public void setSettingsButton() {
@@ -106,9 +105,14 @@ public class MenuView extends ScreenAdapter {
         return settingsButton;
     }
 
-
+/*
     public void setHelpButton() {
         this.helpButton = makeButton(Assets.helpButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
+    }
+
+ */
+    public void setHelpButton() {
+        this.helpButton = makeButton(Assets.helpButton,Gdx.graphics.getWidth()*0.12f, Gdx.graphics.getWidth()*0.12f, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.03f);
     }
 
     public Button getHelpButton(){

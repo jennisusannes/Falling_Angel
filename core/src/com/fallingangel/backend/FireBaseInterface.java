@@ -13,6 +13,7 @@ public interface FireBaseInterface {
     public void setOpponentScore();
     public void numberOfUsersInRoom();
     public int getOpponentScore();
+    public int getGameTie();
 
     public boolean gameWon();
     public boolean gameIsOver();
