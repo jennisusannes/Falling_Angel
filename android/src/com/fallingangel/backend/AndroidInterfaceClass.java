@@ -27,7 +27,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int opponentScore;
     private int numUsersInRoom;
     private boolean gameIsOver;
-    private String gameOverStatus = "";
+    private boolean gameWon;
 
 
     public AndroidInterfaceClass(){
@@ -151,31 +151,30 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     @Override
-    public String gameOverStatus() {
+    public boolean gameWon() {
         ValueEventListener gameOverStatusListener = new ValueEventListener(){
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int opponentFinalScore = 0;
                 int currentPlayerFinalScore = 0;
-                for (DataSnapshot ds:snapshot.getChildren()){
-                    String key= ds.getKey();
+                for (DataSnapshot ds:snapshot.getChildren()) {
+                    String key = ds.getKey();
                     MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
-                    if(key.equals(user.getUID())){
+                    if (key.equals(user.getUID())) {
                         currentPlayerFinalScore = mpd.getScore();
 
-                    } else{
-                        opponentScore = mpd.getScore();
-                    }
-                    if(currentPlayerFinalScore > opponentFinalScore){
-                        gameOverStatus = "gameWon";
-                    }else if(currentPlayerFinalScore < opponentFinalScore){
-                        gameOverStatus = "gameLost";
-                    }else{
-                        gameOverStatus = "gameTied";
+                    } else {
+                        opponentFinalScore = mpd.getScore();
                     }
                 }
-            }
+                if(currentPlayerFinalScore >= opponentFinalScore){
+                    gameWon = true;
+                }else
+                    gameWon = false;
+                }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -183,7 +182,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             }
         };
         rooms.child(roomName).addValueEventListener(gameOverStatusListener);
-        return gameOverStatus;
+        return gameWon;
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.fallingangel.backend.MultiPlayerData;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BoundsSystem;
@@ -258,10 +259,13 @@ public class GameActionsController implements EventListener {
 
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
+        MultiPlayerData mpd = FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData;
         // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
         if (isMultiplayer){
             removeSystem();
             game.setScreen(gameOverMultiPlayerView);
+            game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
+            FallingAngel.getInstance().FBI.updateScore(mpd);
         }
         else {
             removeSystem();

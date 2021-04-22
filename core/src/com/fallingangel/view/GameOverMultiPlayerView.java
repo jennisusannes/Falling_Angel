@@ -45,7 +45,7 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
         game.batch.draw(Assets.gameOverMultiBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        if (FallingAngel.getInstance().FBI.gameOverStatus().equals("gameWon")){
+        if (FallingAngel.getInstance().FBI.gameWon()){
             game.batch.draw(Assets.youWin, Gdx.graphics.getWidth()*0.5f - Assets.youWin.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
         else {
