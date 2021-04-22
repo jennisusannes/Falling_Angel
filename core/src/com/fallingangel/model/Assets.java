@@ -232,7 +232,7 @@ public class Assets {
         collisionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/game_over_sound.wav"));
         // Music from Zapsplat.com
         backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/background_music.mp3"));
-        backgroundMusic.setVolume(0.02f); // Sets volume of music
+        backgroundMusic.setVolume(0.2f); // Sets volume of music
         backgroundMusic.setLooping(true); // Music will continuously loop
 
         // TEXT
