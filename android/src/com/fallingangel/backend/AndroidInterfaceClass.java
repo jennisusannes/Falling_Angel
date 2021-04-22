@@ -244,7 +244,9 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void destroyRoom() {
         rooms.removeEventListener(roomListener);
-        rooms.removeEventListener(scoreListener);
+        if(gameIsOver){
+            rooms.removeEventListener(scoreListener);
+        }
         gameIsOver = false;
         rooms.child(roomName).removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
