@@ -26,7 +26,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int score;
     private int opponentScore;
     private int numUsersInRoom;
-    private boolean gameIsOver;
+    private boolean gameIsOver = false;
     private boolean gameWon;
     private ValueEventListener roomListener;
     private ValueEventListener scoreListener;
@@ -111,7 +111,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         roomListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!gameIsOver()) {
+                if(!FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData.isGameOver()) {
                     numUsersInRoom = (int) dataSnapshot.getChildrenCount();
                     rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
 
@@ -205,7 +205,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     if(mpd.isGameOver){
                         gameIsOver = true;
                     }
-
                 }
             }
             @Override
@@ -246,6 +245,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     public void destroyRoom() {
         rooms.removeEventListener(roomListener);
         rooms.removeEventListener(scoreListener);
+        gameIsOver = false;
         rooms.child(roomName).removeValue()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -281,6 +281,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         return generatedString;
     }
+
 
 
 }
