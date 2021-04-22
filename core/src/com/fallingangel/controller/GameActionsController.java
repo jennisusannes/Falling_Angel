@@ -51,7 +51,7 @@ public class GameActionsController implements EventListener {
 
     private Sound clickSound;
 
-    // THe three states of the game are represented with an integer
+    // The three states of the game are represented with an integer
     static final int GAME_RUNNING = 1;
     static final int GAME_PAUSED = 2;
     static final int GAME_OVER = 3;
@@ -68,15 +68,15 @@ public class GameActionsController implements EventListener {
     //ASHLEY
     public Engine engine;
 
-    // Costructs the GameActionsController depending on whether the game is single player or multi player
+    // Constructs the GameActionsController depending on whether the game is single player or multi player
     public GameActionsController(boolean isMultiplayer) {
-        //Setts the game as the Singleton object Falling Angel
+        // Sets the game as the Singleton object Falling Angel
         this.game = FallingAngel.getInstance();
 
-        //Setts the controller as the mainController
+        // Sets the controller as the mainController
         this.mainController = game.mc;
 
-        //Setts the game as either multi player or single player
+        // Sets the game as either multi player or single player
         this.isMultiplayer = isMultiplayer;
 
         clickSound = Assets.clickSound;
@@ -102,8 +102,6 @@ public class GameActionsController implements EventListener {
         if (isMultiplayer){
             engine.addSystem(new MultiplayerSystem(1));
             engine.addSystem(new RenderingSystem(game.batch, true));
-
-
         }
         else{
             engine.addSystem(new RenderingSystem(game.batch, false));
@@ -115,10 +113,6 @@ public class GameActionsController implements EventListener {
 
     // Method for creating a new game, either singleplayer or multiplayer
     public void setGameScreen(Boolean multi) {
-        if (multi) {
-            // sette isGameOver metoden til jenni til false slik at man kan starte et nytt multi game
-            // du lurer på hvordan man kan hente isgameover metoden slik at man her kan få satt den til false
-        }
         this.gameView = new GameView(multi);
         game.setScreen(gameView);
     }
@@ -137,7 +131,7 @@ public class GameActionsController implements EventListener {
             TransformComponent angelPosVector = transformMapper.get(angel);
             return angelPosVector;
         }
-        // returns an empty TransformComponent is no angel exists
+        // Returns an empty TransformComponent is no angel exists
         else{
             TransformComponent emptyTransformComponent = new TransformComponent();
             return emptyTransformComponent;
@@ -160,14 +154,12 @@ public class GameActionsController implements EventListener {
                 pause();
                 break;
             case GAME_OVER:
-                // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
                 gameOver();
                 break;
         }
     }
 
-
-    //Updates on what state the game is in
+    // Updates on what state the game is in
     public void updateRunning(float dt) {
 
         // Handle input, accelX is changed here and being set in AngelSystem
@@ -184,14 +176,12 @@ public class GameActionsController implements EventListener {
                     accelX = 10f;
                 }
             }
-            //spritePosition.set(Gdx.input.getX(), 0, 0));
         }
         engine.getSystem(AngelSystem.class).setAccelX(accelX);
 
-
         // Player dies
         if (world.state == World.WORLD_STATE_GAME_OVER) {
-            state = GAME_OVER; //setter state som GAME OVER
+            state = GAME_OVER; // Sets state to GAME OVER
             //TODO: gameOver()
             pauseSystem();
         }
@@ -219,8 +209,8 @@ public class GameActionsController implements EventListener {
         engine.getSystem(StateSystem.class).setProcessing(false);
         engine.getSystem(AnimationSystem.class).setProcessing(false);
         engine.getSystem(CollisionSystem.class).setProcessing(false);
-
     }
+
     // This method resumes all systems updating
     public void resumeSystem() {
         engine.getSystem(AngelSystem.class).setProcessing(true);
@@ -240,24 +230,24 @@ public class GameActionsController implements EventListener {
 
     // Method for pausing game
     public void pause() {
-        if (state == GAME_RUNNING) { //checks if the state is running
-            state = GAME_PAUSED; //sets the state to paused
+        if (state == GAME_RUNNING) { // Checks if the state is running
+            state = GAME_PAUSED; // Sets the state to paused
             pauseSystem();
         }
     }
 
     // Method for resuming game
     public void resume() {
-        if (state == GAME_PAUSED) { //checks if game is paused
-            state = GAME_RUNNING; //sets the state to running
+        if (state == GAME_PAUSED) { // Checks if game is paused
+            state = GAME_RUNNING; // Sets the state to running
             resumeSystem();
         }
     }
 
     // Method for exiting game
     public void exit() {
-        if (state == GAME_PAUSED) { //checks if game is paused
-            state = GAME_OVER; //sets the state to game over
+        if (state == GAME_PAUSED) { // Checks if game is paused
+            state = GAME_OVER; // Sets the state to game over
             pauseSystem();
             removeSystem();
         }
@@ -265,13 +255,12 @@ public class GameActionsController implements EventListener {
 
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
-        // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
         if (isMultiplayer){
             MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
             removeSystem();
             game.setScreen(gameOverMultiPlayerView);
             game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
-            FallingAngel.getInstance().FBI.updateScore(mpd);
+            game.FBI.updateScore(mpd);
             isMultiplayer = false;
         }
         else {

@@ -114,6 +114,14 @@ public class MainController extends ClickListener {
             game.setScreen(highscorelistView);
             return true;
         }
+
+        else if (event.getListenerActor().equals(highscorelistView.getBackButton())){
+            if (game.soundOn()){
+                clickSound.play(0.2f);
+            }
+            game.setScreen(menuView);
+            return true;
+        }
          */
 
         else if (event.getListenerActor().equals(menuView.getSettingsButton())){
@@ -123,17 +131,6 @@ public class MainController extends ClickListener {
             game.setScreen(settingsView);
             return true;
         }
-
-        // Not fully implementet highscorelist
-        /*
-        else if (event.getListenerActor().equals(highscorelistView.getBackButton())){
-            if (game.soundOn()){
-                clickSound.play(0.2f);
-            }
-            game.setScreen(menuView);
-            return true;
-        }
-         */
 
         else if (event.getListenerActor().equals(settingsView.getBackButton())){
             if (game.soundOn()){

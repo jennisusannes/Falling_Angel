@@ -15,12 +15,11 @@ import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 
 public class GameOverMultiPlayerView extends ScreenAdapter {
+
     //View for when the multiplayer game is over
-
-    FallingAngel game;
-    GameActionsController gameActionsController;
-    Stage stage;
-
+    private FallingAngel game;
+    private GameActionsController gameActionsController;
+    private Stage stage;
     private Button exitButton;
 
     public GameOverMultiPlayerView(){

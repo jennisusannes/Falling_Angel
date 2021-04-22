@@ -17,9 +17,9 @@ import static android.content.ContentValues.TAG;
 
 public class AndroidInterfaceClass implements FireBaseInterface {
 
-    FirebaseDatabase database;
-    DatabaseReference users;
-    DatabaseReference rooms;
+    public FirebaseDatabase database;
+    public DatabaseReference users;
+    public DatabaseReference rooms;
 
     private String roomName;
     private User user;
@@ -28,7 +28,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int numUsersInRoom;
     private boolean gameIsOver = false;
     private boolean gameWon;
-    public int gameTie = 0;
+    private int gameTie = 0;
     private ValueEventListener roomListener;
     private ValueEventListener scoreListener;
     private ValueEventListener gameIsOverListener;
@@ -183,12 +183,15 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         opponentFinalScore = mpd.getScore();
                     }
                 }
-                gameWon = currentPlayerFinalScore > opponentFinalScore;
-                if (currentPlayerFinalScore == opponentFinalScore) gameTie = 1;
+                if (currentPlayerFinalScore >= opponentFinalScore) {
+                    if (currentPlayerFinalScore == opponentFinalScore) {
+                        gameTie = 1;
+                    }
+                    if (currentPlayerFinalScore > opponentFinalScore) {
+                        gameWon = true;
+                    }
+                } else gameWon = false;
             }
-
-
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
