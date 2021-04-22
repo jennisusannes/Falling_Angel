@@ -38,9 +38,10 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public String gameOverStatus() {
-        return null;
+    public boolean gameWon() {
+        return false;
     }
+
 
     @Override
     public boolean gameIsOver() {

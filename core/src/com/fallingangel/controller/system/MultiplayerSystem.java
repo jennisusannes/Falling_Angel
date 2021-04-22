@@ -63,9 +63,9 @@ public class MultiplayerSystem extends IntervalSystem {
 
             MultiPlayerData mpd = FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData;
             mpd.score = (int) (angelComponent.SCORE);
-            if (stateComponent.state == angelComponent.STATE_HIT){
+            /*if (stateComponent.state == angelComponent.STATE_HIT){
                 mpd.setGameOver(true);
-            }
+            }*/
             FallingAngel.getInstance().FBI.updateScore(mpd);
             FallingAngel.getInstance().FBI.setOpponentScore();
         }
