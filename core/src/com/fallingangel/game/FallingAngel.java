@@ -40,9 +40,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		return INSTANCE;
 	}
 
-	public boolean soundOn(){
-		return music.isPlaying();
-	}
 
 
 	@Override

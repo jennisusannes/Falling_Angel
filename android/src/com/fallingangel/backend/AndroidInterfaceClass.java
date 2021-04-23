@@ -1,5 +1,6 @@
 package com.fallingangel.backend;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.MultiPlayerData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;

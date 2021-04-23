@@ -31,15 +31,29 @@ public class SettingsView extends ScreenAdapter {
         this.game = FallingAngel.getInstance(); // Sets the game as the game singleton object from the FallingAngel class
         this.controller = game.mc; // Sets the controller as the main controller
         stage = new Stage(new ScreenViewport()); // Sets the stage as a new stage and a new viewport
-        Gdx.input.setInputProcessor(stage); // Sets input processor
-        setBackButton(); // Creates a button
-        stage.addActor(backButton); // Adds the button as an actor to the stage
+
+        // Sets input processor
+        Gdx.input.setInputProcessor(stage);
+
+        // Creates a back button
+        setBackButton(); // Creates a back button
+
+        // Adds the button as an actor to the stage
+        stage.addActor(backButton);
+
+        // Creates on and off buttons for the music
         setMusicOnButton();
         setMusicOffButton();
+
+        // Adds the buttons as actors to the stage
         stage.addActor(musicOnButton);
         stage.addActor(musicOffButton);
+
+        //Creates buttons for choosing either bunny or pig as the angel
         setBunnyButton();
         setPigButton();
+
+        // Adds the buttons as actors to the stage
         stage.addActor(bunnyButton);
         stage.addActor(pigButton);
     }
@@ -85,23 +99,6 @@ public class SettingsView extends ScreenAdapter {
         return pigButton;
     }
 
-    public boolean isPig(){
-        this.controller = game.mc;
-        return controller.angel.equals("pig");
-    }
-
-    /*
-    public Button rightSoundButton(){
-        if (game.music.isPlaying()) {
-            return musicOnButton;
-        }
-        else {
-            return musicOffButton;
-        }
-    }
-
-     */
-
     // Method for creating a button, this will add the MainController as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
@@ -121,14 +118,21 @@ public class SettingsView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
         game.batch.draw(Assets.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
-        if (isPig()) {
+
+        // Draws a green square around the chosen character
+        this.controller = game.mc;
+        if (controller.isPig()) {
             game.batch.draw(Assets.selected, Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f );
         }
         else {
             game.batch.draw(Assets.selected, Gdx.graphics.getWidth()*0.05f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f);
         }
+
+        // stops drawing the sprite batch
         game.batch.end();
-        stage.draw(); // Draws the stage
+
+        // Draws the stage
+        stage.draw();
     }
 
     public void update(float dt) {

@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.RoomInputListener;
 import com.fallingangel.NameInputListener;
-import com.fallingangel.backend.MultiPlayerData;
+import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.game.FallingAngel;

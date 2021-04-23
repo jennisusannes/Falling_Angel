@@ -1,14 +1,10 @@
 package com.fallingangel.backend;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.fallingangel.model.MultiPlayerData;
 
 public interface FireBaseInterface {
     public void createUser();
-    public void updateScore(MultiPlayerData mpd );
+    public void updateScore(com.fallingangel.model.MultiPlayerData mpd );
     public void connectToRoom(String roomName, MultiPlayerData mpd);
     public void setOpponentScore();
     public void numberOfUsersInRoom();

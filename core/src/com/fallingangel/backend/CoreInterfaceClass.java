@@ -1,9 +1,6 @@
 package com.fallingangel.backend;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
-
-import java.util.HashMap;
+import com.fallingangel.model.MultiPlayerData;
 
 public class CoreInterfaceClass implements FireBaseInterface{
 
@@ -13,7 +10,7 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void updateScore(MultiPlayerData mpd) {
+    public void updateScore(com.fallingangel.model.MultiPlayerData mpd) {
 
     }
 
