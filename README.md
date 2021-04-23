@@ -12,15 +12,21 @@ You will need an android device or an emulator. Desktop will not work, as this p
 The android device or emulator will need API level 16 or higher, although it is recommended to have a higher API level than this for a proper rendering.
 If you do not have an android device, Android Studio come with the possibility to run the game on an emulator.
 
-* Clone the project down to your repo by using ' git clone https://github.com/jennisusannes/Falling_Angel.git '. Alternatively, you can download and unwrap a zipped file into your repo.
+* Clone the project down to your repo by using ```java
+                                               git clone https://github.com/jennisusannes/Falling_Angel.git
+                                               ```
+                                               or by downloading a .zip-file
 * Open the project in Android Studio. 
 * Set up your device or emulator with Android Studio.
- For further instructions, see following [User guide](https://developer.android.com/studio/run/managing-avds) from android.
-* Wait until the gradle.build has finished before running the app.
+ For instructions on setting up your device, use this [user guide](https://developer.android.com/studio/run/managing-avds) for setting up emulator or this [user guide](https://developer.android.com/studio/run/device) for setting up device.
+* Make sure the gradle.build has finished before running the app.
 
 # Demo / user manual
 
+Fly as long as possible. 
+Avoid the ballons and the other flying obstacles, but make sure to get the coins! The coins are worth 10p. 
 ![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
+
 
 ### Developed by:
 * [Ingeborg Wilsher](https://github.com/Ingebwi)   
