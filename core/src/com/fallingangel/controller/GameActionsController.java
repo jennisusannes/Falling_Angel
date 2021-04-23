@@ -24,6 +24,7 @@ import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
+import com.fallingangel.model.SettingsModel;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -35,19 +36,13 @@ import com.fallingangel.view.GameView;
 import com.fallingangel.view.PauseView;
 
 public class GameActionsController implements EventListener {
-    /*TODO:
-    setter hvilken character som er valgt i settings og setter den characteren i world
-    denne her opprettes kun etter at spillet er trykket på play
-    styrer om spillet er på pause eller i spill
-    holde styr på valgt level
-    håndterer skiftet til gameoverview når man dør
-     */
     public FallingAngel game;
     public GameView gameView;
     public PauseView pauseView = new PauseView();
     public GameOverView gameOverView = new GameOverView();
     public GameOverMultiPlayerView gameOverMultiPlayerView = new GameOverMultiPlayerView();
     public MainController mainController;
+    public SettingsModel settingsModel;
 
     private Sound clickSound;
 
@@ -84,6 +79,8 @@ public class GameActionsController implements EventListener {
         // Sets the engine and world
         this.engine = mainController.engine;
         this.world = mainController.world;
+
+        this.settingsModel = mainController.settingsModel;
 
         // Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
@@ -182,7 +179,6 @@ public class GameActionsController implements EventListener {
         // Player dies
         if (world.state == World.WORLD_STATE_GAME_OVER) {
             state = GAME_OVER; // Sets state to GAME OVER
-            //TODO: gameOver()
             pauseSystem();
         }
 
@@ -273,39 +269,45 @@ public class GameActionsController implements EventListener {
     // Game controller listens to buttons in the different views and changes between views
     // Checks if sound is on and then plays click sound when button is clicked
     public boolean handle(Event event) {
+
+        // Pauses the game if the pause button is pressed
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             pause();
             game.setScreen(pauseView);
             return true;
         }
+
+        // Resumes the game if the resume button is pressed
         else if (event.getListenerActor().equals(pauseView.getResumeButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             resume();
             game.setScreen(gameView);
             return true;
         }
+        // Exits the game if the exit button is pressed
         else if (event.getListenerActor().equals(pauseView.getExitButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             exit();
             game.mc.setStartScreen();
             return true;
         }
+        // Exits the gameOverView
         else if (event.getListenerActor().equals(gameOverView.getExitButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             game.mc.setStartScreen();
             return true;
         }
         else if (event.getListenerActor().equals(gameOverView.getPlayAgainButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             game.mc.gameActionsController = new GameActionsController(false);
@@ -313,7 +315,7 @@ public class GameActionsController implements EventListener {
             return true;
         }
         else if (event.getListenerActor().equals(gameOverMultiPlayerView.getExitButton())){
-            if (game.soundOn()){
+            if (settingsModel.soundOn()){
                 clickSound.play(0.2f);
             }
             game.FBI.destroyRoom();
