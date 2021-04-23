@@ -298,7 +298,7 @@ public class GameActionsController implements EventListener {
             game.mc.setStartScreen();
             return true;
         }
-        // Exits the gameOverView
+        // Exits the gameOverView and sets the menuView
         else if (event.getListenerActor().equals(gameOverView.getExitButton())) {
             if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
@@ -306,6 +306,7 @@ public class GameActionsController implements EventListener {
             game.mc.setStartScreen();
             return true;
         }
+        // Starts a new game on the same level
         else if (event.getListenerActor().equals(gameOverView.getPlayAgainButton())) {
             if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
@@ -314,6 +315,7 @@ public class GameActionsController implements EventListener {
             game.mc.gameActionsController.setGameScreen(false);
             return true;
         }
+        // Exits the gameOverMultiPlayerView and sets the menuView
         else if (event.getListenerActor().equals(gameOverMultiPlayerView.getExitButton())){
             if (settingsModel.soundOn()){
                 clickSound.play(0.2f);

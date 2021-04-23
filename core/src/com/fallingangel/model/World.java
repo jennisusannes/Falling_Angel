@@ -57,17 +57,12 @@ public class World {
     public void setChosenCharacter(Animation<TextureRegion> chosenCharacter) {
         this.character = chosenCharacter;
     }
-
-    public Animation<TextureRegion> getChosenCharacter() {
-        return character;
-    }
+    
 
     //main method that creates the world
     public void create(){
         this.state = WORLD_STATE_RUNNING;
         this.angel = createAngel();
-        //this.background = createBackground();
-        //generateObjects();
 
 
         //creating the drones

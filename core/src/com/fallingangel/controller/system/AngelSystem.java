@@ -5,17 +5,11 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.math.Vector3;
-import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;
-import com.fallingangel.model.component.ObstacleComponent;
 import com.fallingangel.model.component.StateComponent;
-import com.fallingangel.model.component.TextureComponent;
 import com.fallingangel.model.component.TransformComponent;
-import com.fallingangel.view.GameView;
 
 
 public class AngelSystem extends IteratingSystem {
@@ -108,7 +102,8 @@ public class AngelSystem extends IteratingSystem {
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
     }
 
-    //will be used when powerups are implemented
+    // Will be used when powerups are implemented
+    /*
     public void hitPowerUp(Entity entity){
         if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
 
@@ -116,5 +111,7 @@ public class AngelSystem extends IteratingSystem {
 
         //what should happen when the angel hits a powerup
     }
+
+     */
 
 }
