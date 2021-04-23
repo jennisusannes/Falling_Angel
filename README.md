@@ -5,7 +5,7 @@ This is a project for TDT4240 - Software architecture by group 11. The objective
 # Demo / user manual
 
 * pictures here
-![alt text](https://user-images.githubusercontent.com/72627273/115854337-6da45500-a42a-11eb-993d-24e59694562d.gif)
+![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
 
 
 # Technology and frameworks 
@@ -30,12 +30,12 @@ If you do not have an android device, Android Studio come with the possibility t
 
 
 ### Developed by:
-* Ingeborg Wilsher - [Ingebwi](https://github.com/Ingebwi)   
-* Ingrid Renolen Borkenhagen - [Ingrirbo](https://github.com/ingrirbo)
-* Sofie Sunde - [Sofiesunde](https://github.com/sofiesunde)
-* Jenni Sveen Olsen -  [Jenniolsen](https://github.com/jenniolsen)
-* Jenni Susanne Skaara - [JenniSusanneSkaara](https://github.com/JenniSusanneSkaara)
-* Josefine Stiff Aamlid - [Jeaamlid](https://github.com/Jeaamlid)
+* [Ingeborg Wilsher](https://github.com/Ingebwi)   
+* [Ingrid Renolen Borkenhagen](https://github.com/ingrirbo)
+* [Sofie Sunde](https://github.com/sofiesunde)
+* [Jenni Sveen Olsen](https://github.com/jenniolsen)
+* [Jenni Susanne Skaara](https://github.com/JenniSusanneSkaara)
+* [Josefine Stiff Aamlid](https://github.com/Jeaamlid)
 
 ### Roadmap
 The project was planned with the following future updates:
