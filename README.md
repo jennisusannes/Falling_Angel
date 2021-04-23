@@ -5,6 +5,7 @@ This is a project for TDT4240 - Software architecture by group 11. The objective
 # Demo / user manual
 
 * pictures here
+![alt text](https://user-images.githubusercontent.com/72627273/115854337-6da45500-a42a-11eb-993d-24e59694562d.gif)
 
 
 # Technology and frameworks 
