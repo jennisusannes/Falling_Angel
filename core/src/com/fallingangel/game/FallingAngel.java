@@ -5,7 +5,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import com.fallingangel.backend.FireBaseInterface;
 import com.fallingangel.controller.MainController;
 import com.fallingangel.model.Assets;
@@ -22,19 +21,12 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public BitmapFont font;
 
 
+
 	private FallingAngel(com.fallingangel.backend.FireBaseInterface fireBaseInterface){
 		FBI = fireBaseInterface;
 	}
 
-	/**
-	 * SINGLETON IMPLEMENTATION OF THE GAME APPLICATION
-	 * ALLOWS FOR ANDROID LAUNCHER TO INSTANTIATE THE FALLING ANGEL CLASS
-	 * @param fireBaseInterface: CONNECTION TO FIREBASE THROUGH AN INTERFACE
-	 * @return FALLING ANGEL INSTANCE
-	 */
-
-	// TODO: MÅ sjekke om denne metoden faktisk implementerer singleton,
-	// endret nemlig INSTANCE fra static final til bare final
+	// Getter method to connect FallingAngel to AndroidLauncher and FireBase
 	public static FallingAngel getInstance(FireBaseInterface fireBaseInterface) {
 		if (INSTANCE == null){
 			INSTANCE = new FallingAngel(fireBaseInterface);
@@ -42,7 +34,8 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		return INSTANCE;
 	}
 
-	// Getter method for the Singleton object of FallingAngel
+	// The "game object" was originally implemented as Singleton and is therefore called with getInstance() throughout the code
+	// Getter method to connect FallingAngel to game logic
 	public static FallingAngel getInstance() {
 		return INSTANCE;
 	}

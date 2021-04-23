@@ -20,27 +20,21 @@ import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 
 public class WaitingRoomView extends ScreenAdapter {
-    //This vigew is the waiting room for the multiplayer game
 
-    //TextField textField;
-    Stage stage;
-    //MainController controller;
-    GameActionsController gameActionsController;
-    MainController mainController;
-
-    //Texture readyTexture;
-    //public Button readyButton;
+    private Stage stage;
+    private GameActionsController gameActionsController;
+    private MainController mainController;
     private Button backButton;
-
     public String roomNumber;
     public MultiPlayerData multiPlayerData;
-    public FallingAngel game = FallingAngel.getInstance();
+    private FallingAngel game;
 
     RoomInputListener roomListener;
     NameInputListener nameListener;
     boolean alreadyConnected = false;
 
     public WaitingRoomView() {
+        this.game = FallingAngel.getInstance();
         this.gameActionsController = game.mc.gameActionsController;
         this.mainController = game.mc;
         stage = new Stage(new ScreenViewport());
