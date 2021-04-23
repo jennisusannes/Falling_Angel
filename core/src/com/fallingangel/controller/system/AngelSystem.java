@@ -100,7 +100,7 @@ public class AngelSystem extends IteratingSystem {
         state.set(AngelComponent.STATE_HIT); //the state is changed to hit
     }
 
-    public void hitPlane(Entity entity){
+    public void hitDrone(Entity entity){
         if (!family.matches(entity)) return; //to be sure that the entity matches the family requirements
 
         StateComponent state = state_mapper.get(entity); //to get the updated components for this entity
