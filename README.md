@@ -2,18 +2,8 @@
 This is a project for TDT4240 - Software architecture by group 11. The objective of this project is to develop a game, designed using methods and patterns from the course. 
 
 
-# Demo / user manual
-
-* pictures here
-![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
 
 
-# Technology and frameworks 
-This game is built with: 
-* Android Studio (Android SDK)
-* [LibGDX](https://github.com/libgdx/libgdx/wiki)
-* [Ashely ECS](https://github.com/libgdx/ashley/wiki) 
-* [Firebase Realtime Database](https://firebase.google.com/)
 
 
 # Initializating: Cloning, compiling and running the project
@@ -28,6 +18,9 @@ If you do not have an android device, Android Studio come with the possibility t
  For further instructions, see following [User guide](https://developer.android.com/studio/run/managing-avds) from android.
 * Wait until the gradle.build has finished before running the app.
 
+# Demo / user manual
+
+![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
 
 ### Developed by:
 * [Ingeborg Wilsher](https://github.com/Ingebwi)   
@@ -37,12 +30,18 @@ If you do not have an android device, Android Studio come with the possibility t
 * [Jenni Susanne Skaara](https://github.com/JenniSusanneSkaara)
 * [Josefine Stiff Aamlid](https://github.com/Jeaamlid)
 
+# Technology and frameworks 
+This game is built with: 
+* Android Studio (Android SDK)
+* [LibGDX](https://github.com/libgdx/libgdx/wiki)
+* [Ashely ECS](https://github.com/libgdx/ashley/wiki) 
+* [Firebase Realtime Database](https://firebase.google.com/)
+
 ### Roadmap
 The project was planned with the following future updates:
 * Achievements 
 * High Score List
 * Power-Ups in the game mode
-
 
 
 ### Project Status
