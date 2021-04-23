@@ -79,6 +79,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         };
         rooms.child(room.getRoomName()).addValueEventListener(roomListener);
+        return room.isRoomReady();
     }
 
 

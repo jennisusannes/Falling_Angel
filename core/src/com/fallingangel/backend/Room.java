@@ -1,5 +1,7 @@
 package com.fallingangel.backend;
 
+import com.fallingangel.model.MultiPlayerData;
+
 import java.util.ArrayList;
 
 public class Room {

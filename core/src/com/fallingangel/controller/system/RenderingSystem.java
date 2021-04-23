@@ -136,7 +136,7 @@ public class RenderingSystem extends IteratingSystem{
         font.draw(sb, scoreString, Gdx.graphics.getWidth()*0.3f,Gdx.graphics.getHeight()*0.981f);
 
         if (isMultiplayer){
-            String opponentScoreString = Integer.toString(this.game.FBI.getOpponentScore());
+            String opponentScoreString = Integer.toString(this.game.FBI.getRoom().getPlayer2().getScore());
             font.getData().setScale(8, 8);
             font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight()*0.981f);
         }

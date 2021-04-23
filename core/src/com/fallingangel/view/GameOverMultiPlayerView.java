@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.fallingangel.controller.GameActionsController;
+import com.fallingangel.controller.MultiplayerController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 
@@ -19,12 +20,14 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
     //View for when the multiplayer game is over
     private FallingAngel game;
     private GameActionsController gameActionsController;
+    private MultiplayerController multiplayerController;
     private Stage stage;
     private Button exitButton;
 
     public GameOverMultiPlayerView(){
         game = FallingAngel.getInstance();
         this.gameActionsController = game.mc.gameActionsController;
+        this.multiplayerController = game.mc.gameActionsController.multiplayerController;
         stage = new Stage(new ScreenViewport());
         setExitButton();
     }
@@ -33,13 +36,11 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
         game.batch.draw(Assets.gameOverMultiBackgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        if (game.FBI.getGameTie() != 1) {
-            if (game.FBI.gameWon()){
-                game.batch.draw(Assets.youWin, Gdx.graphics.getWidth()*0.5f - Assets.youWin.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
-            }
-            else {
-                game.batch.draw(Assets.youLose, Gdx.graphics.getWidth()*0.5f - Assets.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
-            }
+        if (multiplayerController.getWinnerStatus() == 1) {
+            game.batch.draw(Assets.youWin, Gdx.graphics.getWidth()*0.5f - Assets.youWin.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
+        }
+        else if (multiplayerController.getWinnerStatus() == 2) {
+            game.batch.draw(Assets.youLose, Gdx.graphics.getWidth()*0.5f - Assets.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
         else {
             game.batch.draw(Assets.tie, Gdx.graphics.getWidth()*0.5f - Assets.tie.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);

@@ -6,7 +6,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 import com.fallingangel.model.SettingsModel;
@@ -34,6 +33,7 @@ public class MainController extends ClickListener {
     public WaitingRoomView waitingRoomView;
     public LevelView levelView = new LevelView();
     public GameActionsController gameActionsController;
+    public MultiplayerController multiplayerController;
     protected World world;
     protected Engine engine;
     public String angel;
@@ -95,9 +95,9 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             this.gameActionsController = new GameActionsController(true);
-            this.waitingRoomView = new WaitingRoomView();
-            waitingRoomView.connectToGameRoom();
-            game.setScreen(waitingRoomView);
+            //multiplayerController.connectToGameRoom();
+            //this.waitingRoomView = new WaitingRoomView();
+            //game.setScreen(waitingRoomView);
             return true;
         }
 
@@ -237,10 +237,14 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             game.setScreen(menuView);
+            game.FBI.leaveRoom();
+            /*
             MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
             game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
             game.FBI.destroyRoom();
             game.mc.waitingRoomView.multiPlayerData.setGameOver(false);
+
+             */
             return true;
         }
         else{

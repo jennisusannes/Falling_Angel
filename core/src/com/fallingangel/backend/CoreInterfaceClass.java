@@ -5,13 +5,8 @@ import com.fallingangel.model.MultiPlayerData;
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
-    public void createUser() {
-
-    }
-
-    @Override
-    public void updateScore(com.fallingangel.model.MultiPlayerData mpd) {
-
+    public boolean isRoomReady() {
+        return false;
     }
 
     @Override
@@ -20,45 +15,27 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void setOpponentScore() {
+    public void leaveRoom() {
 
     }
 
-
     @Override
-    public void numberOfUsersInRoom() {
+    public void update(MultiPlayerData player1) {
+
     }
 
     @Override
-    public int getOpponentScore() {
-        return 0;
-    }
-
-    @Override
-    public int getGameTie() {
-        return 0;
-    }
-
-    @Override
-    public boolean gameWon() {
-        return false;
-    }
-
-
-    @Override
-    public boolean gameIsOver() {
+    public boolean gameOver() {
         return false;
     }
 
     @Override
-    public void getHighscoreFromDB() {
+    public void createUser() {
 
     }
 
     @Override
-    public void destroyRoom() {
-
+    public Room getRoom() {
+        return null;
     }
-
-
 }

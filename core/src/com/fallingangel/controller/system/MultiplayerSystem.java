@@ -15,8 +15,8 @@ import com.fallingangel.model.component.TransformComponent;
 import java.util.ArrayList;
 
 public class MultiplayerSystem extends IntervalSystem {
-    //System used to update the score in the database while playing a multiplayer game
-
+    // System used to update the score in the database while playing a multiplayer game
+    private FallingAngel game;
     public static String roomNumber = "";
     public Engine engine;
 
@@ -32,13 +32,14 @@ public class MultiplayerSystem extends IntervalSystem {
 
     @Override
     public void addedToEngine(final Engine engine) {
+        this.game = FallingAngel.getInstance();
         this.engine = engine;
         Family family = Family.all(AngelComponent.class).get();
         for (Entity entity : engine.getEntitiesFor(family)){
             playerEntities.add(entity);
         }
 
-        //adds an entitylistener so that it gets notifyed when an entity is removed
+        // Adds an entitylistener so that it gets notified when an entity is removed
         engine.addEntityListener(family, new EntityListener() {
             @Override
             public void entityAdded(Entity entity) {
@@ -53,7 +54,6 @@ public class MultiplayerSystem extends IntervalSystem {
         });
     }
 
-
     @Override
     protected void updateInterval () {
         for (Entity entity : playerEntities){
@@ -61,13 +61,9 @@ public class MultiplayerSystem extends IntervalSystem {
             TransformComponent transformComponent = transformMapper.get(entity);
             StateComponent stateComponent = stateMapper.get(entity);
 
-            MultiPlayerData mpd = FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData;
-            mpd.score = (int) (angelComponent.SCORE);
-            /*if (stateComponent.state == angelComponent.STATE_HIT){
-                mpd.setGameOver(true);
-            }*/
-            FallingAngel.getInstance().FBI.updateScore(mpd);
-            FallingAngel.getInstance().FBI.setOpponentScore();
+            MultiPlayerData player1 = game.mc.multiplayerController.multiPlayerData;
+            player1.setScore((int) (angelComponent.SCORE));
+            game.FBI.update(player1);
         }
     }
 }
