@@ -145,7 +145,6 @@ public class World {
 
         //create new components
         ObstacleComponent obstacleComponent = new ObstacleComponent();
-        AnimationComponent animationComponent = new AnimationComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
         TransformComponent transformComponent = new TransformComponent();
         StateComponent stateComponent = new StateComponent();
@@ -154,7 +153,6 @@ public class World {
 
         //add the comp. to the entity
         obstacleEntity.add(obstacleComponent);
-        obstacleEntity.add(animationComponent);
         obstacleEntity.add(boundsComponent);
         obstacleEntity.add(transformComponent);
         obstacleEntity.add(stateComponent);
@@ -180,7 +178,6 @@ public class World {
 
         //create new components
         DroneComponent planeComponent = new DroneComponent();
-        AnimationComponent animationComponent = new AnimationComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
         MovementComponent movementComponent = new MovementComponent();
         TransformComponent transformComponent = new TransformComponent();
@@ -189,7 +186,6 @@ public class World {
 
         //add the comp. to the entity
         planeEntity.add(planeComponent);
-        planeEntity.add(animationComponent);
         planeEntity.add(boundsComponent);
         planeEntity.add(movementComponent);
         planeEntity.add(transformComponent);
@@ -219,7 +215,6 @@ public class World {
 
         //create new components
         DevilComponent devilComponent = new DevilComponent();
-        AnimationComponent animationComponent = new AnimationComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
         MovementComponent movementComponent = new MovementComponent();
         TransformComponent transformComponent = new TransformComponent();
@@ -228,7 +223,6 @@ public class World {
 
         //add the comp. to the entity
         devilEntity.add(devilComponent);
-        devilEntity.add(animationComponent);
         devilEntity.add(boundsComponent);
         devilEntity.add(movementComponent);
         devilEntity.add(transformComponent);
@@ -252,9 +246,6 @@ public class World {
 
         return devilEntity;
     }
-
-
-
 
     public Entity createCoin(float x, float y){
         Entity coinEntity = new Entity();

@@ -1,4 +1,4 @@
-package com.fallingangel;
+package com.fallingangel.model;
 
 import com.badlogic.gdx.Input;
 import com.fallingangel.controller.system.MultiplayerSystem;

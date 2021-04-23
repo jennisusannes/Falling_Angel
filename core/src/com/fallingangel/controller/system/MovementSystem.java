@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.MovementComponent;
 import com.fallingangel.model.component.TransformComponent;
 
@@ -17,7 +18,7 @@ public class MovementSystem extends IteratingSystem {
     private ComponentMapper<MovementComponent> movementMapper;
 
     public MovementSystem() {
-        super(Family.all(TransformComponent.class, MovementComponent.class).get());
+        super(Family.all(AngelComponent.class, TransformComponent.class, MovementComponent.class).get());
 
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
         movementMapper = ComponentMapper.getFor(MovementComponent.class);
