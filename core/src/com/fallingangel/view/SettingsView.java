@@ -85,23 +85,6 @@ public class SettingsView extends ScreenAdapter {
         return pigButton;
     }
 
-    public boolean isPig(){
-        this.controller = game.mc;
-        return controller.angel.equals("pig");
-    }
-
-    /*
-    public Button rightSoundButton(){
-        if (game.music.isPlaying()) {
-            return musicOnButton;
-        }
-        else {
-            return musicOffButton;
-        }
-    }
-
-     */
-
     // Method for creating a button, this will add the MainController as a listener
     public Button makeButton(Texture texture, float width, float height, float xPos, float yPos) {
         Button button = new Button(new TextureRegionDrawable(new TextureRegion(texture)));
@@ -121,7 +104,8 @@ public class SettingsView extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage); // Sets input processor
         game.batch.begin();
         game.batch.draw(Assets.settingsBackgroundTexture, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // Draws the sprite batch
-        if (isPig()) {
+        this.controller = game.mc;
+        if (controller.isPig()) {
             game.batch.draw(Assets.selected, Gdx.graphics.getWidth()*0.55f,Gdx.graphics.getHeight() * 0.25f,Gdx.graphics.getWidth()*0.4f,Gdx.graphics.getHeight()*0.2f );
         }
         else {

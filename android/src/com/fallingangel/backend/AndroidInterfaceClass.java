@@ -1,5 +1,6 @@
 package com.fallingangel.backend;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.MultiPlayerData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -64,7 +65,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
 
     @Override
-    public void connectToRoom(String roomName, MultiPlayerData mpd) {
+    public void connectToRoom(String roomName, com.fallingangel.model.MultiPlayerData mpd) {
         this.roomName = roomName;
         rooms.child(roomName).child(user.getUID()).setValue(mpd)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -89,7 +90,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = ds.getKey();
                     if (!key.equals(user.getUID())){//TODO Check if this line of code is needed: && !key.equals("Usernum")) {
-                       MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
+                       com.fallingangel.model.MultiPlayerData opponent = ds.getValue(com.fallingangel.model.MultiPlayerData.class);
                        opponentScore = opponent.getScore();
                     }
                 }
@@ -133,7 +134,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
     @Override
-    public void updateScore(MultiPlayerData mpd) {
+    public void updateScore(com.fallingangel.model.MultiPlayerData mpd) {
         this.getHighscoreFromDB();
         if(FallingAngel.getInstance().mc.gameActionsController.isMultiplayer) {
             rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
@@ -175,7 +176,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                 int currentPlayerFinalScore = 0;
                 for (DataSnapshot ds:snapshot.getChildren()) {
                     String key = ds.getKey();
-                    MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
+                    com.fallingangel.model.MultiPlayerData mpd = ds.getValue(com.fallingangel.model.MultiPlayerData.class);
                     if (key.equals(user.getUID())) {
                         currentPlayerFinalScore = mpd.getScore();
 
@@ -208,7 +209,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
+                    com.fallingangel.model.MultiPlayerData mpd = ds.getValue(MultiPlayerData.class);
                     if(mpd.isGameOver){
                         gameIsOver = true;
                     }

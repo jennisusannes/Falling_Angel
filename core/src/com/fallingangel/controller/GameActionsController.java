@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.fallingangel.backend.MultiPlayerData;
+import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BoundsSystem;
