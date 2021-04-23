@@ -13,7 +13,9 @@ The android device or emulator will need API level 16 or higher, although it is 
 If you do not have an android device, Android Studio come with the possibility to run the game on an emulator.
 
 * Clone the project down to your repo by using
+
      ```java git clone https://github.com/jennisusannes/Falling_Angel.git ```
+     
 or by downloading a .zip-file
 * Open the project in Android Studio. 
 * Set up your device or emulator with Android Studio.
@@ -38,9 +40,10 @@ This game is built with:
 
 ### Roadmap
 The project was planned with the following future updates:
-* Achievements 
 * High Score List
 * Power-Ups in the game mode
+* Achievements 
+
 
 ### Project Status
 This project is under development.
