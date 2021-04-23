@@ -15,7 +15,7 @@ If you do not have an android device, Android Studio come with the possibility t
 * Clone the project down to your repo by using ```java
                                                git clone https://github.com/jennisusannes/Falling_Angel.git
                                                ```
-                                               or by downloading a .zip-file
+or by downloading a .zip-file
 * Open the project in Android Studio. 
 * Set up your device or emulator with Android Studio.
  For instructions on setting up your device, use this [user guide](https://developer.android.com/studio/run/managing-avds) for setting up emulator or this [user guide](https://developer.android.com/studio/run/device) for setting up device.
@@ -30,14 +30,6 @@ Avoid the ballons and the other flying obstacles, but make sure to get the coins
 ![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
 
 
-### Developed by:
-* [Ingeborg Wilsher](https://github.com/Ingebwi)   
-* [Ingrid Renolen Borkenhagen](https://github.com/ingrirbo)
-* [Sofie Sunde](https://github.com/sofiesunde)
-* [Jenni Sveen Olsen](https://github.com/jenniolsen)
-* [Jenni Susanne Skaara](https://github.com/JenniSusanneSkaara)
-* [Josefine Stiff Aamlid](https://github.com/Jeaamlid)
-
 # Technology and frameworks 
 This game is built with: 
 * Android Studio (Android SDK)
@@ -51,7 +43,13 @@ The project was planned with the following future updates:
 * High Score List
 * Power-Ups in the game mode
 
-
 ### Project Status
 This project is under development.
 
+### Developed by:
+* [Ingeborg Wilsher](https://github.com/Ingebwi)   
+* [Ingrid Renolen Borkenhagen](https://github.com/ingrirbo)
+* [Sofie Sunde](https://github.com/sofiesunde)
+* [Jenni Sveen Olsen](https://github.com/jenniolsen)
+* [Jenni Susanne Skaara](https://github.com/JenniSusanneSkaara)
+* [Josefine Stiff Aamlid](https://github.com/Jeaamlid)
