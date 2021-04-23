@@ -25,6 +25,8 @@ If you do not have an android device, Android Studio come with the possibility t
 
 Fly as long as possible. 
 Avoid the ballons and the other flying obstacles, but make sure to get the coins! The coins are worth 10p. 
+
+
 ![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
 
 
