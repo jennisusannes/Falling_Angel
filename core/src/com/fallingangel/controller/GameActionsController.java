@@ -188,10 +188,11 @@ public class GameActionsController implements EventListener {
         if (isMultiplayer && state == GAME_OVER){
             gameOverMultiPlayerView = new GameOverMultiPlayerView();
             multiplayerController.multiPlayerData.setGameOver(true);
+            //game.FBI.setMultiPlayerDataGameOver(true);
         }
 
         // Sets the state to GAME OVER after a multi player game
-        if(isMultiplayer && game.FBI.gameOver()){
+        if(isMultiplayer && game.FBI.gameIsOver()){
             state = GAME_OVER;
         }
 
@@ -255,6 +256,22 @@ public class GameActionsController implements EventListener {
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
         if (isMultiplayer){
+            MultiPlayerData mpd = multiplayerController.multiPlayerData;
+            removeSystem();
+            game.setScreen(gameOverMultiPlayerView);
+            multiplayerController.multiPlayerData.setGameOver(true);
+            game.FBI.updateScore(mpd);
+            isMultiplayer = false;
+        }
+        else {
+            removeSystem();
+            game.setScreen(gameOverView);
+        }
+    }
+/*
+    // When the player dies and the game is over, the player is sent to GameOverView
+    public void gameOver() {
+        if (isMultiplayer){
             MultiPlayerData player1 = multiplayerController.multiPlayerData;
             removeSystem();
             game.setScreen(gameOverMultiPlayerView);
@@ -267,7 +284,7 @@ public class GameActionsController implements EventListener {
             game.setScreen(gameOverView);
         }
     }
-
+*/
 
     // Game controller listens to buttons in the different views and changes between views
     // Checks if sound is on and then plays click sound when button is clicked
@@ -323,8 +340,9 @@ public class GameActionsController implements EventListener {
             if (settingsModel.soundOn()){
                 clickSound.play(0.2f);
             }
-            game.FBI.leaveRoom();
+            game.FBI.destroyRoom();
             game.mc.setStartScreen();
+            multiplayerController.multiPlayerData.setGameOver(false);
             return true;
         }
         else {

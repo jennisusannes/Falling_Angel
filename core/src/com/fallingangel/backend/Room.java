@@ -16,7 +16,6 @@ public class Room {
         this.player1 = player1;
     }
 
-
     public boolean isRoomReady() {
         return roomReady;
     }

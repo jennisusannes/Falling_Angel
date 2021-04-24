@@ -15,7 +15,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public MainController mc;
 
 	public com.fallingangel.backend.FireBaseInterface FBI;
-	//private FirebaseAuth mAuth;
 	public SpriteBatch batch;
 	public Music music;
 	public BitmapFont font;

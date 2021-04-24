@@ -27,9 +27,9 @@ public class MainController extends ClickListener {
     public HelpView2 helpView2 = new HelpView2();
     public HelpView3 helpView3 = new HelpView3();
     public SettingsModel settingsModel = new SettingsModel();
+    public SettingsView settingsView = new SettingsView();
     // Not fully implementet highscorelist
     //public HighScoreListView highscorelistView = new HighScoreListView();
-    public SettingsView settingsView = new SettingsView();
     public WaitingRoomView waitingRoomView;
     public LevelView levelView = new LevelView();
     public GameActionsController gameActionsController;
@@ -163,7 +163,6 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
-        // TODO : hvordan er disse i forhold til settingsmodel??? fjernes?
         else if (event.getListenerActor().equals(settingsView.getMusicOnButton())){
             clickSound.play(0.0f);
             game.music.pause();
@@ -232,18 +231,20 @@ public class MainController extends ClickListener {
             game.setScreen(menuView);
             return true;
         }
-        else if (event.getListenerActor().equals(waitingRoomView.getBackButton())) {
+        else if (event.getListenerActor().equals(gameActionsController.multiplayerController.waitingRoomView.getBackButton())) {
             if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             game.setScreen(menuView);
-            game.FBI.leaveRoom();
+            gameActionsController.multiplayerController.multiPlayerData.setGameOver(true);
+            //game.FBI.destroyRoom();
+            //gameActionsController.multiplayerController.multiPlayerData.setGameOver(false);
+            //game.FBI.leaveRoom();
             /*
             MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
             game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
             game.FBI.destroyRoom();
             game.mc.waitingRoomView.multiPlayerData.setGameOver(false);
-
              */
             return true;
         }

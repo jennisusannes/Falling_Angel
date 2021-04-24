@@ -61,9 +61,24 @@ public class MultiplayerSystem extends IntervalSystem {
             TransformComponent transformComponent = transformMapper.get(entity);
             StateComponent stateComponent = stateMapper.get(entity);
 
+            MultiPlayerData mpd = game.mc.multiplayerController.multiPlayerData;
+            mpd.setScore((int) (angelComponent.SCORE));
+            game.FBI.updateScore(mpd);
+            game.FBI.setOpponentScore();
+        }
+    }
+    /*
+    @Override
+    protected void updateInterval () {
+        for (Entity entity : playerEntities){
+            AngelComponent angelComponent = angelMapper.get(entity);
+            TransformComponent transformComponent = transformMapper.get(entity);
+            StateComponent stateComponent = stateMapper.get(entity);
+
             MultiPlayerData player1 = game.mc.multiplayerController.multiPlayerData;
             player1.setScore((int) (angelComponent.SCORE));
             game.FBI.update(player1);
         }
     }
+     */
 }

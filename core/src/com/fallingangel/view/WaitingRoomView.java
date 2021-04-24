@@ -43,6 +43,7 @@ public class WaitingRoomView extends ScreenAdapter {
         this.mainController = game.mc;
         stage = new Stage(new ScreenViewport());
         setBackButton(); // Creates a back button
+        stage.addActor(backButton); // Adds the button as an actor to the stage
     }
 
     // Getter and setter for the back button
@@ -70,22 +71,19 @@ public class WaitingRoomView extends ScreenAdapter {
     }
 
     public void draw() {
-        GL20 gl = Gdx.gl;
-        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //GL20 gl = Gdx.gl;
+        //gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
         game.batch.draw(Assets.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         game.batch.draw(Assets.waitingRoomTexture, Gdx.graphics.getWidth() * 0.05f, Gdx.graphics.getHeight() * 0.65f, Gdx.graphics.getWidth() * 0.8f, Gdx.graphics.getHeight() * 0.15f);
         game.batch.end();
-        stage.addActor(backButton); // Adds the button as an actor to the stage
         stage.draw();
     }
 
     public void update(float dt) {
-        //multiplayerController.connectToDatabase();
         this.multiplayerController = game.mc.gameActionsController.multiplayerController;
-        //multiplayerController.connectToGameRoom();
-        //multiplayerController.connectToDatabase();
+        multiplayerController.connectToDatabase();
         multiplayerController.checkIfReady();
     }
 
