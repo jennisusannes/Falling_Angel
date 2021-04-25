@@ -21,23 +21,40 @@ or by downloading a .zip-file
 
 # Demo / user manual
 
-Welcome to Falling Angel - a game for Android owners
-![MenuScreen](https://user-images.githubusercontent.com/72627273/116004324-810a1880-a602-11eb-9f93-8a231b668b78.png)
+Welcome to Falling Angel - a game for Android owners!
+![rsz_menuscreen](https://user-images.githubusercontent.com/72627273/116004796-b0ba2000-a604-11eb-9deb-1d9c38794b28.png)
 
 
 Your goal is to fly for as long as possible. Press and hold the screen to make the angel move towards your finger. Change direction by moving your finger 
 You get points for airtime. Avoid the balloons and the other flying obstacles. Try to collect coins; they are worth 20p.
 
 
-![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
+
+![Hnet com-image (3)](https://user-images.githubusercontent.com/72627273/116004883-11495d00-a605-11eb-8b29-2018c06e711f.gif)
+
+
+In singleplayer, you can choose between different worlds
+
+
+![Hnet com-image (5)](https://user-images.githubusercontent.com/72627273/116005199-27a3e880-a606-11eb-91eb-6ce8418f7a08.gif)
+
+And in settings, you can choose your character
+
+
+![rsz_settings_1](https://user-images.githubusercontent.com/72627273/116005271-88cbbc00-a606-11eb-8495-5b9703ddb95c.png)
 
 
 You can play either single- or multiplayer games!
-In a multiplayer game, write the same room number as your opponent. Remember to give yourself a name.
-![Hnet com-image (2)](https://user-images.githubusercontent.com/72627273/116004662-09d58400-a604-11eb-8a29-b073d6b564e3.gif)
+In a multiplayer game, write the same room number as your opponent. Remember to give yourself a name. Gather most points and avoid the obstacles longer than your opponent.
 
 
 
+![Hnet com-image (4)](https://user-images.githubusercontent.com/72627273/116005019-8ae14b00-a605-11eb-97e7-ef4e6c5e429d.gif)
+
+
+If you get more points than your opponent, but hit an obstacle before them it will be a tie between you two.
+
+Hope you enjoy falling angel!
 
 # Technology and frameworks 
 This game is built with: 
