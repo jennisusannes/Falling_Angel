@@ -22,6 +22,8 @@ or by downloading a .zip-file
 # Demo / user manual
 
 Welcome to Falling Angel - a game for Android owners!
+
+
 ![rsz_menuscreen](https://user-images.githubusercontent.com/72627273/116004796-b0ba2000-a604-11eb-9deb-1d9c38794b28.png)
 
 
