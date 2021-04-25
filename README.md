@@ -3,7 +3,7 @@ This is a project for TDT4240 - Software architecture by group 11. The objective
 
 
 
-# Initializating: Cloning, compiling and running the project
+## Initializating: Cloning, compiling and running the project
 In order to run the game, you will need Android Studio, or an other similar IDE. Intellij is also possible to use.
 You will need an android device or an emulator. Desktop will not work, as this project use Firebase DB.
 The android device or emulator will need API level 16 or higher, although it is recommended to have a higher API level than this for a proper rendering.
@@ -11,7 +11,7 @@ If you do not have an android device, Android Studio come with the possibility t
 
 * Clone the project down to your repo by using
 
-     ```java git clone https://github.com/jennisusannes/Falling_Angel.git ```
+     ```git clone https://github.com/jennisusannes/Falling_Angel.git ```
      
 or by downloading a .zip-file
 * Open the project in Android Studio. 
@@ -19,7 +19,7 @@ or by downloading a .zip-file
  For instructions on setting up your device, use this [user guide](https://developer.android.com/studio/run/managing-avds) for setting up emulator or this [user guide](https://developer.android.com/studio/run/device) for setting up device.
 * Make sure the gradle.build has finished before running the app.
 
-# Demo / user manual
+## Demo / user manual
 
 Welcome to Falling Angel - a game for Android owners!
 
@@ -60,23 +60,23 @@ If you get more points than your opponent, but hit an obstacle before them it wi
 
 Hope you enjoy falling angel!
 
-# Technology and frameworks 
+## Technology and frameworks 
 This game is built with: 
 * Android Studio (Android SDK)
 * [LibGDX](https://github.com/libgdx/libgdx/wiki)
 * [Ashely ECS](https://github.com/libgdx/ashley/wiki) 
 * [Firebase Realtime Database](https://firebase.google.com/)
 
-### Roadmap
+## Roadmap
 The project was planned with the following future updates:
 * High Score List
 * Power-Ups in the game mode
 * Achievements 
 
-### Project Status
+## Project Status
 This project is finished and delivered. 
 
-### Developed by:
+## Developed by:
 * [Ingeborg Wilsher](https://github.com/Ingebwi)   
 * [Ingrid Renolen Borkenhagen](https://github.com/ingrirbo)
 * [Sofie Sunde](https://github.com/sofiesunde)
