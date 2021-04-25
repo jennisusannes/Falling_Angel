@@ -5,6 +5,7 @@ import com.fallingangel.model.MultiPlayerData;
 public interface FireBaseInterface {
     public void createUser();
     public void connectToRoom(String roomName, MultiPlayerData mpd);
+    public void setMultiplayer(boolean isMultiplayer);
     public void setOpponentScore();
     public void numberOfUsersInRoom();
     public void updateScore(MultiPlayerData mpd);
@@ -20,6 +21,7 @@ public interface FireBaseInterface {
     public void setMultiPlayerDataNumUsers(int numUsers);
     public int getMultiPlayerDataNumUsers();
     public boolean getRoomReady();
+    public void leaveRoom();
     //public boolean isRoomReady();
     /*
     public void connectToRoom(String roomName, MultiPlayerData mpd);

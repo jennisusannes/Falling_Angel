@@ -1,4 +1,5 @@
 package com.fallingangel.backend;
+import com.fallingangel.controller.GameActionsController;
 import com.fallingangel.controller.MultiplayerController;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.MultiPlayerData;
@@ -30,6 +31,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int numUsersInRoom;
     private int multiplayerdataNumUsers;
     private boolean roomReady;
+    private boolean isMultiplayer;
     private boolean gameIsOver = false;
     private boolean multiplayerdataGameover;
     private boolean gameWon;
@@ -40,6 +42,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private ValueEventListener highScoreListener;
     private ValueEventListener gameWonListener;
     private FallingAngel game;
+    private GameActionsController gameactionsController;
 
     public AndroidInterfaceClass(){
         game = FallingAngel.getInstance();
@@ -146,6 +149,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return roomReady;
     }
 
+    public void setMultiplayer(boolean isMultiplayer) {
+        this.isMultiplayer = isMultiplayer;
+    }
+
     public void setMultiPlayerDataGameOver(boolean gameOver) {
         this.multiplayerdataGameover = gameOver;
     }
@@ -161,13 +168,13 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void numberOfUsersInRoom() {
         roomListener = new ValueEventListener() {
-            /*
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!multiplayerdataGameover) {
                     numUsersInRoom = (int) dataSnapshot.getChildrenCount();
                     rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
-                    if (numUsersInRoom == 1){
+                    if (numUsersInRoom == 2){
                         setRoomReady(true);
                     } else {
                         setRoomReady(false);
@@ -176,7 +183,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     //game.mc.gameActionsController.multiplayerController.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
                 }
             }
-            */
+            /*
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(!game.mc.gameActionsController.multiplayerController.multiPlayerData.isGameOver()) {
@@ -185,7 +192,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
                     game.mc.gameActionsController.multiplayerController.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
                 }
-            }
+            }*/
 
             @Override
             public void onCancelled( DatabaseError error) {
@@ -202,7 +209,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void updateScore(MultiPlayerData mpd) {
         this.getHighscoreFromDB();
-        if(game.mc.gameActionsController.isMultiplayer) {
+        if(isMultiplayer) {
             rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -289,7 +296,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
 
-
     @Override
     public void getHighscoreFromDB(){
         highScoreListener = new ValueEventListener() {
@@ -335,6 +341,25 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     }
                 });
 
+    }
+
+    @Override
+    public void leaveRoom() {
+        if(gameIsOver) {
+            rooms.child(roomName).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.i("Room was destroyed", "nice");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("error", e.toString());
+                        }
+                    });
+        }
     }
 
     // Found at: https://www.baeldung.com/java-random-string

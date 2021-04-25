@@ -1,9 +1,8 @@
 package com.fallingangel.controller;
 
 import com.badlogic.gdx.Gdx;
-import com.fallingangel.NameInputListener;
-import com.fallingangel.RoomInputListener;
-import com.fallingangel.backend.Room;
+import com.fallingangel.model.NameInputListener;
+import com.fallingangel.model.RoomInputListener;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.view.WaitingRoomView;
@@ -20,7 +19,6 @@ public class MultiplayerController {
     public GameActionsController gameActionsController;
     public WaitingRoomView waitingRoomView;
     public MultiPlayerData multiPlayerData;
-    //public Room room;
     public String roomNumber;
     public RoomInputListener roomListener;
     public NameInputListener nameListener;
@@ -31,12 +29,11 @@ public class MultiplayerController {
         this.game = FallingAngel.getInstance();
         this.gameActionsController = game.mc.gameActionsController;
         connectToGameRoom();
-        //multiPlayerData.setGameOver(false);
-        //game.FBI.setMultiPlayerDataGameOver(false);
+        multiPlayerData.setGameOver(false);
+        game.FBI.setMultiPlayerDataGameOver(false);
         connectToDatabase();
         this.waitingRoomView = new WaitingRoomView();
         game.setScreen(waitingRoomView);
-
     }
 
     // Method that creates the input fields for room number and name and saves them in MyTextInputListener classes
@@ -66,43 +63,16 @@ public class MultiplayerController {
             game.FBI.numberOfUsersInRoom();
         }
     }
-    /*
+
     // Method that starts a new game if both players are in the room
     public void checkIfReady(){
         // If there are two children in the same room
-        game.FBI.numberOfUsersInRoom();
         if (game.FBI.getRoomReady()){
             this.gameActionsController = game.mc.gameActionsController;
             gameActionsController.setGameScreen(true);
         }
     }
-    */
-    // Method that starts a new game if both players are in the room
-    public void checkIfReady(){
-        // If there are two children in the same room
-        if (multiPlayerData.getNumberOfUsersInRoom() == 1){
-            this.gameActionsController = game.mc.gameActionsController;
-            gameActionsController.setGameScreen(true);
-        }
-    }
 
-
-    /*
-    public int getWinnerStatus() {
-        // Tie
-        int status = 0;
-        // Player 1 wins
-        if(game.FBI.getRoom().getPlayer1().getScore() > game.FBI.getRoom().getPlayer2().getScore())  {
-            status = 1;
-        }
-        // Player 2 wins
-        else if (game.FBI.getRoom().getPlayer1().getScore() < game.FBI.getRoom().getPlayer2().getScore()){
-            status = 2;
-        }
-        // return winner
-        return status;
-    }
-    */
     public int getWinnerStatus() {
         // Tie
         int status = 0;

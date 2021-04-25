@@ -2,7 +2,7 @@ package com.fallingangel.backend;
 
 import com.fallingangel.model.MultiPlayerData;
 
-public class CoreInterfaceClass implements FireBaseInterface{
+public class CoreInterfaceClass implements FireBaseInterface {
 
     @Override
     public void createUser() {
@@ -11,6 +11,11 @@ public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
     public void connectToRoom(String roomName, MultiPlayerData mpd) {
+
+    }
+
+    @Override
+    public void setMultiplayer(boolean isMultiplayer) {
 
     }
 
@@ -87,6 +92,11 @@ public class CoreInterfaceClass implements FireBaseInterface{
     @Override
     public boolean getRoomReady() {
         return false;
+    }
+
+    @Override
+    public void leaveRoom() {
+
     }
 
 

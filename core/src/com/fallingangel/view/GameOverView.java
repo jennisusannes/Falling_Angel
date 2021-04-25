@@ -70,21 +70,6 @@ public class GameOverView extends ScreenAdapter {
         });
         return button;
     }
-    /*
-    // winner = 0 -> single player, winner = 1 / 2 -> multiplayer
-    public void setWinner(int winner) {
-        if (winner == 1) {
-            background = Asset.winner1BackgroundTexture;
-        }
-        else if (winner == 2) {
-            background = Asset.winner2BackgroundTexture;
-        }
-        else {
-            background = Asset.highscorelistBackgroundTexture;
-        }
-    }
-
-     */
 
     public void draw(){
         this.font = Assets.font;

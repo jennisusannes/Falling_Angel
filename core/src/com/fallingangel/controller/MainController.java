@@ -236,10 +236,13 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             game.setScreen(menuView);
+            game.FBI.setMultiPlayerDataGameOver(true);
             gameActionsController.multiplayerController.multiPlayerData.setGameOver(true);
             //game.FBI.destroyRoom();
-            //gameActionsController.multiplayerController.multiPlayerData.setGameOver(false);
-            //game.FBI.leaveRoom();
+            game.FBI.leaveRoom();
+            game.FBI.setMultiPlayerDataGameOver(false);
+            gameActionsController.multiplayerController.multiPlayerData.setGameOver(false);
+
             /*
             MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
             game.mc.waitingRoomView.multiPlayerData.setGameOver(true);

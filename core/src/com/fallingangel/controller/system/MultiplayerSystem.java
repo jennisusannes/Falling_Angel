@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
+import com.fallingangel.controller.MultiplayerController;
 import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 public class MultiplayerSystem extends IntervalSystem {
     // System used to update the score in the database while playing a multiplayer game
     private FallingAngel game;
+    public MultiplayerController multiplayerController;
     public static String roomNumber = "";
     public Engine engine;
 
@@ -34,6 +36,7 @@ public class MultiplayerSystem extends IntervalSystem {
     public void addedToEngine(final Engine engine) {
         this.game = FallingAngel.getInstance();
         this.engine = engine;
+        //this.multiplayerController = game.mc.gameActionsController.multiplayerController;
         Family family = Family.all(AngelComponent.class).get();
         for (Entity entity : engine.getEntitiesFor(family)){
             playerEntities.add(entity);
@@ -60,8 +63,8 @@ public class MultiplayerSystem extends IntervalSystem {
             AngelComponent angelComponent = angelMapper.get(entity);
             TransformComponent transformComponent = transformMapper.get(entity);
             StateComponent stateComponent = stateMapper.get(entity);
-
-            MultiPlayerData mpd = game.mc.multiplayerController.multiPlayerData;
+            this.multiplayerController = game.mc.gameActionsController.multiplayerController;
+            MultiPlayerData mpd = game.mc.gameActionsController.multiplayerController.multiPlayerData;
             mpd.setScore((int) (angelComponent.SCORE));
             game.FBI.updateScore(mpd);
             game.FBI.setOpponentScore();

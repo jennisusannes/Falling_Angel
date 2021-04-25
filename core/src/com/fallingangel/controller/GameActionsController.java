@@ -98,6 +98,7 @@ public class GameActionsController implements EventListener {
 
         // Adds the RenderingSystem based on whether the gameActionsController is single player or multi player
         if (isMultiplayer){
+            game.FBI.setMultiplayer(true);
             this.multiplayerController = new MultiplayerController();
             engine.addSystem(new MultiplayerSystem(1));
             engine.addSystem(new RenderingSystem(game.batch, true));
@@ -187,6 +188,7 @@ public class GameActionsController implements EventListener {
         // A player dies in multi player
         if (isMultiplayer && state == GAME_OVER){
             gameOverMultiPlayerView = new GameOverMultiPlayerView();
+            game.FBI.setMultiPlayerDataGameOver(true);
             multiplayerController.multiPlayerData.setGameOver(true);
             //game.FBI.setMultiPlayerDataGameOver(true);
         }
@@ -260,6 +262,7 @@ public class GameActionsController implements EventListener {
             removeSystem();
             game.setScreen(gameOverMultiPlayerView);
             multiplayerController.multiPlayerData.setGameOver(true);
+            game.FBI.setMultiPlayerDataGameOver(true);
             game.FBI.updateScore(mpd);
             isMultiplayer = false;
         }
@@ -340,9 +343,13 @@ public class GameActionsController implements EventListener {
             if (settingsModel.soundOn()){
                 clickSound.play(0.2f);
             }
-            game.FBI.destroyRoom();
+            //game.FBI.destroyRoom();
+            game.FBI.leaveRoom();
+            game.FBI.setMultiPlayerDataGameOver(true);
+            multiplayerController.multiPlayerData.setGameOver(true);
             game.mc.setStartScreen();
             multiplayerController.multiPlayerData.setGameOver(false);
+            game.FBI.setMultiPlayerDataGameOver(false);
             return true;
         }
         else {
