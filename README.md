@@ -3,9 +3,6 @@ This is a project for TDT4240 - Software architecture by group 11. The objective
 
 
 
-
-
-
 # Initializating: Cloning, compiling and running the project
 In order to run the game, you will need Android Studio, or an other similar IDE. Intellij is also possible to use.
 You will need an android device or an emulator. Desktop will not work, as this project use Firebase DB.
@@ -24,9 +21,8 @@ or by downloading a .zip-file
 
 # Demo / user manual
 
-Fly as long as possible. 
-Avoid the ballons and the other flying obstacles, but make sure to get the coins! The coins are worth 10p. 
-
+Fly as long as possible. You get points for airtime. 
+Avoid the balloons and the other flying obstacles, but make sure to get the coins! The coins are worth 20p. 
 
 ![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
 
