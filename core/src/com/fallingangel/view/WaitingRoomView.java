@@ -32,9 +32,6 @@ public class WaitingRoomView extends ScreenAdapter {
 
     public WaitingRoomView() {
         this.game = FallingAngel.getInstance();
-        //this.gameActionsController = game.mc.gameActionsController;
-        //multiplayerController = game.mc.gameActionsController.multiplayerController;
-        //this.multiplayerController = game.mc.gameActionsController.multiplayerController;
         this.mainController = game.mc;
         stage = new Stage(new ScreenViewport());
         setBackButton(); // Creates a back button
@@ -66,8 +63,6 @@ public class WaitingRoomView extends ScreenAdapter {
     }
 
     public void draw() {
-        //GL20 gl = Gdx.gl;
-        //gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.input.setInputProcessor(stage);
         game.batch.begin();
         game.batch.draw(Assets.heavenBackgroundPauseTextureRegion, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

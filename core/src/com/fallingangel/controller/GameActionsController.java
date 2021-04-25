@@ -228,6 +228,7 @@ public class GameActionsController implements EventListener {
     // This method removes all systems
     public void removeSystem() {
        engine.removeAllEntities();
+       if (isMultiplayer) engine.removeSystem(engine.getSystem(MultiplayerSystem.class));
     }
 
     // Method for pausing game
@@ -258,10 +259,10 @@ public class GameActionsController implements EventListener {
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
         if (isMultiplayer){
-            MultiPlayerData mpd = multiplayerController.multiPlayerData;
             removeSystem();
-            game.setScreen(gameOverMultiPlayerView);
+            MultiPlayerData mpd = multiplayerController.multiPlayerData;
             multiplayerController.multiPlayerData.setGameOver(true);
+            game.setScreen(gameOverMultiPlayerView);
             game.FBI.setMultiPlayerDataGameOver(true);
             game.FBI.updateScore(mpd);
             isMultiplayer = false;
@@ -343,7 +344,6 @@ public class GameActionsController implements EventListener {
             if (settingsModel.soundOn()){
                 clickSound.play(0.2f);
             }
-            //game.FBI.destroyRoom();
             game.FBI.leaveRoom();
             game.FBI.setMultiPlayerDataGameOver(true);
             multiplayerController.multiPlayerData.setGameOver(true);

@@ -95,9 +95,6 @@ public class MainController extends ClickListener {
                 clickSound.play(0.2f);
             }
             this.gameActionsController = new GameActionsController(true);
-            //multiplayerController.connectToGameRoom();
-            //this.waitingRoomView = new WaitingRoomView();
-            //game.setScreen(waitingRoomView);
             return true;
         }
 
@@ -242,13 +239,6 @@ public class MainController extends ClickListener {
             game.FBI.leaveRoom();
             game.FBI.setMultiPlayerDataGameOver(false);
             gameActionsController.multiplayerController.multiPlayerData.setGameOver(false);
-
-            /*
-            MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
-            game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
-            game.FBI.destroyRoom();
-            game.mc.waitingRoomView.multiPlayerData.setGameOver(false);
-             */
             return true;
         }
         else{

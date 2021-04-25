@@ -8,13 +8,7 @@ import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.view.WaitingRoomView;
 
 public class MultiplayerController {
-    /*TODO:
-    Waiting room methods
-    game over multiplayermethods
-    send game to gameactionscontroller when two players in room
-    gameactionscontroller handles gameoverview????????
-    backbutton i waitingroom i main Controller må endre til leave room()
-     */
+
     public FallingAngel game;
     public GameActionsController gameActionsController;
     public WaitingRoomView waitingRoomView;
