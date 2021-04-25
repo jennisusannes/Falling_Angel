@@ -30,7 +30,8 @@ You get points for airtime. Avoid the balloons and the other flying obstacles. T
 
 
 
-![Hnet com-image (6)](https://user-images.githubusercontent.com/72627273/116005495-7aca6b00-a607-11eb-90fb-5e24dd55db1c.gif)
+![Hnet com-image (7)](https://user-images.githubusercontent.com/72627273/116005524-a9484600-a607-11eb-860b-2ea0a367aecd.gif)
+
 
 
 
