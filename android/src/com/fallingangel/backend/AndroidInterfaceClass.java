@@ -41,11 +41,8 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private ValueEventListener gameIsOverListener;
     private ValueEventListener highScoreListener;
     private ValueEventListener gameWonListener;
-    private FallingAngel game;
-    private GameActionsController gameactionsController;
 
     public AndroidInterfaceClass(){
-        game = FallingAngel.getInstance();
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
         users = database.getReference("users");
         rooms = database.getReference("games");
@@ -360,6 +357,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         }
                     });
         }
+        gameIsOver = false;
     }
 
     // Found at: https://www.baeldung.com/java-random-string
