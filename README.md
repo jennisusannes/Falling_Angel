@@ -21,10 +21,22 @@ or by downloading a .zip-file
 
 # Demo / user manual
 
-Fly as long as possible. You get points for airtime. 
-Avoid the balloons and the other flying obstacles, but make sure to get the coins! The coins are worth 20p. 
+Welcome to Falling Angel - a game for Android owners
+![MenuScreen](https://user-images.githubusercontent.com/72627273/116004324-810a1880-a602-11eb-9f93-8a231b668b78.png)
+
+
+Your goal is to fly for as long as possible. Press and hold the screen to make the angel move towards your finger. Change direction by moving your finger 
+You get points for airtime. Avoid the balloons and the other flying obstacles. Try to collect coins; they are worth 20p.
+
 
 ![alt text](https://user-images.githubusercontent.com/72627273/115859416-726c0780-a430-11eb-8df7-8a1e29a2bb2d.gif)
+
+
+You can play either single- or multiplayer games!
+In a multiplayer game, write the same room number as your opponent. Remember to give yourself a name.
+![Hnet com-image (2)](https://user-images.githubusercontent.com/72627273/116004662-09d58400-a604-11eb-8a29-b073d6b564e3.gif)
+
+
 
 
 # Technology and frameworks 
@@ -40,9 +52,8 @@ The project was planned with the following future updates:
 * Power-Ups in the game mode
 * Achievements 
 
-
 ### Project Status
-This project is under development.
+This project is finished and delivered. 
 
 ### Developed by:
 * [Ingeborg Wilsher](https://github.com/Ingebwi)   
