@@ -1,24 +1,23 @@
 package com.fallingangel.model;
 
 import com.badlogic.gdx.math.Vector3;
+import com.fallingangel.game.FallingAngel;
 
 public class MultiPlayerData {
 
     public boolean isGameOver = false;
-    public Vector3 position;
-
     public int score = 0;
     public String username = "username not defined";
     public int numberOfUsersInRoom = 0;
 
-    public MultiPlayerData(){}
+    public MultiPlayerData(){
+    }
 
     public boolean isGameOver() {
         return isGameOver;
     }
 
     public void setGameOver(boolean isGameOver) {
-
         this.isGameOver = isGameOver;
     }
 
@@ -42,5 +41,4 @@ public class MultiPlayerData {
         this.score = score;
         this.username = username;
     }
-    //TODO: retrieve the data from Firebase and use it to update the multiplayer
 }

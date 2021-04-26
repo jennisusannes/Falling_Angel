@@ -91,7 +91,7 @@ public class GameActionsController implements EventListener {
         engine.addSystem(new MovementSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new CollisionSystem(world));
-        engine.addSystem(new RenderingSystem(game.batch,isMultiplayer));
+        //engine.addSystem(new RenderingSystem(game.batch,isMultiplayer));
         engine.addSystem(new StateSystem());
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new CoinSystem());
@@ -188,16 +188,15 @@ public class GameActionsController implements EventListener {
         // A player dies in multi player
         if (isMultiplayer && state == GAME_OVER){
             gameOverMultiPlayerView = new GameOverMultiPlayerView();
-            game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.setGameIsOver(true);
             multiplayerController.multiPlayerData.setGameOver(true);
-            //game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.setMultiPlayerDataGameOver(true);
         }
 
         // Sets the state to GAME OVER after a multi player game
         if(isMultiplayer && game.FBI.gameIsOver()){
             state = GAME_OVER;
         }
-
     }
 
     // This method sets all systems updating on pause
@@ -228,7 +227,10 @@ public class GameActionsController implements EventListener {
     // This method removes all systems
     public void removeSystem() {
        engine.removeAllEntities();
-       if (isMultiplayer) engine.removeSystem(engine.getSystem(MultiplayerSystem.class));
+       if (isMultiplayer) {
+           engine.removeSystem(engine.getSystem(MultiplayerSystem.class));
+           engine.removeSystem(engine.getSystem(RenderingSystem.class));
+       }
     }
 
     // Method for pausing game
@@ -264,6 +266,7 @@ public class GameActionsController implements EventListener {
             multiplayerController.multiPlayerData.setGameOver(true);
             game.setScreen(gameOverMultiPlayerView);
             game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.setGameIsOver(true);
             game.FBI.updateScore(mpd);
             isMultiplayer = false;
         }
@@ -345,11 +348,13 @@ public class GameActionsController implements EventListener {
                 clickSound.play(0.2f);
             }
             game.FBI.leaveRoom();
+            //game.FBI.destroyRoom();
             game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.setGameIsOver(true);
             multiplayerController.multiPlayerData.setGameOver(true);
             game.mc.setStartScreen();
-            multiplayerController.multiPlayerData.setGameOver(false);
-            game.FBI.setMultiPlayerDataGameOver(false);
+            //multiplayerController.multiPlayerData.setGameOver(false);
+            //game.FBI.setMultiPlayerDataGameOver(false);
             return true;
         }
         else {

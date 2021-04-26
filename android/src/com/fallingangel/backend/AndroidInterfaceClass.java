@@ -154,6 +154,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         this.multiplayerdataGameover = gameOver;
     }
 
+    public void setGameIsOver(boolean gameIsOver) {
+        this.gameIsOver = gameIsOver;
+    }
+
     public void setMultiPlayerDataNumUsers(int numUsers) {
         this.multiplayerdataNumUsers = numUsers;
     }
@@ -357,7 +361,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         }
                     });
         }
-        gameIsOver = false;
+        //gameIsOver = false;
     }
 
     // Found at: https://www.baeldung.com/java-random-string

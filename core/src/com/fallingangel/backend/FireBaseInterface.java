@@ -22,6 +22,7 @@ public interface FireBaseInterface {
     public int getMultiPlayerDataNumUsers();
     public boolean getRoomReady();
     public void leaveRoom();
+    public void setGameIsOver(boolean gameIsOver);
     //public boolean isRoomReady();
     /*
     public void connectToRoom(String roomName, MultiPlayerData mpd);

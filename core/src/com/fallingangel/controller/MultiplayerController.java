@@ -23,11 +23,13 @@ public class MultiplayerController {
         this.game = FallingAngel.getInstance();
         this.gameActionsController = game.mc.gameActionsController;
         connectToGameRoom();
-        multiPlayerData.setGameOver(false);
-        game.FBI.setMultiPlayerDataGameOver(false);
         connectToDatabase();
+        game.FBI.setRoomReady(false);
         this.waitingRoomView = new WaitingRoomView();
         game.setScreen(waitingRoomView);
+        multiPlayerData.setGameOver(false);
+        game.FBI.setMultiPlayerDataGameOver(false);
+        game.FBI.setGameIsOver(false);
     }
 
     // Method that creates the input fields for room number and name and saves them in MyTextInputListener classes

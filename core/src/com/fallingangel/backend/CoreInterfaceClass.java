@@ -99,6 +99,11 @@ public class CoreInterfaceClass implements FireBaseInterface {
 
     }
 
+    @Override
+    public void setGameIsOver(boolean gameIsOver) {
+
+    }
+
 
     /*
     @Override
