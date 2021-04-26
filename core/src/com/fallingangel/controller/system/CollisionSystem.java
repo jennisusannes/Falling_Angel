@@ -1,7 +1,6 @@
 package com.fallingangel.controller.system;
 
 import java.util.Random;
-
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -16,7 +15,6 @@ import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
 import com.fallingangel.model.SettingsModel;
 import com.fallingangel.model.World;
-
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
 import com.fallingangel.model.component.CoinComponent;
@@ -36,23 +34,15 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private ComponentMapper<TransformComponent> transformMapper;
     private ComponentMapper<TextureComponent> textureMapper;
 
-    //CollisionListener brukes hvis vi skal lage lyde når den treffer noe
-   /* public static interface CollisionListener {
-        public void hitObs (); //hits an obstacle
-        public void hitCoin (); //hits a coin
-        public void hitPU (); //hits a power up
-
-    } */
     private FallingAngel game;
     private MainController mainController;
     private SettingsModel settingsModel;
     private Engine engine;
     private World world;
-    //private CollisionListener listener;
     private Random rand = new Random();
     private ImmutableArray<Entity> angels;
     private ImmutableArray<Entity> coins;
-    private ImmutableArray<Entity> planes;
+    private ImmutableArray<Entity> drones;
     private ImmutableArray<Entity> devils;
     private ImmutableArray<Entity> obstacles;
     private ImmutableArray<Entity> powerups;
@@ -60,11 +50,8 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
     private Sound coinSound = Assets.coinSound;
     private Sound collisionSound = Assets.collisionSound;
 
-
-    // om vi skal ha listener (lyd): public CollisionSystem(World world, CollisionListener listener)
     public CollisionSystem(World world) {
         this.world = world;
-        //   this.listener = listener;
         game = FallingAngel.getInstance();
         this.mainController = game.mc;
         this.settingsModel = mainController.settingsModel;
@@ -83,10 +70,9 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
         //returns a collection of the entities that contain the components in the family
         angels = engine.getEntitiesFor(Family.all(AngelComponent.class, BoundsComponent.class, TransformComponent.class, StateComponent.class).get());
         coins = engine.getEntitiesFor(Family.all(CoinComponent.class, BoundsComponent.class).get());
-        planes = engine.getEntitiesFor(Family.all(DroneComponent.class, BoundsComponent.class).get());
+        drones = engine.getEntitiesFor(Family.all(DroneComponent.class, BoundsComponent.class).get());
         devils = engine.getEntitiesFor(Family.all(DevilComponent.class, BoundsComponent.class).get());
         obstacles = engine.getEntitiesFor(Family.all(ObstacleComponent.class, BoundsComponent.class, TransformComponent.class).get());
-
     }
 
     @Override
@@ -110,9 +96,9 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
             Rectangle rec = new Rectangle();
 
             rec.x = (int) obsBounds.rectangle.x;
-            rec.y = (int) (obsBounds.rectangle.y + Assets.balloons.first().getRegionHeight() * 1 / 2);
+            rec.y = (int) (obsBounds.rectangle.y + Assets.balloons.first().getRegionHeight() * 2 / 3);
             rec.width = (int) obsBounds.rectangle.width;
-            rec.height = (int) obsBounds.rectangle.height * 1 / 2;
+            rec.height = (int) obsBounds.rectangle.height * 2/3;
 
 
             if (rec.overlaps(angelBounds.rectangle)) {
@@ -120,24 +106,20 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                     collisionSound.play(0.05f);
                 }
                 angelSystem.hitObstacle(angel);
-                //listener.hitObs();
             }
-
         }
 
-
         //if angel hits a drone, the player dies
-        for (int j = 0; j < planes.size(); ++j) {
-            Entity plane = planes.get(j);
+        for (int j = 0; j < drones.size(); ++j) {
+            Entity drone = drones.get(j);
 
-            BoundsComponent planeBounds = boundsMapper.get(plane);
+            BoundsComponent droneBounds = boundsMapper.get(drone);
 
-            if (planeBounds.rectangle.overlaps(angelBounds.rectangle)) {
+            if (droneBounds.rectangle.overlaps(angelBounds.rectangle)) {
                 if (settingsModel.soundOn()) {
                     collisionSound.play(0.05f);
                 }
-                angelSystem.hitPlane(angel);
-                // listener.hitObs();
+                angelSystem.hitDrone(angel);
             }
         }
 
@@ -151,8 +133,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
                 if (settingsModel.soundOn()) {
                     collisionSound.play(0.05f);
                 }
-                angelSystem.hitPlane(angel);
-                // listener.hitObs();
+                angelSystem.hitDrone(angel);
             }
         }
 
