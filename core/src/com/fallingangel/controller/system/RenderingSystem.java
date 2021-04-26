@@ -39,22 +39,22 @@ public class RenderingSystem extends IteratingSystem{
     boolean isMultiplayer;
 
 
-    //Instanciate a RenderingSystem
+    // Instantiate a RenderingSystem
     public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
-        //creates a new iteratingSystem for the entities with following components
+        // Creates a new iteratingSystem for the entities with following components
         super(Family.all(TransformComponent.class, TextureComponent.class).get());
         this.gameBackground = Assets.heavenMultiplayerBackgroundTextureRegion;
 
         this.isMultiplayer = isMultiplayer;
 
-        //gets the components through a mapper
+        // Gets the components through a mapper
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
-        //creates a renderqueue
+        // Creates a renderqueue
         renderQueue = new Array<Entity>();
 
-        //sorts based on z-value: the highest z-value will be the bottom layer of the screen
+        // Sorts based on z-value: the highest z-value will be the bottom layer of the screen
         comparator = new Comparator<Entity>() {
             @Override
             public int compare(Entity entityA, Entity entityB) {
@@ -79,42 +79,41 @@ public class RenderingSystem extends IteratingSystem{
     // This method updates and draws
     @Override
     public void update(float deltaTime) {
-        //updates the iteratingSystem
+        // Updates the iteratingSystem
         super.update(deltaTime);
 
-        //sorts the renderQueue based on comparator (z-axis)
+        // Sorts the renderQueue based on comparator (z-axis)
         renderQueue.sort(comparator); //the entities are being sorted based on z-value
 
-        //cam.update();
         sb.begin();
         sb.draw(gameBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-        //iterates through all entities and gets the component.
+        // Iterates through all entities and gets the component.
         for (Entity entity : renderQueue) {
             TextureComponent textureComponent = textureMapper.get(entity);
             TransformComponent transformComponent = transformMapper.get(entity);
 
-            //checks if the component contains textureRegion
+            // Checks if the component contains textureRegion
             if (textureComponent.textureRegion == null) {
                 continue;
             }
 
-            //updates the score, which is saved to the angelComponent
+            // Updates the score, which is saved to the angelComponent
             if (entity.getComponent(AngelComponent.class) != null){
                 score = entity.getComponent(AngelComponent.class).SCORE;
             }
 
 
-           //width and height for the textures
+           // Width and height for the textures
             float width = textureComponent.textureRegion.getRegionWidth();
             float height = textureComponent.textureRegion.getRegionHeight();
 
-            //draws the textures
+            // Draws the textures
             sb.draw(textureComponent.textureRegion, transformComponent.pos.x, transformComponent.pos.y, width, height);
 
         }
 
-        //prints the updated score
+        // Prints the updated score
         BitmapFont font = Assets.font;
         int scoreInt = (int) score;
 
@@ -133,7 +132,7 @@ public class RenderingSystem extends IteratingSystem{
     }
 
 
-    //called at every render/update. Adds all entities from family in the queue
+    // Called at every render/update. Adds all entities from family in the queue
     @Override
     public void processEntity(Entity entity, float deltaTime) {
         renderQueue.add(entity);

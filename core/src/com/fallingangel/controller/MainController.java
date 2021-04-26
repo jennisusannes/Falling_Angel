@@ -233,10 +233,15 @@ public class MainController extends ClickListener {
                 clickSound.play(1f);
             }
             game.setScreen(menuView);
+            // Removes the multiplayer systems
             gameActionsController.removeSystem();
+            // Sends information to database that the multiplayerData is game over
             game.FBI.setMultiPlayerDataGameOver(true);
+            // Sends information to database that a multiplayer game is over
             game.FBI.setGameIsOver(true);
+            // Sets multiplayerData to game over
             gameActionsController.multiplayerController.multiPlayerData.setGameOver(true);
+            // Sends information to database that the room is empty
             game.FBI.leaveRoom();
             return true;
         }

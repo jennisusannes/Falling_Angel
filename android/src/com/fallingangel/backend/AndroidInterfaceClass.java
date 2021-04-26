@@ -48,7 +48,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         rooms = database.getReference("games");
     }
 
-    //Creates a new user with a random string for ID
+    // Creates a new user with a random string for ID
     @Override
     public void createUser() {
         String UID =  createID(30);
@@ -88,7 +88,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                 });
     }
 
-    // Reads the opponents score from the database, and updates the score that is beeing used in the game.
+    // Reads the opponents score from the database, and updates the score used in the game
     @Override
     public void setOpponentScore() {
         scoreListener = new ValueEventListener() {
@@ -113,27 +113,27 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         rooms.child(roomName).addValueEventListener(scoreListener);
     }
 
-    // sets whether a room is ready
+    // Sets whether a room is ready
     public void setRoomReady(boolean roomReady) {
         this.roomReady = roomReady;
     }
 
-    // Returns true if a room is ready
+    // Returns true if the room is ready
     public boolean getRoomReady() {
         return roomReady;
     }
 
-    // Sets a game to be a multiplayer
+    // Sets a game to be a multiplayer game
     public void setMultiplayer(boolean isMultiplayer) {
         this.isMultiplayer = isMultiplayer;
     }
 
-    // Sets a multiplayer game to be game over
+    // Sets the multiplayerData to be game over
     public void setMultiPlayerDataGameOver(boolean gameOver) {
         this.multiplayerdataGameover = gameOver;
     }
 
-    // sets game over
+    // Sets game over
     public void setGameIsOver(boolean gameIsOver) {
         this.gameIsOver = gameIsOver;
     }
@@ -192,14 +192,14 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         }
     }
 
-    //Returns opponents score
+    // Returns the opponents' score
     @Override
     public int getOpponentScore(){
         return opponentScore;
     }
 
 
-    // returns an integer that indicates a tie, winning or loosing
+    // Returns an integer that indicates a tie, winning or loosing
     // 0 is a tie, 1 is a win, 2 is a loose
     public int getGameWinner() {
         return gameWinner;
@@ -247,7 +247,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return gameWon;
     }
 
-    //Returns true if a multiplayer game is over
+    // Returns true if a multiplayer game is over
 
     @Override
     public boolean gameIsOver(){
@@ -317,7 +317,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
     // Found at: https://www.baeldung.com/java-random-string
     // Method for creating a random String
-
     public String createID(int IDLength) {
 
         int leftLimit = 97; // letter 'a'
@@ -334,5 +333,4 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         return generatedString;
     }
-
 }
