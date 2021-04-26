@@ -49,14 +49,14 @@ And in settings, you can choose your character
 
 
 You can play either single- or multiplayer games!
-In a multiplayer game, write the same room number as your opponent. Remember to give yourself a name. Gather most points and avoid the obstacles longer than your opponent.
+In a multiplayer game, write the same room number as your opponent. Remember to give yourself a name. The one with most points when someone collides is the winner!
 
 
 
 ![Hnet com-image (4)](https://user-images.githubusercontent.com/72627273/116005019-8ae14b00-a605-11eb-97e7-ef4e6c5e429d.gif)
 
 
-If you get more points than your opponent, but hit an obstacle before them it will be a tie between you two.
+
 
 Hope you enjoy falling angel!
 
