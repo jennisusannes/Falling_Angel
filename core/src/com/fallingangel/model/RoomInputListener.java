@@ -5,7 +5,7 @@ import com.fallingangel.controller.system.MultiplayerSystem;
 import com.fallingangel.game.FallingAngel;
 
 public class RoomInputListener implements Input.TextInputListener {
-    //Handles the input field for room number
+    // Handles the input field for room number
 
     public String room;
 

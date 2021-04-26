@@ -1,8 +1,5 @@
 package com.fallingangel.model;
 
-import com.badlogic.gdx.math.Vector3;
-import com.fallingangel.game.FallingAngel;
-
 public class MultiPlayerData {
 
     public boolean isGameOver = false;

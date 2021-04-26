@@ -19,16 +19,10 @@ public class WaitingRoomView extends ScreenAdapter {
 
     private Stage stage;
     private MainController mainController;
-    //private GameActionsController gameActionsController;
     private MultiplayerController multiplayerController;
     private Button backButton;
-    //public String roomNumber;
-    //public MultiPlayerData multiPlayerData;
     private FallingAngel game;
 
-   // RoomInputListener roomListener;
-    //NameInputListener nameListener;
-    //boolean alreadyConnected = false;
 
     public WaitingRoomView() {
         this.game = FallingAngel.getInstance();

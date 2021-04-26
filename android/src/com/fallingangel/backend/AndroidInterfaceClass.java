@@ -29,7 +29,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int score;
     private int opponentScore;
     private int numUsersInRoom;
-    private int multiplayerdataNumUsers;
     private boolean roomReady;
     private boolean isMultiplayer;
     private boolean gameIsOver = false;
@@ -110,34 +109,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         };
         rooms.child(roomName).addValueEventListener(scoreListener);
     }
-/*
-    @Override
-    public boolean isRoomReady() {
 
-        roomListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                int numUsersInRoom = (int) dataSnapshot.getChildrenCount();
-                if (numUsersInRoom == 1){
-                    room.setRoomReady(true);
-                } else {
-                    room.setRoomReady(false);
-                }
-            }
-
-            @Override
-            public void onCancelled( DatabaseError error) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadHighscore:onCancelled", error.toException());
-
-            }
-
-        };
-        rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
-        rooms.child(roomName).addValueEventListener(roomListener);
-        return room.isRoomReady();
-    }
-    */
     public void setRoomReady(boolean roomReady) {
         this.roomReady = roomReady;
     }
@@ -158,13 +130,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         this.gameIsOver = gameIsOver;
     }
 
-    public void setMultiPlayerDataNumUsers(int numUsers) {
-        this.multiplayerdataNumUsers = numUsers;
-    }
-
-    public int getMultiPlayerDataNumUsers() {
-        return multiplayerdataNumUsers;
-    }
 
     @Override
     public void numberOfUsersInRoom() {
@@ -180,20 +145,8 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                     } else {
                         setRoomReady(false);
                     }
-                    //setMultiPlayerDataNumUsers(numUsersInRoom);
-                    //game.mc.gameActionsController.multiplayerController.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
                 }
             }
-            /*
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!game.mc.gameActionsController.multiplayerController.multiPlayerData.isGameOver()) {
-                    numUsersInRoom = (int) dataSnapshot.getChildrenCount();
-                    rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
-
-                    game.mc.gameActionsController.multiplayerController.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
-                }
-            }*/
 
             @Override
             public void onCancelled( DatabaseError error) {
@@ -258,7 +211,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         opponentFinalScore = mpd.getScore();
                     }
                 }
-                //if (currentPlayerFinalScore >= opponentFinalScore) {
                 if (currentPlayerFinalScore == opponentFinalScore) {
                     gameWinner = 0;
                 }
@@ -328,29 +280,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     @Override
-    public void destroyRoom() {
-        rooms.removeEventListener(roomListener);
-        if(gameIsOver){
-            rooms.removeEventListener(scoreListener);
-        }
-        gameIsOver = false;
-        rooms.child(roomName).removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.i("Room was destroyed", "nice");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("error", e.toString());
-                    }
-                });
-
-    }
-
-    @Override
     public void leaveRoom() {
         if(gameIsOver) {
             rooms.child(roomName).removeValue()
@@ -367,7 +296,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         }
                     });
         }
-        //gameIsOver = false;
     }
 
     // Found at: https://www.baeldung.com/java-random-string

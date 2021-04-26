@@ -23,7 +23,6 @@ public class GameOverView extends ScreenAdapter {
     private Stage stage;
     private Button exitButton;
     private Button playAgainButton;
-    //private Texture background;
     private BitmapFont font = new BitmapFont();
 
     public GameOverView(){
