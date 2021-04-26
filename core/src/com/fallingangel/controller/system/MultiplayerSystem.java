@@ -6,7 +6,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalSystem;
-import com.fallingangel.backend.MultiPlayerData;
+import com.fallingangel.controller.MultiplayerController;
+import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.StateComponent;
@@ -15,8 +16,9 @@ import com.fallingangel.model.component.TransformComponent;
 import java.util.ArrayList;
 
 public class MultiplayerSystem extends IntervalSystem {
-    //System used to update the score in the database while playing a multiplayer game
-
+    // System used to update the score in the database while playing a multiplayer game
+    private FallingAngel game;
+    public MultiplayerController multiplayerController;
     public static String roomNumber = "";
     public Engine engine;
 
@@ -32,13 +34,15 @@ public class MultiplayerSystem extends IntervalSystem {
 
     @Override
     public void addedToEngine(final Engine engine) {
+        this.game = FallingAngel.getInstance();
         this.engine = engine;
+        //this.multiplayerController = game.mc.gameActionsController.multiplayerController;
         Family family = Family.all(AngelComponent.class).get();
         for (Entity entity : engine.getEntitiesFor(family)){
             playerEntities.add(entity);
         }
 
-        //adds an entitylistener so that it gets notifyed when an entity is removed
+        // Adds an entitylistener so that it gets notified when an entity is removed
         engine.addEntityListener(family, new EntityListener() {
             @Override
             public void entityAdded(Entity entity) {
@@ -53,7 +57,20 @@ public class MultiplayerSystem extends IntervalSystem {
         });
     }
 
-
+    @Override
+    protected void updateInterval () {
+        for (Entity entity : playerEntities){
+            AngelComponent angelComponent = angelMapper.get(entity);
+            TransformComponent transformComponent = transformMapper.get(entity);
+            StateComponent stateComponent = stateMapper.get(entity);
+            this.multiplayerController = game.mc.gameActionsController.multiplayerController;
+            MultiPlayerData mpd = game.mc.gameActionsController.multiplayerController.multiPlayerData;
+            mpd.setScore((int) (angelComponent.SCORE));
+            game.FBI.updateScore(mpd);
+            game.FBI.setOpponentScore();
+        }
+    }
+    /*
     @Override
     protected void updateInterval () {
         for (Entity entity : playerEntities){
@@ -61,13 +78,10 @@ public class MultiplayerSystem extends IntervalSystem {
             TransformComponent transformComponent = transformMapper.get(entity);
             StateComponent stateComponent = stateMapper.get(entity);
 
-            MultiPlayerData mpd = FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData;
-            mpd.score = (int) (angelComponent.SCORE);
-            /*if (stateComponent.state == angelComponent.STATE_HIT){
-                mpd.setGameOver(true);
-            }*/
-            FallingAngel.getInstance().FBI.updateScore(mpd);
-            FallingAngel.getInstance().FBI.setOpponentScore();
+            MultiPlayerData player1 = game.mc.multiplayerController.multiPlayerData;
+            player1.setScore((int) (angelComponent.SCORE));
+            game.FBI.update(player1);
         }
     }
+     */
 }

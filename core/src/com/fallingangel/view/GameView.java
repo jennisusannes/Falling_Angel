@@ -57,8 +57,6 @@ public class GameView extends ScreenAdapter {
         return button;
     }
 
-
-
     public void draw() {
         this.stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -68,8 +66,6 @@ public class GameView extends ScreenAdapter {
         }
         stage.draw();
     }
-
-
 
     //if one of the gameOver fields from database are true
     //state = GAME_OVER;

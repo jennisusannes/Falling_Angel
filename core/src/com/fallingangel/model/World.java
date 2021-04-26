@@ -26,24 +26,15 @@ public class World {
 
     public static Random rand = new Random();
 
-    public static final int VP_WIDTH  = 1714;
-    public static final int VP_HEIGHT = 4096;
-
     public static int score;
     public int state;
 
     public Entity angel;
-    public Entity background;
-    public Entity coin;
-    public Entity plane;
-    public Entity obstacle;
     private FallingAngel game;
     private Animation<TextureRegion> character = Assets.pigAnimation;
 
     public static final int WORLD_STATE_RUNNING = 0;
-	public static final int WORLD_STATE_NEXT_LEVEL = 1;
 	public static final int WORLD_STATE_GAME_OVER = 2;
-	public static final Vector2 gravity = new Vector2(0, -12);
 
     private Engine engine;
 
@@ -58,16 +49,11 @@ public class World {
         this.character = chosenCharacter;
     }
 
-    public Animation<TextureRegion> getChosenCharacter() {
-        return character;
-    }
 
     //main method that creates the world
     public void create(){
         this.state = WORLD_STATE_RUNNING;
         this.angel = createAngel();
-        //this.background = createBackground();
-        //generateObjects();
 
 
         //creating the drones
@@ -232,10 +218,10 @@ public class World {
         //add texture to the obstacle.
         textureComponent.textureRegion = Assets.devilTexture;
 
-        //add the position of the plane
+        //add the position of the devil
         transformComponent.pos.set(x, y, 4.0f);
 
-        //random which way the drone starts to go (x-direction)
+        //random which way the devil starts to go (x-direction)
         int a = 1;
         int b = -1;
         int randomPick = rand.nextBoolean() ? a : b;
@@ -250,6 +236,7 @@ public class World {
     public Entity createCoin(float x, float y){
         Entity coinEntity = new Entity();
 
+        //create new components
         TextureComponent textureComponent = new TextureComponent();
         TransformComponent transformComponent = new TransformComponent();
         AnimationComponent animationComponent = new AnimationComponent();
@@ -257,6 +244,7 @@ public class World {
         CoinComponent coinComponent = new CoinComponent();
         BoundsComponent boundsComponent = new BoundsComponent();
 
+        //add the comp. to the entity
         coinEntity.add(textureComponent);
         coinEntity.add(transformComponent);
         coinEntity.add(animationComponent);
@@ -264,17 +252,16 @@ public class World {
         coinEntity.add(coinComponent);
         coinEntity.add(boundsComponent);
 
+        //set the position
         transformComponent.pos.set(x, y, 0.0f);
         animationComponent.animations.put(CoinComponent.STATE_NORMAL, Assets.coinAnimation);
         stateComponent.set(CoinComponent.STATE_NORMAL);
 
-
+        //add the comp. to the entity
         engine.addEntity(coinEntity);
 
         return coinEntity;
     }
-
-
 
 
 }

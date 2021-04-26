@@ -1,19 +1,12 @@
 package com.fallingangel.backend;
 
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.utils.ImmutableArray;
+import com.fallingangel.model.MultiPlayerData;
 
-import java.util.HashMap;
+public class CoreInterfaceClass implements FireBaseInterface {
 
-public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
     public void createUser() {
-
-    }
-
-    @Override
-    public void updateScore(MultiPlayerData mpd) {
 
     }
 
@@ -23,13 +16,23 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
+    public void setMultiplayer(boolean isMultiplayer) {
+
+    }
+
+    @Override
     public void setOpponentScore() {
 
     }
 
-
     @Override
     public void numberOfUsersInRoom() {
+
+    }
+
+    @Override
+    public void updateScore(MultiPlayerData mpd) {
+
     }
 
     @Override
@@ -38,15 +41,14 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public int getGameTie() {
-        return 0;
-    }
-
-    @Override
     public boolean gameWon() {
         return false;
     }
 
+    @Override
+    public int getGameWinner() {
+        return 0;
+    }
 
     @Override
     public boolean gameIsOver() {
@@ -59,9 +61,32 @@ public class CoreInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void destroyRoom() {
+    public String createID(int IDLength) {
+        return null;
+    }
+
+    @Override
+    public void setRoomReady(boolean roomReady) {
 
     }
 
+    @Override
+    public void setMultiPlayerDataGameOver(boolean gameOver) {
 
+    }
+
+    @Override
+    public boolean getRoomReady() {
+        return false;
+    }
+
+    @Override
+    public void leaveRoom() {
+
+    }
+
+    @Override
+    public void setGameIsOver(boolean gameIsOver) {
+
+    }
 }

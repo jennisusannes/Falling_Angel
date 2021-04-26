@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.fallingangel.backend.MultiPlayerData;
+import com.fallingangel.model.MultiPlayerData;
 import com.fallingangel.controller.system.AngelSystem;
 import com.fallingangel.controller.system.AnimationSystem;
 import com.fallingangel.controller.system.BoundsSystem;
@@ -24,6 +24,7 @@ import com.fallingangel.controller.system.RenderingSystem;
 import com.fallingangel.controller.system.StateSystem;
 import com.fallingangel.game.FallingAngel;
 import com.fallingangel.model.Assets;
+import com.fallingangel.model.SettingsModel;
 import com.fallingangel.model.World;
 import com.fallingangel.model.component.AngelComponent;
 import com.fallingangel.model.component.BoundsComponent;
@@ -35,19 +36,14 @@ import com.fallingangel.view.GameView;
 import com.fallingangel.view.PauseView;
 
 public class GameActionsController implements EventListener {
-    /*TODO:
-    setter hvilken character som er valgt i settings og setter den characteren i world
-    denne her opprettes kun etter at spillet er trykket på play
-    styrer om spillet er på pause eller i spill
-    holde styr på valgt level
-    håndterer skiftet til gameoverview når man dør
-     */
     public FallingAngel game;
     public GameView gameView;
     public PauseView pauseView = new PauseView();
     public GameOverView gameOverView = new GameOverView();
-    public GameOverMultiPlayerView gameOverMultiPlayerView = new GameOverMultiPlayerView();
-    public MainController mainController;
+    public GameOverMultiPlayerView gameOverMultiPlayerView;
+    protected MainController mainController;
+    public MultiplayerController multiplayerController;
+    public SettingsModel settingsModel;
 
     private Sound clickSound;
 
@@ -70,7 +66,7 @@ public class GameActionsController implements EventListener {
 
     // Constructs the GameActionsController depending on whether the game is single player or multi player
     public GameActionsController(boolean isMultiplayer) {
-        // Sets the game as the Singleton object Falling Angel
+        // Sets the game as the Falling Angel object
         this.game = FallingAngel.getInstance();
 
         // Sets the controller as the mainController
@@ -85,6 +81,8 @@ public class GameActionsController implements EventListener {
         this.engine = mainController.engine;
         this.world = mainController.world;
 
+        this.settingsModel = mainController.settingsModel;
+
         // Adds all the systems to the engine
         engine.addSystem(new AngelSystem(world));
         engine.addSystem(new ObstacleSystem());
@@ -93,13 +91,14 @@ public class GameActionsController implements EventListener {
         engine.addSystem(new MovementSystem());
         engine.addSystem(new AnimationSystem());
         engine.addSystem(new CollisionSystem(world));
-        engine.addSystem(new RenderingSystem(game.batch,isMultiplayer));
         engine.addSystem(new StateSystem());
         engine.addSystem(new BoundsSystem());
         engine.addSystem(new CoinSystem());
 
         // Adds the RenderingSystem based on whether the gameActionsController is single player or multi player
         if (isMultiplayer){
+            game.FBI.setMultiplayer(true);
+            this.multiplayerController = new MultiplayerController();
             engine.addSystem(new MultiplayerSystem(1));
             engine.addSystem(new RenderingSystem(game.batch, true));
         }
@@ -182,20 +181,22 @@ public class GameActionsController implements EventListener {
         // Player dies
         if (world.state == World.WORLD_STATE_GAME_OVER) {
             state = GAME_OVER; // Sets state to GAME OVER
-            //TODO: gameOver()
             pauseSystem();
         }
 
         // A player dies in multi player
         if (isMultiplayer && state == GAME_OVER){
-            game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
+            gameOverMultiPlayerView = new GameOverMultiPlayerView();
+            game.FBI.setGameIsOver(true);
+            multiplayerController.multiPlayerData.setGameOver(true);
+            game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.gameWon();
         }
 
         // Sets the state to GAME OVER after a multi player game
         if(isMultiplayer && game.FBI.gameIsOver()){
             state = GAME_OVER;
         }
-
     }
 
     // This method sets all systems updating on pause
@@ -226,6 +227,10 @@ public class GameActionsController implements EventListener {
     // This method removes all systems
     public void removeSystem() {
        engine.removeAllEntities();
+       if (isMultiplayer) {
+           engine.removeSystem(engine.getSystem(MultiplayerSystem.class));
+           engine.removeSystem(engine.getSystem(RenderingSystem.class));
+       }
     }
 
     // Method for pausing game
@@ -256,10 +261,12 @@ public class GameActionsController implements EventListener {
     // When the player dies and the game is over, the player is sent to GameOverView
     public void gameOver() {
         if (isMultiplayer){
-            MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
             removeSystem();
+            MultiPlayerData mpd = multiplayerController.multiPlayerData;
+            multiplayerController.multiPlayerData.setGameOver(true);
             game.setScreen(gameOverMultiPlayerView);
-            game.mc.waitingRoomView.multiPlayerData.setGameOver(true);
+            game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.setGameIsOver(true);
             game.FBI.updateScore(mpd);
             isMultiplayer = false;
         }
@@ -269,57 +276,65 @@ public class GameActionsController implements EventListener {
         }
     }
 
-
     // Game controller listens to buttons in the different views and changes between views
     // Checks if sound is on and then plays click sound when button is clicked
     public boolean handle(Event event) {
+
+        // Pauses the game if the pause button is pressed
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             pause();
             game.setScreen(pauseView);
             return true;
         }
+
+        // Resumes the game if the resume button is pressed
         else if (event.getListenerActor().equals(pauseView.getResumeButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             resume();
             game.setScreen(gameView);
             return true;
         }
+        // Exits the game if the exit button is pressed
         else if (event.getListenerActor().equals(pauseView.getExitButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             exit();
             game.mc.setStartScreen();
             return true;
         }
+        // Exits the gameOverView and sets the menuView
         else if (event.getListenerActor().equals(gameOverView.getExitButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             game.mc.setStartScreen();
             return true;
         }
+        // Starts a new game on the same level
         else if (event.getListenerActor().equals(gameOverView.getPlayAgainButton())) {
-            if (game.soundOn()) {
+            if (settingsModel.soundOn()) {
                 clickSound.play(0.2f);
             }
             game.mc.gameActionsController = new GameActionsController(false);
             game.mc.gameActionsController.setGameScreen(false);
             return true;
         }
+        // Exits the gameOverMultiPlayerView and sets the menuView
         else if (event.getListenerActor().equals(gameOverMultiPlayerView.getExitButton())){
-            if (game.soundOn()){
+            if (settingsModel.soundOn()){
                 clickSound.play(0.2f);
             }
-            game.FBI.destroyRoom();
+            game.FBI.leaveRoom();
+            game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.setGameIsOver(true);
+            multiplayerController.multiPlayerData.setGameOver(true);
             game.mc.setStartScreen();
-            MultiPlayerData mpd = game.mc.waitingRoomView.multiPlayerData;
-            game.mc.waitingRoomView.multiPlayerData.setGameOver(false);
             return true;
         }
         else {

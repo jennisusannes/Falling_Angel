@@ -13,14 +13,10 @@ public final class FallingAngel extends Game implements ApplicationListener {
 
 	private static FallingAngel INSTANCE; // Initializing the game as INSTANCE
 	public MainController mc;
-
 	public com.fallingangel.backend.FireBaseInterface FBI;
-	//private FirebaseAuth mAuth;
 	public SpriteBatch batch;
 	public Music music;
 	public BitmapFont font;
-
-
 
 	private FallingAngel(com.fallingangel.backend.FireBaseInterface fireBaseInterface){
 		FBI = fireBaseInterface;
@@ -39,11 +35,6 @@ public final class FallingAngel extends Game implements ApplicationListener {
 	public static FallingAngel getInstance() {
 		return INSTANCE;
 	}
-
-	public boolean soundOn(){
-		return music.isPlaying();
-	}
-
 
 	@Override
 	public void create () {

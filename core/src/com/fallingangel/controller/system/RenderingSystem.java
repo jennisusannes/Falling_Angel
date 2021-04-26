@@ -76,18 +76,14 @@ public class RenderingSystem extends IteratingSystem{
             this.controller = game.mc;
             this.gameBackground = controller.getGameBackground(); 
         }
-
-
     }
-
-
 
     // Sets chosen level
     public void setLevel(TextureRegion chosenLevel){
         this.gameBackground = chosenLevel;
     }
 
-    //This method updates and draws
+    // This method updates and draws
     @Override
     public void update(float deltaTime) {
         //updates the iteratingSystem
@@ -138,8 +134,16 @@ public class RenderingSystem extends IteratingSystem{
         if (isMultiplayer){
             String opponentScoreString = Integer.toString(this.game.FBI.getOpponentScore());
             font.getData().setScale(8, 8);
+            font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.85f, Gdx.graphics.getHeight()*0.981f);
+        }
+
+        /*
+         if (isMultiplayer){
+            String opponentScoreString = Integer.toString(this.game.FBI.getRoom().getPlayer2().getScore());
+            font.getData().setScale(8, 8);
             font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight()*0.981f);
         }
+         */
 
         sb.end();
         renderQueue.clear();

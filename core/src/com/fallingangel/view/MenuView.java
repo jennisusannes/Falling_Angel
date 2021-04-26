@@ -105,12 +105,12 @@ public class MenuView extends ScreenAdapter {
         return settingsButton;
     }
 
-/*
+    // Removed highscorelist and moved help button
+    /*
     public void setHelpButton() {
         this.helpButton = makeButton(Assets.helpButton,Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.15f, Gdx.graphics.getWidth()*0.67f - 200*0.33f, Gdx.graphics.getHeight() * 0.15f);
     }
-
- */
+    */
     public void setHelpButton() {
         this.helpButton = makeButton(Assets.helpButton,Gdx.graphics.getWidth()*0.12f, Gdx.graphics.getWidth()*0.12f, Gdx.graphics.getWidth()*0.82f, Gdx.graphics.getHeight() * 0.03f);
     }

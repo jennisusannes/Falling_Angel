@@ -1,5 +1,8 @@
 package com.fallingangel.backend;
+import com.fallingangel.controller.GameActionsController;
+import com.fallingangel.controller.MultiplayerController;
 import com.fallingangel.game.FallingAngel;
+import com.fallingangel.model.MultiPlayerData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -26,9 +29,12 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private int score;
     private int opponentScore;
     private int numUsersInRoom;
+    private boolean roomReady;
+    private boolean isMultiplayer;
     private boolean gameIsOver = false;
+    private boolean multiplayerdataGameover;
     private boolean gameWon;
-    private int gameTie = 0;
+    private int gameWinner = 0;
     private ValueEventListener roomListener;
     private ValueEventListener scoreListener;
     private ValueEventListener gameIsOverListener;
@@ -47,20 +53,19 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         String UID =  createID(30);
         this.user = new User(UID);
         users.child(UID).setValue(user)
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    System.out.println("User created in db");
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e("Error", e.toString());
-                        }
-                    });
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        System.out.println("User created in db");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Error", e.toString());
+                    }
+                });
     }
-
 
 
     @Override
@@ -88,9 +93,9 @@ public class AndroidInterfaceClass implements FireBaseInterface {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
                     String key = ds.getKey();
-                    if (!key.equals(user.getUID())){//TODO Check if this line of code is needed: && !key.equals("Usernum")) {
-                       MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
-                       opponentScore = opponent.getScore();
+                    if (!key.equals(user.getUID())){
+                        MultiPlayerData opponent = ds.getValue(MultiPlayerData.class);
+                        opponentScore = opponent.getScore();
                     }
                 }
             }
@@ -105,18 +110,41 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         rooms.child(roomName).addValueEventListener(scoreListener);
     }
 
+    public void setRoomReady(boolean roomReady) {
+        this.roomReady = roomReady;
+    }
+
+    public boolean getRoomReady() {
+        return roomReady;
+    }
+
+    public void setMultiplayer(boolean isMultiplayer) {
+        this.isMultiplayer = isMultiplayer;
+    }
+
+    public void setMultiPlayerDataGameOver(boolean gameOver) {
+        this.multiplayerdataGameover = gameOver;
+    }
+
+    public void setGameIsOver(boolean gameIsOver) {
+        this.gameIsOver = gameIsOver;
+    }
 
 
     @Override
     public void numberOfUsersInRoom() {
         roomListener = new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData.isGameOver()) {
+                if(!multiplayerdataGameover) {
                     numUsersInRoom = (int) dataSnapshot.getChildrenCount();
                     rooms.child(roomName).child(user.getUID()).child("numberOfUsersInRoom").setValue(numUsersInRoom);
-
-                    FallingAngel.getInstance().mc.waitingRoomView.multiPlayerData.setNumberOfUsersInRoom(numUsersInRoom);
+                    if (numUsersInRoom == 2){
+                        setRoomReady(true);
+                    } else {
+                        setRoomReady(false);
+                    }
                 }
             }
 
@@ -126,16 +154,16 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                 Log.w(TAG, "loadHighscore:onCancelled", error.toException());
 
             }
-
         };
         rooms.child(roomName).addValueEventListener(roomListener);
     }
+
 
     // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
     @Override
     public void updateScore(MultiPlayerData mpd) {
         this.getHighscoreFromDB();
-        if(FallingAngel.getInstance().mc.gameActionsController.isMultiplayer) {
+        if(isMultiplayer) {
             rooms.child(roomName).child(this.user.getUID()).setValue(mpd)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -155,14 +183,14 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         }
     }
 
-
     @Override
     public int getOpponentScore(){
         return opponentScore;
     }
 
-    public int getGameTie(){
-        return gameTie;
+
+    public int getGameWinner() {
+        return gameWinner;
     }
 
     @Override
@@ -183,14 +211,18 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                         opponentFinalScore = mpd.getScore();
                     }
                 }
-                if (currentPlayerFinalScore >= opponentFinalScore) {
-                    if (currentPlayerFinalScore == opponentFinalScore) {
-                        gameTie = 1;
-                    }
-                    if (currentPlayerFinalScore > opponentFinalScore) {
-                        gameWon = true;
-                    }
-                } else gameWon = false;
+                if (currentPlayerFinalScore == opponentFinalScore) {
+                    gameWinner = 0;
+                }
+                if (currentPlayerFinalScore > opponentFinalScore) {
+                    gameWinner = 1;
+                    gameWon = true;
+                }
+                else if (currentPlayerFinalScore < opponentFinalScore) {
+                    gameWinner = 2;
+                    gameWon = false;
+                }
+
             }
 
             @Override
@@ -223,7 +255,6 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
 
-
     @Override
     public void getHighscoreFromDB(){
         highScoreListener = new ValueEventListener() {
@@ -249,26 +280,22 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     @Override
-    public void destroyRoom() {
-        rooms.removeEventListener(roomListener);
-        if(gameIsOver){
-            rooms.removeEventListener(scoreListener);
+    public void leaveRoom() {
+        if(gameIsOver) {
+            rooms.child(roomName).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.i("Room was destroyed", "nice");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("error", e.toString());
+                        }
+                    });
         }
-        gameIsOver = false;
-        rooms.child(roomName).removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.i("Room was destroyed", "nice");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("error", e.toString());
-                    }
-                });
-
     }
 
     // Found at: https://www.baeldung.com/java-random-string
@@ -291,7 +318,4 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return generatedString;
     }
 
-
-
 }
-
