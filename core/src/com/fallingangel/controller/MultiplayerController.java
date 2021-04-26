@@ -70,15 +70,19 @@ public class MultiplayerController {
     }
 
     public int getWinnerStatus() {
-        // Tie
-        int status = 0;
+
+        int status;
         // Player 1 wins
-        if(game.FBI.gameWon())  {
+        if(game.FBI.getGameWinner() == 1)  {
             status = 1;
         }
         // Player 2 wins
-        else if (!game.FBI.gameWon()){
+        else if (game.FBI.getGameWinner() == 2){
             status = 2;
+        }
+        // Tie
+        else {
+            status = 3;
         }
         // return winner
         return status;

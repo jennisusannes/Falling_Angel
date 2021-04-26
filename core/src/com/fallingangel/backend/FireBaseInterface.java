@@ -10,8 +10,8 @@ public interface FireBaseInterface {
     public void numberOfUsersInRoom();
     public void updateScore(MultiPlayerData mpd);
     public int getOpponentScore();
-    public int getGameTie();
     public boolean gameWon();
+    public int getGameWinner();
     public boolean gameIsOver();
     public void getHighscoreFromDB();
     public void destroyRoom();

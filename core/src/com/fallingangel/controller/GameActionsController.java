@@ -191,6 +191,7 @@ public class GameActionsController implements EventListener {
             game.FBI.setGameIsOver(true);
             multiplayerController.multiPlayerData.setGameOver(true);
             game.FBI.setMultiPlayerDataGameOver(true);
+            game.FBI.gameWon();
         }
 
         // Sets the state to GAME OVER after a multi player game

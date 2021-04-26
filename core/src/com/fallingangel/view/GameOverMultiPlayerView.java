@@ -42,7 +42,7 @@ public class GameOverMultiPlayerView extends ScreenAdapter {
         else if (multiplayerController.getWinnerStatus() == 2) {
             game.batch.draw(Assets.youLose, Gdx.graphics.getWidth()*0.5f - Assets.youLose.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
-        else if (multiplayerController.getWinnerStatus() == 0) {
+        else if (multiplayerController.getWinnerStatus() == 3) {
             game.batch.draw(Assets.tie, Gdx.graphics.getWidth()*0.5f - Assets.tie.getWidth()*0.5f, Gdx.graphics.getHeight()*0.81f);
         }
         game.batch.end();
