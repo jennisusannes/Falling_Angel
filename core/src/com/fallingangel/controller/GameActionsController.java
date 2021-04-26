@@ -283,7 +283,7 @@ public class GameActionsController implements EventListener {
         // Pauses the game if the pause button is pressed
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             pause();
             game.setScreen(pauseView);
@@ -293,7 +293,7 @@ public class GameActionsController implements EventListener {
         // Resumes the game if the resume button is pressed
         else if (event.getListenerActor().equals(pauseView.getResumeButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             resume();
             game.setScreen(gameView);
@@ -302,7 +302,7 @@ public class GameActionsController implements EventListener {
         // Exits the game if the exit button is pressed
         else if (event.getListenerActor().equals(pauseView.getExitButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             exit();
             game.mc.setStartScreen();
@@ -311,7 +311,7 @@ public class GameActionsController implements EventListener {
         // Exits the gameOverView and sets the menuView
         else if (event.getListenerActor().equals(gameOverView.getExitButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.mc.setStartScreen();
             return true;
@@ -319,7 +319,7 @@ public class GameActionsController implements EventListener {
         // Starts a new game on the same level
         else if (event.getListenerActor().equals(gameOverView.getPlayAgainButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.mc.gameActionsController = new GameActionsController(false);
             game.mc.gameActionsController.setGameScreen(false);
@@ -328,7 +328,7 @@ public class GameActionsController implements EventListener {
         // Exits the gameOverMultiPlayerView and sets the menuView
         else if (event.getListenerActor().equals(gameOverMultiPlayerView.getExitButton())){
             if (settingsModel.soundOn()){
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.FBI.leaveRoom();
             game.FBI.setMultiPlayerDataGameOver(true);

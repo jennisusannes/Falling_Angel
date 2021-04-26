@@ -20,11 +20,6 @@ import java.util.Comparator;
 
 public class RenderingSystem extends IteratingSystem{
 
-    /**
-     * RenderingSystem, used for drawing
-     * **/
-
-
     static final float FRUSTUM_WIDTH = Gdx.graphics.getWidth();
     static final float FRUSTUM_HEIGHT = Gdx.graphics.getHeight();
 
@@ -43,8 +38,6 @@ public class RenderingSystem extends IteratingSystem{
     public static float score = 0;
     boolean isMultiplayer;
 
-
-    //public FallingAngel game = FallingAngel.getInstance();
 
     //Instanciate a RenderingSystem
     public RenderingSystem(SpriteBatch sb, boolean isMultiplayer) {
@@ -124,8 +117,6 @@ public class RenderingSystem extends IteratingSystem{
         //prints the updated score
         BitmapFont font = Assets.font;
         int scoreInt = (int) score;
-        // TODO do it
-        //this.game.FBI.updateScore((int)AngelComponent.SCORE);
 
         String scoreString = String.valueOf(scoreInt);
         font.getData().setScale(8, 8);
@@ -136,14 +127,6 @@ public class RenderingSystem extends IteratingSystem{
             font.getData().setScale(8, 8);
             font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.85f, Gdx.graphics.getHeight()*0.981f);
         }
-
-        /*
-         if (isMultiplayer){
-            String opponentScoreString = Integer.toString(this.game.FBI.getRoom().getPlayer2().getScore());
-            font.getData().setScale(8, 8);
-            font.draw(sb, opponentScoreString, Gdx.graphics.getWidth()*0.9f, Gdx.graphics.getHeight()*0.981f);
-        }
-         */
 
         sb.end();
         renderQueue.clear();

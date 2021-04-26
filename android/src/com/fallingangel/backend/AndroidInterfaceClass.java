@@ -298,7 +298,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     // Deletes a room in the database when beeing called
     @Override
     public void leaveRoom() {
-        if(gameIsOver) {
+        if(gameIsOver && roomName != null) {
             rooms.child(roomName).removeValue()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

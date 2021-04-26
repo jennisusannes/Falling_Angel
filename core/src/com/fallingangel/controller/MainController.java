@@ -85,14 +85,14 @@ public class MainController extends ClickListener {
     public boolean handle(Event event) {
         if (event.getListenerActor().equals(menuView.getSinglePlayerButton())) {
             if (settingsModel.soundOn()) {
-                    clickSound.play(0.2f);
+                    clickSound.play(1f);
             }
             game.setScreen(levelView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getMultiPlayerButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             this.gameActionsController = new GameActionsController(true);
             return true;
@@ -119,7 +119,7 @@ public class MainController extends ClickListener {
 
         else if (event.getListenerActor().equals(menuView.getSettingsButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(settingsView);
             return true;
@@ -127,35 +127,35 @@ public class MainController extends ClickListener {
 
         else if (event.getListenerActor().equals(settingsView.getBackButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(menuView.getHelpButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(helpView1);
             return true;
         }
         else if (event.getListenerActor().equals(helpView1.getNextButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(helpView2);
             return true;
         }
         else if (event.getListenerActor().equals(helpView2.getNextButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(helpView3);
             return true;
         }
         else if (event.getListenerActor().equals(helpView3.getNextButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(menuView);
             return true;
@@ -168,8 +168,8 @@ public class MainController extends ClickListener {
             return true;
         }
         else if (event.getListenerActor().equals(settingsView.getMusicOffButton())){
-            clickSound.play(0.2f);
-            game.music.setVolume(0.02f);
+            clickSound.play(1f);
+            game.music.setVolume(0.1f);
             game.music.play();
             settingsView.getMusicOffButton().setPosition(-1000,-1000);
             settingsView.getMusicOnButton().setPosition(Gdx.graphics.getWidth()*0.55f, Gdx.graphics.getHeight() * 0.62f);
@@ -177,7 +177,7 @@ public class MainController extends ClickListener {
         }
         else if (event.getListenerActor().equals(settingsView.getPigButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             world.setChosenCharacter(Assets.pigAnimation);
             settingsModel.setAngel("pig");
@@ -185,7 +185,7 @@ public class MainController extends ClickListener {
         }
         else if (event.getListenerActor().equals(settingsView.getBunnyButton())){
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             world.setChosenCharacter(Assets.bunnyAnimation);
             settingsModel.setAngel("bunny");
@@ -193,7 +193,7 @@ public class MainController extends ClickListener {
         }
         else if (event.getListenerActor().equals(levelView.getHeavenButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             setGameBackground(Assets.heavenBackgroundTextureRegion);
             setPauseBackground(Assets.heavenBackgroundPauseTextureRegion);
@@ -203,7 +203,7 @@ public class MainController extends ClickListener {
         }
         else if (event.getListenerActor().equals(levelView.getSunsetButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             setGameBackground(Assets.sunsetBackgroundTextureRegion);
             setPauseBackground(Assets.sunsetBackgroundPauseTextureRegion);
@@ -213,7 +213,7 @@ public class MainController extends ClickListener {
         }
         else if (event.getListenerActor().equals(levelView.getHellButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             setGameBackground(Assets.hellBackgroundTextureRegion);
             setPauseBackground(Assets.hellBackgroundPauseTextureRegion);
@@ -223,16 +223,17 @@ public class MainController extends ClickListener {
         }
         else if (event.getListenerActor().equals(levelView.getBackButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(menuView);
             return true;
         }
         else if (event.getListenerActor().equals(gameActionsController.multiplayerController.waitingRoomView.getBackButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.setScreen(menuView);
+            gameActionsController.removeSystem();
             game.FBI.setMultiPlayerDataGameOver(true);
             game.FBI.setGameIsOver(true);
             gameActionsController.multiplayerController.multiPlayerData.setGameOver(true);
