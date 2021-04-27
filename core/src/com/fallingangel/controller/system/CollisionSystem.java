@@ -103,7 +103,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
             if (rec.overlaps(angelBounds.rectangle)) {
                 if (settingsModel.soundOn()) {
-                    collisionSound.play(0.05f);
+                    collisionSound.play(0.25f);
                 }
                 angelSystem.hitObstacle(angel);
             }
@@ -117,7 +117,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
             if (droneBounds.rectangle.overlaps(angelBounds.rectangle)) {
                 if (settingsModel.soundOn()) {
-                    collisionSound.play(0.05f);
+                    collisionSound.play(0.25f);
                 }
                 angelSystem.hitDrone(angel);
             }
@@ -131,7 +131,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
             if (devilBounds.rectangle.overlaps(angelBounds.rectangle)) {
                 if (settingsModel.soundOn()) {
-                    collisionSound.play(0.05f);
+                    collisionSound.play(0.25f);
                 }
                 angelSystem.hitDrone(angel);
             }
@@ -147,7 +147,7 @@ public class CollisionSystem extends EntitySystem { //EntitySystem: abstact clas
 
             if (coinBounds.rectangle.overlaps(angelBounds.rectangle)) {
                 if (settingsModel.soundOn()) {
-                    coinSound.play(0.2f);
+                    coinSound.play(1f);
                 }
                 angel.getComponent(AngelComponent.class).COINS_HIT += coin.getComponent(CoinComponent.class).SCORE;
                 coinPos.pos.y = -textureComponent.textureRegion.getRegionHeight() - Gdx.graphics.getHeight() / 2;

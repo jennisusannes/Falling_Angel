@@ -41,13 +41,14 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     private ValueEventListener highScoreListener;
     private ValueEventListener gameWonListener;
 
+    // Constructor
     public AndroidInterfaceClass(){
         database = FirebaseDatabase.getInstance("https://falling-angel-74f3f-default-rtdb.europe-west1.firebasedatabase.app/");
         users = database.getReference("users");
         rooms = database.getReference("games");
     }
 
-
+    // Creates a new user with a random string for ID
     @Override
     public void createUser() {
         String UID =  createID(30);
@@ -68,6 +69,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
 
+    // Connects a user to specific room
     @Override
     public void connectToRoom(String roomName, MultiPlayerData mpd) {
         this.roomName = roomName;
@@ -86,6 +88,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
                 });
     }
 
+    // Reads the opponents score from the database, and updates the score used in the game
     @Override
     public void setOpponentScore() {
         scoreListener = new ValueEventListener() {
@@ -110,27 +113,33 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         rooms.child(roomName).addValueEventListener(scoreListener);
     }
 
+    // Sets whether a room is ready
     public void setRoomReady(boolean roomReady) {
         this.roomReady = roomReady;
     }
 
+    // Returns true if the room is ready
     public boolean getRoomReady() {
         return roomReady;
     }
 
+    // Sets a game to be a multiplayer game
     public void setMultiplayer(boolean isMultiplayer) {
         this.isMultiplayer = isMultiplayer;
     }
 
+    // Sets the multiplayerData to be game over
     public void setMultiPlayerDataGameOver(boolean gameOver) {
         this.multiplayerdataGameover = gameOver;
     }
 
+    // Sets game over
     public void setGameIsOver(boolean gameIsOver) {
         this.gameIsOver = gameIsOver;
     }
 
 
+    // Sets if a room is ready or not based on how many users are in the game room
     @Override
     public void numberOfUsersInRoom() {
         roomListener = new ValueEventListener() {
@@ -159,7 +168,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
 
-    // Checks database for existing highscore and makes sure that the current highscore does not get overwritten
+    // Checks database for existing highscore and makes sure that the current highscore gets updated
     @Override
     public void updateScore(MultiPlayerData mpd) {
         this.getHighscoreFromDB();
@@ -183,16 +192,20 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         }
     }
 
+    // Returns the opponents' score
     @Override
     public int getOpponentScore(){
         return opponentScore;
     }
 
 
+    // Returns an integer that indicates a tie, winning or loosing
+    // 0 is a tie, 1 is a win, 2 is a loose
     public int getGameWinner() {
         return gameWinner;
     }
 
+    // Returns true if game is won
     @Override
     public boolean gameWon() {
         gameWonListener = new ValueEventListener(){
@@ -234,6 +247,8 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         return gameWon;
     }
 
+    // Returns true if a multiplayer game is over
+
     @Override
     public boolean gameIsOver(){
         gameIsOverListener = new ValueEventListener() {
@@ -255,6 +270,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
 
+    // Sets highscore of user
     @Override
     public void getHighscoreFromDB(){
         highScoreListener = new ValueEventListener() {
@@ -279,9 +295,10 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         users.addValueEventListener(highScoreListener);
     }
 
+    // Deletes a room in the database when beeing called
     @Override
     public void leaveRoom() {
-        if(gameIsOver) {
+        if(gameIsOver && roomName != null) {
             rooms.child(roomName).removeValue()
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -299,8 +316,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     }
 
     // Found at: https://www.baeldung.com/java-random-string
-
-
+    // Method for creating a random String
     public String createID(int IDLength) {
 
         int leftLimit = 97; // letter 'a'
@@ -317,5 +333,4 @@ public class AndroidInterfaceClass implements FireBaseInterface {
 
         return generatedString;
     }
-
 }

@@ -97,7 +97,9 @@ public class GameActionsController implements EventListener {
 
         // Adds the RenderingSystem based on whether the gameActionsController is single player or multi player
         if (isMultiplayer){
+            // Sends information to database that a multiplayer game is about to start
             game.FBI.setMultiplayer(true);
+            // Initialize a new multiplayerController
             this.multiplayerController = new MultiplayerController();
             engine.addSystem(new MultiplayerSystem(1));
             engine.addSystem(new RenderingSystem(game.batch, true));
@@ -187,9 +189,13 @@ public class GameActionsController implements EventListener {
         // A player dies in multi player
         if (isMultiplayer && state == GAME_OVER){
             gameOverMultiPlayerView = new GameOverMultiPlayerView();
+            // Sends information to database that a multiplayer game is over
             game.FBI.setGameIsOver(true);
+            // Sets multiplayerData to game over
             multiplayerController.multiPlayerData.setGameOver(true);
+            // Sends information to database that a the multiplayerData is game over
             game.FBI.setMultiPlayerDataGameOver(true);
+            // Sends information to database that it should check which player won
             game.FBI.gameWon();
         }
 
@@ -228,6 +234,7 @@ public class GameActionsController implements EventListener {
     public void removeSystem() {
        engine.removeAllEntities();
        if (isMultiplayer) {
+           // Removes the systems involved in a multiplayer game
            engine.removeSystem(engine.getSystem(MultiplayerSystem.class));
            engine.removeSystem(engine.getSystem(RenderingSystem.class));
        }
@@ -265,8 +272,11 @@ public class GameActionsController implements EventListener {
             MultiPlayerData mpd = multiplayerController.multiPlayerData;
             multiplayerController.multiPlayerData.setGameOver(true);
             game.setScreen(gameOverMultiPlayerView);
+            // Sends information to database that the multiplayerData is game over
             game.FBI.setMultiPlayerDataGameOver(true);
+            // Sends information to database that a multiplayer game is over
             game.FBI.setGameIsOver(true);
+            // Sends information to database that it should check the players' score
             game.FBI.updateScore(mpd);
             isMultiplayer = false;
         }
@@ -283,7 +293,7 @@ public class GameActionsController implements EventListener {
         // Pauses the game if the pause button is pressed
         if (event.getListenerActor().equals(gameView.getPauseButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             pause();
             game.setScreen(pauseView);
@@ -293,7 +303,7 @@ public class GameActionsController implements EventListener {
         // Resumes the game if the resume button is pressed
         else if (event.getListenerActor().equals(pauseView.getResumeButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             resume();
             game.setScreen(gameView);
@@ -302,7 +312,7 @@ public class GameActionsController implements EventListener {
         // Exits the game if the exit button is pressed
         else if (event.getListenerActor().equals(pauseView.getExitButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             exit();
             game.mc.setStartScreen();
@@ -311,7 +321,7 @@ public class GameActionsController implements EventListener {
         // Exits the gameOverView and sets the menuView
         else if (event.getListenerActor().equals(gameOverView.getExitButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.mc.setStartScreen();
             return true;
@@ -319,7 +329,7 @@ public class GameActionsController implements EventListener {
         // Starts a new game on the same level
         else if (event.getListenerActor().equals(gameOverView.getPlayAgainButton())) {
             if (settingsModel.soundOn()) {
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
             game.mc.gameActionsController = new GameActionsController(false);
             game.mc.gameActionsController.setGameScreen(false);
@@ -328,11 +338,15 @@ public class GameActionsController implements EventListener {
         // Exits the gameOverMultiPlayerView and sets the menuView
         else if (event.getListenerActor().equals(gameOverMultiPlayerView.getExitButton())){
             if (settingsModel.soundOn()){
-                clickSound.play(0.2f);
+                clickSound.play(1f);
             }
+            // Sends information to database that the room is empty
             game.FBI.leaveRoom();
+            // Sends information to database that the multiplayerData is game over
             game.FBI.setMultiPlayerDataGameOver(true);
+            // Sends information to database that a multiplayer game is over
             game.FBI.setGameIsOver(true);
+            // Sets multiplayerData to game over
             multiplayerController.multiPlayerData.setGameOver(true);
             game.mc.setStartScreen();
             return true;

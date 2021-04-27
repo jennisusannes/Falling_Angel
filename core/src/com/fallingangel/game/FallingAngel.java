@@ -43,7 +43,7 @@ public final class FallingAngel extends Game implements ApplicationListener {
 		batch = new SpriteBatch(); // Creates a new spritebatch
 		this.mc = new MainController(); // Sets the controller as the main controller
 		music = Assets.backgroundMusic;
-		music.setVolume(0.02f); // Sets the volume of the background music
+		music.setVolume(0.1f); // Sets the volume of the background music
 		music.setLooping(true); // The backgrounds music will continuously loop
 		music.play(); // Plays the music
 		mc.setStartScreen(); // Main controller sets the start screen as the menuscreen
