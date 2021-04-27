@@ -1,33 +1,58 @@
 package com.fallingangel.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.fallingangel.backend.FireBaseInterface;
+import com.fallingangel.controller.MainController;
+import com.fallingangel.model.Assets;
 
-public class FallingAngel extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
+public final class FallingAngel extends Game implements ApplicationListener {
+
+	private static FallingAngel INSTANCE; // Initializing the game as INSTANCE
+	public MainController mc;
+	public com.fallingangel.backend.FireBaseInterface FBI;
+	public SpriteBatch batch;
+	public Music music;
+	public BitmapFont font;
+
+	private FallingAngel(com.fallingangel.backend.FireBaseInterface fireBaseInterface){
+		FBI = fireBaseInterface;
+	}
+
+	// Getter method to connect FallingAngel to AndroidLauncher and FireBase
+	public static FallingAngel getInstance(FireBaseInterface fireBaseInterface) {
+		if (INSTANCE == null){
+			INSTANCE = new FallingAngel(fireBaseInterface);
+		}
+		return INSTANCE;
+	}
+
+	// The "game object" was originally implemented as Singleton and is therefore called with getInstance() throughout the code
+	// Getter method to connect FallingAngel to game logic
+	public static FallingAngel getInstance() {
+		return INSTANCE;
+	}
+
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		Assets.load();
+		FBI.createUser();
+		batch = new SpriteBatch(); // Creates a new spritebatch
+		this.mc = new MainController(); // Sets the controller as the main controller
+		music = Assets.backgroundMusic;
+		music.setVolume(0.1f); // Sets the volume of the background music
+		music.setLooping(true); // The backgrounds music will continuously loop
+		music.play(); // Plays the music
+		mc.setStartScreen(); // Main controller sets the start screen as the menuscreen
 	}
 
-	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
-	}
-	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		music.dispose();
+		font.dispose();
 	}
 }

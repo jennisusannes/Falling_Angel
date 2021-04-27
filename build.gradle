@@ -44,6 +44,9 @@ allprojects {
 project(":android") {
     apply plugin: "com.android.application"
 
+    // Add the following line:
+    apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
     configurations { natives }
 
     dependencies {
@@ -61,7 +64,25 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86_64"
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        
+
+
+        // Import the BoM for the Firebase platform
+        implementation platform('com.google.firebase:firebase-bom:26.7.0')
+
+        // Declare the dependency for the Realtime Database library
+        // When using the BoM, you don't specify versions in Firebase library dependencies
+        implementation 'com.google.firebase:firebase-database'
+        // Implementing Firebase authentications
+
+        implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
+
+        // Required only if Facebook login support is required
+        // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
+       // implementation 'com.facebook.android:facebook-android-sdk:4.x'
+
+        // Required only if Twitter login support is required
+        // Find the latest Twitter SDK releases here: https://goo.gl/E5wZvQ
+       // implementation 'com.twitter.sdk.android:twitter-core:3.x'
     }
 }
 
